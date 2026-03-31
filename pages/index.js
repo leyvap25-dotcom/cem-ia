@@ -145,7 +145,7 @@ const LogoCEM = ({size=44}) => (
 
 const TABS = [
   {id:"inicio",icon:"🏠",label:"Inicio"},
-  {id:"chat",icon:"🤖",label:"Diagnóstico"},
+  {id:"chat IA",icon:"🤖",label:"Diagnóstico"},
   {id:"planes",icon:"📋",label:"Planes"},
   {id:"instalacion",icon:"⚡",label:"Instalación"},
   {id:"limpieza",icon:"🧹",label:"Limpieza"},
