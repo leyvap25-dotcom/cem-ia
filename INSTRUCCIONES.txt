@@ -1,0 +1,132 @@
+# ============================================================
+#  CEM IA Assistant — Guía de instalación para Windows
+#  Tiempo estimado: 15-20 minutos
+# ============================================================
+
+## PASO 1 — Instalar Node.js (solo una vez)
+
+1. Ve a: https://nodejs.org
+2. Descarga el botón verde "LTS" (versión recomendada)
+3. Instala con todas las opciones por defecto (Next, Next, Install)
+4. Al terminar, reinicia tu computador
+
+
+## PASO 2 — Descomprimir la carpeta del proyecto
+
+1. Descarga el archivo que te compartió Claude (cem-ia.zip)
+2. Haz clic derecho → "Extraer todo"
+3. Extrae en tu escritorio o en Documentos
+   → Quedará una carpeta llamada "cem-ia"
+
+
+## PASO 3 — Abrir la terminal (ventana negra)
+
+1. Presiona la tecla Windows + R
+2. Escribe: cmd
+3. Presiona Enter
+4. Se abre una ventana negra — es la terminal
+
+
+## PASO 4 — Ir a la carpeta del proyecto
+
+En la ventana negra escribe exactamente esto y presiona Enter:
+(cambia "TuUsuario" por tu nombre de usuario de Windows)
+
+  cd C:\Users\TuUsuario\Desktop\cem-ia
+
+Si lo pusiste en Documentos sería:
+  cd C:\Users\TuUsuario\Documents\cem-ia
+
+Truco: puedes arrastrar la carpeta cem-ia a la ventana negra
+y la ruta aparece automáticamente.
+
+
+## PASO 5 — Instalar dependencias
+
+Escribe esto y presiona Enter (tarda 1-2 minutos):
+
+  npm install
+
+Verás muchos textos pasar — es normal. Espera hasta que
+vuelva a aparecer el cursor parpadeando.
+
+
+## PASO 6 — Instalar Vercel en tu computador
+
+Escribe esto y presiona Enter:
+
+  npm install -g vercel
+
+Espera a que termine.
+
+
+## PASO 7 — Publicar en Vercel
+
+Escribe esto y presiona Enter:
+
+  vercel
+
+La primera vez te pedirá:
+  - "Log in to Vercel" → presiona Enter para continuar
+  - Se abre el navegador → inicia sesión con tu cuenta de Vercel
+  - Vuelve a la terminal y presiona Enter en cada pregunta
+    (puedes dejar los valores por defecto)
+
+Al finalizar verás algo como:
+  ✅ Production: https://cem-ia-xxxxx.vercel.app
+
+
+## PASO 8 — Agregar tu API Key de Anthropic en Vercel
+
+Este paso es MUY IMPORTANTE — sin esto el chat no funciona.
+
+1. Ve a https://vercel.com y entra a tu cuenta
+2. Haz clic en tu proyecto "cem-ia"
+3. Clic en "Settings" (arriba)
+4. Clic en "Environment Variables" (menú izquierdo)
+5. Clic en "Add New"
+   - Name: ANTHROPIC_API_KEY
+   - Value: (pega aquí tu clave que empieza con sk-ant-...)
+   - Environments: ✅ Production ✅ Preview ✅ Development
+6. Clic en "Save"
+7. Vuelve a la terminal y escribe:
+
+  vercel --prod
+
+Espera a que termine. ¡Listo!
+
+
+## PASO 9 — Instalar como app en el celular (PWA)
+
+### En Android (Chrome):
+1. Abre Chrome en tu celular
+2. Ve a tu URL (ej: https://cem-ia-xxxxx.vercel.app)
+3. Toca los tres puntos ⋮ arriba a la derecha
+4. Toca "Agregar a pantalla de inicio"
+5. Toca "Agregar"
+→ Aparece el ícono en tu pantalla de inicio como una app
+
+### En iPhone (Safari):
+1. Abre Safari (no Chrome) en tu iPhone
+2. Ve a tu URL
+3. Toca el botón compartir (cuadrado con flecha ↑)
+4. Toca "Agregar a inicio"
+5. Toca "Agregar"
+→ Aparece el ícono en tu pantalla de inicio
+
+
+## ¿Problemas?
+
+- El chat no responde: verifica que el API Key está bien en Vercel
+- Error al instalar: verifica que Node.js quedó instalado bien
+  (en la terminal escribe: node --version — debe aparecer v20.x.x)
+- URL no funciona: vuelve a ejecutar: vercel --prod
+
+
+## Tu URL quedará algo así:
+   https://cem-ia-XXXXX.vercel.app
+
+Comparte esa URL con todos los técnicos del CEM.
+Funciona en cualquier celular, sin descargar nada de tiendas.
+
+# ============================================================
