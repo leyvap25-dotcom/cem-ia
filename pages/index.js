@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import Head from "next/head";
- 
+
 // ─── COLORES ──────────────────────────────────────────────────────────────────
 const C = {
   bg:"#f7f8fc", white:"#fff", border:"#e4e8f0",
@@ -11,7 +11,7 @@ const C = {
   purple:"#7c3aed", pl:"#f5f3ff",
   text:"#111827", muted:"#6b7280", light:"#9ca3af",
 };
- 
+
 const EQUIPOS = [
   { tipo:"Horno", icon:"🔥", marcas:[
     { nombre:"Rational", refs:["SCC WE 6×1/1 GN","SCC WE 10×1/1 GN","SCC WE 20×1/1 GN","SCC XS"] },
@@ -23,14 +23,14 @@ const EQUIPOS = [
   { tipo:"Granizadora", icon:"🧊", marcas:[{ nombre:"Bunn", refs:["ULTRA-2","ULTRA-1","FMD"] }]},
   { tipo:"Nevera / Congelador", icon:"❄️", marcas:[{ nombre:"General", refs:["Refrigerador vertical","Congelador horizontal","Vitrina fría"] }]},
 ];
- 
+
 const SINTOMAS = {
   Horno:["Código de error en pantalla","No genera vapor","No enciende","Gotea por la puerta","Ruidos extraños","Error durante la limpieza","Autolavado no funciona","Autolavado se interrumpe","No cierra el ciclo de lavado","Sobrecalentamiento","Sonda térmica","No alcanza temperatura","Quema los alimentos","Puerta no cierra bien","Burlete dañado o despegado","Ventilador no gira","Pantalla en blanco","Olor a quemado","Temperatura irregular","No enciende quemador (gas)","Falla eléctrica","CareControl en rojo","Pequeñas explosiones o detonaciones","Goteras en la parte inferior","Fuga de agua por la base","Humo dentro de la cámara","Cristal de puerta sucio o roto","Filtro de aire sucio","Luz de la cabina no funciona","Precalentamiento muy lento","Equipo se apaga solo"],
   Cafetera:["No calienta el agua","No extrae café","Gotea","No enciende","Error en pantalla","Poca presión"],
   Granizadora:["No enfría","No mezcla","Gotea","No enciende","Ruido extraño","Producto muy líquido","Producto muy sólido"],
   "Nevera / Congelador":["No enfría","Ruido extraño","Gotea agua","Escarcha excesiva","No enciende","Temperatura inestable"],
 };
- 
+
 const ALIAS_MARCA = [
   { words:["chefto","cheftop","chef top","cheff","cheto","jefftop","sheftop","cheftob","chetop","xeftop","jeftop","cheftoop","chefttop","chetop","cheftob"], marca:"Unox", ref:"ChefTop" },
   { words:["bakertop","baker","baketop","bakertob","bejertop"], marca:"Unox", ref:"BakerTop" },
@@ -51,7 +51,7 @@ const ALIAS_TIPO = [
   { words:["granizadora","granizado","slush","frozen"], tipo:"Granizadora" },
   { words:["nevera","refri","refrigerador","congelador"], tipo:"Nevera / Congelador" },
 ];
- 
+
 const extraerPorReglas = (texto) => {
   const t = texto.toLowerCase().replace(/[áàä]/g,"a").replace(/[éèë]/g,"e").replace(/[íìï]/g,"i").replace(/[óòö]/g,"o").replace(/[úùü]/g,"u");
   let tipo=null, marca=null, ref=null;
@@ -59,7 +59,7 @@ const extraerPorReglas = (texto) => {
   for (const a of ALIAS_MARCA) { if (a.words.some(w=>t.includes(w))) { marca=a.marca; if(a.ref)ref=a.ref; if(!tipo){const eq=EQUIPOS.find(e=>e.marcas.some(m=>m.nombre===a.marca));if(eq)tipo=eq.tipo;} break; } }
   return {tipo,marca,ref};
 };
- 
+
 const INSTALACION = {
   "Rational-SCC WE 6×1/1 GN":{ electrico:{tension:"3N AC 400V",frecuencia:"50/60 Hz",potencia:"10.5 kW",corriente:"16 A",fusible:"3×16 A",conexion:"5 hilos (3F+N+T) — línea de puesta a tierra obligatoria"},agua:{presion:"150–300 kPa (1.5–3 bar) dinámica",caudal:"20 l/min mín. para XS/61",conexion:'Manguera tipo lavarropa 1/2" con conector hembra rosca 3/4" — llave de corte independiente',desague:"Tubería diámetro 2\", material resistente a 65°C — SCC requiere sifón externo, iCombi NO requiere sifón",temp:"máx. 30°C — agua fría potable"},dimensiones:{ancho:"847 mm",profundidad:"771 mm",altura:"600 mm",peso:"80 kg",capacidad:"6×1/1 GN"},notas:"Distancia mínima pared posterior: 50 mm. Campana extractora: mín. 400 mm entre escape del equipo y filtros de grasa de la campana. Conductividad mínima del agua: 50 µS (dureza mín. 5°dH, mín. 90 ppm). Presión gas natural: 18–25 mbar / Gas propano: 25–57 mbar."},
   "Rational-SCC WE 10×1/1 GN":{ electrico:{tension:"3N AC 400V",frecuencia:"50/60 Hz",potencia:"18.5 kW",corriente:"32 A",fusible:"3×32 A",conexion:"5 hilos (3F+N+T) — conexión fija recomendada"},agua:{presion:"150–300 kPa (1.5–3 bar) dinámica",caudal:"20 l/min mín.",conexion:'Manguera tipo lavarropa 1/2" con conector hembra rosca 3/4" — llave de corte independiente',desague:"Tubería diámetro 2\", material resistente a 65°C — SCC requiere sifón externo",temp:"máx. 30°C — agua fría potable"},dimensiones:{ancho:"847 mm",profundidad:"771 mm",altura:"1000 mm",peso:"120 kg",capacidad:"10×1/1 GN"},notas:"Campana extractora: mín. 400 mm entre escape y filtros de grasa. Conductividad mínima del agua: 50 µS. Filtro en acometida de agua recomendado."},
@@ -69,14 +69,14 @@ const INSTALACION = {
   "Bunn-VPR":{ electrico:{tension:"AC 120V/240V",frecuencia:"50/60 Hz",potencia:"1.55 kW",corriente:"13 A",fusible:"15 A",conexion:"2 hilos + tierra"},agua:{presion:"20–90 psi",caudal:"2 l/min",conexion:'1/4" tubing',desague:"Bandeja con desagüe",temp:"Fría"},dimensiones:{ancho:"279 mm",profundidad:"457 mm",altura:"432 mm",peso:"5.2 kg",capacidad:"1.9 L/jarra"},notas:"Requiere toma de agua fría y drenaje de bandeja."},
   "Bunn-ULTRA-2":{ electrico:{tension:"AC 120V",frecuencia:"60 Hz",potencia:"0.93 kW",corriente:"8 A",fusible:"15 A",conexion:"2 hilos + tierra"},agua:{presion:"20–90 psi",caudal:"2 l/min",conexion:'1/4" tubing',desague:"Bandeja frontal",temp:"Fría filtrada"},dimensiones:{ancho:"368 mm",profundidad:"508 mm",altura:"686 mm",peso:"22 kg",capacidad:"2×4.7 L"},notas:"Agua fría filtrada. Limpiar condensador mensualmente."},
 };
- 
+
 const PLANES = {
   "Rational-SCC WE 10×1/1 GN":{ diario:["Ejecutar CleanJet+Care al finalizar jornada (nivel según suciedad)","Limpiar burlete de puerta con paño húmedo — verificar que no esté dañado","Limpiar bandeja recogegotas de la puerta: hacer circular 1-2 litros de agua tibia","Verificar que el desagüe no esté obstruido","No dejar residuos de comida en la cámara — riesgo de obstrucción del desagüe"], semanal:["Limpiar filtro de aire con solución jabonosa suave (<80°C) y dejar secar","Revisar chapa deflectora y bastidores colgantes — deben estar bien fijos","Limpiar cristal de puerta con paño suave y húmedo — NO usar químicos","Inspeccionar estado del burlete — reemplazar si tiene grietas o deformaciones"], mensual:["Descalcificar boquilla de humidificación si hay incrustaciones","Revisar sonda térmica — verificar inserción y estado del cable","Verificar presión dinámica del agua: 1.5–3 bar","Verificar conductividad del agua: mín. 50 µS (dureza mín. 5°dH)"], semestral:["Cambiar burlete si hay deterioro (ver guía de cambio de burlete)","Revisión técnica por servicio certificado Rational — verificar consumibles"], anual:["Inspección general certificada por técnico Rational","Reemplazar consumibles según uso: burlete (1-3 según intensidad), filtro de aire (1-2), junta caldera (1-2)","Pastillas Cleaner: consumo aprox. 0.7 baldes/año (uso ligero) a 1 balde/año (uso intenso)","Pastillas Care: consumo aprox. 0.3–0.5 baldes/año según intensidad de uso"] },
   "Unox-ChefTop":{ diario:["Ejecutar ciclo de limpieza con UNOX Det&Rinse al finalizar jornada","Retirar TODAS las bandejas antes del ciclo de lavado","Verificar grifo de agua abierto","Verificar tanque de detergente lleno y bien instalado","Limpiar junta de puerta visualmente","Verificar que la chimenea no esté obstruida"], semanal:["Inspeccionar interior de cámara: manchas, incrustaciones, corrosión","Verificar sello de puerta","Verificar P-trap del desagüe: llenar con agua si está seco","Limpiar filtro mecánico de agua"], mensual:["Verificar presión de agua: entrada 1.5-6 bar, salida reductor ~2.3 bar","Verificar válvulas solenoides EL1, EL2, EG1, EG2","Revisar P-trap y sistema de drenaje","Verificar calibración del horno en Service Menu (PIN: 99857)"], trimestral:["Limpiar chimenea con cepillo metálico","Verificar capacitores de motores: valor esperado 6.3 µF","Solo gas: verificar corriente de ionización 1.5-10 µA DC","Solo gas: verificar gaps electrodos — 3 mm entre electrodos"], semestral:["Actualizar firmware","Verificar contactores y elementos calefactores"], anual:["Solo gas: reemplazar empaques kit KGN1569A","Reemplazar empaque de puerta completo si hay deterioro","Evaluar calidad del agua","Respaldar parámetros en USB (PARAM_S6)"] },
   "Unox-BakerTop":{ diario:["Ejecutar ciclo de limpieza con UNOX Det&Rinse","Retirar todas las bandejas antes del lavado","Verificar grifo de agua abierto y tanque de detergente lleno"], semanal:["Inspeccionar cámara y sello de puerta","Verificar P-trap del desagüe"], mensual:["Verificar presión de agua entrada 1.5-6 bar","Verificar válvulas solenoides EL1, EL2, EG1, EG2"], semestral:["Actualizar firmware","Revisar contactores y elementos calefactores"], anual:["Solo gas: reemplazar empaques kit KGN1569A","Respaldo de parámetros en USB","Evaluar calidad del agua"] },
 };
 const PLAN_GEN = { diario:["Limpiar exteriores","Verificar funcionamiento básico"], semanal:["Limpiar filtros accesibles"], mensual:["Inspección visual de mangueras"], semestral:["Revisión por técnico"], anual:["Mantenimiento preventivo completo"] };
- 
+
 const LIMPIEZAS_DATA = {
   Horno:[
     {titulo:"CleanJet+Care — Rational SCC / iCombi Pro",alerta:"⚠️ Usar gafas, guantes y delantal. NO insertar bandejas ni recipientes durante la limpieza.",pasos:["Seleccionar nivel de limpieza 1-6 según suciedad (Ligero, Medio, Fuerte, Rápido, Ahorro, Intenso).","Esperar que la cámara baje de 75°C antes de iniciar.","Retirar contenedores, bandejas y parrillas de la cámara.","iCombi Pro: Colocar pastilla de detergente (sobre verde, redonda) en el tamiz del piso de la cámara. Colocar pastilla CareControl (sobre azul, 4 pastillas cúbicas) en el cajón CareControl.","SCC: Colocar pastilla de detergente (sobre rojo/plateado) en el canasto del bafle. Colocar pastilla CareControl en el cajón CareControl.","Verificar que la puerta cierre bien y pulsar Inicio.","Al terminar, revisar que no queden residuos de producto en la cámara.","Limpiar la bandeja recogegotas de la puerta diariamente con 1-2 litros de agua tibia.","⚠️ Si el equipo no se limpia a diario, el residuo de grasa puede generar riesgo de incendio."]},
@@ -90,7 +90,7 @@ const LIMPIEZAS_DATA = {
   Granizadora:[{titulo:"Granizadora Bunn — Semanal",alerta:"Sin agua a presión en el compresor.",pasos:["Apagar y desconectar.","Retirar y lavar el tambor.","Limpiar interior.","Limpiar rejillas del condensador."]}],
   "Nevera / Congelador":[{titulo:"Nevera — Quincenal",alerta:"No raspar escarcha con metal.",pasos:["Apagar y desenchufar.","Retirar productos.","Limpiar con bicarbonato.","Limpiar rejillas y juntas."]}],
 };
- 
+
 const ERRORES_UNOX = [
   {code:"AF01 – Motor térmico",nivel:"CRÍTICO",desc:"Termostato del motor disparó. Capacitores o motor dañados.",pasos:["Apagar equipo. Desconectar socket P2.","Medir continuidad entre pin 4 y 5.","Probar capacitores: valor esperado 6.3 µF.","Reemplazar capacitor defectuoso o motor."]},
   {code:"AF02 – Termostato seguridad",nivel:"CRÍTICO",desc:"Termostato de seguridad activado (dispara a 320°C).",pasos:["Esperar enfriamiento completo del horno.","Reiniciar termostato. Verificar fuentes externas de calor.","Desconectar socket P22, medir continuidad pin 4 y 5.","Si no hay continuidad → reemplazar termostato de seguridad."]},
@@ -105,7 +105,7 @@ const ERRORES_UNOX = [
   {code:"Pantalla en blanco",nivel:"SIMPLE",desc:"Panel sin imagen.",pasos:["Tocar el panel — puede estar en modo stand-by.","Medir 12V DC en conector principal.","Si no hay voltaje → reemplazar placa de control."]},
   {code:"No enciende",nivel:"MODERADO",desc:"El horno no arranca.",pasos:["Verificar fusible F2 (2A - 250V Fast Acting).","Medir 230 VAC en socket P1 entre NF y LF.","Si no hay voltaje → placa de potencia dañada.","Verificar fusible F4 (5A - 250V Time Delay)."]},
 ];
- 
+
 const ERRORES_RATIONAL = [
   {code:"Service 23/24",nivel:"CRÍTICO",desc:"Error hardware. Apagar inmediatamente.",pasos:["Apagar con interruptor 0/I.","Llamar Service Rational Colombia.","No rearmar hasta instrucciones."]},
   {code:"Service 26/27",nivel:"CRÍTICO",desc:"Falla CleanJet: válvula de esfera no encuentra posición. No es posible cocinar.",pasos:["Cancelar CleanJet en menú.","Retirar tabletas con guantes.","Verificar que la chapa deflectora y bastidores estén bien fijos — NO debe haber recipientes en la cámara.","Enjuagar con ducha de mano.","Llamar técnico si persiste."]},
@@ -127,12 +127,113 @@ const ERRORES_RATIONAL = [
   {code:"No enciende (pantalla oscura)",nivel:"MODERADO",desc:"Sin energía eléctrica o protección disparada.",pasos:["Verificar que no se haya disparado el breaker o fusible del tablero.","Verificar que el interruptor del equipo esté en posición I (encendido).","Llamar técnico Rational si persiste."]},
 ];
 const NIVEL_C = {CRÍTICO:"red",PELIGRO:"red",LIMITADO:"blue",FRECUENTE:"yellow",SIMPLE:"green",COMÚN:"blue",MODERADO:"blue"};
- 
-// ─── HELPERS ──────────────────────────────────────────────────────────────────
+
+// ─── CATÁLOGO DE REPUESTOS CON PRECIOS (Unox Colombia - Cotización 2256431, Mar 2026) ─────
+const REPUESTOS = [
+  // Cotización directa Terpel
+  {cod:"KMT1012A",desc:"Motor 330W con eje cónico D12 (LUX/MIND.Maps)",precio:1350000,marca:"Unox"},
+  {cod:"KPE2260A",desc:"Tarjeta potencia BLSP/Speed.Pro/Zero",precio:990000,marca:"Unox"},
+  {cod:"KPE2107A",desc:"Control completo BakerLux SP LED",precio:990000,marca:"Unox"},
+  {cod:"KTR1136A",desc:"Termostato de seguridad 318°C",precio:405000,marca:"Unox"},
+  {cod:"KVN1172A",desc:"Turbina D195 H40 8 aspas tuerca M8",precio:553500,marca:"Unox"},
+  {cod:"KRS1283B",desc:"Resistencia 3000W 230V + 260W 135V 4 espiras",precio:765000,marca:"Unox"},
+  {cod:"KTR1105A",desc:"Sonda temperatura PT100 L1000",precio:540000,marca:"Unox"},
+  {cod:"KVT1330A",desc:"Cristal interno BL SP Arianna",precio:315000,marca:"Unox"},
+  {cod:"KCR1112A",desc:"Bisagra plegable SP Arianna-Elena",precio:225000,marca:"Unox"},
+  {cod:"KCE1095A",desc:"Cable bus 4 polos 2M potencia-control",precio:180000,marca:"Unox"},
+  {cod:"KEL1251A",desc:"Electroválvula 1 vía JG D8-D10",precio:292500,marca:"Unox"},
+  {cod:"KGN1352A",desc:"Goma puerta LM Arianna / Armarios BT",precio:211500,marca:"Unox"},
+  {cod:"KCN1003A",desc:"Condensador motor 6.3 µF",precio:135000,marca:"Unox"},
+  {cod:"KPE1057B",desc:"Panel control capacitivo MIND.Maps Plus",precio:4275000,marca:"Unox"},
+  {cod:"KVE1115A",desc:"Minicontactor cuadripolar 20A 230V",precio:247500,marca:"Unox"},
+  {cod:"KVN1171A",desc:"Turbina D195 H60 8 paletas tuerca M8",precio:765000,marca:"Unox"},
+  {cod:"KPE2037A",desc:"Tarjeta potencia MIND.Maps ONE",precio:2160000,marca:"Unox"},
+  {cod:"KVT1303C",desc:"Cristal interno XECC-0513/0523 doble vidrio",precio:1485000,marca:"Unox"},
+  {cod:"KMG1099A",desc:"Manilla completa MIND.Maps -M",precio:301500,marca:"Unox"},
+  {cod:"KSB1016A",desc:"Tanque detergente 3L",precio:675000,marca:"Unox"},
+  {cod:"KVN1165A",desc:"Turbina refrigeración 230V MM/S.5E ADV",precio:450000,marca:"Unox"},
+  {cod:"KEL1140A",desc:"Electroválvula 1 vía",precio:180000,marca:"Unox"},
+  {cod:"KVL1211A",desc:"Sistema lavado Compact ONE Y0523-EP",precio:1260000,marca:"Unox"},
+  {cod:"KPE1059A",desc:"Soporte USB-Reset MIND.Maps",precio:382500,marca:"Unox"},
+  {cod:"KRS1150A",desc:"Resistencia 4.9kW RS1090A",precio:990000,marca:"Unox"},
+  {cod:"KVL0022A",desc:"Filtro detergente con VNR VL1102",precio:135000,marca:"Unox"},
+  {cod:"KGN1656A",desc:"Goma puerta XECC-0513/0523",precio:256500,marca:"Unox"},
+  {cod:"KSN1031A",desc:"Sonda al corazón monopunto L2000",precio:1080000,marca:"Unox"},
+  // Repuestos clave adicionales del catálogo
+  {cod:"KVN1025A",desc:"Turbina D196 H61 serie 3/4/Miss/Micro",precio:765000,marca:"Unox"},
+  {cod:"KVN1030A",desc:"Turbina LUX ≤08.2017 / S.5 / S.5E D196",precio:1035000,marca:"Unox"},
+  {cod:"KVN1035B",desc:"Motor LineMiss / LineMicro",precio:1035000,marca:"Unox"},
+  {cod:"KVN1130A",desc:"Motor LUX / L.Miss / S.5 / 5E",precio:1440000,marca:"Unox"},
+  {cod:"KVN1134A",desc:"Motor 330W 120V 50/60Hz",precio:1710000,marca:"Unox"},
+  {cod:"KPE2038A",desc:"Tarjeta potencia MIND.Maps Plus eléctrico",precio:2700000,marca:"Unox"},
+  {cod:"KPE2021C",desc:"Tarjeta potencia MIND.Maps Gas EU",precio:2722500,marca:"Unox"},
+  {cod:"KRS1267A",desc:"Resistencia circular 10.5kW 230V 6 espiras",precio:1440000,marca:"Unox"},
+  {cod:"KRS1180A",desc:"Resistencia 9kW 230V",precio:1350000,marca:"Unox"},
+  {cod:"KRS1090A",desc:"Resistencia 2900W 230V",precio:630000,marca:"Unox"},
+  {cod:"KRS1034A",desc:"Resistencia frenada 147W MM",precio:427500,marca:"Unox"},
+  {cod:"KRS1036A",desc:"Resistencia frenada 100W MM Gas",precio:382500,marca:"Unox"},
+  {cod:"KTR1106B",desc:"Sonda temperatura L2000 MIND.Maps",precio:540000,marca:"Unox"},
+  {cod:"KTR1105A",desc:"Sonda temperatura PT100 L1000",precio:540000,marca:"Unox"},
+  {cod:"KSN1000A",desc:"Sonda al corazón multipunto L1550",precio:1755000,marca:"Unox"},
+  {cod:"KSN1002A",desc:"Sonda al corazón multipunto L2050",precio:1845000,marca:"Unox"},
+  {cod:"KGN1629A",desc:"Goma puerta 0511",precio:382500,marca:"Unox"},
+  {cod:"KGN1630A",desc:"Goma puerta 0711",precio:360000,marca:"Unox"},
+  {cod:"KGN1631A",desc:"Goma puerta 1011",precio:405000,marca:"Unox"},
+  {cod:"KGN1628A",desc:"Goma puerta 0311",precio:337500,marca:"Unox"},
+  {cod:"KGN1659A",desc:"Goma puerta 06EU-FS/0621",precio:495000,marca:"Unox"},
+  {cod:"KGN1660A",desc:"Goma puerta 10EU-FS/1021",precio:495000,marca:"Unox"},
+  {cod:"KGN1658A",desc:"Goma puerta XEBC-04xx",precio:427500,marca:"Unox"},
+  {cod:"KGN1569A",desc:"Kit empaques antorcha gas",precio:450000,marca:"Unox"},
+  {cod:"KGN1596A",desc:"Goma puerta Stefania BL Shop.Pro",precio:247500,marca:"Unox"},
+  {cod:"KGN1597A",desc:"Goma puerta Elena BL Shop.Pro",precio:315000,marca:"Unox"},
+  {cod:"KGN1598A",desc:"Goma puerta Vittoria BL Shop.Pro",precio:360000,marca:"Unox"},
+  {cod:"KGN1599A",desc:"Goma puerta Camilla BL Shop.Pro",precio:450000,marca:"Unox"},
+  {cod:"KVL1183A",desc:"Sistema lavado Plus 1 brazo",precio:1845000,marca:"Unox"},
+  {cod:"KVL1184A",desc:"Sistema lavado 2 rotores EU",precio:2160000,marca:"Unox"},
+  {cod:"KVL1182A",desc:"Sistema lavado ONE (excluido 0311)",precio:1215000,marca:"Unox"},
+  {cod:"KVL0014B",desc:"Reductor de presión MM ≥2017",precio:418500,marca:"Unox"},
+  {cod:"KEL1170B",desc:"Bomba detergente + tubo + peso",precio:765000,marca:"Unox"},
+  {cod:"KEL1175B",desc:"Bomba abrillantadora + tubo + peso",precio:765000,marca:"Unox"},
+  {cod:"KCR1015A",desc:"Bisagras LineMiss Arianna",precio:405000,marca:"Unox"},
+  {cod:"KCR1010A",desc:"Bisagras LineMiss Stefania",precio:382500,marca:"Unox"},
+  {cod:"KCR1020B",desc:"Bisagras LineMiss Elena",precio:396000,marca:"Unox"},
+  {cod:"KCR1050A",desc:"Bisagras XVC105-Rossella",precio:405000,marca:"Unox"},
+  {cod:"KCR1130A",desc:"Bisagras izquierdas Speed.Pro",precio:1170000,marca:"Unox"},
+  {cod:"KVT1060A",desc:"Cristal interno LineMiss Arianna",precio:360000,marca:"Unox"},
+  {cod:"KVT1055A",desc:"Cristal interno LM Stefania",precio:337500,marca:"Unox"},
+  {cod:"KVT1065B",desc:"Cristal interno LineMiss Elena",precio:585000,marca:"Unox"},
+  {cod:"KVT1070B",desc:"Cristal interno Rossella",precio:585000,marca:"Unox"},
+  {cod:"KVT1279B",desc:"Cristal interno sencillo 0311",precio:450000,marca:"Unox"},
+  {cod:"KVT1280B",desc:"Cristal interno sencillo 0511",precio:585000,marca:"Unox"},
+  {cod:"KVT1281B",desc:"Cristal interno sencillo 0711",precio:675000,marca:"Unox"},
+  {cod:"KVT1282B",desc:"Cristal interno sencillo 1011",precio:765000,marca:"Unox"},
+  {cod:"XRF011",desc:"Kit retrofit doble encendedor MIND.Maps",precio:1710000,marca:"Unox"},
+  {cod:"KVG1031C",desc:"Conjunto soplete 7.5kW + bujías 0511-G",precio:2385000,marca:"Unox"},
+  {cod:"KVG1032C",desc:"Antorcha 9.5kW + bujías 0711/06EU-G",precio:2250000,marca:"Unox"},
+  {cod:"KVG1033C",desc:"Conjunto soplete 17.5kW + bujías 10EU",precio:2250000,marca:"Unox"},
+  {cod:"KPM1000A",desc:"Bomba Ulka 230V",precio:247500,marca:"Unox"},
+  {cod:"KCN1002A",desc:"Condensador CE1002A",precio:108000,marca:"Unox"},
+  {cod:"KVE1634A",desc:"Interruptor magnetotérmico modular",precio:990000,marca:"Unox"},
+  {cod:"KVE1670A",desc:"Relé estado sólido 25A + pad térmico",precio:603000,marca:"Unox"},
+  {cod:"KVE2000A",desc:"Contactor 4P 30A 230V 50/60Hz",precio:427500,marca:"Unox"},
+];
+
+// Función búsqueda de repuestos
+const buscarRepuesto = (query) => {
+  const q = query.toLowerCase().replace(/[áàä]/g,"a").replace(/[éèë]/g,"e").replace(/[íìï]/g,"i").replace(/[óòö]/g,"o").replace(/[úùü]/g,"u");
+  return REPUESTOS.filter(r =>
+    r.cod.toLowerCase().includes(q) ||
+    r.desc.toLowerCase().split(" ").some(w => w.length > 3 && q.includes(w)) ||
+    q.split(" ").some(w => w.length > 3 && r.desc.toLowerCase().includes(w))
+  ).slice(0, 5);
+};
+
+const formatPrecio = (n) => new Intl.NumberFormat("es-CO",{style:"currency",currency:"COP",minimumFractionDigits:0}).format(n);
+
 const card = (x={}) => ({ background:C.white, border:`1px solid ${C.border}`, borderRadius:12, padding:16, ...x });
 const btn = (v="primary",s="md") => ({ display:"inline-flex", alignItems:"center", justifyContent:"center", gap:6, padding:s==="sm"?"5px 10px":"9px 16px", fontSize:s==="sm"?11:13, fontWeight:600, borderRadius:8, cursor:"pointer", fontFamily:"inherit", border:v==="outline"?`1px solid ${C.border}`:"none", background:v==="primary"?C.accent:v==="outline"?C.white:"transparent", color:v==="primary"?"#fff":C.muted });
 const tagS = (c="blue") => { const m={blue:[C.accent,C.al],red:[C.red,C.rl],green:[C.green,C.gl],yellow:[C.yellow,C.yl],gray:[C.muted,"#f3f4f6"]}; const [col,bg]=m[c]||m.blue; return {fontSize:10,fontWeight:700,padding:"2px 7px",borderRadius:20,color:col,background:bg}; };
- 
+
 const LogoCEM = ({size=44}) => (
   <svg width={size} height={size*0.88} viewBox="0 0 280 247" xmlns="http://www.w3.org/2000/svg">
     <polygon points="0,247 28,175 48,210 22,247" fill="#e8432d"/>
@@ -143,28 +244,29 @@ const LogoCEM = ({size=44}) => (
     <text x="22" y="234" fontFamily="Impact,Arial Black,sans-serif" fontWeight="900" fontSize="105" fill="#2d5f6e" letterSpacing="-3">CEM</text>
   </svg>
 );
- 
+
 const TABS = [
   {id:"inicio",icon:"🏠",label:"Inicio"},
   {id:"chat",icon:"🤖",label:"Diagnóstico"},
   {id:"planes",icon:"📋",label:"Planes"},
   {id:"instalacion",icon:"⚡",label:"Instalación"},
   {id:"limpieza",icon:"🧹",label:"Limpieza"},
+  {id:"repuestos",icon:"🔩",label:"Repuestos"},
   {id:"stats",icon:"📊",label:"Stats"},
   {id:"guia",icon:"📖",label:"Guía"},
 ];
- 
+
 // ─── STORAGE LOCAL (reemplaza window.storage) ─────────────────────────────────
 const SK = "cem_fallas_v4";
 const loadF = () => { try { const d = localStorage.getItem(SK); return d ? JSON.parse(d) : []; } catch { return []; } };
 const saveF = (d) => { try { localStorage.setItem(SK, JSON.stringify(d)); } catch {} };
- 
+
 // ══════════════════════════════════════════════════════════════════════════════
 // CHAT
 // ══════════════════════════════════════════════════════════════════════════════
 const SALUDO_TXT = "Hola. Soy el asistente técnico del CEM. Puedes escribirme, usar los botones o hablarme con el micrófono. Siempre dime el equipo, la marca y la referencia para darte el mejor diagnóstico. ¿Con qué equipo necesitas ayuda hoy?";
 const SALUDO_DISPLAY = "¡Hola! Soy el asistente técnico del **CEM**.\n\nPuedes interactuar conmigo de 3 formas:\n✍️ **Escribiendo** en el campo de texto\n🔘 **Usando los botones** que aparecen abajo\n🎙️ **Hablándome** con el micrófono\n\nSiempre indica el **equipo**, **marca** y **referencia** para un diagnóstico preciso.\n\n¿Con qué equipo necesitas ayuda hoy?";
- 
+
 function ChatTab({ onFalla }) {
   const [msgs, setMsgs] = useState([{ role:"bot", text:SALUDO_DISPLAY }]);
   const [step, setStep] = useState("tipo");
@@ -178,10 +280,10 @@ function ChatTab({ onFalla }) {
   const lastBot = useRef(SALUDO_TXT);
   const recRef = useRef(null);
   const endRef = useRef(null);
- 
+
   useEffect(() => { msgsRef.current = msgs; }, [msgs]);
   useEffect(() => { endRef.current?.scrollIntoView({ behavior:"smooth" }); }, [msgs, loading]);
- 
+
   const hablar = useCallback((texto) => {
     if (!window.speechSynthesis) return;
     speechSynthesis.cancel();
@@ -199,7 +301,7 @@ function ChatTab({ onFalla }) {
     };
     speechSynthesis.getVoices().length > 0 ? go() : (speechSynthesis.onvoiceschanged = go);
   }, []);
- 
+
   const toggleMic = useCallback(() => {
     if (listening) { recRef.current?.stop(); return; }
     const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -213,13 +315,13 @@ function ChatTab({ onFalla }) {
     recRef.current = rec;
     try { rec.start(); } catch { setListening(false); }
   }, [listening]);
- 
+
   const addMsg = (role, text) => {
     const m = { role, text };
     setMsgs(prev => { const n=[...prev,m]; msgsRef.current=n; return n; });
     if (role==="bot") lastBot.current = text;
   };
- 
+
   // ── Llama al backend propio en /api/chat ──
   const callIA = async (contenido, ctx) => {
     if (!contenido?.trim()) return;
@@ -228,10 +330,10 @@ function ChatTab({ onFalla }) {
     const esUnox = ctx?.marca?.nombre === "Unox";
     const esChefTop = ctx?.ref?.toLowerCase().includes("cheftop") || ctx?.ref?.toLowerCase().includes("bakertop");
     const esArianna = ctx?.ref?.toLowerCase().includes("arianna");
- 
+
     const system = `Eres el asistente técnico del CEM de Terpel. Responde en español colombiano simple. Máximo 180 palabras.
 Equipo: ${ctx?.tipo?.tipo||"?"} ${ctx?.marca?.nombre||""} ${ctx?.ref||""}
- 
+
 === PROCEDIMIENTOS DE BURLETE ===
 UNOX ChefTop/BakerTop (burlete SIN orificios, sellado):
 - Retirar burlete viejo, limpiar ranura.
@@ -241,14 +343,14 @@ UNOX ChefTop/BakerTop (burlete SIN orificios, sellado):
 - Esquinas redondeadas: línea del burlete debe coincidir con línea guía del horno.
 - Pestaña LARGA = alejada de la cabina (lado vapor). Pestaña CORTA = cerca de la cabina (lado calor).
 - No debe sobrar ni cortarse.
- 
+
 UNOX Arianna (burlete CON DOS ORIFICIOS en la parte superior, puerta cierra hacia arriba):
 - Retirar burlete viejo, limpiar ranura.
 - Unión del burlete nuevo → lado IZQUIERDO del horno en la mitad de la guía. Los orificios deben quedar en la parte SUPERIOR.
 - Luego: centro derecho → lado superior → lado inferior.
 - Insertar de a poco del centro hacia esquinas.
 - Pestaña LARGA = alejada de la cabina (vapor). Pestaña CORTA = cerca de la cabina (calor).
- 
+
 RATIONAL SCC/iCombi (burlete CON orificios en la parte INFERIOR, esquinas de 90 grados):
 - Retirar burlete viejo, limpiar ranura con paño húmedo.
 - Unión del burlete → parte SUPERIOR centrada. Los orificios deben quedar en la parte INFERIOR.
@@ -257,7 +359,7 @@ RATIONAL SCC/iCombi (burlete CON orificios en la parte INFERIOR, esquinas de 90 
 - Insertar de a poco del centro hacia las esquinas.
 - No debe sobrar ni cortarse.
 - Humedecer la ranura con agua jabonosa facilita la instalación.
- 
+
 === MEDICIONES TÉCNICAS UNOX ChefTop/BakerTop ===
 - Sondas de temperatura: ~110 Ω a 25°C (medir en ohms con multímetro).
 - Capacitores de motores: valor esperado 6.3 µF cada uno.
@@ -271,7 +373,7 @@ RATIONAL SCC/iCombi (burlete CON orificios en la parte INFERIOR, esquinas de 90 
 - Fusible F2: 2A 250V Fast Acting. Fusible F4: 5A 250V Time Delay.
 - Presión agua entrada: 1.5–6 bar. Salida reductor: ~2.3 bar.
 - PIN menú servicio: 99857.
- 
+
 === MEDICIONES TÉCNICAS RATIONAL SCC/iCombi ===
 - Presión dinámica agua: 1.5–3 bar (150–300 kPa).
 - Conductividad mínima agua: 50 µS (dureza mín. 5°dH, 90 ppm).
@@ -280,15 +382,19 @@ RATIONAL SCC/iCombi (burlete CON orificios en la parte INFERIOR, esquinas de 90 
 - Verificar las 3 fases eléctricas si el precalentamiento es lento o no termina.
 - Sonda térmica B2/B4 (combinación de fallas puede mostrar códigos combinados como 20.6, 31.12).
 - Revisar bus cable si aparece error 34.x — verificar conexión y estado del cable bus.
- 
+
+=== PRECIOS REPUESTOS UNOX (COP sin IVA, Mar 2026) ===
+Motor 330W D12 KMT1012A=$1.350.000 | Tarjeta pot BLSP KPE2260A=$990.000 | Tarjeta pot MM Plus KPE2038A=$2.700.000 | Tarjeta pot MM ONE KPE2037A=$2.160.000 | Panel control MM Plus KPE1057B=$4.275.000 | Termostato seg 318°C KTR1136A=$405.000 | Turbina H40 KVN1172A=$553.500 | Turbina H60 KVN1171A=$765.000 | Resistencia 3000W KRS1283B=$765.000 | Resistencia 4.9kW KRS1150A=$990.000 | Resistencia 9kW KRS1180A=$1.350.000 | Resistencia frenada KRS1034A=$427.500 | Sonda PT100 L1000 KTR1105A=$540.000 | Sonda corazón L2000 KSN1031A=$1.080.000 | Condensador 6.3µF KCN1003A=$135.000 | Electroválvula D8-D10 KEL1251A=$292.500 | Bomba detergente KEL1170B=$765.000 | Cristal int Arianna KVT1330A=$315.000 | Goma puerta Arianna KGN1352A=$211.500 | Goma puerta 0511 KGN1629A=$382.500 | Goma puerta 0711 KGN1630A=$360.000 | Goma puerta 1011 KGN1631A=$405.000 | Bisagra Arianna-Elena KCR1112A=$225.000 | Sistema lavado ONE KVL1182A=$1.215.000 | Sistema lavado Plus KVL1183A=$1.845.000 | Tanque detergente 3L KSB1016A=$675.000 | Cable bus 2M KCE1095A=$180.000 | Kit doble encendedor XRF011=$1.710.000 | Empaques gas KGN1569A=$450.000
+Si preguntan precio de repuesto, menciona código y valor. +19% IVA no incluido.
+
 ${esRational?"Rational SCC: 23/24=apagar ya; 32/33=cerrar gas+ventilar; 14=sin agua; 25=filtro agua; 29=filtro aire; 31=sonda; 47/48=bomba desagüe; 110/120=llamar técnico.":""}
 ${esUnox?"Unox: AF01=motor/capacitor; AF02=termostato 320°C; AF03=sonda 110Ω; AF04=comunicación placa; AF23=gas; WF16=agua EL1; WF06=placa caliente; WF41=red.":""}
- 
+
 Responde SIEMPRE así:
 Causa: [1 línea]
 Pasos: 1. 2. 3. (máx 5 pasos con valores técnicos si aplica)
 Escalar: [cuándo llamar técnico]
-Tip: [consejo práctico]`;
+Tip: [consejo — si aplica mencionar repuesto con código y precio]`;
     try {
       const prevMsgs = msgsRef.current
         .filter(m => m?.role && typeof m.text === "string" && m.text.trim())
@@ -297,12 +403,12 @@ Tip: [consejo práctico]`;
       const messages = prevMsgs.length > 0
         ? [...prevMsgs, { role:"user", content:contenido.trim() }]
         : [{ role:"user", content:contenido.trim() }];
- 
+
       // ← Aquí llama a /api/chat (tu propio backend) en lugar de Anthropic directo
       const res = await fetch("/api/chat", {
         method:"POST",
         headers:{ "Content-Type":"application/json" },
-        body: JSON.stringify({ model:"claude-haiku-4-5-20251001", max_tokens:300, system, messages }),
+        body: JSON.stringify({ model:"claude-haiku-4-5-20251001", max_tokens:400, system, messages }),
       });
       const data = await res.json();
       if (data.error) { addMsg("bot", "⚠️ " + (data.error.message || data.error)); return; }
@@ -313,7 +419,7 @@ Tip: [consejo práctico]`;
       addMsg("bot", "⚠️ No se pudo conectar. Verifica tu internet e intenta de nuevo.");
     } finally { setLoading(false); }
   };
- 
+
   const pickTipo = (eq) => {
     setSel({ tipo:eq, marca:null, ref:null });
     addMsg("user", `${eq.icon} ${eq.tipo}`);
@@ -351,7 +457,7 @@ Tip: [consejo práctico]`;
   const renderText = (t) => t.split("\n").filter(Boolean).map((l,i) => (
     <div key={i} dangerouslySetInnerHTML={{__html:l.replace(/\*\*(.+?)\*\*/g,"<strong>$1</strong>")}} style={{marginBottom:3}}/>
   ));
- 
+
   return (
     <div style={{display:"flex",flexDirection:"column",height:"calc(100vh - 110px)"}}>
       {sel.tipo && (
@@ -420,7 +526,7 @@ Tip: [consejo práctico]`;
     </div>
   );
 }
- 
+
 // ══════════════════════════════════════════════════════════════════════════════
 // INICIO
 // ══════════════════════════════════════════════════════════════════════════════
@@ -456,7 +562,7 @@ function InicioTab({ onNav }) {
     </div>
   );
 }
- 
+
 // ══════════════════════════════════════════════════════════════════════════════
 // INSTALACIÓN
 // ══════════════════════════════════════════════════════════════════════════════
@@ -494,7 +600,7 @@ function InstalacionTab() {
     </div>
   );
 }
- 
+
 // ══════════════════════════════════════════════════════════════════════════════
 // PLANES
 // ══════════════════════════════════════════════════════════════════════════════
@@ -529,7 +635,7 @@ function PlanesTab() {
     </div>
   );
 }
- 
+
 // ══════════════════════════════════════════════════════════════════════════════
 // LIMPIEZA
 // ══════════════════════════════════════════════════════════════════════════════
@@ -559,7 +665,7 @@ function LimpiezaTab() {
     </div>
   );
 }
- 
+
 // ══════════════════════════════════════════════════════════════════════════════
 // STATS
 // ══════════════════════════════════════════════════════════════════════════════
@@ -591,10 +697,72 @@ function StatsTab({ fallas }) {
     </div>
   );
 }
- 
+
 // ══════════════════════════════════════════════════════════════════════════════
-// GUÍA
+// REPUESTOS
 // ══════════════════════════════════════════════════════════════════════════════
+function RepuestosTab() {
+  const [search, setSearch] = useState("");
+  const resultados = search.trim().length > 1 ? buscarRepuesto(search) : [];
+  const destacados = [
+    {grupo:"🔧 Motores y turbinas", items:REPUESTOS.filter(r=>r.cod.startsWith("KMT")||r.cod.startsWith("KVN")).slice(0,6)},
+    {grupo:"⚡ Tarjetas y control", items:REPUESTOS.filter(r=>r.cod.startsWith("KPE")).slice(0,6)},
+    {grupo:"🌡️ Sondas y termostatos", items:REPUESTOS.filter(r=>r.cod.startsWith("KTR")||r.cod.startsWith("KSN")).slice(0,5)},
+    {grupo:"🔥 Resistencias", items:REPUESTOS.filter(r=>r.cod.startsWith("KRS")).slice(0,5)},
+    {grupo:"💧 Hidráulica y lavado", items:REPUESTOS.filter(r=>r.cod.startsWith("KVL")||r.cod.startsWith("KEL")).slice(0,6)},
+    {grupo:"🚪 Gomas y burletes", items:REPUESTOS.filter(r=>r.cod.startsWith("KGN")).slice(0,6)},
+  ];
+  return (
+    <div style={{padding:14,overflowY:"auto",height:"calc(100vh - 110px)"}}>
+      <div style={{fontSize:17,fontWeight:800,marginBottom:4}}>🔩 Repuestos Unox</div>
+      <div style={{fontSize:11,color:C.muted,marginBottom:12}}>Precios COP sin IVA · Cotización Unox Colombia Mar 2026</div>
+      <input value={search} onChange={e=>setSearch(e.target.value)} placeholder="Buscar por código o descripción…"
+        style={{width:"100%",padding:"10px 13px",borderRadius:9,border:`1px solid ${C.border}`,fontSize:13,fontFamily:"inherit",color:C.text,background:C.bg,outline:"none",marginBottom:14,boxSizing:"border-box"}}/>
+      {search.trim().length > 1 && (
+        <div style={{marginBottom:16}}>
+          {resultados.length===0 && <div style={{...card({textAlign:"center",padding:20,color:C.muted})}}>Sin resultados para "{search}"</div>}
+          {resultados.map(r=>(
+            <div key={r.cod} style={{...card({marginBottom:7,padding:"10px 13px"})}}>
+              <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",gap:8}}>
+                <div>
+                  <span style={{fontSize:10,fontWeight:700,color:C.accent,background:C.al,padding:"2px 6px",borderRadius:4}}>{r.cod}</span>
+                  <div style={{fontSize:12,marginTop:4,lineHeight:1.5}}>{r.desc}</div>
+                </div>
+                <div style={{fontSize:14,fontWeight:800,color:C.green,flexShrink:0,textAlign:"right"}}>
+                  {formatPrecio(r.precio)}
+                  <div style={{fontSize:9,color:C.muted,fontWeight:400}}>sin IVA</div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+      {!search.trim() && destacados.map(grupo=>(
+        <div key={grupo.grupo} style={{marginBottom:16}}>
+          <div style={{fontSize:12,fontWeight:700,marginBottom:8,color:C.text}}>{grupo.grupo}</div>
+          {grupo.items.map(r=>(
+            <div key={r.cod} style={{...card({marginBottom:6,padding:"9px 12px"})}}>
+              <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",gap:8}}>
+                <div style={{flex:1,minWidth:0}}>
+                  <span style={{fontSize:9,fontWeight:700,color:C.accent,background:C.al,padding:"1px 5px",borderRadius:3}}>{r.cod}</span>
+                  <div style={{fontSize:11,marginTop:3,color:C.muted,lineHeight:1.4,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{r.desc}</div>
+                </div>
+                <div style={{fontSize:13,fontWeight:800,color:C.green,flexShrink:0}}>
+                  {formatPrecio(r.precio)}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      ))}
+      <div style={{textAlign:"center",padding:"10px 0",fontSize:10,color:C.light,borderTop:`1px solid ${C.border}`}}>
+        +19% IVA no incluido · Precios sujetos a cambio · Contacto: info.co@unox.com
+      </div>
+    </div>
+  );
+}
+
+
 function GuiaTab() {
   const [marca, setMarca] = useState("rational");
   const [open, setOpen] = useState(null);
@@ -620,23 +788,23 @@ function GuiaTab() {
     </div>
   );
 }
- 
+
 // ══════════════════════════════════════════════════════════════════════════════
 // APP
 // ══════════════════════════════════════════════════════════════════════════════
 export default function App() {
   const [tab, setTab] = useState("inicio");
   const [fallas, setFallas] = useState([]);
- 
+
   useEffect(() => { setFallas(loadF()); }, []);
- 
+
   const registrar = (f) => {
     const n = { ...f, fecha: new Date().toISOString() };
     const a = [...fallas, n];
     setFallas(a);
     saveF(a);
   };
- 
+
   return (
     <>
       <Head>
@@ -661,15 +829,16 @@ export default function App() {
           </div>
           {fallas.length>0&&<div style={{marginLeft:"auto",background:C.al,color:C.accent,fontSize:9,fontWeight:700,padding:"2px 7px",borderRadius:20}}>{fallas.length} reg.</div>}
         </div>
- 
+
         {tab==="inicio"      && <InicioTab onNav={setTab}/>}
         {tab==="chat"        && <ChatTab onFalla={registrar}/>}
         {tab==="instalacion" && <InstalacionTab/>}
         {tab==="planes"      && <PlanesTab/>}
         {tab==="limpieza"    && <LimpiezaTab/>}
+        {tab==="repuestos"  && <RepuestosTab/>}
         {tab==="stats"       && <StatsTab fallas={fallas}/>}
         {tab==="guia"        && <GuiaTab/>}
- 
+
         {/* Bottom Nav */}
         <div style={{position:"fixed",bottom:0,left:"50%",transform:"translateX(-50%)",width:"100%",maxWidth:520,background:C.white,borderTop:`1px solid ${C.border}`,display:"flex",zIndex:100}}>
           {TABS.map(t=>(
