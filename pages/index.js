@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import Head from "next/head";
-
+ 
 // ─── COLORES ──────────────────────────────────────────────────────────────────
 const C = {
   bg:"#f7f8fc", white:"#fff", border:"#e4e8f0",
@@ -11,7 +11,7 @@ const C = {
   purple:"#7c3aed", pl:"#f5f3ff",
   text:"#111827", muted:"#6b7280", light:"#9ca3af",
 };
-
+ 
 const EQUIPOS = [
   { tipo:"Horno", icon:"🔥", marcas:[
     { nombre:"Rational", refs:["SCC WE 6×1/1 GN","SCC WE 10×1/1 GN","SCC WE 20×1/1 GN","SCC XS"] },
@@ -23,14 +23,14 @@ const EQUIPOS = [
   { tipo:"Granizadora", icon:"🧊", marcas:[{ nombre:"Bunn", refs:["ULTRA-2","ULTRA-1","FMD"] }]},
   { tipo:"Nevera / Congelador", icon:"❄️", marcas:[{ nombre:"General", refs:["Refrigerador vertical","Congelador horizontal","Vitrina fría"] }]},
 ];
-
+ 
 const SINTOMAS = {
   Horno:["Código de error en pantalla","No genera vapor","No enciende","Gotea por la puerta","Ruidos extraños","Error durante la limpieza","Autolavado no funciona","Autolavado se interrumpe","No cierra el ciclo de lavado","Sobrecalentamiento","Sonda térmica","No alcanza temperatura","Quema los alimentos","Puerta no cierra bien","Burlete dañado o despegado","Ventilador no gira","Pantalla en blanco","Olor a quemado","Temperatura irregular","No enciende quemador (gas)","Falla eléctrica","CareControl en rojo","Pequeñas explosiones o detonaciones","Goteras en la parte inferior","Fuga de agua por la base","Humo dentro de la cámara","Cristal de puerta sucio o roto","Filtro de aire sucio","Luz de la cabina no funciona","Precalentamiento muy lento","Equipo se apaga solo"],
   Cafetera:["No calienta el agua","No extrae café","Gotea","No enciende","Error en pantalla","Poca presión"],
   Granizadora:["No enfría","No mezcla","Gotea","No enciende","Ruido extraño","Producto muy líquido","Producto muy sólido"],
   "Nevera / Congelador":["No enfría","Ruido extraño","Gotea agua","Escarcha excesiva","No enciende","Temperatura inestable"],
 };
-
+ 
 const ALIAS_MARCA = [
   { words:["chefto","cheftop","chef top","cheff","cheto","jefftop","sheftop","cheftob","chetop","xeftop","jeftop","cheftoop","chefttop","chetop","cheftob"], marca:"Unox", ref:"ChefTop" },
   { words:["bakertop","baker","baketop","bakertob","bejertop"], marca:"Unox", ref:"BakerTop" },
@@ -51,7 +51,7 @@ const ALIAS_TIPO = [
   { words:["granizadora","granizado","slush","frozen"], tipo:"Granizadora" },
   { words:["nevera","refri","refrigerador","congelador"], tipo:"Nevera / Congelador" },
 ];
-
+ 
 const extraerPorReglas = (texto) => {
   const t = texto.toLowerCase().replace(/[áàä]/g,"a").replace(/[éèë]/g,"e").replace(/[íìï]/g,"i").replace(/[óòö]/g,"o").replace(/[úùü]/g,"u");
   let tipo=null, marca=null, ref=null;
@@ -59,7 +59,7 @@ const extraerPorReglas = (texto) => {
   for (const a of ALIAS_MARCA) { if (a.words.some(w=>t.includes(w))) { marca=a.marca; if(a.ref)ref=a.ref; if(!tipo){const eq=EQUIPOS.find(e=>e.marcas.some(m=>m.nombre===a.marca));if(eq)tipo=eq.tipo;} break; } }
   return {tipo,marca,ref};
 };
-
+ 
 const INSTALACION = {
   "Rational-SCC WE 6×1/1 GN":{ electrico:{tension:"3N AC 400V",frecuencia:"50/60 Hz",potencia:"10.5 kW",corriente:"16 A",fusible:"3×16 A",conexion:"5 hilos (3F+N+T) — línea de puesta a tierra obligatoria"},agua:{presion:"150–300 kPa (1.5–3 bar) dinámica",caudal:"20 l/min mín. para XS/61",conexion:'Manguera tipo lavarropa 1/2" con conector hembra rosca 3/4" — llave de corte independiente',desague:"Tubería diámetro 2\", material resistente a 65°C — SCC requiere sifón externo, iCombi NO requiere sifón",temp:"máx. 30°C — agua fría potable"},dimensiones:{ancho:"847 mm",profundidad:"771 mm",altura:"600 mm",peso:"80 kg",capacidad:"6×1/1 GN"},notas:"Distancia mínima pared posterior: 50 mm. Campana extractora: mín. 400 mm entre escape del equipo y filtros de grasa de la campana. Conductividad mínima del agua: 50 µS (dureza mín. 5°dH, mín. 90 ppm). Presión gas natural: 18–25 mbar / Gas propano: 25–57 mbar."},
   "Rational-SCC WE 10×1/1 GN":{ electrico:{tension:"3N AC 400V",frecuencia:"50/60 Hz",potencia:"18.5 kW",corriente:"32 A",fusible:"3×32 A",conexion:"5 hilos (3F+N+T) — conexión fija recomendada"},agua:{presion:"150–300 kPa (1.5–3 bar) dinámica",caudal:"20 l/min mín.",conexion:'Manguera tipo lavarropa 1/2" con conector hembra rosca 3/4" — llave de corte independiente',desague:"Tubería diámetro 2\", material resistente a 65°C — SCC requiere sifón externo",temp:"máx. 30°C — agua fría potable"},dimensiones:{ancho:"847 mm",profundidad:"771 mm",altura:"1000 mm",peso:"120 kg",capacidad:"10×1/1 GN"},notas:"Campana extractora: mín. 400 mm entre escape y filtros de grasa. Conductividad mínima del agua: 50 µS. Filtro en acometida de agua recomendado."},
@@ -69,19 +69,20 @@ const INSTALACION = {
   "Bunn-VPR":{ electrico:{tension:"AC 120V/240V",frecuencia:"50/60 Hz",potencia:"1.55 kW",corriente:"13 A",fusible:"15 A",conexion:"2 hilos + tierra"},agua:{presion:"20–90 psi",caudal:"2 l/min",conexion:'1/4" tubing',desague:"Bandeja con desagüe",temp:"Fría"},dimensiones:{ancho:"279 mm",profundidad:"457 mm",altura:"432 mm",peso:"5.2 kg",capacidad:"1.9 L/jarra"},notas:"Requiere toma de agua fría y drenaje de bandeja."},
   "Bunn-ULTRA-2":{ electrico:{tension:"AC 120V",frecuencia:"60 Hz",potencia:"0.93 kW",corriente:"8 A",fusible:"15 A",conexion:"2 hilos + tierra"},agua:{presion:"20–90 psi",caudal:"2 l/min",conexion:'1/4" tubing',desague:"Bandeja frontal",temp:"Fría filtrada"},dimensiones:{ancho:"368 mm",profundidad:"508 mm",altura:"686 mm",peso:"22 kg",capacidad:"2×4.7 L"},notas:"Agua fría filtrada. Limpiar condensador mensualmente."},
 };
-
+ 
 const PLANES = {
   "Rational-SCC WE 10×1/1 GN":{ diario:["Ejecutar CleanJet+Care al finalizar jornada (nivel según suciedad)","Limpiar burlete de puerta con paño húmedo — verificar que no esté dañado","Limpiar bandeja recogegotas de la puerta: hacer circular 1-2 litros de agua tibia","Verificar que el desagüe no esté obstruido","No dejar residuos de comida en la cámara — riesgo de obstrucción del desagüe"], semanal:["Limpiar filtro de aire con solución jabonosa suave (<80°C) y dejar secar","Revisar chapa deflectora y bastidores colgantes — deben estar bien fijos","Limpiar cristal de puerta con paño suave y húmedo — NO usar químicos","Inspeccionar estado del burlete — reemplazar si tiene grietas o deformaciones"], mensual:["Descalcificar boquilla de humidificación si hay incrustaciones","Revisar sonda térmica — verificar inserción y estado del cable","Verificar presión dinámica del agua: 1.5–3 bar","Verificar conductividad del agua: mín. 50 µS (dureza mín. 5°dH)"], semestral:["Cambiar burlete si hay deterioro (ver guía de cambio de burlete)","Revisión técnica por servicio certificado Rational — verificar consumibles"], anual:["Inspección general certificada por técnico Rational","Reemplazar consumibles según uso: burlete (1-3 según intensidad), filtro de aire (1-2), junta caldera (1-2)","Pastillas Cleaner: consumo aprox. 0.7 baldes/año (uso ligero) a 1 balde/año (uso intenso)","Pastillas Care: consumo aprox. 0.3–0.5 baldes/año según intensidad de uso"] },
   "Unox-ChefTop":{ diario:["Ejecutar ciclo de limpieza con UNOX Det&Rinse al finalizar jornada","Retirar TODAS las bandejas antes del ciclo de lavado","Verificar grifo de agua abierto","Verificar tanque de detergente lleno y bien instalado","Limpiar junta de puerta visualmente","Verificar que la chimenea no esté obstruida"], semanal:["Inspeccionar interior de cámara: manchas, incrustaciones, corrosión","Verificar sello de puerta","Verificar P-trap del desagüe: llenar con agua si está seco","Limpiar filtro mecánico de agua"], mensual:["Verificar presión de agua: entrada 1.5-6 bar, salida reductor ~2.3 bar","Verificar válvulas solenoides EL1, EL2, EG1, EG2","Revisar P-trap y sistema de drenaje","Verificar calibración del horno en Service Menu (PIN: 99857)"], trimestral:["Limpiar chimenea con cepillo metálico","Verificar capacitores de motores: valor esperado 6.3 µF","Solo gas: verificar corriente de ionización 1.5-10 µA DC","Solo gas: verificar gaps electrodos — 3 mm entre electrodos"], semestral:["Actualizar firmware","Verificar contactores y elementos calefactores"], anual:["Solo gas: reemplazar empaques kit KGN1569A","Reemplazar empaque de puerta completo si hay deterioro","Evaluar calidad del agua","Respaldar parámetros en USB (PARAM_S6)"] },
   "Unox-BakerTop":{ diario:["Ejecutar ciclo de limpieza con UNOX Det&Rinse","Retirar todas las bandejas antes del lavado","Verificar grifo de agua abierto y tanque de detergente lleno"], semanal:["Inspeccionar cámara y sello de puerta","Verificar P-trap del desagüe"], mensual:["Verificar presión de agua entrada 1.5-6 bar","Verificar válvulas solenoides EL1, EL2, EG1, EG2"], semestral:["Actualizar firmware","Revisar contactores y elementos calefactores"], anual:["Solo gas: reemplazar empaques kit KGN1569A","Respaldo de parámetros en USB","Evaluar calidad del agua"] },
 };
 const PLAN_GEN = { diario:["Limpiar exteriores","Verificar funcionamiento básico"], semanal:["Limpiar filtros accesibles"], mensual:["Inspección visual de mangueras"], semestral:["Revisión por técnico"], anual:["Mantenimiento preventivo completo"] };
-
+ 
 const LIMPIEZAS_DATA = {
   Horno:[
     {titulo:"CleanJet+Care — Rational SCC / iCombi Pro",alerta:"⚠️ Usar gafas, guantes y delantal. NO insertar bandejas ni recipientes durante la limpieza.",pasos:["Seleccionar nivel de limpieza 1-6 según suciedad (Ligero, Medio, Fuerte, Rápido, Ahorro, Intenso).","Esperar que la cámara baje de 75°C antes de iniciar.","Retirar contenedores, bandejas y parrillas de la cámara.","iCombi Pro: Colocar pastilla de detergente (sobre verde, redonda) en el tamiz del piso de la cámara. Colocar pastilla CareControl (sobre azul, 4 pastillas cúbicas) en el cajón CareControl.","SCC: Colocar pastilla de detergente (sobre rojo/plateado) en el canasto del bafle. Colocar pastilla CareControl en el cajón CareControl.","Verificar que la puerta cierre bien y pulsar Inicio.","Al terminar, revisar que no queden residuos de producto en la cámara.","Limpiar la bandeja recogegotas de la puerta diariamente con 1-2 litros de agua tibia.","⚠️ Si el equipo no se limpia a diario, el residuo de grasa puede generar riesgo de incendio."]},
     {titulo:"Cambio de Burlete — Unox ChefTop / BakerTop",alerta:"⚠️ El burlete NO tiene orificios (es sellado). No debe sobrar ni cortarse.",pasos:["Retirar el burlete viejo jalando desde cualquier punto de la ranura.","Limpiar bien la ranura y el marco de la puerta con paño húmedo.","Identificar la UNIÓN del burlete nuevo (donde se une el caucho): eso va en la parte SUPERIOR centrado en la guía.","Colocar el centro de la parte INFERIOR.","Luego el lado DERECHO y después el lado IZQUIERDO.","Ir insertando el burlete de a pocos desde el centro hacia las esquinas, presionando hacia adentro de la ranura.","En las esquinas redondeadas: verificar que la línea del burlete coincida con la línea guía del horno.","Verificar las pestañas: la pestaña LARGA va alejada de la cabina (lado vapor), la pestaña CORTA va cerca de la cabina (lado calor).","Hacer prueba de cierre: la puerta debe sellar uniformemente todo el contorno."]},
     {titulo:"Cambio de Burlete — Unox Arianna (XEFR-04HS)",alerta:"⚠️ Este burlete tiene DOS ORIFICIOS que deben quedar en la parte superior. La puerta cierra hacia arriba.",pasos:["Retirar el burlete viejo jalando desde cualquier punto de la ranura.","Limpiar bien la ranura y el marco de la puerta con paño húmedo.","Identificar la UNIÓN del burlete nuevo (donde se une el caucho): eso va en el lado IZQUIERDO del horno en la mitad de la guía. Los orificios deben quedar en la parte SUPERIOR.","Colocar el centro de la parte DERECHA.","Luego el lado SUPERIOR y después el lado INFERIOR.","Ir insertando el burlete de a pocos desde el centro hacia las esquinas, presionando hacia adentro de la ranura.","En las esquinas redondeadas: verificar que la línea del burlete coincida con la línea guía del horno.","Verificar las pestañas: la pestaña LARGA va alejada de la cabina (lado vapor), la pestaña CORTA va cerca de la cabina (lado calor).","Verificar que los DOS ORIFICIOS queden en la parte superior del marco.","Hacer prueba de cierre: la puerta debe sellar uniformemente todo el contorno."]},
+    {titulo:"Cambio de Burlete — Rational SCC / iCombi",alerta:"⚠️ Este burlete tiene orificios en la parte INFERIOR. Las esquinas son de 90 grados.",pasos:["Retirar el burlete viejo jalando desde cualquier punto de la ranura.","Limpiar bien la ranura con paño húmedo. Se puede humedecer con agua jabonosa para facilitar la instalación.","Identificar la UNIÓN del burlete nuevo: va en la parte SUPERIOR centrada. Los orificios deben quedar en la parte INFERIOR.","Colocar el centro de la parte INFERIOR.","Luego el lado DERECHO y después el lado IZQUIERDO.","Ir insertando el burlete de a pocos desde el centro hacia las esquinas.","En las esquinas de 90 grados (rectas, no redondeadas): asegurarse que el burlete quede completamente recto y encajado.","Verificar pestañas: pestaña LARGA alejada de la cabina (lado vapor), pestaña CORTA cerca de la cabina (lado calor).","No debe sobrar ni cortarse. Hacer prueba de cierre: la puerta debe sellar uniformemente."]},
     {titulo:"Cuidado Diario — Filtro de Aire Rational",alerta:"Un filtro obstruido puede dañar componentes electrónicos. Limpiar semanalmente.",pasos:["iCombi Pro/Classic (mesa 6-1/1 a 10-2/1): Con destornillador, levantar la rejilla de ventilación en la base bajo el panel de control (punto A). Levantar el elemento de filtro del soporte (punto B) y extraerlo.","SCC (mesa 61-102): Empujar el marco del filtro en las zonas marcadas hacia adentro. Inclinar hacia abajo y extraer.","Lavar con solución jabonosa suave y agua caliente a menos de 60-80°C.","Dejar secar completamente antes de reinstalar.","Si el filtro no se puede limpiar bien, reemplazar por filtro nuevo.","Reinstalar asegurando que quede bien fijo. El equipo NO debe usarse sin filtro de aire."]},
     {titulo:"Cuidado del Cristal y Burlete de Puerta — Rational",alerta:"⚠️ NO usar químicos ni detergentes en el cristal — despegan los flejes de sujeción del vidrio.",pasos:["Cristal: Abrir el cristal interior soltando los 2 clips de muelle (superior e inferior). Esperar que se enfríe antes de tocar. Limpiar solo con paño suave y húmedo.","Burlete: Limpiar con paño suave y húmedo la parte interior y exterior del burlete después de cada carga.","No usar productos corrosivos, abrasivos ni con vinagre (ácidos) en el burlete.","Evitar operar el horno vacío a temperaturas superiores a 180°C — reduce la vida útil del burlete.","Si se usan modos de plancha/parrilla con frecuencia, pasar paño húmedo al burlete entre ciclos."]},
   ],
@@ -89,7 +90,7 @@ const LIMPIEZAS_DATA = {
   Granizadora:[{titulo:"Granizadora Bunn — Semanal",alerta:"Sin agua a presión en el compresor.",pasos:["Apagar y desconectar.","Retirar y lavar el tambor.","Limpiar interior.","Limpiar rejillas del condensador."]}],
   "Nevera / Congelador":[{titulo:"Nevera — Quincenal",alerta:"No raspar escarcha con metal.",pasos:["Apagar y desenchufar.","Retirar productos.","Limpiar con bicarbonato.","Limpiar rejillas y juntas."]}],
 };
-
+ 
 const ERRORES_UNOX = [
   {code:"AF01 – Motor térmico",nivel:"CRÍTICO",desc:"Termostato del motor disparó. Capacitores o motor dañados.",pasos:["Apagar equipo. Desconectar socket P2.","Medir continuidad entre pin 4 y 5.","Probar capacitores: valor esperado 6.3 µF.","Reemplazar capacitor defectuoso o motor."]},
   {code:"AF02 – Termostato seguridad",nivel:"CRÍTICO",desc:"Termostato de seguridad activado (dispara a 320°C).",pasos:["Esperar enfriamiento completo del horno.","Reiniciar termostato. Verificar fuentes externas de calor.","Desconectar socket P22, medir continuidad pin 4 y 5.","Si no hay continuidad → reemplazar termostato de seguridad."]},
@@ -104,7 +105,7 @@ const ERRORES_UNOX = [
   {code:"Pantalla en blanco",nivel:"SIMPLE",desc:"Panel sin imagen.",pasos:["Tocar el panel — puede estar en modo stand-by.","Medir 12V DC en conector principal.","Si no hay voltaje → reemplazar placa de control."]},
   {code:"No enciende",nivel:"MODERADO",desc:"El horno no arranca.",pasos:["Verificar fusible F2 (2A - 250V Fast Acting).","Medir 230 VAC en socket P1 entre NF y LF.","Si no hay voltaje → placa de potencia dañada.","Verificar fusible F4 (5A - 250V Time Delay)."]},
 ];
-
+ 
 const ERRORES_RATIONAL = [
   {code:"Service 23/24",nivel:"CRÍTICO",desc:"Error hardware. Apagar inmediatamente.",pasos:["Apagar con interruptor 0/I.","Llamar Service Rational Colombia.","No rearmar hasta instrucciones."]},
   {code:"Service 26/27",nivel:"CRÍTICO",desc:"Falla CleanJet: válvula de esfera no encuentra posición. No es posible cocinar.",pasos:["Cancelar CleanJet en menú.","Retirar tabletas con guantes.","Verificar que la chapa deflectora y bastidores estén bien fijos — NO debe haber recipientes en la cámara.","Enjuagar con ducha de mano.","Llamar técnico si persiste."]},
@@ -126,12 +127,12 @@ const ERRORES_RATIONAL = [
   {code:"No enciende (pantalla oscura)",nivel:"MODERADO",desc:"Sin energía eléctrica o protección disparada.",pasos:["Verificar que no se haya disparado el breaker o fusible del tablero.","Verificar que el interruptor del equipo esté en posición I (encendido).","Llamar técnico Rational si persiste."]},
 ];
 const NIVEL_C = {CRÍTICO:"red",PELIGRO:"red",LIMITADO:"blue",FRECUENTE:"yellow",SIMPLE:"green",COMÚN:"blue",MODERADO:"blue"};
-
+ 
 // ─── HELPERS ──────────────────────────────────────────────────────────────────
 const card = (x={}) => ({ background:C.white, border:`1px solid ${C.border}`, borderRadius:12, padding:16, ...x });
 const btn = (v="primary",s="md") => ({ display:"inline-flex", alignItems:"center", justifyContent:"center", gap:6, padding:s==="sm"?"5px 10px":"9px 16px", fontSize:s==="sm"?11:13, fontWeight:600, borderRadius:8, cursor:"pointer", fontFamily:"inherit", border:v==="outline"?`1px solid ${C.border}`:"none", background:v==="primary"?C.accent:v==="outline"?C.white:"transparent", color:v==="primary"?"#fff":C.muted });
 const tagS = (c="blue") => { const m={blue:[C.accent,C.al],red:[C.red,C.rl],green:[C.green,C.gl],yellow:[C.yellow,C.yl],gray:[C.muted,"#f3f4f6"]}; const [col,bg]=m[c]||m.blue; return {fontSize:10,fontWeight:700,padding:"2px 7px",borderRadius:20,color:col,background:bg}; };
-
+ 
 const LogoCEM = ({size=44}) => (
   <svg width={size} height={size*0.88} viewBox="0 0 280 247" xmlns="http://www.w3.org/2000/svg">
     <polygon points="0,247 28,175 48,210 22,247" fill="#e8432d"/>
@@ -142,7 +143,7 @@ const LogoCEM = ({size=44}) => (
     <text x="22" y="234" fontFamily="Impact,Arial Black,sans-serif" fontWeight="900" fontSize="105" fill="#2d5f6e" letterSpacing="-3">CEM</text>
   </svg>
 );
-
+ 
 const TABS = [
   {id:"inicio",icon:"🏠",label:"Inicio"},
   {id:"chat",icon:"🤖",label:"Diagnóstico"},
@@ -152,18 +153,18 @@ const TABS = [
   {id:"stats",icon:"📊",label:"Stats"},
   {id:"guia",icon:"📖",label:"Guía"},
 ];
-
+ 
 // ─── STORAGE LOCAL (reemplaza window.storage) ─────────────────────────────────
 const SK = "cem_fallas_v4";
 const loadF = () => { try { const d = localStorage.getItem(SK); return d ? JSON.parse(d) : []; } catch { return []; } };
 const saveF = (d) => { try { localStorage.setItem(SK, JSON.stringify(d)); } catch {} };
-
+ 
 // ══════════════════════════════════════════════════════════════════════════════
 // CHAT
 // ══════════════════════════════════════════════════════════════════════════════
 const SALUDO_TXT = "Hola. Soy el asistente técnico del CEM. Puedes escribirme, usar los botones o hablarme con el micrófono. Siempre dime el equipo, la marca y la referencia para darte el mejor diagnóstico. ¿Con qué equipo necesitas ayuda hoy?";
 const SALUDO_DISPLAY = "¡Hola! Soy el asistente técnico del **CEM**.\n\nPuedes interactuar conmigo de 3 formas:\n✍️ **Escribiendo** en el campo de texto\n🔘 **Usando los botones** que aparecen abajo\n🎙️ **Hablándome** con el micrófono\n\nSiempre indica el **equipo**, **marca** y **referencia** para un diagnóstico preciso.\n\n¿Con qué equipo necesitas ayuda hoy?";
-
+ 
 function ChatTab({ onFalla }) {
   const [msgs, setMsgs] = useState([{ role:"bot", text:SALUDO_DISPLAY }]);
   const [step, setStep] = useState("tipo");
@@ -177,10 +178,10 @@ function ChatTab({ onFalla }) {
   const lastBot = useRef(SALUDO_TXT);
   const recRef = useRef(null);
   const endRef = useRef(null);
-
+ 
   useEffect(() => { msgsRef.current = msgs; }, [msgs]);
   useEffect(() => { endRef.current?.scrollIntoView({ behavior:"smooth" }); }, [msgs, loading]);
-
+ 
   const hablar = useCallback((texto) => {
     if (!window.speechSynthesis) return;
     speechSynthesis.cancel();
@@ -198,7 +199,7 @@ function ChatTab({ onFalla }) {
     };
     speechSynthesis.getVoices().length > 0 ? go() : (speechSynthesis.onvoiceschanged = go);
   }, []);
-
+ 
   const toggleMic = useCallback(() => {
     if (listening) { recRef.current?.stop(); return; }
     const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -212,26 +213,82 @@ function ChatTab({ onFalla }) {
     recRef.current = rec;
     try { rec.start(); } catch { setListening(false); }
   }, [listening]);
-
+ 
   const addMsg = (role, text) => {
     const m = { role, text };
     setMsgs(prev => { const n=[...prev,m]; msgsRef.current=n; return n; });
     if (role==="bot") lastBot.current = text;
   };
-
+ 
   // ── Llama al backend propio en /api/chat ──
   const callIA = async (contenido, ctx) => {
     if (!contenido?.trim()) return;
     setLoading(true);
     const esRational = ctx?.marca?.nombre === "Rational";
-    const system = `Asistente técnico CEM. Español colombiano simple. Máximo 120 palabras.
+    const esUnox = ctx?.marca?.nombre === "Unox";
+    const esChefTop = ctx?.ref?.toLowerCase().includes("cheftop") || ctx?.ref?.toLowerCase().includes("bakertop");
+    const esArianna = ctx?.ref?.toLowerCase().includes("arianna");
+ 
+    const system = `Eres el asistente técnico del CEM de Terpel. Responde en español colombiano simple. Máximo 180 palabras.
 Equipo: ${ctx?.tipo?.tipo||"?"} ${ctx?.marca?.nombre||""} ${ctx?.ref||""}
-${esRational?"Rational SCC: 23/24=apagar ya; 26=cancelar CleanJet; 14=calor seco; 25=sin agua; 27=reiniciar 5s; 29=filtro aire; 31=sonda.":""}
-Responde:
+ 
+=== PROCEDIMIENTOS DE BURLETE ===
+UNOX ChefTop/BakerTop (burlete SIN orificios, sellado):
+- Retirar burlete viejo, limpiar ranura.
+- Unión del burlete nuevo → parte SUPERIOR centrada en la guía.
+- Luego: centro inferior → lado derecho → lado izquierdo.
+- Insertar de a poco del centro hacia esquinas presionando hacia adentro.
+- Esquinas redondeadas: línea del burlete debe coincidir con línea guía del horno.
+- Pestaña LARGA = alejada de la cabina (lado vapor). Pestaña CORTA = cerca de la cabina (lado calor).
+- No debe sobrar ni cortarse.
+ 
+UNOX Arianna (burlete CON DOS ORIFICIOS en la parte superior, puerta cierra hacia arriba):
+- Retirar burlete viejo, limpiar ranura.
+- Unión del burlete nuevo → lado IZQUIERDO del horno en la mitad de la guía. Los orificios deben quedar en la parte SUPERIOR.
+- Luego: centro derecho → lado superior → lado inferior.
+- Insertar de a poco del centro hacia esquinas.
+- Pestaña LARGA = alejada de la cabina (vapor). Pestaña CORTA = cerca de la cabina (calor).
+ 
+RATIONAL SCC/iCombi (burlete CON orificios en la parte INFERIOR, esquinas de 90 grados):
+- Retirar burlete viejo, limpiar ranura con paño húmedo.
+- Unión del burlete → parte SUPERIOR centrada. Los orificios deben quedar en la parte INFERIOR.
+- Luego: centro inferior → lado derecho → lado izquierdo.
+- Esquinas son de 90 grados (no redondeadas): asegurarse que el burlete quede recto en las esquinas.
+- Insertar de a poco del centro hacia las esquinas.
+- No debe sobrar ni cortarse.
+- Humedecer la ranura con agua jabonosa facilita la instalación.
+ 
+=== MEDICIONES TÉCNICAS UNOX ChefTop/BakerTop ===
+- Sondas de temperatura: ~110 Ω a 25°C (medir en ohms con multímetro).
+- Capacitores de motores: valor esperado 6.3 µF cada uno.
+- Resistencias de freno: rojo=37.5 Ω, amarillo=75 Ω.
+- Elemento calefactor: medir consumo por fase en amperios.
+- Voltaje válvula solenoide EL1/EL2: 230 VAC desde placa.
+- Corriente de ionización (solo gas): 1.5–10 µA DC.
+- Presión dinámica de gas: 0 ± 0.7 mbar.
+- Gaps electrodos gas: 3 mm entre electrodos, 7 mm electrodo-antorcha (piso) / 4 mm (sobremesa).
+- Voltaje pantalla: 12 V DC entre cables negro y amarillo del conector principal.
+- Fusible F2: 2A 250V Fast Acting. Fusible F4: 5A 250V Time Delay.
+- Presión agua entrada: 1.5–6 bar. Salida reductor: ~2.3 bar.
+- PIN menú servicio: 99857.
+ 
+=== MEDICIONES TÉCNICAS RATIONAL SCC/iCombi ===
+- Presión dinámica agua: 1.5–3 bar (150–300 kPa).
+- Conductividad mínima agua: 50 µS (dureza mín. 5°dH, 90 ppm).
+- Presión gas natural: 18–25 mbar. Gas propano: 25–57 mbar.
+- Termostato de seguridad: dispara a ~180°C — revisar si el indicador llegó a zona roja.
+- Verificar las 3 fases eléctricas si el precalentamiento es lento o no termina.
+- Sonda térmica B2/B4 (combinación de fallas puede mostrar códigos combinados como 20.6, 31.12).
+- Revisar bus cable si aparece error 34.x — verificar conexión y estado del cable bus.
+ 
+${esRational?"Rational SCC: 23/24=apagar ya; 32/33=cerrar gas+ventilar; 14=sin agua; 25=filtro agua; 29=filtro aire; 31=sonda; 47/48=bomba desagüe; 110/120=llamar técnico.":""}
+${esUnox?"Unox: AF01=motor/capacitor; AF02=termostato 320°C; AF03=sonda 110Ω; AF04=comunicación placa; AF23=gas; WF16=agua EL1; WF06=placa caliente; WF41=red.":""}
+ 
+Responde SIEMPRE así:
 Causa: [1 línea]
-Pasos: 1. 2. 3.
-Escalar: [cuándo llamar]
-Tip: [consejo]`;
+Pasos: 1. 2. 3. (máx 5 pasos con valores técnicos si aplica)
+Escalar: [cuándo llamar técnico]
+Tip: [consejo práctico]`;
     try {
       const prevMsgs = msgsRef.current
         .filter(m => m?.role && typeof m.text === "string" && m.text.trim())
@@ -240,7 +297,7 @@ Tip: [consejo]`;
       const messages = prevMsgs.length > 0
         ? [...prevMsgs, { role:"user", content:contenido.trim() }]
         : [{ role:"user", content:contenido.trim() }];
-
+ 
       // ← Aquí llama a /api/chat (tu propio backend) en lugar de Anthropic directo
       const res = await fetch("/api/chat", {
         method:"POST",
@@ -256,7 +313,7 @@ Tip: [consejo]`;
       addMsg("bot", "⚠️ No se pudo conectar. Verifica tu internet e intenta de nuevo.");
     } finally { setLoading(false); }
   };
-
+ 
   const pickTipo = (eq) => {
     setSel({ tipo:eq, marca:null, ref:null });
     addMsg("user", `${eq.icon} ${eq.tipo}`);
@@ -294,7 +351,7 @@ Tip: [consejo]`;
   const renderText = (t) => t.split("\n").filter(Boolean).map((l,i) => (
     <div key={i} dangerouslySetInnerHTML={{__html:l.replace(/\*\*(.+?)\*\*/g,"<strong>$1</strong>")}} style={{marginBottom:3}}/>
   ));
-
+ 
   return (
     <div style={{display:"flex",flexDirection:"column",height:"calc(100vh - 110px)"}}>
       {sel.tipo && (
@@ -363,7 +420,7 @@ Tip: [consejo]`;
     </div>
   );
 }
-
+ 
 // ══════════════════════════════════════════════════════════════════════════════
 // INICIO
 // ══════════════════════════════════════════════════════════════════════════════
@@ -399,7 +456,7 @@ function InicioTab({ onNav }) {
     </div>
   );
 }
-
+ 
 // ══════════════════════════════════════════════════════════════════════════════
 // INSTALACIÓN
 // ══════════════════════════════════════════════════════════════════════════════
@@ -437,7 +494,7 @@ function InstalacionTab() {
     </div>
   );
 }
-
+ 
 // ══════════════════════════════════════════════════════════════════════════════
 // PLANES
 // ══════════════════════════════════════════════════════════════════════════════
@@ -472,7 +529,7 @@ function PlanesTab() {
     </div>
   );
 }
-
+ 
 // ══════════════════════════════════════════════════════════════════════════════
 // LIMPIEZA
 // ══════════════════════════════════════════════════════════════════════════════
@@ -502,7 +559,7 @@ function LimpiezaTab() {
     </div>
   );
 }
-
+ 
 // ══════════════════════════════════════════════════════════════════════════════
 // STATS
 // ══════════════════════════════════════════════════════════════════════════════
@@ -534,7 +591,7 @@ function StatsTab({ fallas }) {
     </div>
   );
 }
-
+ 
 // ══════════════════════════════════════════════════════════════════════════════
 // GUÍA
 // ══════════════════════════════════════════════════════════════════════════════
@@ -563,23 +620,23 @@ function GuiaTab() {
     </div>
   );
 }
-
+ 
 // ══════════════════════════════════════════════════════════════════════════════
 // APP
 // ══════════════════════════════════════════════════════════════════════════════
 export default function App() {
   const [tab, setTab] = useState("inicio");
   const [fallas, setFallas] = useState([]);
-
+ 
   useEffect(() => { setFallas(loadF()); }, []);
-
+ 
   const registrar = (f) => {
     const n = { ...f, fecha: new Date().toISOString() };
     const a = [...fallas, n];
     setFallas(a);
     saveF(a);
   };
-
+ 
   return (
     <>
       <Head>
@@ -604,7 +661,7 @@ export default function App() {
           </div>
           {fallas.length>0&&<div style={{marginLeft:"auto",background:C.al,color:C.accent,fontSize:9,fontWeight:700,padding:"2px 7px",borderRadius:20}}>{fallas.length} reg.</div>}
         </div>
-
+ 
         {tab==="inicio"      && <InicioTab onNav={setTab}/>}
         {tab==="chat"        && <ChatTab onFalla={registrar}/>}
         {tab==="instalacion" && <InstalacionTab/>}
@@ -612,7 +669,7 @@ export default function App() {
         {tab==="limpieza"    && <LimpiezaTab/>}
         {tab==="stats"       && <StatsTab fallas={fallas}/>}
         {tab==="guia"        && <GuiaTab/>}
-
+ 
         {/* Bottom Nav */}
         <div style={{position:"fixed",bottom:0,left:"50%",transform:"translateX(-50%)",width:"100%",maxWidth:520,background:C.white,borderTop:`1px solid ${C.border}`,display:"flex",zIndex:100}}>
           {TABS.map(t=>(
