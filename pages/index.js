@@ -513,7 +513,7 @@ const LogoCEM = ({size=44}) => (
 
 const TABS = [
   {id:"inicio",icon:"🏠",label:"Inicio"},
-  {id:"chat",icon:"🤖",label:"Diagnóstico"},
+  {id:"chat",icon:"🤖",label:"CEM Bot"},
   {id:"planes",icon:"📋",label:"Planes"},
   {id:"instalacion",icon:"⚡",label:"Instalación"},
   {id:"limpieza",icon:"🧹",label:"Limpieza"},
@@ -801,7 +801,7 @@ Tip: [consejo — si aplica mencionar repuesto con código y precio]`;
 // ══════════════════════════════════════════════════════════════════════════════
 function InicioTab({ onNav }) {
   const items = [
-    {id:"chat",icon:"🤖",color:C.accent,bg:C.al,titulo:"Diagnóstico IA",desc:"Describe la falla por texto o voz."},
+    {id:"chat",icon:"🤖",color:C.accent,bg:C.al,titulo:"CEM Bot",desc:"Describe la falla por texto o voz."},
     {id:"planes",icon:"📋",color:C.green,bg:C.gl,titulo:"Planes PM",desc:"Tareas preventivas por equipo."},
     {id:"instalacion",icon:"⚡",color:C.purple,bg:C.pl,titulo:"Instalación",desc:"Requisitos eléctricos e hidráulicos."},
     {id:"limpieza",icon:"🧹",color:C.yellow,bg:C.yl,titulo:"Limpieza",desc:"Guías para operadores y técnicos."},
@@ -973,7 +973,7 @@ function StatsTab({ fallas }) {
   const ahora=new Date();
   const filtrar=lista=>{ if(filtro==="todo")return lista; const dias={hoy:1,semana:7,mes:30}[filtro]; const desde=filtro==="hoy"?new Date(ahora.getFullYear(),ahora.getMonth(),ahora.getDate()):new Date(ahora.getTime()-dias*24*60*60*1000); return lista.filter(f=>f.fecha&&new Date(f.fecha)>=desde); };
   const datos=filtrar(fallas);
-  if(fallas.length===0)return(<div style={{display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",height:"calc(100vh - 110px)",padding:16,textAlign:"center"}}><div style={{fontSize:44,marginBottom:10}}>📊</div><div style={{fontSize:15,fontWeight:700,marginBottom:5}}>Sin datos aún</div><div style={{fontSize:12,color:C.muted}}>Usa el Diagnóstico IA para registrar fallas.</div></div>);
+  if(fallas.length===0)return(<div style={{display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",height:"calc(100vh - 110px)",padding:16,textAlign:"center"}}><div style={{fontSize:44,marginBottom:10}}>📊</div><div style={{fontSize:15,fontWeight:700,marginBottom:5}}>Sin datos aún</div><div style={{fontSize:12,color:C.muted}}>Usa el CEM Bot para registrar fallas.</div></div>);
   const contar=key=>datos.reduce((a,f)=>{const k=f[key]||"Sin dato";a[k]=(a[k]||0)+1;return a;},{});
   const top=(key,n=8)=>Object.entries(contar(key)).sort((a,b)=>b[1]-a[1]).slice(0,n);
   const tS=top("sintoma"); const mx=tS[0]?.[1]||1;
