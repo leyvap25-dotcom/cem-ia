@@ -12,17 +12,69 @@ const C = {
   text:"#111827", muted:"#6b7280", light:"#9ca3af",
 };
 
+// Cada ref es un objeto: { ref, favorito, img, desc }
+// favorito:true = badge ⭐ CEM + aparece en filtro favoritos
 const EQUIPOS = [
   { tipo:"Horno", icon:"🔥", marcas:[
-    { nombre:"Rational", refs:["SCC WE 6×1/1 GN","SCC WE 10×1/1 GN","SCC WE 20×1/1 GN","SCC XS"] },
-    { nombre:"Unox", refs:["XEVC-0523-E1R","XEVC-1011-EPR","ChefTop","BakerTop","Arianna (XEFR-04HS)","Stefania (XEFR-03HS)","Elena (XEFR-03EU)","Rossella (XEFR-04EU)","Vittoria (XEFR-06EU)","Camilla (XEFR-10EU)"] },
-    { nombre:"Zanolli", refs:["Synthesis 5/50","Synthesis 8/75","Teorema","Pizza Express"] },
-    { nombre:"Turbochef", refs:["HHC2020","HHC2620","Sota","Fire"] },
+    { nombre:"Rational", refs:[
+      { ref:"SCC WE 6×1/1 GN",  favorito:false, img:"https://images.tundrafmp.com/fit-in/700x700/filters:fill(white)/product_images/original_images/RATIONAL-iCombi-Pro-10-11-E_main.jpg", desc:"Combi 6 bandejas GN 1/1 · 10.5 kW · 3F" },
+      { ref:"SCC WE 10×1/1 GN", favorito:true,  img:"https://images.tundrafmp.com/fit-in/700x700/filters:fill(white)/product_images/original_images/RATIONAL-iCombi-Pro-10-11-E_main.jpg", desc:"Combi 10 bandejas GN 1/1 · 18.5 kW · 3F" },
+      { ref:"SCC WE 20×1/1 GN", favorito:false, img:"https://images.tundrafmp.com/fit-in/700x700/filters:fill(white)/product_images/original_images/RATIONAL-iCombi-Pro-10-11-E_main.jpg", desc:"Combi 20 bandejas GN 1/1 · 3F" },
+      { ref:"SCC XS",            favorito:true,  img:"https://www.metos.com/media/catalog/product/r/a/rational_icombi_pro_xs_6_2_3_electric_1.jpg", desc:"iCombi XS · Compacto · 6×2/3 GN" },
+    ]},
+    { nombre:"Unox", refs:[
+      { ref:"XEVC-0523-E1R",         favorito:false, img:"https://www.unox.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/x/a/xavc-0513-eprm.jpg", desc:"ChefTop ONE · 5 bandejas GN 2/3" },
+      { ref:"XEVC-1011-EPR",         favorito:false, img:"https://www.unox.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/x/a/xavc-0513-eprm.jpg", desc:"ChefTop ONE · 10 bandejas GN 1/1" },
+      { ref:"ChefTop",               favorito:true,  img:"https://www.unox.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/x/a/xavc-0513-eprm.jpg", desc:"ChefTop MIND.Maps · 5 GN 1/1" },
+      { ref:"BakerTop",              favorito:false, img:"https://www.unox.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/x/a/xabc-05fs-eprm.jpg", desc:"BakerTop MIND.Maps · Panadería" },
+      { ref:"Arianna (XEFR-04HS)",   favorito:true,  img:"https://store.cedarhospitality.com/96216-medium_default/unox-arianna-4-tray-oven-xeft-04hs-etlv.jpg", desc:"Arianna · 4 bandejas 460×330 · 3.5 kW" },
+      { ref:"Stefania (XEFR-03HS)",  favorito:false, img:"https://cdn.habitium.com/ie/2251864-home_default/bakerlux-shop-pro-arianna-unox-professional-electric-oven-for-frozen-baked-goods.jpg", desc:"Stefania · 3 bandejas 460×330" },
+      { ref:"Elena (XEFR-03EU)",     favorito:false, img:"https://cdn.habitium.com/ie/2251864-home_default/bakerlux-shop-pro-arianna-unox-professional-electric-oven-for-frozen-baked-goods.jpg", desc:"Elena · 3 bandejas GN 1/1" },
+      { ref:"Rossella (XEFR-04EU)",  favorito:false, img:"https://cdn.habitium.com/ie/2251864-home_default/bakerlux-shop-pro-arianna-unox-professional-electric-oven-for-frozen-baked-goods.jpg", desc:"Rossella · 4 bandejas GN 1/1" },
+      { ref:"Vittoria (XEFR-06EU)",  favorito:false, img:"https://cdn.habitium.com/ie/2251864-home_default/bakerlux-shop-pro-arianna-unox-professional-electric-oven-for-frozen-baked-goods.jpg", desc:"Vittoria · 6 bandejas GN 1/1" },
+      { ref:"Camilla (XEFR-10EU)",   favorito:false, img:"https://cdn.habitium.com/ie/2251864-home_default/bakerlux-shop-pro-arianna-unox-professional-electric-oven-for-frozen-baked-goods.jpg", desc:"Camilla · 10 bandejas GN 1/1" },
+    ]},
+    { nombre:"Zanolli", refs:[
+      { ref:"Synthesis 5/50", favorito:false, img:"https://m.media-amazon.com/images/I/71VFX2cq4AL._AC_SL1000_.jpg", desc:"Horno túnel pizza · banda 50 cm" },
+      { ref:"Synthesis 8/75", favorito:false, img:"https://m.media-amazon.com/images/I/71VFX2cq4AL._AC_SL1000_.jpg", desc:"Horno túnel pizza · banda 75 cm" },
+      { ref:"Teorema",        favorito:false, img:"https://m.media-amazon.com/images/I/71VFX2cq4AL._AC_SL1000_.jpg", desc:"Horno rotativo Zanolli" },
+      { ref:"Pizza Express",  favorito:false, img:"https://m.media-amazon.com/images/I/71VFX2cq4AL._AC_SL1000_.jpg", desc:"Horno express pizza" },
+    ]},
+    { nombre:"Turbochef", refs:[
+      { ref:"HHC2020",   favorito:false, img:"https://www.turbochef.com/wp-content/uploads/2019/02/HHC2020_main.jpg", desc:"Alta velocidad · 6.7 kW · ventless" },
+      { ref:"HHC2620",   favorito:false, img:"https://www.turbochef.com/wp-content/uploads/2019/02/HHC2020_main.jpg", desc:"Alta velocidad amplio" },
+      { ref:"Sota",      favorito:false, img:"https://www.turbochef.com/wp-content/uploads/2019/02/HHC2020_main.jpg", desc:"Compacto · ventless" },
+      { ref:"Fire",      favorito:false, img:"https://www.turbochef.com/wp-content/uploads/2019/02/HHC2020_main.jpg", desc:"Fire · sin extracción" },
+    ]},
   ]},
-  { tipo:"Cafetera", icon:"☕", marcas:[{ nombre:"Bunn", refs:["VPR","AXIOM","Infusion Series","TF DBC"] }]},
-  { tipo:"Granizadora", icon:"🧊", marcas:[{ nombre:"Bunn", refs:["ULTRA-2","ULTRA-1","FMD"] }]},
-  { tipo:"Nevera / Congelador", icon:"❄️", marcas:[{ nombre:"General", refs:["Refrigerador vertical","Congelador horizontal","Vitrina fría"] }]},
+  { tipo:"Cafetera", icon:"☕", marcas:[
+    { nombre:"Bunn", refs:[
+      { ref:"VPR",            favorito:false, img:"https://www.bunn.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/v/p/vpr-0.jpg",         desc:"Por gravedad · 1.9 L · 120V" },
+      { ref:"AXIOM",          favorito:false, img:"https://www.bunn.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/a/x/axiom-0001.jpg",    desc:"Doble decanter · digital" },
+      { ref:"Infusion Series",favorito:false, img:"https://www.bunn.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/i/t/itcb-dv-0.jpg",    desc:"Té y café · programable" },
+      { ref:"TF DBC",         favorito:false, img:"https://www.bunn.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/t/f/tf-dbc-black-0.jpg",desc:"ThermoFresh DBC · acero inox" },
+    ]},
+  ]},
+  { tipo:"Granizadora", icon:"🧊", marcas:[
+    { nombre:"Bunn", refs:[
+      { ref:"ULTRA-2", favorito:true,  img:"https://www.bunn.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/u/l/ultra-2-hp-0001.jpg", desc:"2 tambores 4.7 L c/u · 120V" },
+      { ref:"ULTRA-1", favorito:true,  img:"https://www.bunn.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/u/l/ultra-1-0001.jpg",    desc:"1 tambor 4.7 L · compacta" },
+      { ref:"FMD",     favorito:false, img:"https://www.bunn.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/f/m/fmd-3-0001.jpg",       desc:"3 tambores · alta producción" },
+    ]},
+  ]},
+  { tipo:"Nevera / Congelador", icon:"❄️", marcas:[
+    { nombre:"General", refs:[
+      { ref:"Refrigerador vertical",  favorito:false, img:"https://images.tundrafmp.com/fit-in/700x700/filters:fill(white)/product_images/original_images/TRUE-T-49-HC_main.jpg", desc:"Refrigerador vertical comercial" },
+      { ref:"Congelador horizontal",  favorito:false, img:"https://images.tundrafmp.com/fit-in/700x700/filters:fill(white)/product_images/original_images/TRUE-T-49-HC_main.jpg", desc:"Congelador tipo cofre" },
+      { ref:"Vitrina fría",           favorito:false, img:"https://images.tundrafmp.com/fit-in/700x700/filters:fill(white)/product_images/original_images/TRUE-T-49-HC_main.jpg", desc:"Vitrina refrigerada exhibición" },
+    ]},
+  ]},
 ];
+// Helpers para compatibilidad con código existente que usa refs como strings
+const getRefStr = (r) => typeof r === "string" ? r : r.ref;
+const getRefImg  = (r) => typeof r === "object" ? r.img  : null;
+const getRefDesc = (r) => typeof r === "object" ? r.desc : "";
+const isRefFav   = (r) => typeof r === "object" && r.favorito === true;
 
 const SINTOMAS = {
   Horno:["Código de error en pantalla","No genera vapor","No enciende","Gotea por la puerta","Ruidos extraños","Error durante la limpieza","Autolavado no funciona","Autolavado se interrumpe","No cierra el ciclo de lavado","Sobrecalentamiento","Sonda térmica","No alcanza temperatura","Quema los alimentos","Puerta no cierra bien","Burlete dañado o despegado","Ventilador no gira","Pantalla en blanco","Olor a quemado","Temperatura irregular","No enciende quemador (gas)","Falla eléctrica","CareControl en rojo","Pequeñas explosiones o detonaciones","Goteras en la parte inferior","Fuga de agua por la base","Humo dentro de la cámara","Cristal de puerta sucio o roto","Filtro de aire sucio","Luz de la cabina no funciona","Precalentamiento muy lento","Equipo se apaga solo"],
@@ -67,6 +119,64 @@ const extraerPorReglas = (texto) => {
   for (const a of ALIAS_MARCA) { if (a.words.some(w=>t.includes(w))) { marca=a.marca; if(a.ref)ref=a.ref; if(!tipo){const eq=EQUIPOS.find(e=>e.marcas.some(m=>m.nombre===a.marca));if(eq)tipo=eq.tipo;} break; } }
   return {tipo,marca,ref};
 };
+
+// ─── COMPONENTE: catálogo de referencias con foto y badge favorito ────────────
+function RefCatalog({ marca, onSelect, mostrarOtra=true }) {
+  const [soloFav, setSoloFav] = useState(false);
+  if (!marca) return null;
+  const refsRaw = marca.refs || [];
+  const tieneFav = refsRaw.some(r => isRefFav(r));
+  const lista = soloFav ? refsRaw.filter(r => isRefFav(r)) : refsRaw;
+  return (
+    <div>
+      {tieneFav && (
+        <div style={{display:"flex",gap:6,marginBottom:10}}>
+          <button onClick={()=>setSoloFav(false)} style={{...btn(!soloFav?"primary":"outline","sm")}}>Todos</button>
+          <button onClick={()=>setSoloFav(true)}  style={{...btn(soloFav?"primary":"outline","sm")}}>⭐ Favoritos CEM</button>
+        </div>
+      )}
+      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10}}>
+        {lista.map(r => {
+          const refStr = getRefStr(r);
+          const img    = getRefImg(r);
+          const desc   = getRefDesc(r);
+          const fav    = isRefFav(r);
+          return (
+            <div key={refStr} onClick={()=>onSelect(refStr)}
+              style={{background:C.white,border:`1.5px solid ${fav?"#f59e0b":C.border}`,borderRadius:12,overflow:"hidden",cursor:"pointer",position:"relative",boxShadow:fav?"0 2px 10px rgba(245,158,11,0.18)":"0 1px 3px rgba(0,0,0,0.05)"}}>
+              {fav && (
+                <div style={{position:"absolute",top:6,right:6,background:"#f59e0b",color:"#fff",fontSize:8,fontWeight:800,padding:"2px 7px",borderRadius:20,zIndex:2,letterSpacing:0.3}}>
+                  ⭐ CEM
+                </div>
+              )}
+              <div style={{width:"100%",height:90,background:"#f8faff",display:"flex",alignItems:"center",justifyContent:"center",overflow:"hidden"}}>
+                {img ? (
+                  <img src={img} alt={refStr}
+                    style={{width:"100%",height:"100%",objectFit:"contain",padding:6}}
+                    onError={e=>{e.target.style.display="none";e.target.parentNode.innerHTML='<div style="font-size:32px;color:#9ca3af">🔧</div>';}}
+                  />
+                ) : (
+                  <div style={{fontSize:32,color:C.light}}>🔧</div>
+                )}
+              </div>
+              <div style={{padding:"8px 9px 10px"}}>
+                <div style={{fontSize:11,fontWeight:700,lineHeight:1.3,marginBottom:2,color:C.text}}>{refStr}</div>
+                {desc && <div style={{fontSize:9,color:C.muted,lineHeight:1.4}}>{desc}</div>}
+              </div>
+            </div>
+          );
+        })}
+        {mostrarOtra && (
+          <div onClick={()=>onSelect("Otra")}
+            style={{background:C.bg,border:`1.5px dashed ${C.border}`,borderRadius:12,cursor:"pointer",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:16,minHeight:90}}>
+            <div style={{fontSize:22,marginBottom:4}}>➕</div>
+            <div style={{fontSize:11,color:C.muted,fontWeight:600}}>Otra</div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
 
 // ─── TUTORIALES DE YOUTUBE ─────────────────────────────────────────────────────
 // Links curados y verificados por canal oficial o fuentes de confianza
@@ -610,8 +720,8 @@ Llama a mantenimiento si: [condición clara]`;
           </div>
         )}
         {step==="ref" && sel.marca && (
-          <div style={{alignSelf:"flex-start",display:"flex",flexWrap:"wrap",gap:7}}>
-            {[...sel.marca.refs,"Otra"].map(r=><div key={r} onClick={()=>pickRef(r)} style={{...card({padding:"7px 13px",cursor:"pointer"}),fontSize:12,color:r==="Otra"?C.muted:C.text}}>{r}</div>)}
+          <div style={{alignSelf:"flex-start",width:"100%"}}>
+            <RefCatalog marca={sel.marca} onSelect={pickRef} />
           </div>
         )}
         {step==="sintoma" && (
@@ -818,7 +928,7 @@ function InstalacionTab() {
       <div style={{fontSize:17,fontWeight:800,marginBottom:14}}>Datos de Instalación</div>
       {!sT&&<div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10}}>{EQUIPOS.map(eq=><div key={eq.tipo} onClick={()=>setST(eq)} style={{...card({cursor:"pointer",textAlign:"center",padding:"16px 8px"})}}><div style={{fontSize:26,marginBottom:5}}>{eq.icon}</div><div style={{fontSize:12,fontWeight:700}}>{eq.tipo}</div></div>)}</div>}
       {sT&&!sM&&<div><div style={{fontSize:12,fontWeight:700,marginBottom:9,color:C.muted}}>{sT.icon} {sT.tipo}</div><div style={{display:"flex",flexWrap:"wrap",gap:8}}>{sT.marcas.map(m=><div key={m.nombre} onClick={()=>setSM(m)} style={{...card({padding:"8px 14px",cursor:"pointer"}),fontSize:12,fontWeight:600}}>{m.nombre}</div>)}</div><div style={{marginTop:10,cursor:"pointer",fontSize:11,color:C.muted}} onClick={()=>setST(null)}>← Volver</div></div>}
-      {sT&&sM&&!sR&&<div><div style={{fontSize:12,fontWeight:700,marginBottom:9,color:C.muted}}>{sM.nombre}</div><div style={{display:"flex",flexWrap:"wrap",gap:8}}>{sM.refs.map(r=><div key={r} onClick={()=>setSR(r)} style={{...card({padding:"8px 14px",cursor:"pointer"}),fontSize:11}}>{r}</div>)}</div><div style={{marginTop:10,cursor:"pointer",fontSize:11,color:C.muted}} onClick={()=>setSM(null)}>← Volver</div></div>}
+      {sT&&sM&&!sR&&<div><div style={{fontSize:12,fontWeight:700,marginBottom:9,color:C.muted}}>{sM.nombre}</div><RefCatalog marca={sM} onSelect={setSR} mostrarOtra={false}/><div style={{marginTop:10,cursor:"pointer",fontSize:11,color:C.muted}} onClick={()=>setSM(null)}>← Volver</div></div>}
       {sR&&<div>
         <div style={{...card({background:C.pl,border:`1px solid ${C.purple}44`,marginBottom:12,padding:"11px 14px"})}}>
           <div style={{fontSize:10,color:C.purple,fontWeight:700,marginBottom:2}}>DATOS DE INSTALACIÓN</div>
@@ -852,7 +962,7 @@ function PlanesTab() {
       <div style={{fontSize:17,fontWeight:800,marginBottom:14}}>Planes de Mantenimiento</div>
       {!sT&&<div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10}}>{EQUIPOS.map(eq=><div key={eq.tipo} onClick={()=>setST(eq)} style={{...card({cursor:"pointer",textAlign:"center",padding:"16px 8px"})}}><div style={{fontSize:26,marginBottom:5}}>{eq.icon}</div><div style={{fontSize:12,fontWeight:700}}>{eq.tipo}</div></div>)}</div>}
       {sT&&!sM&&<div><div style={{fontSize:12,fontWeight:700,marginBottom:9,color:C.muted}}>{sT.icon} {sT.tipo}</div><div style={{display:"flex",flexWrap:"wrap",gap:8}}>{sT.marcas.map(m=><div key={m.nombre} onClick={()=>setSM(m)} style={{...card({padding:"8px 14px",cursor:"pointer"}),fontSize:12,fontWeight:600}}>{m.nombre}</div>)}</div><div style={{marginTop:10,cursor:"pointer",fontSize:11,color:C.muted}} onClick={()=>setST(null)}>← Volver</div></div>}
-      {sT&&sM&&!sR&&<div><div style={{fontSize:12,fontWeight:700,marginBottom:9,color:C.muted}}>{sM.nombre}</div><div style={{display:"flex",flexWrap:"wrap",gap:8}}>{sM.refs.map(r=><div key={r} onClick={()=>setSR(r)} style={{...card({padding:"8px 14px",cursor:"pointer"}),fontSize:11}}>{r}</div>)}</div><div style={{marginTop:10,cursor:"pointer",fontSize:11,color:C.muted}} onClick={()=>setSM(null)}>← Volver</div></div>}
+      {sT&&sM&&!sR&&<div><div style={{fontSize:12,fontWeight:700,marginBottom:9,color:C.muted}}>{sM.nombre}</div><RefCatalog marca={sM} onSelect={setSR} mostrarOtra={false}/><div style={{marginTop:10,cursor:"pointer",fontSize:11,color:C.muted}} onClick={()=>setSM(null)}>← Volver</div></div>}
       {plan&&sR&&<div>
         <div style={{...card({background:C.al,border:`1px solid ${C.accent}44`,marginBottom:12,padding:"11px 14px"})}}>
           <div style={{fontSize:10,color:C.accent,fontWeight:700,marginBottom:2}}>PLAN PREVENTIVO</div>
@@ -888,7 +998,7 @@ function LimpiezaTab() {
       <div style={{fontSize:17,fontWeight:800,marginBottom:14}}>Guías de Limpieza</div>
       {!sT && <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10}}>{EQUIPOS.map(eq=><div key={eq.tipo} onClick={()=>{setST(eq);setSM(null);setSR(null);setOpen(null);}} style={{...card({cursor:"pointer",textAlign:"center",padding:"16px 8px"})}}><div style={{fontSize:26,marginBottom:5}}>{eq.icon}</div><div style={{fontSize:12,fontWeight:700}}>{eq.tipo}</div></div>)}</div>}
       {sT&&!sM&&<div><div style={{fontSize:12,fontWeight:700,marginBottom:9,color:C.muted}}>{sT.icon} {sT.tipo}</div><div style={{display:"flex",flexWrap:"wrap",gap:8}}>{sT.marcas.map(m=><div key={m.nombre} onClick={()=>{setSM(m);setSR(null);setOpen(null);}} style={{...card({padding:"8px 14px",cursor:"pointer"}),fontSize:12,fontWeight:600}}>{m.nombre}</div>)}</div><div style={{marginTop:10,cursor:"pointer",fontSize:11,color:C.muted}} onClick={()=>setST(null)}>← Volver</div></div>}
-      {sT&&sM&&!sR&&<div><div style={{fontSize:12,fontWeight:700,marginBottom:9,color:C.muted}}>{sM.nombre}</div><div style={{display:"flex",flexWrap:"wrap",gap:8}}>{sM.refs.map(r=><div key={r} onClick={()=>{setSR(r);setOpen(null);}} style={{...card({padding:"8px 14px",cursor:"pointer"}),fontSize:11}}>{r}</div>)}</div><div style={{marginTop:10,cursor:"pointer",fontSize:11,color:C.muted}} onClick={()=>setSM(null)}>← Volver</div></div>}
+      {sT&&sM&&!sR&&<div><div style={{fontSize:12,fontWeight:700,marginBottom:9,color:C.muted}}>{sM.nombre}</div><RefCatalog marca={sM} onSelect={(r)=>{setSR(r);setOpen(null);}} mostrarOtra={false}/><div style={{marginTop:10,cursor:"pointer",fontSize:11,color:C.muted}} onClick={()=>setSM(null)}>← Volver</div></div>}
       {sT&&sM&&sR&&<div>
         <div style={{...card({background:C.gl,border:`1px solid ${C.green}44`,marginBottom:12,padding:"11px 14px"})}}>
           <div style={{fontSize:10,color:C.green,fontWeight:700,marginBottom:2}}>GUÍAS DE LIMPIEZA</div>
@@ -954,7 +1064,7 @@ function RepuestosTab() {
       <div style={{fontSize:17,fontWeight:800,marginBottom:14}}>🔩 Repuestos</div>
       {!sT && <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10}}>{EQUIPOS.map(eq=><div key={eq.tipo} onClick={()=>{setST(eq);setSM(null);setSR(null);setSearch("");}} style={{...card({cursor:"pointer",textAlign:"center",padding:"16px 8px"})}}><div style={{fontSize:26,marginBottom:5}}>{eq.icon}</div><div style={{fontSize:12,fontWeight:700}}>{eq.tipo}</div></div>)}</div>}
       {sT&&!sM&&<div><div style={{fontSize:12,fontWeight:700,marginBottom:9,color:C.muted}}>{sT.icon} {sT.tipo}</div><div style={{display:"flex",flexWrap:"wrap",gap:8}}>{sT.marcas.map(m=><div key={m.nombre} onClick={()=>{setSM(m);setSR(null);setSearch("");}} style={{...card({padding:"8px 14px",cursor:"pointer"}),fontSize:12,fontWeight:600}}>{m.nombre}</div>)}</div><div style={{marginTop:10,cursor:"pointer",fontSize:11,color:C.muted}} onClick={()=>setST(null)}>← Volver</div></div>}
-      {sT&&sM&&!sR&&<div><div style={{fontSize:12,fontWeight:700,marginBottom:9,color:C.muted}}>{sM.nombre}</div><div style={{display:"flex",flexWrap:"wrap",gap:8}}>{sM.refs.map(r=><div key={r} onClick={()=>{setSR(r);setSearch("");}} style={{...card({padding:"8px 14px",cursor:"pointer"}),fontSize:11}}>{r}</div>)}</div><div style={{marginTop:10,cursor:"pointer",fontSize:11,color:C.muted}} onClick={()=>setSM(null)}>← Volver</div></div>}
+      {sT&&sM&&!sR&&<div><div style={{fontSize:12,fontWeight:700,marginBottom:9,color:C.muted}}>{sM.nombre}</div><RefCatalog marca={sM} onSelect={(r)=>{setSR(r);setSearch("");}} mostrarOtra={false}/><div style={{marginTop:10,cursor:"pointer",fontSize:11,color:C.muted}} onClick={()=>setSM(null)}>← Volver</div></div>}
       {sT&&sM&&sR&&<div>
         <div style={{...card({background:"#f8faff",border:`1px solid ${C.accent}33`,marginBottom:12,padding:"11px 14px"})}}>
           <div style={{fontSize:10,color:C.accent,fontWeight:700,marginBottom:2}}>REPUESTOS</div>
