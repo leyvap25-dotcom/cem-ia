@@ -216,6 +216,118 @@ const REPUESTOS = [
   {cod:"KVE1634A",desc:"Interruptor magnetotérmico modular",precio:990000,marca:"Unox"},
   {cod:"KVE1670A",desc:"Relé estado sólido 25A + pad térmico",precio:603000,marca:"Unox"},
   {cod:"KVE2000A",desc:"Contactor 4P 30A 230V 50/60Hz",precio:427500,marca:"Unox"},
+,
+  // ─── RATIONAL (Lista precios Colombia, válida desde 01.04.2025) ─────────────
+  {cod:'87.00.276',desc:'Kit de modifica., filtro de aire para la unidad del gas compl. SCC, CM',precio:3860493,cant:1,marca:'Rational'},
+  {cod:'87.01.650S',desc:'Panel de control con táctil/TFT *ME* LM1; B-G desde 03/2020',precio:3133279,cant:1,marca:'Rational'},
+  {cod:'87.01.648S',desc:'Panel de control con táctil/TFT *FU* LM1; B-G desde 03/2020',precio:3126849,cant:1,marca:'Rational'},
+  {cod:'87.01.535S',desc:'Panel de control con táctil/TFT *RAT* LM1; B-G desde 03/2020',precio:3076206,cant:1,marca:'Rational'},
+  {cod:'87.01.647S',desc:'Panel de control con táctil/TFT *BL* LM1; B-G desde 03/2020',precio:2973155,cant:1,marca:'Rational'},
+  {cod:'74.00.462P',desc:'Burlete de la camara de calentamiento TJ200G desde n°47',precio:2947720,cant:1,marca:'Rational'},
+  {cod:'87.01.649S',desc:'Panel de control con táctil/TFT *RH* LM1; B-G desde 03/2020',precio:2848368,cant:1,marca:'Rational'},
+  {cod:'87.01.493',desc:'Tapa panel frontal con carátula *KF* SCC XS 623 bisagras a la izquierda',precio:2513212,cant:1,marca:'Rational'},
+  {cod:'87.01.390',desc:'Tapa panel frontal con carátula *RAT* CMP XS 623 bisagras a la izquier-',precio:2398326,cant:1,marca:'Rational'},
+  {cod:'87.01.388',desc:'Tapa panel frontal con carátula *RAT* SCC XS 623 bisagras a la izquierda',precio:2244917,cant:1,marca:'Rational'},
+  {cod:'87.01.514',desc:'Tapa panel frontal con carátula *TH* SCC XS 623 bisagras a la izquierda',precio:2083428,cant:1,marca:'Rational'},
+  {cod:'87.00.340',desc:'Kit electroválvula 3/8\" VCC 112P 230V desde 01/2005',precio:2034150,cant:1,marca:'Rational'},
+  {cod:'60.71.452',desc:'Desviación para del filtro de aire el dúo 62/102/G',precio:1932750,cant:1,marca:'Rational'},
+  {cod:'87.00.464',desc:'Kit de modificación interface Ethernet VCC 111-311 Desde 01/05',precio:1629858,cant:1,marca:'Rational'},
+  {cod:'60.76.328P',desc:'Tapa del panel de control LMX; A-D desde 03/2020',precio:1342671,cant:1,marca:'Rational'},
+  {cod:'60.21.218',desc:'Kit de modificación, no echador del eslabón giratorio Línea SCC,',precio:1239620,cant:1,marca:'Rational'},
+  {cod:'60.22.318',desc:'Kit de modificación, no echador del eslabón giratorio Línea SCC,',precio:1113411,cant:1,marca:'Rational'},
+  {cod:'40.07.132P',desc:'Arnés de energía elemento calefactor LMX; C 3AC200-480V desde',precio:817461,cant:1,marca:'Rational'},
+  {cod:'87.00.261',desc:'Kit de modificación * cuerno de la señal * 201/202 desde 04/2004',precio:797773,cant:1,marca:'Rational'},
+  {cod:'87.00.260',desc:'Kit de modificación * cuerno de la señal * 61-102 desde 04/2004',precio:777572,cant:1,marca:'Rational'},
+  {cod:'50.02.012P',desc:'Electroválvula quíntuple con caudalímetro LM1; F-G desde 03/2020',precio:561627,cant:1,marca:'Rational'},
+  {cod:'50.02.104P',desc:'Electroválvula triple con caudalímetro LM2; F G desde 03/2020',precio:482817,cant:1,marca:'Rational'},
+  {cod:'50.02.054P',desc:'Electroválvula quíntuple con caudalímetro LM1; B-E desde 03/2020',precio:475875,cant:1,marca:'Rational'},
+  {cod:'24.01.801S',desc:'Bandeja recojegotas SCC, CM 62/102 desde 10/2005',precio:473485,cant:1,marca:'Rational'},
+  {cod:'20.00.399P',desc:'Burlete puerta SCC CMP 202, LM1 LM2; G desde 04/2004',precio:432629,cant:1,marca:'Rational'},
+  {cod:'50.02.102P',desc:'Electroválvula triple con caudalímetro LM2; B-E desde 03/2020',precio:418460,cant:1,marca:'Rational'},
+  {cod:'60.70.976',desc:'Pipa de cerámica del kit de modificación Línea SCC desde 04/2004',precio:411291,cant:1,marca:'Rational'},
+  {cod:'20.00.398P',desc:'Burlete puerta SCC CMP 201, LM1 LM2; F desde 04/2004',precio:402983,cant:1,marca:'Rational'},
+  {cod:'87.01.004',desc:'Kit de modificación interface Ethernet SCC_WE desde 09/2011 hasta',precio:379994,cant:1,marca:'Rational'},
+  {cod:'87.01.004F',desc:'Kit de modificación interface Ethernet VCCM Desde 09/2011',precio:379994,cant:1,marca:'Rational'},
+  {cod:'20.02.553P',desc:'Burlete puerta SCC CMP 102, LM1 LM2; E desde 04/2004',precio:364915,cant:1,marca:'Rational'},
+  {cod:'40.02.754',desc:'Arnés de energía, K1 salida, 112 VCC 112 Desde 01/08',precio:359566,cant:1,marca:'Rational'},
+  {cod:'20.02.552P',desc:'Burlete puerta SCC CMP 101, LM1 LM2; D desde 04/2004',precio:333391,cant:1,marca:'Rational'},
+  {cod:'20.02.551P',desc:'Burlete puerta SCC CMP 62, LM1 LM2; C desde 04/2004',precio:322295,cant:1,marca:'Rational'},
+  {cod:'40.07.634S',desc:'Ventilador de refrigeración LM1; B-E desde 08/2022',precio:302948,cant:1,marca:'Rational'},
+  {cod:'20.02.550P',desc:'Burlete puerta SCC CMP 61, LM1 LM2; B desde 04/2004',precio:290771,cant:1,marca:'Rational'},
+  {cod:'56.00.176P',desc:'Manguera succión para limpieza CleanJet SCC 201/202 desde',precio:284683,cant:1,marca:'Rational'},
+  {cod:'20.02.549P',desc:'Burlete puerta SCC CMP 623, LM1 LM2; A desde 09/2016',precio:274895,cant:1,marca:'Rational'},
+  {cod:'40.00.220P',desc:'Cable conexión válvula solenoide Línea SCC CM 201/202 desde',precio:274497,cant:1,marca:'Rational'},
+  {cod:'87.00.279',desc:'Kit de modifica., Termostato de seguridad, Bilímite 360°C Línea SCC',precio:265905,cant:1,marca:'Rational'},
+  {cod:'87.01.790S',desc:'Kit de modificación, tapa para cegar ducha de mano LM1 LM2; B-E',precio:248700,cant:1,marca:'Rational'},
+  {cod:'56.00.120P',desc:'Manguera succión para limpieza Línea SCC 62/102 desde 04/2004',precio:185502,cant:1,marca:'Rational'},
+  {cod:'87.00.436',desc:'Kit de modificación *Service25* Línea SCC, SCC desde 04/2004',precio:162285,cant:1,marca:'Rational'},
+  {cod:'24.00.135P',desc:'Angulo superior de sujeción de la puerta Línea SCC 61-102 bisagras a',precio:149938,cant:1,marca:'Rational'},
+  {cod:'40.03.661P',desc:'Estructura de montaje del ventilador de refrigeración SCC_',precio:137476,cant:1,marca:'Rational'},
+  {cod:'56.00.607P',desc:'Manguera succión para limpieza CleanJet SCC_WE 62/102 desde',precio:131558,cant:1,marca:'Rational'},
+  {cod:'40.00.334P',desc:'Contacto de puerta SCC, CM 61-102 bisagras a la izquierda desde',precio:130420,cant:1,marca:'Rational'},
+  {cod:'40.05.839P',desc:'Cable bus RJ45 2.85m',precio:127404,cant:1,marca:'Rational'},
+  {cod:'40.03.660P',desc:'Estructura de montaje del ventilador de refrigeración SCC_',precio:125697,cant:1,marca:'Rational'},
+  {cod:'50.00.301P',desc:'Bandeja recojegotas SCC, CM 61/101 bisagras a la izquierda desde',precio:121202,cant:1,marca:'Rational'},
+  {cod:'56.00.180',desc:'Inlet pipe CleanJet SCC line 61-202 desde 04/2004',precio:100717,cant:1,marca:'Rational'},
+  {cod:'56.01.524P',desc:'Manguera succión para limpieza CleanJet Línea SCC 61/101 desde',precio:88255,cant:1,marca:'Rational'},
+  {cod:'40.02.337P',desc:'Termostato de seguridad, Bilímite 215°C VCC 111-311, VCCM 211-',precio:84614,cant:1,marca:'Rational'},
+  {cod:'24.01.329',desc:'Tuerca para sonda nucleo',precio:83703,cant:1,marca:'Rational'},
+  {cod:'50.00.618P',desc:'Válvula solenoide simple verde VCC 112-311 200-240V Desde 01/05',precio:79322,cant:1,marca:'Rational'},
+  {cod:'87.00.077',desc:'Grapas sujección para cristal interior Línea SCC, 61-202 desde',precio:77728,cant:1,marca:'Rational'},
+  {cod:'56.00.175P',desc:'Manguera presión Limpieza SCC 201/202 desde 04/2004',precio:73745,cant:1,marca:'Rational'},
+  {cod:'50.00.286P',desc:'Bandeja recojegotas SCC, CM 61/101 desde 04/2004',precio:71981,cant:1,marca:'Rational'},
+  {cod:'40.05.654P',desc:'Filtro entrada de aire LM1 LM2; F G desde 03/2020',precio:65153,cant:1,marca:'Rational'},
+  {cod:'87.00.343S',desc:'Trabar el perno para el panel de control desde 05/2008',precio:63673,cant:1,marca:'Rational'},
+  {cod:'24.03.054P',desc:'Casquillo de encastre 623-102, LM1; A bisagras a la izquierda desde',precio:61056,cant:1,marca:'Rational'},
+  {cod:'40.04.423P',desc:'Haz termostato de seguridad calentador VCCM 112 desde 05/2013',precio:59918,cant:1,marca:'Rational'},
+  {cod:'87.01.345',desc:'Kit de modificación, soporte para el desbloqueo Carrito de transporte',precio:57869,cant:1,marca:'Rational'},
+  {cod:'56.00.166P',desc:'Manguera presión Limpieza SCC 61-102 desde 04/2004',precio:57756,cant:1,marca:'Rational'},
+  {cod:'24.01.188P',desc:'Drene para bandeja recojegotas SCC, CM 61-102 desde 10/2005',precio:57130,cant:1,marca:'Rational'},
+  {cod:'40.04.095P',desc:'Cable bus 0.3m RJ45',precio:56048,cant:1,marca:'Rational'},
+  {cod:'56.01.682S',desc:'Casquillo del tubo CleanJet LM1 LM2; B-E desde 03/2020',precio:55423,cant:1,marca:'Rational'},
+  {cod:'16.01.662P',desc:'Filtro entrada de aire Línea SCC desde 04/2004',precio:53602,cant:1,marca:'Rational'},
+  {cod:'50.01.146P',desc:'Válvula solenoide simple Y2 SCC, CM 200-240V desde 09/2008',precio:53431,cant:1,marca:'Rational'},
+  {cod:'50.01.147P',desc:'Válvula solenoide simple Y1 CM_P 61-202 200-240V desde 09/2011',precio:53431,cant:1,marca:'Rational'},
+  {cod:'50.00.316P',desc:'Válvula solenoide simple Línea SCC, línea SCC 200-240V desde',precio:53146,cant:1,marca:'Rational'},
+  {cod:'87.01.774S',desc:'Kit de juntas para los cables del panel de control LMX desde 03/2020',precio:52805,cant:1,marca:'Rational'},
+  {cod:'12.00.319P',desc:'Alojamiento para bomba limpieza SCC 61-102 desde 04/2004',precio:47570,cant:1,marca:'Rational'},
+  {cod:'56.01.450P',desc:'Drain hose door LM1 LM2; B D bisagras a la izquierda desde 03/2020',precio:47285,cant:1,marca:'Rational'},
+  {cod:'16.01.526P',desc:'Filtro entrada de aire para el lado izquierdo Línea SCC, 61/101/201/G',precio:47115,cant:1,marca:'Rational'},
+  {cod:'56.00.744S',desc:'Manguera presión ø10mm 130mm',precio:46830,cant:1,marca:'Rational'},
+  {cod:'40.05.424P',desc:'Filtro entrada de aire LM1 LM2; B-E desde 03/2020',precio:45977,cant:1,marca:'Rational'},
+  {cod:'56.01.473P',desc:'Drain hose door LM1 LM2; C E bisagras a la izquierda desde 03/2020',precio:45920,cant:1,marca:'Rational'},
+  {cod:'12.01.283S',desc:'Soporte contacto puerta Línea SCC 61-102 bisagras a la izquierda',precio:45749,cant:1,marca:'Rational'},
+  {cod:'40.04.501P',desc:'Termostato de seguridad 130°',precio:44383,cant:1,marca:'Rational'},
+  {cod:'24.00.151P',desc:'Perno lado superior puerta Línea SCC 61-102 bisagras a la izquierda',precio:44156,cant:1,marca:'Rational'},
+  {cod:'12.00.316P',desc:'Soporte contacto puerta Línea SCC 61-102 bisagras a la izquierda',precio:43132,cant:1,marca:'Rational'},
+  {cod:'56.01.454S',desc:'Caja de limpieza de emergencia de rebosadero LM1 LM2; B-E desde',precio:42961,cant:1,marca:'Rational'},
+  {cod:'20.01.508P',desc:'Espaciador termostato de seguridad VCC 111-311 desde 10/09',precio:42449,cant:1,marca:'Rational'},
+  {cod:'40.04.512P',desc:'Termostato de seguridad, Bilímite 205°C',precio:41709,cant:1,marca:'Rational'},
+  {cod:'12.00.950P',desc:'Soporte para contacto reed puerta SCC, CM 61-102 bisagras a la',precio:41425,cant:1,marca:'Rational'},
+  {cod:'24.03.788P',desc:'Tope de la puerta 61-102 bisagras a la izquierda desde 09/2016',precio:40400,cant:1,marca:'Rational'},
+  {cod:'40.04.499P',desc:'Cable adaptador para bomba limpieza',precio:40173,cant:1,marca:'Rational'},
+  {cod:'40.04.771P',desc:'Filtro entrada de aire SCC 623, LM1; A desde 09/2016',precio:39945,cant:1,marca:'Rational'},
+  {cod:'14.01.059P',desc:'Perno lado superior puerta LM1 LM2; B-E bisagras a la izquierda desde',precio:37043,cant:1,marca:'Rational'},
+  {cod:'40.02.684P',desc:'Filtro entrada de aire SCC_WE, CM_P 61-202 desde 09/2011',precio:35962,cant:1,marca:'Rational'},
+  {cod:'40.00.236',desc:'Cable conexión válvula solenoide Línea SCC CM 62/101/102/E,',precio:35393,cant:1,marca:'Rational'},
+  {cod:'24.00.507P',desc:'Panel soporte para cristal interior puerta SCC, CM 201/202 desde',precio:35279,cant:1,marca:'Rational'},
+  {cod:'24.03.183P',desc:'Perno lado superior puerta LM1; A bisagras a la izquierda desde',precio:33913,cant:1,marca:'Rational'},
+  {cod:'40.04.370P',desc:'Termostato de seguridad calentador',precio:33401,cant:1,marca:'Rational'},
+  {cod:'40.02.381P',desc:'Cable conexión válvula solenoide Línea SCC CM 61/E desde 04/2006',precio:27939,cant:1,marca:'Rational'},
+  {cod:'56.00.823P',desc:'Codo para manguera de aspiración CleanJet SCC 623, LM1; A desde',precio:27654,cant:1,marca:'Rational'},
+  {cod:'40.01.091P',desc:'Cable bus 0.4m Línea SCC, línea VCC desde 04/2004',precio:26345,cant:1,marca:'Rational'},
+  {cod:'40.04.810P',desc:'Soporte ventilador de refrigeración SCC XS 623 desde 09/2016',precio:21452,cant:1,marca:'Rational'},
+  {cod:'24.03.787S',desc:'Grapas sujección para cristal interior Línea SCC, 61-202, LM1 LM2;',precio:21395,cant:1,marca:'Rational'},
+  {cod:'40.02.802',desc:'Cable bus 0.2m RJ45',precio:20769,cant:1,marca:'Rational'},
+  {cod:'12.00.320P',desc:'Cubierta para la abertura de la bomba de CleanJet CM 61-102 desde',precio:18493,cant:1,marca:'Rational'},
+  {cod:'24.05.303S',desc:'Cubierta de la bisagra LM1 LM2; B-E desde 03/2020',precio:17582,cant:1,marca:'Rational'},
+  {cod:'50.00.303P',desc:'Manguito bandeja recojegotas SCC, CM 61-102 desde 04/2004',precio:17525,cant:2,marca:'Rational'},
+  {cod:'24.03.185P',desc:'Tapa de cerradura 61-102, LM1; A bisagras a la izquierda desde',precio:16843,cant:1,marca:'Rational'},
+  {cod:'56.01.472P',desc:'Tapa del soporte inferior de la puerta LM1 LM2; B-E bisagras a la',precio:15136,cant:1,marca:'Rational'},
+  {cod:'87.00.189',desc:'Kit de modificación que quita el sensor de temp. de la base Lìnea SCC',precio:15136,cant:1,marca:'Rational'},
+  {cod:'24.00.505P',desc:'Tapa de cerradura Línea SCC 61-102 bisagras a la izquierda desde',precio:10925,cant:1,marca:'Rational'},
+  {cod:'24.00.504P',desc:'Tapa de cerradura Línea SCC 61-102 *bisagras a la derecha* desde',precio:8649,cant:1,marca:'Rational'},
+  {cod:'40.06.053P',desc:'Soporte para termostato de seguridad LM1 LM2; B-G desde 03/2020',precio:6031,cant:1,marca:'Rational'}
 ];
 
 // Función búsqueda de repuestos
@@ -383,9 +495,12 @@ RATIONAL SCC/iCombi (burlete CON orificios en la parte INFERIOR, esquinas de 90 
 - Sonda térmica B2/B4 (combinación de fallas puede mostrar códigos combinados como 20.6, 31.12).
 - Revisar bus cable si aparece error 34.x — verificar conexión y estado del cable bus.
 
-=== PRECIOS REPUESTOS UNOX (COP sin IVA, Mar 2026) ===
+=== PRECIOS REPUESTOS UNOX (PESOS COLOMBIANOS - COP, sin IVA, Mar 2026) — SIEMPRE di "pesos" no "dólares" ===
 Motor 330W D12 KMT1012A=$1.350.000 | Tarjeta pot BLSP KPE2260A=$990.000 | Tarjeta pot MM Plus KPE2038A=$2.700.000 | Tarjeta pot MM ONE KPE2037A=$2.160.000 | Panel control MM Plus KPE1057B=$4.275.000 | Termostato seg 318°C KTR1136A=$405.000 | Turbina H40 KVN1172A=$553.500 | Turbina H60 KVN1171A=$765.000 | Resistencia 3000W KRS1283B=$765.000 | Resistencia 4.9kW KRS1150A=$990.000 | Resistencia 9kW KRS1180A=$1.350.000 | Resistencia frenada KRS1034A=$427.500 | Sonda PT100 L1000 KTR1105A=$540.000 | Sonda corazón L2000 KSN1031A=$1.080.000 | Condensador 6.3µF KCN1003A=$135.000 | Electroválvula D8-D10 KEL1251A=$292.500 | Bomba detergente KEL1170B=$765.000 | Cristal int Arianna KVT1330A=$315.000 | Goma puerta Arianna KGN1352A=$211.500 | Goma puerta 0511 KGN1629A=$382.500 | Goma puerta 0711 KGN1630A=$360.000 | Goma puerta 1011 KGN1631A=$405.000 | Bisagra Arianna-Elena KCR1112A=$225.000 | Sistema lavado ONE KVL1182A=$1.215.000 | Sistema lavado Plus KVL1183A=$1.845.000 | Tanque detergente 3L KSB1016A=$675.000 | Cable bus 2M KCE1095A=$180.000 | Kit doble encendedor XRF011=$1.710.000 | Empaques gas KGN1569A=$450.000
-Si preguntan precio de repuesto, menciona código y valor. +19% IVA no incluido.
+Si preguntan precio de repuesto, menciona código y valor en PESOS COLOMBIANOS (ejemplo: "cuesta $292.500 pesos"). NUNCA digas dólares.
+
+=== PRECIOS REPUESTOS RATIONAL SCC/iCombi (PESOS COLOMBIANOS - COP, sin IVA, válido 01.04.2025) — SIEMPRE di "pesos" no "dólares" ===
+Burlete puerta SCC 61 (20.02.550P)=$290.771 | Burlete SCC 62 (20.02.551P)=$322.295 | Burlete SCC 101 (20.02.552P)=$333.391 | Burlete SCC 102 (20.02.553P)=$364.915 | Burlete SCC 201 (20.00.398P)=$402.983 | Burlete SCC 202 (20.00.399P)=$432.629 | Burlete SCC 623 (20.02.549P)=$274.895 | Panel control iCombi (87.01.535S)=$3.076.206 | Ventilador refrig iCombi (40.07.634S)=$302.948 | Electroválvula quíntuple iCombi (50.02.054P)=$475.875 | Electroválvula triple iCombi (50.02.102P)=$418.460 | Termostato seg 215°C (40.02.337P)=$84.614 | Kit termostato 360°C (87.00.279)=$265.905 | Manguera succión CleanJet 62/102 (56.00.120P)=$185.502 | Manguera succión CleanJet 201/202 (56.00.176P)=$284.683 | Manguera presión 61-102 (56.00.166P)=$57.756 | Bandeja recogegotas 62/102 (24.01.801S)=$473.485 | Filtro aire SCC_WE (40.02.684P)=$35.962 | Filtro aire iCombi (40.05.654P)=$65.153 | Válvula solenoide (50.00.316P)=$53.146 | Cable bus RJ45 2.85m (40.05.839P)=$127.404 | Kit modificación Service25 (87.00.436)=$162.285
 
 ${esRational?"Rational SCC: 23/24=apagar ya; 32/33=cerrar gas+ventilar; 14=sin agua; 25=filtro agua; 29=filtro aire; 31=sonda; 47/48=bomba desagüe; 110/120=llamar técnico.":""}
 ${esUnox?"Unox: AF01=motor/capacitor; AF02=termostato 320°C; AF03=sonda 110Ω; AF04=comunicación placa; AF23=gas; WF16=agua EL1; WF06=placa caliente; WF41=red.":""}
@@ -640,28 +755,56 @@ function PlanesTab() {
 // LIMPIEZA
 // ══════════════════════════════════════════════════════════════════════════════
 function LimpiezaTab() {
-  const [sT,setST]=useState(null); const [open,setOpen]=useState(null);
-  const datos=sT?(LIMPIEZAS_DATA[sT.tipo]||[]):[];
+  const [sT,setST]=useState(null); const [sM,setSM]=useState(null); const [sR,setSR]=useState(null); const [open,setOpen]=useState(null);
+  // Filtrar guías por equipo y opcionalmente por marca/ref en el título
+  const datos = sT ? (LIMPIEZAS_DATA[sT.tipo]||[]).filter(item => {
+    if (!sM) return true;
+    const t = item.titulo.toLowerCase();
+    if (!sR) return t.includes(sM.nombre.toLowerCase()) || !sT.marcas.some(m => t.includes(m.nombre.toLowerCase()));
+    return t.includes(sR.toLowerCase()) || t.includes(sM.nombre.toLowerCase());
+  }) : [];
   return (
     <div style={{padding:16,overflowY:"auto",height:"calc(100vh - 110px)"}}>
-      <div style={{fontSize:17,fontWeight:800,marginBottom:12}}>Guías de Limpieza</div>
-      <div style={{display:"flex",gap:7,marginBottom:14,flexWrap:"wrap"}}>
-        {EQUIPOS.map(eq=><button key={eq.tipo} onClick={()=>{setST(eq);setOpen(null);}} style={{...btn(sT?.tipo===eq.tipo?"primary":"outline","sm"),flexShrink:0}}>{eq.icon} {eq.tipo}</button>)}
-      </div>
-      {!sT&&<div style={{...card({textAlign:"center",padding:28,color:C.muted})}}>Selecciona un equipo arriba.</div>}
-      {datos.length===0&&sT&&<div style={{...card({textAlign:"center",padding:28,color:C.muted})}}>Próximamente para {sT.tipo}.</div>}
-      {datos.map((item,i)=>(
-        <div key={i} style={{...card({marginBottom:9}),border:open===i?`1px solid ${C.accent}`:`1px solid ${C.border}`}}>
-          <div onClick={()=>setOpen(open===i?null:i)} style={{display:"flex",alignItems:"center",gap:9,cursor:"pointer",paddingBottom:open===i?10:0}}>
-            <div style={{flex:1,fontSize:13,fontWeight:700}}>{item.titulo}</div>
-            <span style={{color:C.muted,fontSize:11}}>{open===i?"▲":"▼"}</span>
-          </div>
-          {open===i&&<div style={{borderTop:`1px solid ${C.border}`,paddingTop:10}}>
-            {item.alerta&&<div style={{background:C.rl,borderLeft:`3px solid ${C.red}`,borderRadius:4,padding:"7px 10px",fontSize:11,color:C.red,marginBottom:10}}>{item.alerta}</div>}
-            {item.pasos.map((p,j)=><div key={j} style={{display:"flex",gap:9,marginBottom:8}}><div style={{width:20,height:20,background:C.accent,color:"#fff",fontSize:10,fontWeight:700,borderRadius:5,display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}>{j+1}</div><div style={{fontSize:12,lineHeight:1.6,paddingTop:2}}>{p}</div></div>)}
-          </div>}
+      <div style={{fontSize:17,fontWeight:800,marginBottom:14}}>Guías de Limpieza</div>
+      {/* PASO 1 — Equipo */}
+      {!sT && <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10}}>{EQUIPOS.map(eq=><div key={eq.tipo} onClick={()=>{setST(eq);setSM(null);setSR(null);setOpen(null);}} style={{...card({cursor:"pointer",textAlign:"center",padding:"16px 8px"})}}><div style={{fontSize:26,marginBottom:5}}>{eq.icon}</div><div style={{fontSize:12,fontWeight:700}}>{eq.tipo}</div></div>)}</div>}
+      {/* PASO 2 — Marca */}
+      {sT&&!sM&&<div>
+        <div style={{fontSize:12,fontWeight:700,marginBottom:9,color:C.muted}}>{sT.icon} {sT.tipo}</div>
+        <div style={{display:"flex",flexWrap:"wrap",gap:8}}>
+          {sT.marcas.map(m=><div key={m.nombre} onClick={()=>{setSM(m);setSR(null);setOpen(null);}} style={{...card({padding:"8px 14px",cursor:"pointer"}),fontSize:12,fontWeight:600}}>{m.nombre}</div>)}
         </div>
-      ))}
+        <div style={{marginTop:10,cursor:"pointer",fontSize:11,color:C.muted}} onClick={()=>setST(null)}>← Volver</div>
+      </div>}
+      {/* PASO 3 — Referencia */}
+      {sT&&sM&&!sR&&<div>
+        <div style={{fontSize:12,fontWeight:700,marginBottom:9,color:C.muted}}>{sM.nombre}</div>
+        <div style={{display:"flex",flexWrap:"wrap",gap:8}}>
+          {sM.refs.map(r=><div key={r} onClick={()=>{setSR(r);setOpen(null);}} style={{...card({padding:"8px 14px",cursor:"pointer"}),fontSize:11}}>{r}</div>)}
+        </div>
+        <div style={{marginTop:10,cursor:"pointer",fontSize:11,color:C.muted}} onClick={()=>setSM(null)}>← Volver</div>
+      </div>}
+      {/* CONTENIDO */}
+      {sT&&sM&&sR&&<div>
+        <div style={{...card({background:C.gl,border:`1px solid ${C.green}44`,marginBottom:12,padding:"11px 14px"})}}>
+          <div style={{fontSize:10,color:C.green,fontWeight:700,marginBottom:2}}>GUÍAS DE LIMPIEZA</div>
+          <div style={{fontSize:15,fontWeight:800}}>{sM.nombre} {sR}</div>
+        </div>
+        {datos.length===0&&<div style={{...card({textAlign:"center",padding:28,color:C.muted})}}>Próximamente para {sM.nombre} {sR}.</div>}
+        {datos.map((item,i)=>(
+          <div key={i} style={{...card({marginBottom:9}),border:open===i?`1px solid ${C.accent}`:`1px solid ${C.border}`}}>
+            <div onClick={()=>setOpen(open===i?null:i)} style={{display:"flex",alignItems:"center",gap:9,cursor:"pointer",paddingBottom:open===i?10:0}}>
+              <div style={{flex:1,fontSize:13,fontWeight:700}}>{item.titulo}</div>
+              <span style={{color:C.muted,fontSize:11}}>{open===i?"▲":"▼"}</span>
+            </div>
+            {open===i&&<div style={{borderTop:`1px solid ${C.border}`,paddingTop:10}}>
+              {item.alerta&&<div style={{background:C.rl,borderLeft:`3px solid ${C.red}`,borderRadius:4,padding:"7px 10px",fontSize:11,color:C.red,marginBottom:10}}>{item.alerta}</div>}
+              {item.pasos.map((p,j)=><div key={j} style={{display:"flex",gap:9,marginBottom:8}}><div style={{width:20,height:20,background:C.accent,color:"#fff",fontSize:10,fontWeight:700,borderRadius:5,display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}>{j+1}</div><div style={{fontSize:12,lineHeight:1.6,paddingTop:2}}>{p}</div></div>)}
+            </div>}
+          </div>
+        ))}
+        <div style={{marginTop:10,cursor:"pointer",fontSize:11,color:C.muted}} onClick={()=>setSR(null)}>← Cambiar referencia</div>
+      </div>}
     </div>
   );
 }
@@ -702,62 +845,95 @@ function StatsTab({ fallas }) {
 // REPUESTOS
 // ══════════════════════════════════════════════════════════════════════════════
 function RepuestosTab() {
-  const [search, setSearch] = useState("");
-  const resultados = search.trim().length > 1 ? buscarRepuesto(search) : [];
-  const destacados = [
-    {grupo:"🔧 Motores y turbinas", items:REPUESTOS.filter(r=>r.cod.startsWith("KMT")||r.cod.startsWith("KVN")).slice(0,6)},
-    {grupo:"⚡ Tarjetas y control", items:REPUESTOS.filter(r=>r.cod.startsWith("KPE")).slice(0,6)},
-    {grupo:"🌡️ Sondas y termostatos", items:REPUESTOS.filter(r=>r.cod.startsWith("KTR")||r.cod.startsWith("KSN")).slice(0,5)},
-    {grupo:"🔥 Resistencias", items:REPUESTOS.filter(r=>r.cod.startsWith("KRS")).slice(0,5)},
-    {grupo:"💧 Hidráulica y lavado", items:REPUESTOS.filter(r=>r.cod.startsWith("KVL")||r.cod.startsWith("KEL")).slice(0,6)},
-    {grupo:"🚪 Gomas y burletes", items:REPUESTOS.filter(r=>r.cod.startsWith("KGN")).slice(0,6)},
-  ];
-  return (
-    <div style={{padding:14,overflowY:"auto",height:"calc(100vh - 110px)"}}>
-      <div style={{fontSize:17,fontWeight:800,marginBottom:4}}>🔩 Repuestos Unox</div>
-      <div style={{fontSize:11,color:C.muted,marginBottom:12}}>Precios COP sin IVA · Cotización Unox Colombia Mar 2026</div>
-      <input value={search} onChange={e=>setSearch(e.target.value)} placeholder="Buscar por código o descripción…"
-        style={{width:"100%",padding:"10px 13px",borderRadius:9,border:`1px solid ${C.border}`,fontSize:13,fontFamily:"inherit",color:C.text,background:C.bg,outline:"none",marginBottom:14,boxSizing:"border-box"}}/>
-      {search.trim().length > 1 && (
-        <div style={{marginBottom:16}}>
-          {resultados.length===0 && <div style={{...card({textAlign:"center",padding:20,color:C.muted})}}>Sin resultados para "{search}"</div>}
-          {resultados.map(r=>(
-            <div key={r.cod} style={{...card({marginBottom:7,padding:"10px 13px"})}}>
-              <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",gap:8}}>
-                <div>
-                  <span style={{fontSize:10,fontWeight:700,color:C.accent,background:C.al,padding:"2px 6px",borderRadius:4}}>{r.cod}</span>
-                  <div style={{fontSize:12,marginTop:4,lineHeight:1.5}}>{r.desc}</div>
-                </div>
-                <div style={{fontSize:14,fontWeight:800,color:C.green,flexShrink:0,textAlign:"right"}}>
-                  {formatPrecio(r.precio)}
-                  <div style={{fontSize:9,color:C.muted,fontWeight:400}}>sin IVA</div>
-                </div>
-              </div>
-            </div>
-          ))}
+  const [sT,setST]=useState(null); const [sM,setSM]=useState(null); const [sR,setSR]=useState(null);
+  const [search,setSearch]=useState("");
+
+  // Filtrar repuestos según selección y búsqueda
+  const repBase = sM ? REPUESTOS.filter(r=>r.marca===sM.nombre) : REPUESTOS;
+  const resultados = search.trim().length>1
+    ? repBase.filter(r=>{
+        const q=search.toLowerCase();
+        return r.cod.toLowerCase().includes(q)||r.desc.toLowerCase().split(" ").some(w=>w.length>3&&q.includes(w))||q.split(" ").some(w=>w.length>3&&r.desc.toLowerCase().includes(w));
+      }).slice(0,12)
+    : [];
+
+  // Grupos para vista sin búsqueda
+  const grupos = [
+    {label:"🚪 Burletes y juntas", items:repBase.filter(r=>/goma|burlete|junta puerta/i.test(r.desc)).slice(0,6)},
+    {label:"🔧 Motores y turbinas", items:repBase.filter(r=>/motor|turbina|ventilador/i.test(r.desc)||r.cod.startsWith("KMT")||r.cod.startsWith("KVN")).slice(0,5)},
+    {label:"⚡ Tarjetas y electrónica", items:repBase.filter(r=>/panel de control|tarjeta|control táctil/i.test(r.desc)||r.cod.startsWith("KPE")).slice(0,5)},
+    {label:"🌡️ Sondas y termostatos", items:repBase.filter(r=>/sonda|termostato/i.test(r.desc)||r.cod.startsWith("KTR")||r.cod.startsWith("KSN")).slice(0,5)},
+    {label:"💧 Válvulas y lavado", items:repBase.filter(r=>/válvula|electroválvula|limpieza|cleanjet|manguera/i.test(r.desc)||r.cod.startsWith("KVL")||r.cod.startsWith("KEL")).slice(0,5)},
+    {label:"🔥 Resistencias", items:repBase.filter(r=>/resistencia|calefactor/i.test(r.desc)||r.cod.startsWith("KRS")).slice(0,5)},
+  ].filter(g=>g.items.length>0);
+
+  const ItemCard = ({r}) => (
+    <div style={{...card({marginBottom:7,padding:"10px 13px"})}}>
+      <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",gap:8}}>
+        <div style={{flex:1,minWidth:0}}>
+          <div style={{display:"flex",gap:5,marginBottom:3,flexWrap:"wrap"}}>
+            <span style={{fontSize:10,fontWeight:700,color:C.accent,background:C.al,padding:"2px 6px",borderRadius:4}}>{r.cod}</span>
+            <span style={{fontSize:9,color:C.muted,background:"#f3f4f6",padding:"2px 6px",borderRadius:4}}>{r.marca}</span>
+          </div>
+          <div style={{fontSize:12,lineHeight:1.5,color:C.text}}>{r.desc}</div>
+          {r.cant>1&&<div style={{fontSize:10,color:C.muted,marginTop:2}}>Precio por {r.cant} unidades</div>}
         </div>
-      )}
-      {!search.trim() && destacados.map(grupo=>(
-        <div key={grupo.grupo} style={{marginBottom:16}}>
-          <div style={{fontSize:12,fontWeight:700,marginBottom:8,color:C.text}}>{grupo.grupo}</div>
-          {grupo.items.map(r=>(
-            <div key={r.cod} style={{...card({marginBottom:6,padding:"9px 12px"})}}>
-              <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",gap:8}}>
-                <div style={{flex:1,minWidth:0}}>
-                  <span style={{fontSize:9,fontWeight:700,color:C.accent,background:C.al,padding:"1px 5px",borderRadius:3}}>{r.cod}</span>
-                  <div style={{fontSize:11,marginTop:3,color:C.muted,lineHeight:1.4,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{r.desc}</div>
-                </div>
-                <div style={{fontSize:13,fontWeight:800,color:C.green,flexShrink:0}}>
-                  {formatPrecio(r.precio)}
-                </div>
-              </div>
-            </div>
-          ))}
+        <div style={{fontSize:14,fontWeight:800,color:C.green,flexShrink:0,textAlign:"right"}}>
+          {formatPrecio(r.precio)}
+          <div style={{fontSize:9,color:C.muted,fontWeight:400}}>sin IVA</div>
         </div>
-      ))}
-      <div style={{textAlign:"center",padding:"10px 0",fontSize:10,color:C.light,borderTop:`1px solid ${C.border}`}}>
-        +19% IVA no incluido · Precios sujetos a cambio · Contacto: info.co@unox.com
       </div>
+    </div>
+  );
+
+  return (
+    <div style={{padding:16,overflowY:"auto",height:"calc(100vh - 110px)"}}>
+      <div style={{fontSize:17,fontWeight:800,marginBottom:14}}>🔩 Repuestos</div>
+      {/* PASO 1 — Equipo */}
+      {!sT && <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10}}>{EQUIPOS.map(eq=><div key={eq.tipo} onClick={()=>{setST(eq);setSM(null);setSR(null);setSearch("");}} style={{...card({cursor:"pointer",textAlign:"center",padding:"16px 8px"})}}><div style={{fontSize:26,marginBottom:5}}>{eq.icon}</div><div style={{fontSize:12,fontWeight:700}}>{eq.tipo}</div></div>)}</div>}
+      {/* PASO 2 — Marca */}
+      {sT&&!sM&&<div>
+        <div style={{fontSize:12,fontWeight:700,marginBottom:9,color:C.muted}}>{sT.icon} {sT.tipo}</div>
+        <div style={{display:"flex",flexWrap:"wrap",gap:8}}>
+          {sT.marcas.map(m=><div key={m.nombre} onClick={()=>{setSM(m);setSR(null);setSearch("");}} style={{...card({padding:"8px 14px",cursor:"pointer"}),fontSize:12,fontWeight:600}}>{m.nombre}</div>)}
+        </div>
+        <div style={{marginTop:10,cursor:"pointer",fontSize:11,color:C.muted}} onClick={()=>setST(null)}>← Volver</div>
+      </div>}
+      {/* PASO 3 — Referencia */}
+      {sT&&sM&&!sR&&<div>
+        <div style={{fontSize:12,fontWeight:700,marginBottom:9,color:C.muted}}>{sM.nombre}</div>
+        <div style={{display:"flex",flexWrap:"wrap",gap:8}}>
+          {sM.refs.map(r=><div key={r} onClick={()=>{setSR(r);setSearch("");}} style={{...card({padding:"8px 14px",cursor:"pointer"}),fontSize:11}}>{r}</div>)}
+        </div>
+        <div style={{marginTop:10,cursor:"pointer",fontSize:11,color:C.muted}} onClick={()=>setSM(null)}>← Volver</div>
+      </div>}
+      {/* CONTENIDO */}
+      {sT&&sM&&sR&&<div>
+        <div style={{...card({background:"#f8faff",border:`1px solid ${C.accent}33`,marginBottom:12,padding:"11px 14px"})}}>
+          <div style={{fontSize:10,color:C.accent,fontWeight:700,marginBottom:2}}>REPUESTOS</div>
+          <div style={{fontSize:15,fontWeight:800}}>{sM.nombre} {sR}</div>
+          <div style={{fontSize:11,color:C.muted,marginTop:2}}>Precios COP sin IVA · {sM.nombre==="Unox"?"Mar 2026":"Apr 2025"}</div>
+        </div>
+        <input value={search} onChange={e=>setSearch(e.target.value)} placeholder={`Buscar repuesto ${sM.nombre}…`}
+          style={{width:"100%",padding:"10px 13px",borderRadius:9,border:`1px solid ${C.border}`,fontSize:13,fontFamily:"inherit",color:C.text,background:C.bg,outline:"none",marginBottom:14,boxSizing:"border-box"}}/>
+        {search.trim().length>1 && (
+          <div>
+            {resultados.length===0&&<div style={{...card({textAlign:"center",padding:20,color:C.muted})}}>Sin resultados para "{search}"</div>}
+            {resultados.map(r=><ItemCard key={r.cod} r={r}/>)}
+          </div>
+        )}
+        {!search.trim() && grupos.map(g=>(
+          <div key={g.label} style={{marginBottom:16}}>
+            <div style={{fontSize:12,fontWeight:700,marginBottom:8}}>{g.label}</div>
+            {g.items.map(r=><ItemCard key={r.cod} r={r}/>)}
+          </div>
+        ))}
+        {!search.trim() && grupos.length===0 && <div style={{...card({textAlign:"center",padding:28,color:C.muted})}}>Próximamente repuestos para {sM.nombre} {sR}.</div>}
+        <div style={{textAlign:"center",padding:"10px 0",fontSize:10,color:C.light,borderTop:`1px solid ${C.border}`,marginTop:8}}>
+          +19% IVA no incluido · {sM.nombre==="Unox"?"info.co@unox.com":"service@rational-online.co"}
+        </div>
+        <div style={{marginTop:8,cursor:"pointer",fontSize:11,color:C.muted}} onClick={()=>setSR(null)}>← Cambiar referencia</div>
+      </div>}
     </div>
   );
 }
