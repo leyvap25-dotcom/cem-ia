@@ -828,7 +828,7 @@ function InicioTab({ onNav }) {
           <div style={{color:C.light,fontSize:15,paddingTop:8}}>›</div>
         </div>
       ))}
-      <div style={{textAlign:"center",padding:"14px 0 6px",borderTop:`1px solid ${C.border}`,marginTop:6,fontSize:10,color:C.light}}>Rational · Unox · Zanolli · Turbochef · Bunn · v3.0</div>
+      <div style={{textAlign:"center",padding:"14px 0 6px",borderTop:`1px solid ${C.border}`,marginTop:6,fontSize:10,color:C.light}}>Rational · Unox · Zanolli · Turbochef · Bunn<br/><span style={{fontSize:9}}>{"v" + (process.env.NEXT_PUBLIC_BUILD_DATE ? new Date(process.env.NEXT_PUBLIC_BUILD_DATE).toLocaleDateString("es-CO",{day:"2-digit",month:"2-digit",year:"2-digit"})+" "+new Date(process.env.NEXT_PUBLIC_BUILD_DATE).toLocaleTimeString("es-CO",{hour:"2-digit",minute:"2-digit"}) : "dev")}</span></div>
     </div>
   );
 }
