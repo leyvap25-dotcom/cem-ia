@@ -79,16 +79,170 @@ const PLAN_GEN = { diario:["Limpiar exteriores","Verificar funcionamiento básic
 
 const LIMPIEZAS_DATA = {
   Horno:[
-    {titulo:"CleanJet+Care — Rational SCC / iCombi Pro",alerta:"⚠️ Usar gafas, guantes y delantal. NO insertar bandejas ni recipientes durante la limpieza.",pasos:["Seleccionar nivel de limpieza 1-6 según suciedad (Ligero, Medio, Fuerte, Rápido, Ahorro, Intenso).","Esperar que la cámara baje de 75°C antes de iniciar.","Retirar contenedores, bandejas y parrillas de la cámara.","iCombi Pro: Colocar pastilla de detergente (sobre verde, redonda) en el tamiz del piso de la cámara. Colocar pastilla CareControl (sobre azul, 4 pastillas cúbicas) en el cajón CareControl.","SCC: Colocar pastilla de detergente (sobre rojo/plateado) en el canasto del bafle. Colocar pastilla CareControl en el cajón CareControl.","Verificar que la puerta cierre bien y pulsar Inicio.","Al terminar, revisar que no queden residuos de producto en la cámara.","Limpiar la bandeja recogegotas de la puerta diariamente con 1-2 litros de agua tibia.","⚠️ Si el equipo no se limpia a diario, el residuo de grasa puede generar riesgo de incendio."]},
-    {titulo:"Cambio de Burlete — Unox ChefTop / BakerTop",alerta:"⚠️ El burlete NO tiene orificios (es sellado). No debe sobrar ni cortarse.",pasos:["Retirar el burlete viejo jalando desde cualquier punto de la ranura.","Limpiar bien la ranura y el marco de la puerta con paño húmedo.","Identificar la UNIÓN del burlete nuevo (donde se une el caucho): eso va en la parte SUPERIOR centrado en la guía.","Colocar el centro de la parte INFERIOR.","Luego el lado DERECHO y después el lado IZQUIERDO.","Ir insertando el burlete de a pocos desde el centro hacia las esquinas, presionando hacia adentro de la ranura.","En las esquinas redondeadas: verificar que la línea del burlete coincida con la línea guía del horno.","Verificar las pestañas: la pestaña LARGA va alejada de la cabina (lado vapor), la pestaña CORTA va cerca de la cabina (lado calor).","Hacer prueba de cierre: la puerta debe sellar uniformemente todo el contorno."]},
-    {titulo:"Cambio de Burlete — Unox Arianna (XEFR-04HS)",alerta:"⚠️ Este burlete tiene DOS ORIFICIOS que deben quedar en la parte superior. La puerta cierra hacia arriba.",pasos:["Retirar el burlete viejo jalando desde cualquier punto de la ranura.","Limpiar bien la ranura y el marco de la puerta con paño húmedo.","Identificar la UNIÓN del burlete nuevo (donde se une el caucho): eso va en el lado IZQUIERDO del horno en la mitad de la guía. Los orificios deben quedar en la parte SUPERIOR.","Colocar el centro de la parte DERECHA.","Luego el lado SUPERIOR y después el lado INFERIOR.","Ir insertando el burlete de a pocos desde el centro hacia las esquinas, presionando hacia adentro de la ranura.","En las esquinas redondeadas: verificar que la línea del burlete coincida con la línea guía del horno.","Verificar las pestañas: la pestaña LARGA va alejada de la cabina (lado vapor), la pestaña CORTA va cerca de la cabina (lado calor).","Verificar que los DOS ORIFICIOS queden en la parte superior del marco.","Hacer prueba de cierre: la puerta debe sellar uniformemente todo el contorno."]},
-    {titulo:"Cambio de Burlete — Rational SCC / iCombi",alerta:"⚠️ Este burlete tiene orificios en la parte INFERIOR. Las esquinas son de 90 grados.",pasos:["Retirar el burlete viejo jalando desde cualquier punto de la ranura.","Limpiar bien la ranura con paño húmedo. Se puede humedecer con agua jabonosa para facilitar la instalación.","Identificar la UNIÓN del burlete nuevo: va en la parte SUPERIOR centrada. Los orificios deben quedar en la parte INFERIOR.","Colocar el centro de la parte INFERIOR.","Luego el lado DERECHO y después el lado IZQUIERDO.","Ir insertando el burlete de a pocos desde el centro hacia las esquinas.","En las esquinas de 90 grados (rectas, no redondeadas): asegurarse que el burlete quede completamente recto y encajado.","Verificar pestañas: pestaña LARGA alejada de la cabina (lado vapor), pestaña CORTA cerca de la cabina (lado calor).","No debe sobrar ni cortarse. Hacer prueba de cierre: la puerta debe sellar uniformemente."]},
-    {titulo:"Cuidado Diario — Filtro de Aire Rational",alerta:"Un filtro obstruido puede dañar componentes electrónicos. Limpiar semanalmente.",pasos:["iCombi Pro/Classic (mesa 6-1/1 a 10-2/1): Con destornillador, levantar la rejilla de ventilación en la base bajo el panel de control (punto A). Levantar el elemento de filtro del soporte (punto B) y extraerlo.","SCC (mesa 61-102): Empujar el marco del filtro en las zonas marcadas hacia adentro. Inclinar hacia abajo y extraer.","Lavar con solución jabonosa suave y agua caliente a menos de 60-80°C.","Dejar secar completamente antes de reinstalar.","Si el filtro no se puede limpiar bien, reemplazar por filtro nuevo.","Reinstalar asegurando que quede bien fijo. El equipo NO debe usarse sin filtro de aire."]},
-    {titulo:"Cuidado del Cristal y Burlete de Puerta — Rational",alerta:"⚠️ NO usar químicos ni detergentes en el cristal — despegan los flejes de sujeción del vidrio.",pasos:["Cristal: Abrir el cristal interior soltando los 2 clips de muelle (superior e inferior). Esperar que se enfríe antes de tocar. Limpiar solo con paño suave y húmedo.","Burlete: Limpiar con paño suave y húmedo la parte interior y exterior del burlete después de cada carga.","No usar productos corrosivos, abrasivos ni con vinagre (ácidos) en el burlete.","Evitar operar el horno vacío a temperaturas superiores a 180°C — reduce la vida útil del burlete.","Si se usan modos de plancha/parrilla con frecuencia, pasar paño húmedo al burlete entre ciclos."]},
+    // ── RATIONAL ──────────────────────────────────────────────────────────────
+    {titulo:"Rational SCC/iCombi — Limpieza diaria (operador)",alerta:"⚠️ Usar guantes y delantal. NO limpiar con el horno caliente por encima de 75°C.",pasos:[
+      "Al finalizar la jornada, retirar TODAS las bandejas, parrillas y contenedores de la cámara.",
+      "Seleccionar el ciclo de limpieza CleanJet+Care desde el panel. Elegir nivel según suciedad: Nivel 1-2 para suciedad ligera, Nivel 3-4 para suciedad media, Nivel 5-6 para suciedad fuerte.",
+      "iCombi Pro: colocar pastilla verde (detergente) en el tamiz del piso. Colocar pastillas azules CareControl en el cajón CareControl.",
+      "SCC: colocar pastilla roja/plateada en el canasto del bafle. Colocar pastillas CareControl en el cajón.",
+      "Cerrar bien la puerta y pulsar Inicio. NO abrir durante el ciclo.",
+      "Al terminar: limpiar la bandeja recogegotas de la puerta con 1-2 litros de agua tibia.",
+      "Dejar la puerta entreabierta al final del día para ventilar y evitar malos olores.",
+      "⚠️ Si no se limpia a diario el residuo de grasa puede generar humo, mal sabor en alimentos y riesgo de incendio.",
+    ]},
+    {titulo:"Rational SCC/iCombi — Productos permitidos y prohibidos",alerta:"⚠️ Usar productos incorrectos daña el acero inox, el cristal y los burletes — puede anular la garantía.",pasos:[
+      "✅ SÍ usar: pastillas CleanJet originales Rational (verde iCombi / roja SCC), pastillas CareControl originales, agua tibia con paño suave para exteriores.",
+      "✅ SÍ usar: esponja suave o paño de microfibra para limpiar la puerta, el burlete y el panel de control.",
+      "❌ NUNCA usar: limpiadores con cloro o lejía — corroen el acero inox.",
+      "❌ NUNCA usar: productos con vinagre o ácidos — atacan el burlete de silicona.",
+      "❌ NUNCA usar: estropajos metálicos, virutas de acero, esponjas abrasivas — raspan y dañan el interior.",
+      "❌ NUNCA usar: desengrasantes industriales no aprobados Rational — pueden dejar residuos tóxicos en la cámara.",
+      "❌ NUNCA usar: manguera de agua a presión para limpiar el interior o el panel eléctrico.",
+      "❌ NUNCA limpiar el cristal de la puerta con químicos — disuelven los flejes de sujeción del vidrio.",
+    ]},
+    {titulo:"Rational SCC/iCombi — Cuidado del burlete y cristal (operador)",alerta:"⚠️ Un burlete dañado genera pérdida de vapor, mayor consumo y posibles fallas.",pasos:[
+      "Después de cada carga: limpiar el burlete con un paño húmedo suave, por dentro y por fuera.",
+      "Revisar visualmente que el burlete no tenga grietas, rasgaduras ni partes despegadas.",
+      "Si el burlete tiene daños visibles, reportar al técnico de mantenimiento — NO continuar usando el horno si la puerta no sella bien.",
+      "Cristal exterior: limpiar solo con paño húmedo. Nunca usar químicos.",
+      "Cristal interior: abrir soltando los 2 clips de muelle (superior e inferior). Limpiar solo con paño suave y agua. Dejar enfriar antes de tocar.",
+      "Evitar golpear la puerta al cerrarla — el impacto repetido deteriora el burlete y las bisagras.",
+      "No colgar trapos ni utensilios en la manija de la puerta.",
+    ]},
+    {titulo:"Rational SCC/iCombi — Limpieza exterior y panel (operador)",alerta:"",pasos:[
+      "Apagar el equipo y esperar que se enfríe antes de limpiar el exterior.",
+      "Limpiar el acero inoxidable con paño húmedo siguiendo la dirección del pulido (horizontal) — nunca en círculos.",
+      "Para manchas difíciles en acero inox: usar unas gotas de aceite mineral o limpiador específico para inox, aplicar con paño suave.",
+      "Panel de control táctil: limpiar solo con paño ligeramente húmedo. No aplicar líquidos directamente.",
+      "Limpiar la bandeja recogegotas debajo de la puerta diariamente — acumula grasa y agua.",
+      "Limpiar la zona de desagüe del piso de la cámara: retirar el tamiz, enjuagar bajo el grifo y devolver.",
+      "❌ No usar spray de agua o limpiador directamente sobre el panel de control o zonas eléctricas.",
+    ]},
+    // ── UNOX ──────────────────────────────────────────────────────────────────
+    {titulo:"Unox ChefTop/BakerTop — Limpieza diaria (operador)",alerta:"⚠️ Retirar TODAS las bandejas antes del ciclo. No iniciar la limpieza con el horno lleno.",pasos:[
+      "Al finalizar la jornada, retirar TODAS las bandejas y rejillas de la cámara.",
+      "Verificar que el grifo de agua esté abierto.",
+      "Verificar que el tanque de detergente Det&Rinse esté lleno y bien instalado.",
+      "Seleccionar el ciclo de lavado desde el panel. Pulsar Inicio.",
+      "NO abrir la puerta durante el ciclo de lavado.",
+      "Al terminar: revisar que no queden residuos de producto en la cámara.",
+      "Dejar la puerta entreabierta al final del día para ventilar.",
+      "Limpiar la junta de puerta visualmente — si hay residuos, limpiar con paño húmedo.",
+    ]},
+    {titulo:"Unox ChefTop/BakerTop — Productos permitidos y prohibidos",alerta:"⚠️ El uso de productos no aprobados puede dañar los componentes y anular la garantía Unox.",pasos:[
+      "✅ SÍ usar: detergente líquido Det&Rinse Unox original en el tanque del equipo.",
+      "✅ SÍ usar: paño de microfibra húmedo para exteriores, burlete y panel.",
+      "✅ SÍ usar: agua tibia para enjuagar manualmente el interior si queda residuo.",
+      "❌ NUNCA usar: lejía, cloro ni productos clorados — corroen el acero inox de la cámara.",
+      "❌ NUNCA usar: vinagre ni productos ácidos — dañan los burletes de silicona.",
+      "❌ NUNCA usar: estropajos abrasivos ni lana de acero — raspan y dejan marcas permanentes.",
+      "❌ NUNCA usar: sprays desengrasantes de cocina directamente en la cámara — dejan residuos que contaminan alimentos.",
+      "❌ NUNCA limpiar con manguera a presión — el agua puede entrar a componentes eléctricos.",
+      "❌ NUNCA rellenar el tanque de Det&Rinse con detergente de otra marca sin aprobación Unox.",
+    ]},
+    {titulo:"Unox ChefTop/BakerTop — Cuidado del burlete (operador)",alerta:"⚠️ El burlete del ChefTop/BakerTop NO tiene orificios — es totalmente sellado.",pasos:[
+      "Revisar el burlete visualmente al inicio y al final de cada jornada.",
+      "Limpiar con paño húmedo suave — nunca con productos químicos.",
+      "Verificar que el burlete esté completamente encajado en la ranura todo el contorno.",
+      "Si el burlete tiene grietas, está despegado o la puerta no cierra bien: reportar al técnico de mantenimiento.",
+      "No jalar el burlete innecesariamente — se puede salir de la ranura.",
+      "Evitar golpear la puerta. Cerrar siempre con suavidad.",
+    ]},
+    {titulo:"Unox Arianna — Limpieza diaria (operador)",alerta:"⚠️ Recuerda que la puerta de la Arianna cierra hacia ARRIBA, no hacia los lados.",pasos:[
+      "Al finalizar la jornada, retirar todas las bandejas y el cajón de grasas.",
+      "Limpiar el cajón recogegotas: retirarlo, vaciarlo y lavarlo con agua y jabón suave.",
+      "Limpiar el interior de la cámara con paño húmedo mientras aún está tibio (no caliente).",
+      "Limpiar el burlete con paño húmedo — tiene DOS ORIFICIOS en la parte superior, que no se deben tapar.",
+      "Limpiar el cristal exterior e interior con paño húmedo. No usar químicos.",
+      "Limpiar el exterior (acero inox) con paño húmedo siguiendo el pulido horizontal.",
+      "Verificar que la puerta cierre correctamente al terminar.",
+    ]},
+    // ── ZANOLLI / TURBOCHEF ──────────────────────────────────────────────────
+    {titulo:"Zanolli / Turbochef — Limpieza diaria (operador)",alerta:"⚠️ Apagar el horno y esperar al menos 30 min antes de limpiar.",pasos:[
+      "Apagar el horno completamente y esperar a que se enfríe.",
+      "Retirar la piedra refractaria (Zanolli) o la bandeja (Turbochef) con cuidado — pueden estar calientes.",
+      "Zanolli: limpiar la piedra en seco con rasqueta o cepillo de cerdas metálicas. Nunca sumergir en agua ni lavar con jabón — la piedra absorbe agua y puede romperse al calentarse.",
+      "Turbochef: limpiar el interior con el kit de limpieza propio del equipo o paño húmedo.",
+      "Limpiar el exterior con paño húmedo y jabón suave.",
+      "Limpiar la mirilla o cristal con paño húmedo. No usar abrasivos.",
+      "Verificar que la banda transportadora (si aplica) esté libre de residuos.",
+    ]},
+    {titulo:"Zanolli / Turbochef — Productos permitidos y prohibidos",alerta:"",pasos:[
+      "✅ SÍ usar: rasqueta de metal (sin filo) para la piedra refractaria cuando está fría.",
+      "✅ SÍ usar: paño húmedo con agua tibia para exteriores e interior metálico.",
+      "✅ SÍ usar: jabón neutro suave en superficies externas de acero.",
+      "❌ NUNCA lavar la piedra refractaria con agua ni jabón — absorbe humedad y se rompe.",
+      "❌ NUNCA usar lejía ni cloro en ninguna parte del horno.",
+      "❌ NUNCA usar limpiadores en aerosol dentro de la cámara de cocción.",
+      "❌ NUNCA introducir objetos metálicos en la zona de la resistencia.",
+    ]},
   ],
-  Cafetera:[{titulo:"Cafetera Bunn — Diario",alerta:"No sumergir piezas eléctricas.",pasos:["Lavar canasta y filtro.","Enjuagar recipiente.","Limpiar cabezal con cepillo."]}],
-  Granizadora:[{titulo:"Granizadora Bunn — Semanal",alerta:"Sin agua a presión en el compresor.",pasos:["Apagar y desconectar.","Retirar y lavar el tambor.","Limpiar interior.","Limpiar rejillas del condensador."]}],
-  "Nevera / Congelador":[{titulo:"Nevera — Quincenal",alerta:"No raspar escarcha con metal.",pasos:["Apagar y desenchufar.","Retirar productos.","Limpiar con bicarbonato.","Limpiar rejillas y juntas."]}],
+  Cafetera:[
+    {titulo:"Cafetera Bunn — Limpieza diaria (operador)",alerta:"⚠️ No sumergir ninguna pieza eléctrica en agua.",pasos:[
+      "Al finalizar la jornada, retirar la canasta de filtro y lavarla con agua y jabón suave. Enjuagar bien.",
+      "Limpiar el cabezal de distribución con cepillo suave para retirar residuos de café.",
+      "Lavar el jarro o recipiente de café con agua y jabón suave. Enjuagar.",
+      "Limpiar el exterior de la cafetera con paño húmedo.",
+      "No dejar café viejo en la jarra — la acidez mancha y genera malos olores.",
+      "Revisar que el grifo y la boquilla de salida estén libres de obstrucciones.",
+    ]},
+    {titulo:"Cafetera Bunn — Descalcificación mensual (operador con supervisión)",alerta:"⚠️ Usar solo descalcificante aprobado para cafeteras. Nunca vinagre puro.",pasos:[
+      "Vaciar el depósito de agua.",
+      "Preparar solución de descalcificante según instrucciones del fabricante.",
+      "Pasar la solución por el ciclo de la cafetera.",
+      "Pasar 2-3 ciclos de agua limpia para enjuagar completamente.",
+      "Si persiste sabor a descalcificante, pasar un ciclo más de agua.",
+      "Registrar la fecha de descalcificación.",
+    ]},
+    {titulo:"Cafetera Bunn — Productos permitidos y prohibidos",alerta:"",pasos:[
+      "✅ SÍ usar: agua y jabón neutro para lavar partes desmontables.",
+      "✅ SÍ usar: descalcificante líquido para cafeteras (aprobado).",
+      "✅ SÍ usar: cepillo suave de silicona para el cabezal.",
+      "❌ NUNCA usar lejía ni desinfectantes clorados — el residuo contamina el café.",
+      "❌ NUNCA usar estropajos abrasivos en el jarro de vidrio — lo raya y puede romperse.",
+      "❌ NUNCA verter agua directamente sobre componentes eléctricos.",
+    ]},
+  ],
+  Granizadora:[
+    {titulo:"Granizadora Bunn — Limpieza diaria (operador)",alerta:"⚠️ Apagar y desconectar de la corriente antes de limpiar. No mojar el compresor.",pasos:[
+      "Al finalizar la jornada, vaciar el producto del tambor.",
+      "Retirar el tambor y la paleta mezcladora (si son desmontables).",
+      "Lavar el tambor con agua tibia y jabón neutro. Enjuagar muy bien — el residuo de jabón afecta el sabor.",
+      "Limpiar el interior del gabinete con paño húmedo. No mojar el compresor ni zonas eléctricas.",
+      "Limpiar las rejillas laterales o traseras del condensador con paño seco o pincel suave.",
+      "Secar bien todas las piezas antes de remontar.",
+      "Dejar la tapa abierta si el equipo quedará apagado por largo tiempo.",
+    ]},
+    {titulo:"Granizadora Bunn — Productos permitidos y prohibidos",alerta:"",pasos:[
+      "✅ SÍ usar: agua tibia y jabón neutro sin fragancia para lavar el tambor.",
+      "✅ SÍ usar: paño seco para limpiar el condensador y rejillas.",
+      "❌ NUNCA usar lejía — el residuo contamina el producto.",
+      "❌ NUNCA mojar el compresor ni las zonas eléctricas.",
+      "❌ NUNCA raspar el interior del tambor con objetos metálicos.",
+      "❌ NUNCA usar el tambor sin enjuagar completamente el jabón.",
+    ]},
+  ],
+  "Nevera / Congelador":[
+    {titulo:"Nevera/Congelador — Limpieza semanal (operador)",alerta:"⚠️ No raspar el hielo con objetos metálicos — daña el evaporador.",pasos:[
+      "Retirar todos los productos y guardar en zona fría temporal.",
+      "Apagar el equipo o usar modo de descongelación.",
+      "Esperar a que el hielo se derrita naturalmente. Si hay mucho hielo, colocar recipiente con agua caliente dentro (sin que toque el evaporador).",
+      "Limpiar el interior con paño húmedo y solución de bicarbonato (1 cucharada por litro de agua) — neutraliza olores.",
+      "Enjuagar con agua limpia y secar con paño seco.",
+      "Limpiar las juntas de la puerta con paño húmedo — revisar que no estén rotas ni deformadas.",
+      "Limpiar las rejillas del condensador (parte trasera o inferior) con pincel suave o aspiradora.",
+      "Devolver los productos y encender el equipo.",
+    ]},
+    {titulo:"Nevera/Congelador — Productos permitidos y prohibidos",alerta:"",pasos:[
+      "✅ SÍ usar: solución de bicarbonato y agua para el interior.",
+      "✅ SÍ usar: agua tibia con jabón neutro para estantes y cajones desmontables.",
+      "✅ SÍ usar: paño seco para limpiar el condensador.",
+      "❌ NUNCA usar lejía ni desinfectantes con cloro en el interior — el residuo contamina alimentos.",
+      "❌ NUNCA raspar el hielo con cuchillos ni objetos metálicos — perfora el evaporador.",
+      "❌ NUNCA usar agua caliente directamente sobre el evaporador.",
+      "❌ NUNCA dejar la puerta abierta innecesariamente — genera acumulación de hielo.",
+    ]},
+  ],
 };
 
 const ERRORES_UNOX = [
@@ -495,11 +649,11 @@ RATIONAL SCC/iCombi (burlete CON orificios en la parte INFERIOR, esquinas de 90 
 - Sonda térmica B2/B4 (combinación de fallas puede mostrar códigos combinados como 20.6, 31.12).
 - Revisar bus cable si aparece error 34.x — verificar conexión y estado del cable bus.
 
-=== PRECIOS REPUESTOS UNOX (PESOS COLOMBIANOS - COP, sin IVA, Mar 2026) — SIEMPRE di "pesos" no "dólares" ===
+=== PRECIOS REPUESTOS UNOX (pesos colombianos, sin IVA, Mar 2026) ===
 Motor 330W D12 KMT1012A=$1.350.000 | Tarjeta pot BLSP KPE2260A=$990.000 | Tarjeta pot MM Plus KPE2038A=$2.700.000 | Tarjeta pot MM ONE KPE2037A=$2.160.000 | Panel control MM Plus KPE1057B=$4.275.000 | Termostato seg 318°C KTR1136A=$405.000 | Turbina H40 KVN1172A=$553.500 | Turbina H60 KVN1171A=$765.000 | Resistencia 3000W KRS1283B=$765.000 | Resistencia 4.9kW KRS1150A=$990.000 | Resistencia 9kW KRS1180A=$1.350.000 | Resistencia frenada KRS1034A=$427.500 | Sonda PT100 L1000 KTR1105A=$540.000 | Sonda corazón L2000 KSN1031A=$1.080.000 | Condensador 6.3µF KCN1003A=$135.000 | Electroválvula D8-D10 KEL1251A=$292.500 | Bomba detergente KEL1170B=$765.000 | Cristal int Arianna KVT1330A=$315.000 | Goma puerta Arianna KGN1352A=$211.500 | Goma puerta 0511 KGN1629A=$382.500 | Goma puerta 0711 KGN1630A=$360.000 | Goma puerta 1011 KGN1631A=$405.000 | Bisagra Arianna-Elena KCR1112A=$225.000 | Sistema lavado ONE KVL1182A=$1.215.000 | Sistema lavado Plus KVL1183A=$1.845.000 | Tanque detergente 3L KSB1016A=$675.000 | Cable bus 2M KCE1095A=$180.000 | Kit doble encendedor XRF011=$1.710.000 | Empaques gas KGN1569A=$450.000
-Si preguntan precio de repuesto, menciona código y valor en PESOS COLOMBIANOS (ejemplo: "cuesta $292.500 pesos"). NUNCA digas dólares.
+Si preguntan precio de repuesto, menciona código y valor. Ejemplo: "cuesta $292.500 pesos". NUNCA digas dólares.
 
-=== PRECIOS REPUESTOS RATIONAL SCC/iCombi (PESOS COLOMBIANOS - COP, sin IVA, válido 01.04.2025) — SIEMPRE di "pesos" no "dólares" ===
+=== PRECIOS REPUESTOS RATIONAL SCC/iCombi (pesos colombianos, sin IVA, válido 01.04.2025) ===
 Burlete puerta SCC 61 (20.02.550P)=$290.771 | Burlete SCC 62 (20.02.551P)=$322.295 | Burlete SCC 101 (20.02.552P)=$333.391 | Burlete SCC 102 (20.02.553P)=$364.915 | Burlete SCC 201 (20.00.398P)=$402.983 | Burlete SCC 202 (20.00.399P)=$432.629 | Burlete SCC 623 (20.02.549P)=$274.895 | Panel control iCombi (87.01.535S)=$3.076.206 | Ventilador refrig iCombi (40.07.634S)=$302.948 | Electroválvula quíntuple iCombi (50.02.054P)=$475.875 | Electroválvula triple iCombi (50.02.102P)=$418.460 | Termostato seg 215°C (40.02.337P)=$84.614 | Kit termostato 360°C (87.00.279)=$265.905 | Manguera succión CleanJet 62/102 (56.00.120P)=$185.502 | Manguera succión CleanJet 201/202 (56.00.176P)=$284.683 | Manguera presión 61-102 (56.00.166P)=$57.756 | Bandeja recogegotas 62/102 (24.01.801S)=$473.485 | Filtro aire SCC_WE (40.02.684P)=$35.962 | Filtro aire iCombi (40.05.654P)=$65.153 | Válvula solenoide (50.00.316P)=$53.146 | Cable bus RJ45 2.85m (40.05.839P)=$127.404 | Kit modificación Service25 (87.00.436)=$162.285
 
 ${esRational?"Rational SCC: 23/24=apagar ya; 32/33=cerrar gas+ventilar; 14=sin agua; 25=filtro agua; 29=filtro aire; 31=sonda; 47/48=bomba desagüe; 110/120=llamar técnico.":""}
@@ -648,9 +802,10 @@ Tip: [consejo — si aplica mencionar repuesto con código y precio]`;
 function InicioTab({ onNav }) {
   const items = [
     {id:"chat",icon:"🤖",color:C.accent,bg:C.al,titulo:"Diagnóstico IA",desc:"Describe la falla por texto o voz."},
-    {id:"instalacion",icon:"⚡",color:C.purple,bg:C.pl,titulo:"Instalación",desc:"Requisitos eléctricos e hidráulicos."},
     {id:"planes",icon:"📋",color:C.green,bg:C.gl,titulo:"Planes PM",desc:"Tareas preventivas por equipo."},
-    {id:"limpieza",icon:"🧹",color:C.yellow,bg:C.yl,titulo:"Limpieza",desc:"Procedimientos para operadores."},
+    {id:"instalacion",icon:"⚡",color:C.purple,bg:C.pl,titulo:"Instalación",desc:"Requisitos eléctricos e hidráulicos."},
+    {id:"limpieza",icon:"🧹",color:C.yellow,bg:C.yl,titulo:"Limpieza",desc:"Guías para operadores y técnicos."},
+    {id:"repuestos",icon:"🔩",color:"#b45309",bg:"#fffbeb",titulo:"Repuestos",desc:"Precios Unox y Rational Colombia."},
     {id:"stats",icon:"📊",color:"#0891b2",bg:"#ecfeff",titulo:"Estadísticas",desc:"Registro de fallas con filtros."},
     {id:"guia",icon:"📖",color:C.red,bg:C.rl,titulo:"Guía Técnica",desc:"Códigos de error por marca."},
   ];
