@@ -967,29 +967,176 @@ function LimpiezaTab() {
 // ══════════════════════════════════════════════════════════════════════════════
 // STATS
 // ══════════════════════════════════════════════════════════════════════════════
-function StatsTab({ fallas }) {
+const ADMIN_PIN = "1234"; // ← cambia este PIN
+
+function BarChart({datos, colorFn}) {
+  const mx = datos[0]?.[1] || 1;
+  return (
+    <div>
+      {datos.map(([label,n],i)=>(
+        <div key={label} style={{marginBottom:9}}>
+          <div style={{display:"flex",justifyContent:"space-between",fontSize:11,marginBottom:3}}>
+            <span style={{fontWeight:i===0?700:400,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap",maxWidth:"75%"}}>{label}</span>
+            <span style={{fontWeight:700,color:colorFn(i),flexShrink:0,marginLeft:6}}>{n}x</span>
+          </div>
+          <div style={{background:C.bg,borderRadius:4,height:7,overflow:"hidden"}}>
+            <div style={{background:colorFn(i),width:`${(n/mx)*100}%`,height:"100%",borderRadius:4,transition:"width 0.4s"}}/>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function StatsTab({ fallas, onBorrar }) {
   const [filtro,setFiltro]=useState("todo");
+  const [vista,setVista]=useState("graficas"); // "graficas" | "registros"
+  const [adminMode,setAdminMode]=useState(false);
+  const [pinInput,setPinInput]=useState("");
+  const [pinError,setPinError]=useState(false);
+  const [showPin,setShowPin]=useState(false);
+  const [seleccionados,setSeleccionados]=useState(new Set());
+
   const FILTROS=[{id:"todo",label:"Todo"},{id:"hoy",label:"Hoy"},{id:"semana",label:"7d"},{id:"mes",label:"30d"}];
   const ahora=new Date();
-  const filtrar=lista=>{ if(filtro==="todo")return lista; const dias={hoy:1,semana:7,mes:30}[filtro]; const desde=filtro==="hoy"?new Date(ahora.getFullYear(),ahora.getMonth(),ahora.getDate()):new Date(ahora.getTime()-dias*24*60*60*1000); return lista.filter(f=>f.fecha&&new Date(f.fecha)>=desde); };
+  const filtrar=lista=>{
+    if(filtro==="todo")return lista;
+    const dias={hoy:1,semana:7,mes:30}[filtro];
+    const desde=filtro==="hoy"?new Date(ahora.getFullYear(),ahora.getMonth(),ahora.getDate()):new Date(ahora.getTime()-dias*24*60*60*1000);
+    return lista.filter(f=>f.fecha&&new Date(f.fecha)>=desde);
+  };
   const datos=filtrar(fallas);
-  if(fallas.length===0)return(<div style={{display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",height:"calc(100vh - 110px)",padding:16,textAlign:"center"}}><div style={{fontSize:44,marginBottom:10}}>📊</div><div style={{fontSize:15,fontWeight:700,marginBottom:5}}>Sin datos aún</div><div style={{fontSize:12,color:C.muted}}>Usa el CEM Bot para registrar fallas.</div></div>);
-  const contar=key=>datos.reduce((a,f)=>{const k=f[key]||"Sin dato";a[k]=(a[k]||0)+1;return a;},{});
-  const top=(key,n=8)=>Object.entries(contar(key)).sort((a,b)=>b[1]-a[1]).slice(0,n);
-  const tS=top("sintoma"); const mx=tS[0]?.[1]||1;
+  const contar=key=>Object.entries(datos.reduce((a,f)=>{const k=f[key]||"Sin dato";a[k]=(a[k]||0)+1;return a;},{})).sort((a,b)=>b[1]-a[1]);
+  const topEquipos=contar("equipo");
+  const topMarcas=contar("marca");
+  const topRefs=contar("ref").slice(0,8);
+  const topSintomas=contar("sintoma").slice(0,6);
+
+  const colores=["#2563eb","#16a34a","#d97706","#dc2626","#7c3aed","#0891b2","#9ca3af","#6b7280"];
+  const colorFn=i=>colores[i%colores.length];
+
+  const toggleSel=idx=>{
+    const s=new Set(seleccionados);
+    s.has(idx)?s.delete(idx):s.add(idx);
+    setSeleccionados(s);
+  };
+  const borrarSeleccionados=()=>{
+    if(seleccionados.size===0)return;
+    if(!window.confirm(`¿Borrar ${seleccionados.size} registro(s)?`))return;
+    // Calcular índices reales en fallas (no en datos filtrados)
+    const registrosABorrar=new Set([...seleccionados].map(i=>[...datos].reverse()[i]));
+    const nuevasFallas=fallas.filter(f=>!registrosABorrar.has(f));
+    onBorrar(nuevasFallas);
+    setSeleccionados(new Set());
+  };
+
+  const entrarAdmin=()=>{
+    if(pinInput===ADMIN_PIN){setAdminMode(true);setShowPin(false);setPinInput("");setPinError(false);}
+    else{setPinError(true);}
+  };
+
+  if(fallas.length===0)return(
+    <div style={{display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",height:"calc(100vh - 110px)",padding:16,textAlign:"center"}}>
+      <div style={{fontSize:44,marginBottom:10}}>📊</div>
+      <div style={{fontSize:15,fontWeight:700,marginBottom:5}}>Sin datos aún</div>
+      <div style={{fontSize:12,color:C.muted}}>Usa el CEM Bot para registrar fallas.</div>
+    </div>
+  );
+
   return (
     <div style={{padding:14,overflowY:"auto",height:"calc(100vh - 110px)"}}>
-      <div style={{fontSize:17,fontWeight:800,marginBottom:10}}>Estadísticas</div>
-      <div style={{display:"flex",gap:5,marginBottom:12}}>{FILTROS.map(f=><button key={f.id} onClick={()=>setFiltro(f.id)} style={{...btn(filtro===f.id?"primary":"outline","sm")}}>{f.label}</button>)}</div>
-      {datos.length===0&&<div style={{...card({textAlign:"center",padding:28,color:C.muted})}}>Sin registros en este período.</div>}
-      {datos.length>0&&<>
-        <div style={{...card(),marginBottom:12}}>
-          <div style={{fontSize:12,fontWeight:700,marginBottom:10}}>🔴 Fallas más frecuentes</div>
-          {tS.map(([s,n],i)=>(<div key={s} style={{marginBottom:8}}><div style={{display:"flex",justifyContent:"space-between",fontSize:11,marginBottom:3}}><span style={{fontWeight:i===0?700:400}}>{s}</span><span style={{fontWeight:700,color:C.accent}}>{n}x</span></div><div style={{background:C.bg,borderRadius:3,height:5,overflow:"hidden"}}><div style={{background:i===0?C.accent:`${C.accent}66`,width:`${(n/mx)*100}%`,height:"100%"}}/></div></div>))}
+      {/* Header */}
+      <div style={{display:"flex",alignItems:"center",marginBottom:12}}>
+        <div style={{fontSize:17,fontWeight:800,flex:1}}>Estadísticas</div>
+        <button onClick={()=>adminMode?setAdminMode(false):setShowPin(!showPin)}
+          style={{...btn(adminMode?"primary":"outline","sm"),fontSize:10}}>
+          {adminMode?"🔓 Admin ON":"🔐 Admin"}
+        </button>
+      </div>
+
+      {/* PIN modal */}
+      {showPin&&!adminMode&&(
+        <div style={{...card({marginBottom:12,padding:"12px 14px",background:C.yl,border:`1px solid ${C.yellow}44`})}}>
+          <div style={{fontSize:12,fontWeight:700,marginBottom:8}}>🔐 PIN de administrador</div>
+          <div style={{display:"flex",gap:8}}>
+            <input type="password" value={pinInput} onChange={e=>setPinInput(e.target.value)}
+              onKeyDown={e=>e.key==="Enter"&&entrarAdmin()}
+              placeholder="PIN" maxLength={6}
+              style={{flex:1,padding:"8px 10px",borderRadius:7,border:`1px solid ${pinError?C.red:C.border}`,fontSize:14,fontFamily:"inherit",outline:"none"}}/>
+            <button onClick={entrarAdmin} style={{...btn("primary","sm")}}>Entrar</button>
+          </div>
+          {pinError&&<div style={{fontSize:11,color:C.red,marginTop:5}}>PIN incorrecto</div>}
         </div>
+      )}
+
+      {/* Admin banner */}
+      {adminMode&&<div style={{...card({marginBottom:12,padding:"9px 12px",background:C.rl,border:`1px solid ${C.red}44`})}}>
+        <div style={{fontSize:11,color:C.red,fontWeight:700}}>🔓 Modo administrador activo — puedes seleccionar y borrar registros en la pestaña Registros</div>
+      </div>}
+
+      {/* Filtros tiempo */}
+      <div style={{display:"flex",gap:5,marginBottom:12}}>
+        {FILTROS.map(f=><button key={f.id} onClick={()=>setFiltro(f.id)} style={{...btn(filtro===f.id?"primary":"outline","sm")}}>{f.label}</button>)}
+        <div style={{marginLeft:"auto",background:C.al,color:C.accent,fontSize:10,fontWeight:700,padding:"4px 10px",borderRadius:20,display:"flex",alignItems:"center"}}>{datos.length} reg.</div>
+      </div>
+
+      {/* Vista toggle */}
+      <div style={{display:"flex",gap:5,marginBottom:14}}>
+        <button onClick={()=>setVista("graficas")} style={{...btn(vista==="graficas"?"primary":"outline","sm"),flex:1}}>📊 Gráficas</button>
+        <button onClick={()=>setVista("registros")} style={{...btn(vista==="registros"?"primary":"outline","sm"),flex:1}}>📋 Registros</button>
+      </div>
+
+      {datos.length===0&&<div style={{...card({textAlign:"center",padding:28,color:C.muted})}}>Sin registros en este período.</div>}
+
+      {/* ── GRÁFICAS ── */}
+      {vista==="graficas"&&datos.length>0&&<>
+        {/* Por equipo */}
+        <div style={{...card({marginBottom:12})}} >
+          <div style={{fontSize:12,fontWeight:700,marginBottom:12}}>🔥 Fallas por equipo</div>
+          <BarChart datos={topEquipos} colorFn={colorFn}/>
+        </div>
+        {/* Por marca */}
+        <div style={{...card({marginBottom:12})}}>
+          <div style={{fontSize:12,fontWeight:700,marginBottom:12}}>🏷️ Fallas por marca</div>
+          <BarChart datos={topMarcas} colorFn={i=>colores[(i+2)%colores.length]}/>
+        </div>
+        {/* Por referencia */}
+        <div style={{...card({marginBottom:12})}}>
+          <div style={{fontSize:12,fontWeight:700,marginBottom:12}}>📌 Fallas por referencia</div>
+          <BarChart datos={topRefs} colorFn={i=>colores[(i+4)%colores.length]}/>
+        </div>
+        {/* Por síntoma */}
         <div style={card()}>
-          <div style={{fontSize:12,fontWeight:700,marginBottom:8}}>🕐 Últimas consultas</div>
-          {[...datos].reverse().slice(0,10).map((f,i)=>(<div key={i} style={{display:"flex",gap:9,padding:"7px 0",borderBottom:i<9?`1px solid ${C.border}`:"none",alignItems:"flex-start"}}><span style={{fontSize:14,flexShrink:0}}>{EQUIPOS.find(e=>e.tipo===f.equipo)?.icon||"🔧"}</span><div style={{flex:1,minWidth:0}}><div style={{fontSize:11,fontWeight:600}}>{f.marca} · {f.ref}</div><div style={{fontSize:10,color:C.muted,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{f.sintoma}</div></div><div style={{fontSize:9,color:C.light,flexShrink:0}}>{f.fecha?new Date(f.fecha).toLocaleDateString("es-CO",{day:"2-digit",month:"short"}):""}</div></div>))}
+          <div style={{fontSize:12,fontWeight:700,marginBottom:12}}>⚠️ Síntomas más frecuentes</div>
+          <BarChart datos={topSintomas} colorFn={i=>i===0?C.red:`${C.red}99`}/>
+        </div>
+      </>}
+
+      {/* ── REGISTROS ── */}
+      {vista==="registros"&&datos.length>0&&<>
+        {adminMode&&seleccionados.size>0&&(
+          <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:10,padding:"8px 12px",background:C.rl,borderRadius:8,border:`1px solid ${C.red}44`}}>
+            <span style={{fontSize:12,color:C.red,fontWeight:700}}>{seleccionados.size} seleccionado(s)</span>
+            <button onClick={borrarSeleccionados} style={{...btn("outline","sm"),color:C.red,borderColor:C.red,fontSize:11}}>🗑 Borrar</button>
+          </div>
+        )}
+        <div style={card()}>
+          {[...datos].reverse().map((f,i)=>(
+            <div key={i} onClick={()=>adminMode&&toggleSel(i)}
+              style={{display:"flex",gap:9,padding:"9px 0",borderBottom:i<datos.length-1?`1px solid ${C.border}`:"none",alignItems:"flex-start",cursor:adminMode?"pointer":"default",background:seleccionados.has(i)?"#fef2f2":"transparent",borderRadius:4,marginLeft:-4,paddingLeft:4}}>
+              {adminMode&&<div style={{width:16,height:16,borderRadius:4,border:`2px solid ${seleccionados.has(i)?C.red:C.border}`,background:seleccionados.has(i)?C.red:"transparent",flexShrink:0,marginTop:2,display:"flex",alignItems:"center",justifyContent:"center"}}>
+                {seleccionados.has(i)&&<span style={{color:"#fff",fontSize:9,fontWeight:900}}>✓</span>}
+              </div>}
+              <span style={{fontSize:14,flexShrink:0}}>{EQUIPOS.find(e=>e.tipo===f.equipo)?.icon||"🔧"}</span>
+              <div style={{flex:1,minWidth:0}}>
+                <div style={{fontSize:11,fontWeight:600}}>{f.equipo} · {f.marca} · {f.ref}</div>
+                <div style={{fontSize:10,color:C.muted,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{f.sintoma}</div>
+              </div>
+              <div style={{fontSize:9,color:C.light,flexShrink:0,textAlign:"right"}}>
+                {f.fecha?new Date(f.fecha).toLocaleDateString("es-CO",{day:"2-digit",month:"short"}):""}
+              </div>
+            </div>
+          ))}
         </div>
       </>}
     </div>
@@ -1167,7 +1314,7 @@ export default function App() {
         {tab==="planes"      && <PlanesTab/>}
         {tab==="limpieza"    && <LimpiezaTab/>}
         {tab==="repuestos"  && <RepuestosTab/>}
-        {tab==="stats"       && <StatsTab fallas={fallas}/>}
+        {tab==="stats"       && <StatsTab fallas={fallas} onBorrar={f=>{setFallas(f);saveF(f);}}/>}
         {tab==="guia"        && <GuiaTab/>}
 
         {/* Bottom Nav */}
