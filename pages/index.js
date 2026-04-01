@@ -1039,7 +1039,7 @@ function StatsTab({ fallas, onBorrar }) {
     <div style={{display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",height:"calc(100vh - 110px)",padding:16,textAlign:"center"}}>
       <div style={{fontSize:44,marginBottom:10}}>📊</div>
       <div style={{fontSize:15,fontWeight:700,marginBottom:5}}>Sin datos aún</div>
-      <div style={{fontSize:12,color:C.muted}}>Usa el CEM Bot para registrar fallas.</div>
+      <div style={{fontSize:12,color:C.muted}}>Usa el CEM Bot para registrar consultas.</div>
     </div>
   );
 
@@ -1092,22 +1092,22 @@ function StatsTab({ fallas, onBorrar }) {
       {vista==="graficas"&&datos.length>0&&<>
         {/* Por equipo */}
         <div style={{...card({marginBottom:12})}} >
-          <div style={{fontSize:12,fontWeight:700,marginBottom:12}}>🔥 Fallas por equipo</div>
+          <div style={{fontSize:12,fontWeight:700,marginBottom:12}}>🔥 Consultas por equipo</div>
           <BarChart datos={topEquipos} colorFn={colorFn}/>
         </div>
         {/* Por marca */}
         <div style={{...card({marginBottom:12})}}>
-          <div style={{fontSize:12,fontWeight:700,marginBottom:12}}>🏷️ Fallas por marca</div>
+          <div style={{fontSize:12,fontWeight:700,marginBottom:12}}>🏷️ Consultas por marca</div>
           <BarChart datos={topMarcas} colorFn={i=>colores[(i+2)%colores.length]}/>
         </div>
         {/* Por referencia */}
         <div style={{...card({marginBottom:12})}}>
-          <div style={{fontSize:12,fontWeight:700,marginBottom:12}}>📌 Fallas por referencia</div>
+          <div style={{fontSize:12,fontWeight:700,marginBottom:12}}>📌 Consultas por referencia</div>
           <BarChart datos={topRefs} colorFn={i=>colores[(i+4)%colores.length]}/>
         </div>
         {/* Por síntoma */}
         <div style={card()}>
-          <div style={{fontSize:12,fontWeight:700,marginBottom:12}}>⚠️ Síntomas más frecuentes</div>
+          <div style={{fontSize:12,fontWeight:700,marginBottom:12}}>⚠️ Consultas más frecuentes</div>
           <BarChart datos={topSintomas} colorFn={i=>i===0?C.red:`${C.red}99`}/>
         </div>
       </>}
