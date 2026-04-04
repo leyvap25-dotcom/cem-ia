@@ -484,8 +484,102 @@ const TutorialLinks = ({ tutoriales }) => {
   );
 };
 
+// ─── BASE DE CONTACTOS SERVICIO TÉCNICO COLOMBIA ─────────────────────────────
+const CONTACTOS_ST = {
+  Rational: {
+    oficial: [
+      { nombre:"Rational Colombia", tipo:"🏢 Oficial", tel:"+57 1 743 3837", ws:"https://wa.me/573173723134", web:"https://www.rational-online.co", ciudad:"Bogotá · Calle 104 #15-31", nota:"Distribuidor y servicio técnico oficial para toda Colombia" },
+    ],
+    especializados: [
+      { nombre:"Cleaning Mach — TécnicosRational.com", tipo:"🔧 Especializado", tel:"", ws:"https://tecnicosrational.com", web:"https://tecnicosrational.com", ciudad:"Bogotá · cobertura nacional", nota:"Diagnóstico sin costo si se hace la reparación. Repuestos originales." },
+    ],
+  },
+  Unox: {
+    oficial: [
+      { nombre:"Unox Colombia SAS", tipo:"🏢 Oficial", tel:"+57 1 751 1028", ws:"https://wa.me/5717511028", web:"https://exhibirequipos.com/servicio-tecnico/unox/", ciudad:"Bogotá · Cra 68H #78-95", nota:"Distribuidor directo Unox. Servicio inmediato en Bogotá, programado en el resto del país." },
+    ],
+    especializados: [
+      { nombre:"HAGAMOS — Gestión e Ingeniería", tipo:"🔧 Especializado", tel:"", ws:"https://hagamos.co/mantenimiento-hornos-unox-repuestos/", web:"https://hagamos.co", ciudad:"Bogotá · Cali · Valle del Cauca", nota:"Repuestos originales. ChefTop, BakerTop, Arianna, Arianna, Camilla." },
+      { nombre:"Exhibir Equipos Colombia", tipo:"🔧 Especializado", tel:"+57 1 751 1028", ws:"https://wa.me/5717511028", web:"https://exhibirequipos.com", ciudad:"Bogotá · área metropolitana", nota:"Técnicos capacitados por Unox Colombia." },
+    ],
+  },
+  Turbochef: {
+    oficial: [
+      { nombre:"Turbochef Technologies Colombia", tipo:"🏢 Oficial", tel:"", ws:"", web:"https://www.turbochef.com/service", ciudad:"Contacto vía web", nota:"Localizar servicio autorizado en Colombia desde el portal oficial." },
+    ],
+    especializados: [
+      { nombre:"Búsqueda servicio Turbochef Colombia", tipo:"🔍 Buscar", tel:"", ws:"", web:"", ciudad:"", nota:"Usar el buscador de Google para tu ciudad." },
+    ],
+  },
+  Bunn: {
+    oficial: [
+      { nombre:"Bunn Latinoamérica — Soporte", tipo:"🏢 Oficial", tel:"", ws:"", web:"https://www.bunn.com/support", ciudad:"Contacto vía web", nota:"Portal oficial de soporte y repuestos Bunn." },
+    ],
+    especializados: [
+      { nombre:"Búsqueda servicio Bunn Colombia", tipo:"🔍 Buscar", tel:"", ws:"", web:"", ciudad:"", nota:"Usar el buscador de Google para tu ciudad." },
+    ],
+  },
+};
+
+// Google search URLs por marca y ciudad
+const googleST = (marca, ciudad) => `https://www.google.com/search?q=servicio+tecnico+${encodeURIComponent(marca)}+Colombia+${encodeURIComponent(ciudad)}+certificado`;
+
+// Componente tarjeta de contacto
+function ContactCard({ marca, ciudad }) {
+  const data = CONTACTOS_ST[marca];
+  if (!data) return null;
+  const todos = [...(data.oficial||[]), ...(data.especializados||[])];
+  return (
+    <div style={{marginTop:8,background:"#f0fdf4",border:"1px solid #16a34a44",borderRadius:12,padding:"12px 13px"}}>
+      <div style={{fontSize:10,fontWeight:800,color:C.green,marginBottom:8}}>📍 SERVICIO TÉCNICO {marca.toUpperCase()} — {ciudad.toUpperCase()}</div>
+      {todos.map((c,i)=>(
+        <div key={i} style={{background:C.white,borderRadius:8,padding:"9px 11px",marginBottom:7,border:`1px solid ${C.border}`}}>
+          <div style={{display:"flex",alignItems:"center",gap:6,marginBottom:4}}>
+            <span style={{fontSize:11}}>{c.tipo}</span>
+            <span style={{fontSize:11,fontWeight:700,color:C.text,flex:1}}>{c.nombre}</span>
+          </div>
+          {c.ciudad && <div style={{fontSize:9,color:C.muted,marginBottom:4}}>📌 {c.ciudad}</div>}
+          {c.nota && <div style={{fontSize:9,color:C.muted,marginBottom:6,lineHeight:1.4}}>{c.nota}</div>}
+          <div style={{display:"flex",gap:6,flexWrap:"wrap"}}>
+            {c.tel && (
+              <a href={`tel:${c.tel.replace(/\s/g,"")}`}
+                style={{display:"flex",alignItems:"center",gap:4,background:C.gl,color:C.green,fontSize:10,fontWeight:700,padding:"4px 9px",borderRadius:6,textDecoration:"none"}}>
+                📞 {c.tel}
+              </a>
+            )}
+            {c.ws && (
+              <a href={c.ws} target="_blank" rel="noopener noreferrer"
+                style={{display:"flex",alignItems:"center",gap:4,background:"#dcfce7",color:"#15803d",fontSize:10,fontWeight:700,padding:"4px 9px",borderRadius:6,textDecoration:"none"}}>
+                💬 WhatsApp / Web
+              </a>
+            )}
+            {c.web && !c.ws && (
+              <a href={c.web} target="_blank" rel="noopener noreferrer"
+                style={{display:"flex",alignItems:"center",gap:4,background:C.al,color:C.accent,fontSize:10,fontWeight:700,padding:"4px 9px",borderRadius:6,textDecoration:"none"}}>
+                🌐 Ver web
+              </a>
+            )}
+          </div>
+        </div>
+      ))}
+      <a href={googleST(marca, ciudad)} target="_blank" rel="noopener noreferrer"
+        style={{display:"flex",alignItems:"center",gap:6,marginTop:4,padding:"8px 11px",background:"#fff7ed",border:"1px solid #fed7aa",borderRadius:8,textDecoration:"none"}}>
+        <span style={{fontSize:15}}>🔍</span>
+        <div>
+          <div style={{fontSize:11,fontWeight:700,color:"#c2410c"}}>Buscar más en Google</div>
+          <div style={{fontSize:9,color:C.muted}}>Servicio técnico {marca} certificado en {ciudad}</div>
+        </div>
+        <span style={{marginLeft:"auto",color:C.light,fontSize:12}}>›</span>
+      </a>
+    </div>
+  );
+}
+
+// ─── CIUDADES COLOMBIA (botones rápidos) ──────────────────────────────────────
+const CIUDADES_CO = ["Bogotá","Medellín","Cali","Barranquilla","Bucaramanga","Pereira","Manizales","Cartagena","Cúcuta","Ibagué","Pasto","Villavicencio","Santa Marta","Montería","Neiva"];
+
 // ══════════════════════════════════════════════════════════════════════════════
-// CHAT (técnico + operador)
+// CHAT
 // ══════════════════════════════════════════════════════════════════════════════
 const SALUDO_TECNICO = "¡Hola! Soy el asistente técnico del **CEM**.\n\nPuedes escribirme, usar los botones o hablarme con el micrófono. También puedes **adjuntar una imagen** de la falla con el botón 📷 para que la analice.\n\nSiempre indica el **equipo**, **marca** y **referencia** para un diagnóstico preciso.\n\n¿Con qué equipo necesitas ayuda hoy?";
 const SALUDO_OPERADOR = "¡Hola! Soy el asistente del **CEM**.\n\nSoy de fácil manejo — escríbeme o usa los botones para decirme qué está pasando con el equipo.\n\nPara problemas complejos o errores en pantalla, avisa a **mantenimiento**. 😊\n\n¿Con qué equipo tienes una inquietud?";
@@ -494,6 +588,7 @@ function ChatTab({ onFalla, modo="tecnico" }) {
   const [msgs, setMsgs] = useState([{ role:"bot", text:modo==="tecnico"?SALUDO_TECNICO:SALUDO_OPERADOR }]);
   const [step, setStep] = useState("tipo");
   const [sel, setSel] = useState({ tipo:null, marca:null, ref:null });
+  const [ubicacionMarca, setUbicacionMarca] = useState(null);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [speaking, setSpeaking] = useState(false);
@@ -570,6 +665,23 @@ Equipo: ${ctx?.tipo?.tipo||"?"} ${ctx?.marca?.nombre||""} ${ctx?.ref||""}
 ${esRational?"Rational SCC: 23/24=apagar ya; 32/33=cerrar gas+ventilar; 14=sin agua; 25=filtro agua; 29=filtro aire; 31=sonda; 47/48=bomba desagüe; 110/120=llamar técnico.":""}
 ${esUnox?"Unox: AF01=motor/capacitor; AF02=termostato 320°C; AF03=sonda 110Ω; AF04=comunicación placa; AF23=gas; WF16=agua EL1; WF06=placa caliente; WF41=red.":""}
 Si el mensaje incluye una imagen, analiza qué equipo es, qué marca, referencia visible, código de error en pantalla o daño físico visible.
+
+=== CONOCIMIENTO TÉCNICO AVANZADO — NOTAS DE CAPACITACIÓN CEM ===
+COMPONENTES POTENCIA: válvulas, bombas, motor/turbina/blower, resistencias, presóstato, contactores, transformadores, microswitch de puerta. Tarjetas: superior=potencia, inferior=control. Excepción: micros de puerta van en potencia pero alimentan software.
+BOMBAS: si hay voltaje y no bombea→bomba dañada. Sin voltaje→fusible o tarjeta. Cheque (check valve)=balín+resorte+empaque, si se cristaliza→agua retorna al tanque, quema fusible o bomba. Restrictor de caudal entre bomba y manifold es obligatorio. Bomba detergente trabaja a media onda: voltaje típico medido 115–140V AC. Consumo detergente: ciclo corto ~70cm³/rotor, largo ~330cm³/rotor; segundo rotor consume 50% adicional.
+VÁLVULAS Y VAPOR: humedad se genera pulverizando agua en centro de turbina. Válvula doble=2 solenoides, 2 caudales, modulación cada 10%. ChefPro/Compact=modulación cada 20%. Filtro agua es para línea de vapor (NO para lavado) — error frecuente: instalar filtro en detergente→saturación.
+MOTORES: desde ChefPro hacia arriba motor 220VAC con doble bobina para invertir giro. Sin capacitor (6.3µF)→motor no gira, se calienta, activa termostato→alarma AF01. Tacómetro: conectar en canal correcto (1 o 2). Blower≠turbina: blower=ventilación/combustión, turbina=agitación cámara.
+RESISTENCIAS FRENADO: divisor de voltaje para reducir velocidad. Velocidad máxima=sin resistencias; vel.3=mayor valor; vel.2=menor valor; vel.mínima=alta resistencia. NUNCA cambiar resistencia sin sellar empaque con silicona→entra humedad→explosión.
+RESISTENCIAS CALEFACCIÓN: solo hornos eléctricos, consumen alta corriente. Medir valor real en ohmios: I=V/R, P=V×I.
+SISTEMA GAS — COMPONENTES: blower (mezcla aire+gas), válvula gas (185–210V DC), transformador chispa (220V→25.000V), electrodos/chisperos, sensor llama (ionización), módulo gas (BRAMA). Corriente de llama: 4–15 µA DC, medir en serie con multímetro (NO con pinza). Si <4µA→alarma AF23/F23. Causas F23: mala tierra, sensor contaminado, mala presión gas, chispero mal posicionado, agua en blower. Distancia electrodo–sensor llama: ~4mm. Diagnóstico chispa: intercambiar cables de bujías en transformador→si falla se mueve=transformador; si falla queda=electrodo o cable. Empaque chisperos debe ser fibra alta temperatura (no improviso). Inyector GLP propano: va ENTRE válvula gas y blower (NO en entrada de válvula→error grave).
+PRESIÓN GAS: válvula opera 25–35mbar. Si >40mbar→se bloquea o daña. Caída máxima permitida 5mbar (estática 25→dinámica mínimo 20). Presión NO la regula el técnico. Caudal SÍ lo regula el técnico. Gas propano más denso→menor caudal para misma energía. Registrar siempre en checklist: tipo de gas + si se instaló inyector GLP.
+INSTALACIÓN: distancia mínima 5cm, fuente de calor al lado 45cm, parte trasera 70cm. Ajustar primero patas traseras. Anclar horno→evita doblar drenaje flexible. Lectura placa: sección1=familia+región+frecuencia, sección2=bandejas+formato GN, sección3=energía+pantalla+lado apertura. Garantía extendida 4 años requiere buena instalación certificada.
+SONDAS: multipunto 4 puntos+1 común (MIND.Maps), monopunto 1 punto central (Compact). Diagnosticar en TEBU comparando lecturas. Conexiones repetidas levantan pines→alarmas de sonda, puerta, tacómetro.
+DIAGNÓSTICO BLOWER: 1.revisar instalación/voltaje 2.revisar conexiones/humedad 3.revisar mecánica 4.medir 220VAC 5.desconectar control→debe ir a máxima velocidad; si va a máxima→problema señal control o tarjeta.
+ERRORES INSTALACIÓN ELÉCTRICA: mezclar fase con tierra, usar neutro como común del transformador, puentes incorrectos→motor no gira, no calienta, fallas blower, retornos de voltaje.
+TRANSFORMADORES: principal baja a 12V y 24V para control; módulo gas; chispa (25.000V); americanos 220↔110V.
+LÍNEAS UNOX: Iberio, LineMicro(tiempo+temp), ChefLux/BakerLux(manual), ChefPro, SpeedPro, SpeedCompact, ChefTop Compact/CounterTop, BakerTop, Serie5, LineMiss, ChefTop MIND.Maps, ChefX. ChefTop vs BakerTop: volumen/uniformidad panadería, técnicamente similares.
+
 Responde SIEMPRE así:
 Equipo detectado: [si hay imagen]
 Causa: [1 línea]
@@ -623,10 +735,21 @@ Llama a mantenimiento si: [condición clara]`;
       addMsg("bot", texto);
       hablar(texto);
 
-      // Buscar tutoriales relevantes
+      // Tutoriales relevantes
       const tuts = getTutoriales(ctx?.marca?.nombre||"", contenido||"");
       if (tuts.length > 0 && !esOperador) {
-        setTimeout(() => addMsg("bot", `📺 **Tutoriales relacionados:**\n${tuts.map(t=>`• [${t.titulo}](${t.url})`).join("\n")}`, { isTutorial:true }), 800);
+        setTimeout(() => addMsg("bot", `📺 **Tutoriales relacionados:**\n${tuts.map(t=>`• [${t.titulo}](${t.url})`).join("\n")}`, { isTutorial:true }), 600);
+      }
+
+      // Pregunta de ubicación para sugerir empresas certificadas (solo técnico, marcas soportadas)
+      const marcasSoportadas = ["Rational","Unox","Turbochef","Bunn"];
+      if (!esOperador && marcasSoportadas.includes(ctx?.marca?.nombre)) {
+        const marcaNombre = ctx?.marca?.nombre;
+        setTimeout(() => {
+          setUbicacionMarca(marcaNombre);
+          addMsg("bot", `📍 **¿En qué ciudad o departamento de Colombia está este equipo?**\nPuedo buscarte empresas de servicio técnico certificado cerca de ti.`, { isUbicacion:true });
+          setStep("ubicacion");
+        }, tuts.length > 0 ? 1200 : 700);
       }
     } catch(e) {
       addMsg("bot", "⚠️ No se pudo conectar. Verifica tu internet e intenta de nuevo.");
@@ -647,7 +770,21 @@ Llama a mantenimiento si: [condición clara]`;
     if (!registrado.current) { registrado.current=true; onFalla({ equipo:ctx.tipo?.tipo||"Sin especificar", marca:ctx.marca?.nombre||"Sin especificar", ref:ctx.ref||"Sin especificar", sintoma:s }); }
     callIA(s, ctx);
   };
+  const pickCiudad = (ciudad) => {
+    const marca = ubicacionMarca || sel?.marca?.nombre || "";
+    addMsg("user", `📍 ${ciudad}`);
+    setStep("chat");
+    addMsg("bot", `Aquí tienes los contactos de servicio técnico **${marca}** para tu zona:`, { isUbicacion:true });
+    addMsg("bot", `__CONTACTCARD__${marca}__${ciudad}__`, { isContactCard:true, marca, ciudad });
+  };
+
   const sendMsg = async () => {
+    // Si estamos en paso ubicacion, tratar el texto como ciudad
+    if (step === "ubicacion" && input.trim()) {
+      const ciudad = input.trim(); setInput("");
+      pickCiudad(ciudad);
+      return;
+    }
     if (!input.trim() && !imgData || loading) return;
     const txt = input.trim(); setInput(""); setStep("chat");
     if (imgData && !txt) {
@@ -671,6 +808,7 @@ Llama a mantenimiento si: [condición clara]`;
   };
   const reset = () => {
     setStep("tipo"); setSel({tipo:null,marca:null,ref:null}); registrado.current=false;
+    setUbicacionMarca(null);
     const ini=[{role:"bot",text:modo==="tecnico"?SALUDO_TECNICO:SALUDO_OPERADOR}]; setMsgs(ini); msgsRef.current=ini;
     setImgData(null);
   };
@@ -700,11 +838,15 @@ Llama a mantenimiento si: [condición clara]`;
       <div style={{flex:1,overflowY:"auto",padding:14,display:"flex",flexDirection:"column",gap:10}}>
         {msgs.map((m,i) => (
           <div key={i} style={{maxWidth:"85%",alignSelf:m.role==="bot"?"flex-start":"flex-end"}}>
-            {m.role==="bot" && <div style={{fontSize:10,color:C.light,marginBottom:2,fontWeight:600}}>CEM IA</div>}
-            <div style={{background:m.role==="bot"?C.white:C.accent,color:m.role==="bot"?C.text:"#fff",padding:"10px 13px",borderRadius:m.role==="bot"?"4px 14px 14px 14px":"14px 4px 14px 14px",fontSize:13,lineHeight:1.65,border:m.role==="bot"?`1px solid ${C.border}`:"none",boxShadow:"0 1px 3px rgba(0,0,0,0.06)"}}>
-              {m.hasImg && <div style={{fontSize:11,color:m.role==="bot"?C.muted:"rgba(255,255,255,0.8)",marginBottom:4}}>📷 Imagen adjunta</div>}
-              {renderText(m.text)}
-            </div>
+            {m.role==="bot" && !m.isContactCard && <div style={{fontSize:10,color:C.light,marginBottom:2,fontWeight:600}}>CEM IA</div>}
+            {m.isContactCard ? (
+              <ContactCard marca={m.marca} ciudad={m.ciudad} />
+            ) : (
+              <div style={{background:m.role==="bot"?C.white:C.accent,color:m.role==="bot"?C.text:"#fff",padding:"10px 13px",borderRadius:m.role==="bot"?"4px 14px 14px 14px":"14px 4px 14px 14px",fontSize:13,lineHeight:1.65,border:m.role==="bot"?`1px solid ${C.border}`:"none",boxShadow:"0 1px 3px rgba(0,0,0,0.06)"}}>
+                {m.hasImg && <div style={{fontSize:11,color:m.role==="bot"?C.muted:"rgba(255,255,255,0.8)",marginBottom:4}}>📷 Imagen adjunta</div>}
+                {renderText(m.text)}
+              </div>
+            )}
           </div>
         ))}
         {step==="tipo" && (
@@ -730,6 +872,23 @@ Llama a mantenimiento si: [condición clara]`;
         {step==="sintoma" && (
           <div style={{alignSelf:"flex-start",display:"flex",flexWrap:"wrap",gap:7}}>
             {sintomasActivos.map(s=><div key={s} onClick={()=>pickSintoma(s)} style={{...card({padding:"7px 13px",cursor:"pointer"}),fontSize:12}}>{s}</div>)}
+          </div>
+        )}
+        {step==="ubicacion" && (
+          <div style={{alignSelf:"flex-start",width:"100%"}}>
+            <div style={{fontSize:11,color:C.muted,marginBottom:8,fontWeight:600}}>Ciudades principales — o escribe la tuya:</div>
+            <div style={{display:"flex",flexWrap:"wrap",gap:6}}>
+              {CIUDADES_CO.map(c=>(
+                <div key={c} onClick={()=>pickCiudad(c)}
+                  style={{background:C.white,border:`1px solid ${C.border}`,borderRadius:20,padding:"5px 12px",cursor:"pointer",fontSize:11,fontWeight:600,color:C.text}}>
+                  📍 {c}
+                </div>
+              ))}
+              <div onClick={()=>setStep("chat")}
+                style={{background:C.bg,border:`1px solid ${C.border}`,borderRadius:20,padding:"5px 12px",cursor:"pointer",fontSize:11,color:C.muted}}>
+                Omitir
+              </div>
+            </div>
           </div>
         )}
         {loading && <div style={{alignSelf:"flex-start",...card({padding:"10px 14px"}),fontSize:13,color:C.accent}}>Analizando…</div>}
