@@ -565,14 +565,24 @@ const CIUDADES_CO = ["Bogotá","Medellín","Cali","Barranquilla","Bucaramanga","
 // ══════════════════════════════════════════════════════════════════════════════
 // CHAT
 // ══════════════════════════════════════════════════════════════════════════════
-const SALUDO_TECNICO = "¡Hola! Soy el asistente técnico del **CEM**. Escríbeme directamente con tu consulta 💬\n\nPuedes usar el micrófono 🎙️ o adjuntar una foto 📷 del equipo o la falla — la analizo automáticamente.\n\n**Dime:** equipo, marca, referencia y síntoma. O solo describe el problema y yo lo identifico.\n\nEjemplo: *\"El Unox XECC-0523 marca error AF01\"*";
-const SALUDO_OPERADOR = "¡Hola! Soy tu asistente de cocina 👋\n\nEscríbeme directamente qué está pasando con el equipo y te ayudo. Puedes también adjuntar una foto 📷.\n\nPara emergencias o errores en pantalla → llama a **mantenimiento** ya. 🚨";
+const SALUDO_TECNICO = "¡Hola! Soy el asistente técnico del **CEM**.\n\nPuedes escribirme, usar los botones o hablarme con el micrófono 🎙️. También puedes **adjuntar una imagen** 📷 del equipo o la falla para que la analice.\n\nSelecciona el **equipo** para comenzar el diagnóstico:";
+const SALUDO_OPERADOR = "¡Hola! Soy tu asistente de cocina del **CEM** 👋\n\nEscríbeme o usa los botones para contarme qué está pasando con el equipo.\n\nPara emergencias o errores en pantalla → llama a **mantenimiento** ya. 🚨\n\n¿Con qué equipo tienes una inquietud?";
 
 function ChatTab({ onFalla, modo="tecnico" }) {
   const [msgs, setMsgs] = useState([{ role:"bot", text:modo==="tecnico"?SALUDO_TECNICO:SALUDO_OPERADOR }]);
-  const [step, setStep] = useState("chat");
+  const [step, setStep] = useState("tipo");
   const [sel, setSel] = useState({ tipo:null, marca:null, ref:null });
   const [ubicacionMarca, setUbicacionMarca] = useState(null);
+
+  useEffect(() => {
+    // Leer el saludo en voz alta al entrar al chat
+    const saludoTxt = modo==="tecnico"
+      ? "Hola. Soy el asistente técnico del CEM. Selecciona el equipo, la marca y la referencia para darte el mejor diagnóstico."
+      : "Hola. Soy tu asistente de cocina. Cuéntame qué está pasando con el equipo y te ayudo.";
+    const timer = setTimeout(() => hablar(saludoTxt), 600);
+    return () => clearTimeout(timer);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [speaking, setSpeaking] = useState(false);
@@ -801,10 +811,11 @@ Llama a mantenimiento si: [condición clara]`;
     callIA(txt||"Analiza la imagen adjunta.", ctx, imgData);
   };
   const reset = () => {
-    setStep("chat"); setSel({tipo:null,marca:null,ref:null}); registrado.current=false;
+    setStep("tipo"); setSel({tipo:null,marca:null,ref:null}); registrado.current=false;
     setUbicacionMarca(null);
     const ini=[{role:"bot",text:modo==="tecnico"?SALUDO_TECNICO:SALUDO_OPERADOR}]; setMsgs(ini); msgsRef.current=ini;
     setImgData(null);
+    setTimeout(() => hablar(modo==="tecnico" ? "Nueva consulta. Selecciona el equipo." : "¿Con qué equipo necesitas ayuda?"), 300);
   };
 
   const renderText = (t) => {
