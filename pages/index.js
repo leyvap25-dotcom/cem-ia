@@ -254,7 +254,7 @@ const CONSEJOS_OP = [
     consejos:[
       "Cierra la puerta con suavidad — los golpes dañan el burlete y las bisagras.",
       "Limpia el burlete (caucho negro alrededor de la puerta) con paño húmedo todos los días.",
-      "Si ves que el burlete está despegado o roto, avisa a mantenimiento ese mismo día.",
+      "Si ves que el burlete está despegado o roto, contrata un técnico especializado certificado para ese equipo.",
       "No cuelgues trapos ni nada en la manija de la puerta.",
     ]
   },
@@ -283,7 +283,7 @@ const CONSEJOS_OP = [
       "Vacía el producto al cerrar si el equipo va a estar apagado más de 4 horas.",
       "Limpia el tambor con agua tibia y jabón neutro — enjuaga muy bien.",
       "Nunca mojes el compresor ni las zonas eléctricas.",
-      "Si el producto está muy líquido o muy sólido, avisa a mantenimiento.",
+      "Si el producto está muy líquido o muy sólido, contrata un técnico especializado certificado.",
     ]
   },
   {
@@ -291,12 +291,12 @@ const CONSEJOS_OP = [
     consejos:[
       "No dejes la puerta abierta más de 30 segundos — genera escarcha.",
       "No metas comida caliente — baja la temperatura del equipo.",
-      "Si hay mucho hielo acumulado, avisa a mantenimiento — no lo raspes con metal.",
+      "Si hay mucho hielo acumulado, contrata un técnico especializado — no raspes el hielo con metal.",
       "Limpia los derrames inmediatamente — generan olores y bacterias.",
     ]
   },
   {
-    icono:"🚨", titulo:"Cuando debes llamar a mantenimiento YA",
+    icono:"🚨", titulo:"Cuando debes contratar un técnico certificado YA",
     consejos:[
       "🔴 Hay humo, llamas o chispas dentro del equipo.",
       "🔴 Hay olor a gas o a quemado eléctrico.",
@@ -312,11 +312,11 @@ const LIMPIEZAS_DATA = {
   Horno:[
     {titulo:"Rational SCC/iCombi — Limpieza diaria (operador)",alerta:"⚠️ Usar guantes y delantal. NO limpiar con el horno caliente por encima de 75°C.",pasos:["Al finalizar la jornada, retirar TODAS las bandejas, parrillas y contenedores de la cámara.","Seleccionar el ciclo de limpieza CleanJet+Care desde el panel. Elegir nivel según suciedad: Nivel 1-2 para suciedad ligera, Nivel 3-4 para suciedad media, Nivel 5-6 para suciedad fuerte.","iCombi Pro: colocar pastilla verde (detergente) en el tamiz del piso. Colocar pastillas azules CareControl en el cajón CareControl.","SCC: colocar pastilla roja/plateada en el canasto del bafle. Colocar pastillas CareControl en el cajón.","Cerrar bien la puerta y pulsar Inicio. NO abrir durante el ciclo.","Al terminar: limpiar la bandeja recogegotas de la puerta con 1-2 litros de agua tibia.","Dejar la puerta entreabierta al final del día para ventilar y evitar malos olores.","⚠️ Si no se limpia a diario el residuo de grasa puede generar humo, mal sabor en alimentos y riesgo de incendio."],tutoriales:getTutoriales("Rational","limpieza")},
     {titulo:"Rational SCC/iCombi — Productos permitidos y prohibidos",alerta:"⚠️ Usar productos incorrectos daña el acero inox, el cristal y los burletes — puede anular la garantía.",pasos:["✅ SÍ usar: pastillas CleanJet originales Rational (verde iCombi / roja SCC), pastillas CareControl originales, agua tibia con paño suave para exteriores.","✅ SÍ usar: esponja suave o paño de microfibra para limpiar la puerta, el burlete y el panel de control.","❌ NUNCA usar: limpiadores con cloro o lejía — corroen el acero inox.","❌ NUNCA usar: productos con vinagre o ácidos — atacan el burlete de silicona.","❌ NUNCA usar: estropajos metálicos, virutas de acero, esponjas abrasivas — raspan y dañan el interior.","❌ NUNCA usar: desengrasantes industriales no aprobados Rational — pueden dejar residuos tóxicos en la cámara.","❌ NUNCA usar: manguera de agua a presión para limpiar el interior o el panel eléctrico.","❌ NUNCA limpiar el cristal de la puerta con químicos — disuelven los flejes de sujeción del vidrio."]},
-    {titulo:"Rational SCC/iCombi — Cuidado del burlete y cristal",alerta:"⚠️ Un burlete dañado genera pérdida de vapor, mayor consumo y posibles fallas.",pasos:["Después de cada carga: limpiar el burlete con un paño húmedo suave, por dentro y por fuera.","Revisar visualmente que el burlete no tenga grietas, rasgaduras ni partes despegadas.","Si el burlete tiene daños visibles, reportar al técnico de mantenimiento — NO continuar usando el horno si la puerta no sella bien.","Cristal exterior: limpiar solo con paño húmedo. Nunca usar químicos.","Cristal interior: abrir soltando los 2 clips de muelle (superior e inferior). Limpiar solo con paño suave y agua. Dejar enfriar antes de tocar.","Evitar golpear la puerta al cerrarla — el impacto repetido deteriora el burlete y las bisagras.","No colgar trapos ni utensilios en la manija de la puerta."],tutoriales:getTutoriales("Rational","burlete")},
+    {titulo:"Rational SCC/iCombi — Cuidado del burlete y cristal",alerta:"⚠️ Un burlete dañado genera pérdida de vapor, mayor consumo y posibles fallas.",pasos:["Después de cada carga: limpiar el burlete con un paño húmedo suave, por dentro y por fuera.","Revisar visualmente que el burlete no tenga grietas, rasgaduras ni partes despegadas.","Si el burlete tiene daños visibles, contratar un técnico certificado especializado — NO continuar usando el horno si la puerta no sella bien.","Cristal exterior: limpiar solo con paño húmedo. Nunca usar químicos.","Cristal interior: abrir soltando los 2 clips de muelle (superior e inferior). Limpiar solo con paño suave y agua. Dejar enfriar antes de tocar.","Evitar golpear la puerta al cerrarla — el impacto repetido deteriora el burlete y las bisagras.","No colgar trapos ni utensilios en la manija de la puerta."],tutoriales:getTutoriales("Rational","burlete")},
     {titulo:"Rational SCC/iCombi — Cambio de burlete (técnico) 🔧",alerta:"⚠️ Burlete SCC/iCombi tiene orificios en la parte INFERIOR y esquinas de 90°. Solo se necesitan manos y agua jabonosa.",pasos:["Apagar el horno y dejar enfriar completamente antes de empezar.","Retirar el burlete viejo: jalar desde una esquina y deslizarlo fuera de la ranura todo el contorno.","Limpiar la ranura con paño húmedo — retirar residuos de silicona o grasa acumulada.","Identificar la unión del burlete nuevo (el punto donde los dos extremos se unen). Esta unión va en la parte SUPERIOR centrada.","Los orificios del burlete deben quedar en la parte INFERIOR (parte baja de la puerta). Si los orificios quedan arriba — está al revés, girar.","Comenzar insertando el centro superior en la ranura. Luego ir hacia el centro inferior, después lado derecho y finalmente lado izquierdo.","Las esquinas son de 90 grados (no redondeadas): asegurarse que el burlete quede perfectamente recto en cada esquina, sin curvas ni arrugas.","Humedecer la ranura con agua jabonosa facilita la inserción — el burlete entra más fácil.","No cortar ni empalmar el burlete — debe ser continuo. Si sobra material, revisar que esté bien encajado.","Verificar el sello cerrando la puerta y pasando la mano alrededor: no debe salir calor ni vapor por ningún punto.","Codigos de repuesto: SCC 61=20.02.550P ($290.771), SCC 101=20.02.552P ($333.391), SCC 201=20.00.398P ($402.983), SCC 202=20.00.399P ($432.629)"],tutoriales:getTutoriales("Rational","burlete")},
     {titulo:"Unox ChefTop/BakerTop — Limpieza diaria (operador)",alerta:"⚠️ Retirar TODAS las bandejas antes del ciclo. No iniciar la limpieza con el horno lleno.",pasos:["Al finalizar la jornada, retirar TODAS las bandejas y rejillas de la cámara.","Verificar que el grifo de agua esté abierto.","Verificar que el tanque de detergente Det&Rinse esté lleno y bien instalado.","Seleccionar el ciclo de lavado desde el panel. Pulsar Inicio.","NO abrir la puerta durante el ciclo de lavado.","Al terminar: revisar que no queden residuos de producto en la cámara.","Dejar la puerta entreabierta al final del día para ventilar.","Limpiar la junta de puerta visualmente — si hay residuos, limpiar con paño húmedo."],tutoriales:getTutoriales("Unox","limpieza")},
     {titulo:"Unox ChefTop/BakerTop — Productos permitidos y prohibidos",alerta:"⚠️ El uso de productos no aprobados puede dañar los componentes y anular la garantía Unox.",pasos:["✅ SÍ usar: detergente líquido Det&Rinse Unox original en el tanque del equipo.","✅ SÍ usar: paño de microfibra húmedo para exteriores, burlete y panel.","✅ SÍ usar: agua tibia para enjuagar manualmente el interior si queda residuo.","❌ NUNCA usar: lejía, cloro ni productos clorados — corroen el acero inox de la cámara.","❌ NUNCA usar: vinagre ni productos ácidos — dañan los burletes de silicona.","❌ NUNCA usar: estropajos abrasivos ni lana de acero — raspan y dejan marcas permanentes.","❌ NUNCA usar: sprays desengrasantes de cocina directamente en la cámara — dejan residuos que contaminan alimentos.","❌ NUNCA limpiar con manguera a presión — el agua puede entrar a componentes eléctricos.","❌ NUNCA rellenar el tanque de Det&Rinse con detergente de otra marca sin aprobación Unox."]},
-    {titulo:"Unox ChefTop/BakerTop — Cuidado del burlete",alerta:"⚠️ El burlete del ChefTop/BakerTop NO tiene orificios — es totalmente sellado.",pasos:["Revisar el burlete visualmente al inicio y al final de cada jornada.","Limpiar con paño húmedo suave — nunca con productos químicos.","Verificar que el burlete esté completamente encajado en la ranura todo el contorno.","Si el burlete tiene grietas, está despegado o la puerta no cierra bien: reportar al técnico de mantenimiento.","No jalar el burlete innecesariamente — se puede salir de la ranura.","Evitar golpear la puerta. Cerrar siempre con suavidad."],tutoriales:getTutoriales("Unox","burlete")},
+    {titulo:"Unox ChefTop/BakerTop — Cuidado del burlete",alerta:"⚠️ El burlete del ChefTop/BakerTop NO tiene orificios — es totalmente sellado.",pasos:["Revisar el burlete visualmente al inicio y al final de cada jornada.","Limpiar con paño húmedo suave — nunca con productos químicos.","Verificar que el burlete esté completamente encajado en la ranura todo el contorno.","Si el burlete tiene grietas, está despegado o la puerta no cierra bien: contratar un técnico certificado especializado.","No jalar el burlete innecesariamente — se puede salir de la ranura.","Evitar golpear la puerta. Cerrar siempre con suavidad."],tutoriales:getTutoriales("Unox","burlete")},
     {titulo:"Unox ChefTop/BakerTop — Cambio de burlete (técnico) 🔧",alerta:"⚠️ Burlete ChefTop/BakerTop NO tiene orificios (sellado completo). Pestaña LARGA = lado vapor (alejada de cabina). Pestaña CORTA = lado calor (cerca de cabina).",pasos:["Apagar el horno y dejar enfriar completamente.","Retirar burlete viejo jalando desde una esquina — deslizar fuera de la ranura todo el contorno.","Limpiar la ranura con paño húmedo y retirar residuos.","Identificar la pestaña larga y la pestaña corta del burlete nuevo. La pestaña LARGA va alejada de la cabina (lado donde sale el vapor). La pestaña CORTA va cerca de la cabina (lado del calor). Si se instala al revés el burlete no sella correctamente.","Identificar la unión del burlete (punto donde se unen los dos extremos). Esta unión va en la parte SUPERIOR centrada en la guía.","Insertar la unión en el centro superior. Luego continuar hacia el centro inferior, después hacia el lado derecho y finalmente el lado izquierdo.","Insertar de a poco, del centro hacia las esquinas, presionando hacia adentro con el pulgar.","Las esquinas son REDONDEADAS en ChefTop/BakerTop: la línea del burlete debe coincidir exactamente con la línea guía de la ranura en cada curva.","El burlete no debe sobrar ni cortarse — si sobra, revisar que esté bien insertado en toda la ranura.","Verificar sello cerrando la puerta: sin fugas de vapor ni calor en ningún punto.","Código repuesto: XECC-0523 → KGN1656A ($256.500) · ChefTop 0511 → KGN1629A ($382.500) · 1011 → KGN1631A ($405.000)"],tutoriales:getTutoriales("Unox","burlete")},
     {titulo:"Unox Arianna — Cambio de burlete (técnico) 🔧",alerta:"⚠️ La Arianna tiene burlete CON DOS ORIFICIOS en la parte superior. La puerta cierra hacia ARRIBA. La unión del burlete va en el lado IZQUIERDO.",pasos:["Apagar el horno y dejar enfriar completamente. Recuerda que la puerta de la Arianna abre hacia abajo (cae hacia el frente).","Retirar burlete viejo jalando suavemente desde una esquina.","Limpiar la ranura con paño húmedo.","Identificar los DOS ORIFICIOS del burlete nuevo — estos orificios van en la parte SUPERIOR de la puerta (arriba). Si quedan abajo, el vapor no puede escapar correctamente.","Identificar la unión del burlete. En la Arianna, la unión va en el lado IZQUIERDO del horno, en la mitad de la guía lateral.","Comenzar insertando la unión en el centro del lado izquierdo. Luego ir hacia el centro del lado derecho, después hacia la parte superior y finalmente hacia la parte inferior.","Insertar de a poco del centro hacia las esquinas — las esquinas de la Arianna son redondeadas.","Pestaña LARGA = alejada de la cabina (lado vapor). Pestaña CORTA = cerca de la cabina (lado calor).","Verificar que los dos orificios queden libres y en la parte superior — no deben quedar tapados.","El burlete no debe sobrar ni cortarse.","Verificar sello cerrando la puerta hacia arriba: sin fugas en ningún punto del contorno.","Código repuesto: KGN1352A ($211.500) o KCR1112A para bisagra ($225.000)"],tutoriales:getTutoriales("Unox","burlete")},
     {titulo:"Unox Arianna — Limpieza diaria (operador)",alerta:"⚠️ Recuerda que la puerta de la Arianna cierra hacia ARRIBA, no hacia los lados.",pasos:["Al finalizar la jornada, retirar todas las bandejas y el cajón de grasas.","Limpiar el cajón recogegotas: retirarlo, vaciarlo y lavarlo con agua y jabón suave.","Limpiar el interior de la cámara con paño húmedo mientras aún está tibio (no caliente).","Limpiar el burlete con paño húmedo — tiene DOS ORIFICIOS en la parte superior, que no se deben tapar.","Limpiar el cristal exterior e interior con paño húmedo. No usar químicos.","Limpiar el exterior (acero inox) con paño húmedo siguiendo el pulido horizontal.","Verificar que la puerta cierre correctamente al terminar."]},
@@ -351,18 +351,18 @@ const ERRORES_UNOX = [
 
 const ERRORES_RATIONAL = [
   {code:"Service 23/24",nivel:"CRÍTICO",desc:"Error hardware. Apagar inmediatamente.",pasos:["Apagar con interruptor 0/I.","Llamar Service Rational Colombia.","No rearmar hasta instrucciones."]},
-  {code:"Service 26/27",nivel:"CRÍTICO",desc:"Falla CleanJet: válvula de esfera no encuentra posición. No es posible cocinar.",pasos:["Cancelar CleanJet en menú.","Retirar tabletas con guantes.","Verificar que la chapa deflectora y bastidores estén bien fijos — NO debe haber recipientes en la cámara.","Enjuagar con ducha de mano.","Llamar técnico si persiste."]},
-  {code:"Service 32/33",nivel:"PELIGRO",desc:"Fallo del quemador de gas. Cerrar gas inmediatamente.",pasos:["Cerrar llave del gas.","Ventilar el local.","No encender hasta que llegue el técnico de gas.","Llamar técnico certificado Rational."]},
+  {code:"Service 26/27",nivel:"CRÍTICO",desc:"Falla CleanJet: válvula de esfera no encuentra posición. No es posible cocinar.",pasos:["Cancelar CleanJet en menú.","Retirar tabletas con guantes.","Verificar que la chapa deflectora y bastidores estén bien fijos — NO debe haber recipientes en la cámara.","Enjuagar con ducha de mano.","Contratar técnico certificado si persiste."]},
+  {code:"Service 32/33",nivel:"PELIGRO",desc:"Fallo del quemador de gas. Cerrar gas inmediatamente.",pasos:["Cerrar llave del gas.","Ventilar el local.","No encender hasta que llegue un técnico certificado en gas.","Contratar técnico certificado Rational."]},
   {code:"Service 14",nivel:"LIMITADO",desc:"Solo Calor Seco disponible — problema con suministro de agua.",pasos:["Cancelar con Flecha.","Verificar grifo de agua abierto.","Verificar presión de agua: 1.5–3 bar, mín. 20 L/min.","Revisar filtros de acometida."]},
   {code:"Service 25",nivel:"FRECUENTE",desc:"CleanJet sin agua — iCareSystem no recibe la cantidad necesaria.",pasos:["Verificar grifo de agua abierto completamente.","Limpiar filtro de acometida de agua.","Verificar presión dinámica: mín. 1.5 bar.","Verificar conductividad mínima del agua: 50 µS (dureza mín. 5°dH)."]},
   {code:"Service 10/11/12",nivel:"MODERADO",desc:"Falla en generador de vapor fresco. El equipo puede seguir cocinando.",pasos:["Presionar Flecha para continuar.","Verificar suministro de agua.","Programar visita de servicio."]},
-  {code:"Service 20.1 / 20.8",nivel:"CRÍTICO",desc:"Falla sensor de temperatura — no es posible cocinar.",pasos:["Apagar el equipo.","Verificar conexiones de sonda térmica.","Llamar técnico Rational certificado."]},
-  {code:"Service 28.1 / 28.2 / 28.4",nivel:"CRÍTICO",desc:"Se sobrepasó límite de temperatura del generador de vapor o cámara.",pasos:["Apagar inmediatamente.","Dejar enfriar mínimo 30 minutos.","Verificar que el filtro de aire no esté obstruido.","Llamar técnico si persiste."]},
+  {code:"Service 20.1 / 20.8",nivel:"CRÍTICO",desc:"Falla sensor de temperatura — no es posible cocinar.",pasos:["Apagar el equipo.","Verificar conexiones de sonda térmica.","Contratar técnico certificado Rational."]},
+  {code:"Service 28.1 / 28.2 / 28.4",nivel:"CRÍTICO",desc:"Se sobrepasó límite de temperatura del generador de vapor o cámara.",pasos:["Apagar inmediatamente.","Dejar enfriar mínimo 30 minutos.","Verificar que el filtro de aire no esté obstruido.","Contratar técnico certificado si persiste."]},
   {code:"Service 29",nivel:"FRECUENTE",desc:"Temperatura de la placa demasiado elevada — filtro de aire sucio.",pasos:["Apagar y limpiar filtro de aire.","Revisar ventilación del local.","Verificar que haya espacio mínimo de 400mm entre escape y campana."]},
   {code:"Service 31.1 / 31.2",nivel:"COMÚN",desc:"Falla sonda térmica en cámara de cocción. Se puede cocinar pero no usar la sonda.",pasos:["Verificar inserción de la sonda.","Inspeccionar cable y conector.","Programar reemplazo con técnico."]},
   {code:"Service 41",nivel:"MODERADO",desc:"Boquilla o tubo de humidificación calcificados.",pasos:["Descalcificar la boquilla de humidificación.","Verificar calidad del agua — conductividad mín. 50 µS.","Programar mantenimiento."]},
-  {code:"Service 47/48",nivel:"MODERADO",desc:"Falla bomba de desagüe o circulación.",pasos:["Verificar que el desagüe no esté atascado.","Limpiar sifón/P-trap trasero.","Verificar pendiente mínima del tubo de desagüe.","Llamar técnico si persiste."]},
-  {code:"Service 110/120",nivel:"CRÍTICO",desc:"Error en bomba SC o detección de agua durante limpieza automática.",pasos:["Cancelar la limpieza en curso.","Verificar suministro de agua.","Llamar técnico Rational."]},
+  {code:"Service 47/48",nivel:"MODERADO",desc:"Falla bomba de desagüe o circulación.",pasos:["Verificar que el desagüe no esté atascado.","Limpiar sifón/P-trap trasero.","Verificar pendiente mínima del tubo de desagüe.","Contratar técnico certificado si persiste."]},
+  {code:"Service 110/120",nivel:"CRÍTICO",desc:"Error en bomba SC o detección de agua durante limpieza automática.",pasos:["Cancelar la limpieza en curso.","Verificar suministro de agua.","Contratar técnico certificado Rational."]},
 ];
 
 const NIVEL_C = {CRÍTICO:"red",PELIGRO:"red",LIMITADO:"blue",FRECUENTE:"yellow",SIMPLE:"green",COMÚN:"blue",MODERADO:"blue"};
@@ -566,7 +566,7 @@ const CIUDADES_CO = ["Bogotá","Medellín","Cali","Barranquilla","Bucaramanga","
 // CHAT
 // ══════════════════════════════════════════════════════════════════════════════
 const SALUDO_TECNICO = "¡Hola! Soy el asistente técnico del **CEM**.\n\nPuedes escribirme, usar los botones o hablarme con el micrófono 🎙️. También puedes **adjuntar una imagen** 📷 del equipo o la falla para que la analice.\n\nSelecciona el **equipo** para comenzar el diagnóstico:";
-const SALUDO_OPERADOR = "¡Hola! Soy tu asistente de cocina del **CEM** 👋\n\nEscríbeme o usa los botones para contarme qué está pasando con el equipo.\n\nPara emergencias o errores en pantalla → llama a **mantenimiento** ya. 🚨\n\n¿Con qué equipo tienes una inquietud?";
+const SALUDO_OPERADOR = "¡Hola! Soy tu asistente de cocina del **CEM** 👋\n\nEscríbeme o usa los botones para contarme qué está pasando con el equipo.\n\nPara emergencias o errores en pantalla → contrata un **técnico certificado** especializado en el equipo. 🚨\n\n¿Con qué equipo tienes una inquietud?";
 
 function ChatTab({ onFalla, modo="tecnico" }) {
   const [msgs, setMsgs] = useState([{ role:"bot", text:modo==="tecnico"?SALUDO_TECNICO:SALUDO_OPERADOR }]);
@@ -656,7 +656,7 @@ function ChatTab({ onFalla, modo="tecnico" }) {
 
     const systemTecnico = `Eres el asistente técnico del CEM. Responde en español colombiano técnico. Máximo 180 palabras.
 Equipo: ${ctx?.tipo?.tipo||"?"} ${ctx?.marca?.nombre||""} ${ctx?.ref||""}
-${esRational?"Rational SCC: 23/24=apagar ya; 32/33=cerrar gas+ventilar; 14=sin agua; 25=filtro agua; 29=filtro aire; 31=sonda; 47/48=bomba desagüe; 110/120=llamar técnico.":""}
+${esRational?"Rational SCC: 23/24=apagar ya; 32/33=cerrar gas+ventilar; 14=sin agua; 25=filtro agua; 29=filtro aire; 31=sonda; 47/48=bomba desagüe; 110/120=contratar técnico certificado.":""}
 ${esUnox?"Unox: AF01=motor/capacitor; AF02=termostato 320°C; AF03=sonda 110Ω; AF04=comunicación placa; AF23=gas; WF16=agua EL1; WF06=placa caliente; WF41=red.":""}
 Si el mensaje incluye una imagen, analiza qué equipo es, qué marca, referencia visible, código de error en pantalla o daño físico visible.
 
@@ -690,17 +690,17 @@ Responde SIEMPRE así:
 Equipo detectado: [si hay imagen]
 Causa: [1 línea]
 Pasos: 1. 2. 3. (máx 5 pasos con valores técnicos si aplica)
-Escalar: [cuándo llamar técnico]
+Escalar: [cuándo contratar técnico certificado especializado — NO llamar a mantenimiento interno sino a empresa certificada]
 Tip: [consejo — si aplica mencionar repuesto con código y precio en pesos colombianos]`;
 
     const systemOperador = `Eres el asistente de cocina del CEM. Responde en español sencillo para cocineros. Máximo 100 palabras. Sin términos técnicos complejos.
 Equipo: ${ctx?.tipo?.tipo||"?"} ${ctx?.marca?.nombre||""} ${ctx?.ref||""}
 Si hay imagen, describe qué ves y da un consejo simple.
-Reglas: Si el problema parece eléctrico, de gas, o hay errores en pantalla con números → SIEMPRE di "llama a mantenimiento ahora".
+Reglas: Si el problema parece eléctrico, de gas, o hay errores en pantalla con números → SIEMPRE di "contrata un técnico certificado especializado para este equipo".
 Responde así:
 ¿Qué pasa?: [1 línea simple]
 Puedes intentar: [1-2 pasos simples sin riesgo]
-Llama a mantenimiento si: [condición clara]`;
+Contrata técnico certificado si: [condición clara]`;
 
     try {
       const prevMsgs = msgsRef.current
@@ -965,7 +965,7 @@ function WelcomeScreen({ onSelect }) {
           style={{background:"#fff",borderRadius:16,padding:"20px 22px",cursor:"pointer",display:"flex",alignItems:"center",gap:14,boxShadow:"0 8px 32px rgba(0,0,0,0.2)"}}>
           <div style={{width:52,height:52,background:"#eff6ff",borderRadius:12,display:"flex",alignItems:"center",justifyContent:"center",fontSize:28,flexShrink:0}}>🔧</div>
           <div>
-            <div style={{fontSize:15,fontWeight:800,color:C.text,marginBottom:3}}>Técnico de mantenimiento</div>
+            <div style={{fontSize:15,fontWeight:800,color:C.text,marginBottom:3}}>Técnico especializado</div>
             <div style={{fontSize:11,color:C.muted,lineHeight:1.5}}>Diagnóstico, códigos de error, repuestos, planes PM, instalación</div>
           </div>
         </div>
@@ -1069,7 +1069,7 @@ function InicioOpTab({ onNav }) {
         </div>
       </div>
       <div style={{...card({background:"#fef2f2",border:`1px solid ${C.red}33`,padding:"14px 16px"})}}>
-        <div style={{fontSize:12,fontWeight:800,color:C.red,marginBottom:8}}>🚨 Llama a mantenimiento YA si:</div>
+        <div style={{fontSize:12,fontWeight:800,color:C.red,marginBottom:8}}>🚨 Contrata un técnico certificado si:</div>
         {["Hay humo, llamas o chispas","Hay olor a gas o quemado","Hay agua en el piso del equipo","Aparece un número de error en pantalla"].map((item,i)=>(
           <div key={i} style={{fontSize:12,color:C.text,padding:"3px 0",display:"flex",gap:6}}>
             <span style={{color:C.red}}>•</span> {item}
