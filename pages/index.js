@@ -948,38 +948,156 @@ Contrata técnico certificado si: [condición clara]`;
 // ══════════════════════════════════════════════════════════════════════════════
 // PANTALLA DE BIENVENIDA (selección de rol)
 // ══════════════════════════════════════════════════════════════════════════════
-function WelcomeScreen({ onSelect }) {
+// ─── TUTORIAL ESCRITO ────────────────────────────────────────────────────────
+const TUTORIAL_PASOS = [
+  { icono:"🏠", titulo:"Pantalla de inicio",
+    texto:"Al abrir la app verás dos opciones: Técnico especializado y Operador. Elige tu rol. Cada perfil muestra solo las herramientas que necesitas. Puedes cambiar de rol en cualquier momento con el botón en el encabezado." },
+  { icono:"🤖", titulo:"CEM Bot — Diagnóstico inteligente",
+    texto:"Toca CEM Bot y selecciona el equipo, la marca y la referencia. Luego elige el síntoma o escríbelo. El bot analiza la falla y te da causa, pasos de diagnóstico y valores técnicos de medición como voltajes, presiones y resistencias." },
+  { icono:"📷", titulo:"Diagnóstico por imagen",
+    texto:"Toca el botón de cámara en el chat y adjunta una foto del panel de error, del equipo o del daño. El bot identifica automáticamente el equipo, la marca y el problema sin que tengas que escribir nada." },
+  { icono:"🎙️", titulo:"Diagnóstico por voz",
+    texto:"Toca el micrófono y describe la falla en voz alta. El reconocimiento de voz transcribe lo que dices y el bot responde. También puedes activar el altavoz para que el bot lea la respuesta en voz alta." },
+  { icono:"🧹", titulo:"Guías de limpieza",
+    texto:"En Limpieza encontrarás protocolos paso a paso para Rational, Unox, Zanolli y Turbochef. Incluye productos permitidos, prohibidos, cuidado de burletes y procedimientos de cambio de empaque con códigos de repuesto." },
+  { icono:"📋", titulo:"Planes de mantenimiento preventivo",
+    texto:"En Planes PM selecciona el equipo y la referencia. Verás tareas organizadas por frecuencia: diario, semanal, mensual, trimestral, semestral y anual. Ideal para programar el mantenimiento antes de que ocurra la falla." },
+  { icono:"🔩", titulo:"Catálogo de repuestos con precios",
+    texto:"En Repuestos busca por nombre o código. Verás el precio en pesos colombianos sin IVA, el código oficial y la marca. Precios de cotización oficial Unox Colombia marzo 2026 y Rational Colombia abril 2025." },
+  { icono:"📍", titulo:"Técnicos certificados cerca de ti",
+    texto:"Después de cada diagnóstico el bot pregunta en qué ciudad está el equipo. Al responder, muestra contactos de empresas certificadas con teléfono, enlace web y un botón de búsqueda en Google para tu ciudad." },
+  { icono:"📊", titulo:"Estadísticas de fallas",
+    texto:"En Stats verás gráficas de fallas frecuentes por equipo, marca y referencia. Con PIN de administrador puedes ver el registro completo y eliminar entradas. Útil para priorizar el mantenimiento preventivo." },
+];
+
+function TutorialScreen({ onClose }) {
+  const [paso, setPaso] = useState(0);
+  const [leyendo, setLeyendo] = useState(false);
+  const p = TUTORIAL_PASOS[paso];
+
+  const leer = () => {
+    if (!window.speechSynthesis) return;
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(p.titulo + ". " + p.texto);
+    u.lang = "es-CO"; u.rate = 0.92; u.pitch = 0.85;
+    const go = () => {
+      const vs = speechSynthesis.getVoices();
+      const v = vs.find(v=>v.lang.startsWith("es")&&/jorge|diego|carlos/i.test(v.name))||vs.find(v=>v.lang.startsWith("es"));
+      if (v) u.voice = v;
+      u.onstart = () => setLeyendo(true);
+      u.onend = u.onerror = () => setLeyendo(false);
+      speechSynthesis.speak(u);
+    };
+    speechSynthesis.getVoices().length > 0 ? go() : (speechSynthesis.onvoiceschanged = go);
+  };
+  const detener = () => { speechSynthesis.cancel(); setLeyendo(false); };
+
   return (
-    <div style={{minHeight:"100vh",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:24,background:"linear-gradient(135deg,#1e3a5f 0%,#2563eb 50%,#1d4ed8 100%)"}}>
-      <div style={{marginBottom:20,position:"relative"}}>
-        <LogoCEM size={90}/>
-        <div style={{position:"absolute",top:-6,right:-10,background:"#e8432d",color:"#fff",fontSize:13,fontWeight:900,padding:"3px 9px",borderRadius:6,fontFamily:"Impact,sans-serif"}}>IA</div>
-      </div>
-      <div style={{textAlign:"center",marginBottom:32}}>
-        <div style={{fontSize:24,fontWeight:900,color:"#fff",marginBottom:6}}>CEM IA Assistant</div>
-        <div style={{fontSize:13,color:"rgba(255,255,255,0.75)"}}>Centro de Excelencia de Mantenimiento</div>
-      </div>
-      <div style={{fontSize:13,color:"rgba(255,255,255,0.9)",marginBottom:20,fontWeight:600}}>¿Quién eres hoy?</div>
-      <div style={{display:"flex",flexDirection:"column",gap:14,width:"100%",maxWidth:320}}>
-        <div onClick={()=>onSelect("tecnico")}
-          style={{background:"#fff",borderRadius:16,padding:"20px 22px",cursor:"pointer",display:"flex",alignItems:"center",gap:14,boxShadow:"0 8px 32px rgba(0,0,0,0.2)"}}>
-          <div style={{width:52,height:52,background:"#eff6ff",borderRadius:12,display:"flex",alignItems:"center",justifyContent:"center",fontSize:28,flexShrink:0}}>🔧</div>
+    <div style={{position:"fixed",inset:0,background:"rgba(15,23,42,0.88)",zIndex:200,display:"flex",alignItems:"center",justifyContent:"center",padding:20}}>
+      <div style={{background:"#fff",borderRadius:20,width:"100%",maxWidth:440,overflow:"hidden",boxShadow:"0 24px 64px rgba(0,0,0,0.4)"}}>
+        <div style={{background:"linear-gradient(135deg,#1e3a5f,#2563eb)",padding:"20px 20px 16px",display:"flex",alignItems:"center",justifyContent:"space-between"}}>
           <div>
-            <div style={{fontSize:15,fontWeight:800,color:C.text,marginBottom:3}}>Técnico especializado</div>
-            <div style={{fontSize:11,color:C.muted,lineHeight:1.5}}>Diagnóstico, códigos de error, repuestos, planes PM, instalación</div>
+            <div style={{fontSize:10,color:"rgba(255,255,255,0.55)",fontWeight:700,letterSpacing:1,marginBottom:3}}>TUTORIAL DE USO</div>
+            <div style={{fontSize:17,fontWeight:900,color:"#fff"}}>CEM IA Assistant</div>
+          </div>
+          <div onClick={()=>{detener();onClose();}} style={{width:32,height:32,borderRadius:8,background:"rgba(255,255,255,0.15)",display:"flex",alignItems:"center",justifyContent:"center",cursor:"pointer",color:"#fff",fontSize:18}}>✕</div>
+        </div>
+        <div style={{display:"flex",gap:5,padding:"14px 20px 0",justifyContent:"center"}}>
+          {TUTORIAL_PASOS.map((_,i)=>(
+            <div key={i} onClick={()=>{detener();setPaso(i);}}
+              style={{width:i===paso?22:8,height:8,borderRadius:4,background:i===paso?"#2563eb":i<paso?"#93c5fd":"#e4e8f0",cursor:"pointer",transition:"all 0.3s"}}/>
+          ))}
+        </div>
+        <div style={{padding:"20px 22px 16px"}}>
+          <div style={{display:"flex",alignItems:"center",gap:12,marginBottom:14}}>
+            <div style={{width:52,height:52,background:"#eff6ff",borderRadius:14,display:"flex",alignItems:"center",justifyContent:"center",fontSize:26,flexShrink:0}}>{p.icono}</div>
+            <div>
+              <div style={{fontSize:9,color:"#2563eb",fontWeight:800,letterSpacing:0.5,marginBottom:2}}>PASO {paso+1} DE {TUTORIAL_PASOS.length}</div>
+              <div style={{fontSize:15,fontWeight:800,color:"#111827"}}>{p.titulo}</div>
+            </div>
+          </div>
+          <div style={{fontSize:13,color:"#374151",lineHeight:1.75,background:"#f8fafc",borderRadius:10,padding:"14px 16px",borderLeft:"3px solid #2563eb"}}>
+            {p.texto}
           </div>
         </div>
-        <div onClick={()=>onSelect("operador")}
-          style={{background:"rgba(255,255,255,0.15)",borderRadius:16,padding:"20px 22px",cursor:"pointer",display:"flex",alignItems:"center",gap:14,border:"2px solid rgba(255,255,255,0.3)"}}>
-          <div style={{width:52,height:52,background:"rgba(255,255,255,0.2)",borderRadius:12,display:"flex",alignItems:"center",justifyContent:"center",fontSize:28,flexShrink:0}}>👨‍🍳</div>
-          <div>
-            <div style={{fontSize:15,fontWeight:800,color:"#fff",marginBottom:3}}>Operador / Cocinero</div>
-            <div style={{fontSize:11,color:"rgba(255,255,255,0.8)",lineHeight:1.5}}>Limpieza, consejos diarios y reporte de fallas simples</div>
-          </div>
+        <div style={{padding:"0 22px 20px",display:"flex",gap:8}}>
+          <button onClick={leyendo?detener:leer}
+            style={{display:"flex",alignItems:"center",gap:6,padding:"9px 14px",borderRadius:10,border:`1px solid ${leyendo?"#2563eb":"#e4e8f0"}`,background:leyendo?"#eff6ff":"#fff",cursor:"pointer",fontFamily:"inherit",fontSize:12,fontWeight:600,color:leyendo?"#2563eb":"#6b7280",flexShrink:0}}>
+            {leyendo?"⏹ Detener":"🔈 Leer"}
+          </button>
+          <button onClick={()=>{detener();setPaso(p=>Math.max(0,p-1));}} disabled={paso===0}
+            style={{padding:"9px 14px",borderRadius:10,border:"1px solid #e4e8f0",background:"#fff",cursor:paso===0?"default":"pointer",fontFamily:"inherit",fontSize:12,fontWeight:600,color:paso===0?"#d1d5db":"#374151",opacity:paso===0?0.5:1}}>
+            ← Ant.
+          </button>
+          {paso < TUTORIAL_PASOS.length-1 ? (
+            <button onClick={()=>{detener();setPaso(p=>p+1);}}
+              style={{flex:1,padding:"9px 14px",borderRadius:10,border:"none",background:"#2563eb",cursor:"pointer",fontFamily:"inherit",fontSize:12,fontWeight:700,color:"#fff"}}>
+              Siguiente →
+            </button>
+          ) : (
+            <button onClick={()=>{detener();onClose();}}
+              style={{flex:1,padding:"9px 14px",borderRadius:10,border:"none",background:"#16a34a",cursor:"pointer",fontFamily:"inherit",fontSize:12,fontWeight:700,color:"#fff"}}>
+              ✓ Empezar
+            </button>
+          )}
         </div>
       </div>
-      <div style={{marginTop:32,fontSize:10,color:"rgba(255,255,255,0.4)"}}>Rational · Unox · Zanolli · Turbochef · Bunn</div>
     </div>
+  );
+}
+
+function WelcomeScreen({ onSelect }) {
+  const [showTutorial, setShowTutorial] = useState(false);
+  return (
+    <>
+      {showTutorial && <TutorialScreen onClose={()=>setShowTutorial(false)}/>}
+      <div style={{minHeight:"100vh",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:"28px 22px",background:"#0f172a"}}>
+        <div style={{position:"fixed",inset:0,backgroundImage:"radial-gradient(circle at 25% 25%,#1e3a5f 0%,transparent 55%),radial-gradient(circle at 78% 75%,#1e40af 0%,transparent 55%)",opacity:0.7,pointerEvents:"none"}}/>
+        <div style={{position:"relative",width:"100%",maxWidth:360}}>
+          <div style={{textAlign:"center",marginBottom:28}}>
+            <div style={{position:"relative",display:"inline-block",marginBottom:14}}>
+              <div style={{width:84,height:84,background:"rgba(255,255,255,0.07)",borderRadius:22,display:"flex",alignItems:"center",justifyContent:"center",border:"1px solid rgba(255,255,255,0.1)"}}>
+                <LogoCEM size={62}/>
+              </div>
+              <div style={{position:"absolute",top:-6,right:-8,background:"#e8432d",color:"#fff",fontSize:10,fontWeight:900,padding:"3px 8px",borderRadius:6,fontFamily:"Impact,sans-serif"}}>IA</div>
+            </div>
+            <div style={{fontSize:22,fontWeight:900,color:"#fff",letterSpacing:-0.5,marginBottom:4}}>CEM IA Assistant</div>
+            <div style={{fontSize:12,color:"rgba(255,255,255,0.4)"}}>Centro de Excelencia de Mantenimiento</div>
+          </div>
+          <div style={{fontSize:10,color:"rgba(255,255,255,0.4)",fontWeight:700,letterSpacing:1,marginBottom:10,textAlign:"center"}}>SELECCIONA TU ROL</div>
+          <div style={{display:"flex",flexDirection:"column",gap:10,marginBottom:14}}>
+            <div onClick={()=>onSelect("tecnico")}
+              style={{background:"#fff",borderRadius:16,padding:"18px 20px",cursor:"pointer",display:"flex",alignItems:"center",gap:14,boxShadow:"0 4px 24px rgba(0,0,0,0.3)"}}>
+              <div style={{width:48,height:48,background:"#dbeafe",borderRadius:12,display:"flex",alignItems:"center",justifyContent:"center",fontSize:24,flexShrink:0}}>🔧</div>
+              <div style={{flex:1}}>
+                <div style={{fontSize:14,fontWeight:800,color:"#0f172a",marginBottom:2}}>Técnico especializado</div>
+                <div style={{fontSize:11,color:"#64748b",lineHeight:1.4}}>Diagnóstico, errores, repuestos, PM, instalación</div>
+              </div>
+              <div style={{fontSize:18,color:"#cbd5e1"}}>›</div>
+            </div>
+            <div onClick={()=>onSelect("operador")}
+              style={{background:"rgba(255,255,255,0.07)",borderRadius:16,padding:"18px 20px",cursor:"pointer",display:"flex",alignItems:"center",gap:14,border:"1px solid rgba(255,255,255,0.1)"}}>
+              <div style={{width:48,height:48,background:"rgba(255,255,255,0.1)",borderRadius:12,display:"flex",alignItems:"center",justifyContent:"center",fontSize:24,flexShrink:0}}>👨‍🍳</div>
+              <div style={{flex:1}}>
+                <div style={{fontSize:14,fontWeight:800,color:"#fff",marginBottom:2}}>Operador / Cocinero</div>
+                <div style={{fontSize:11,color:"rgba(255,255,255,0.5)",lineHeight:1.4}}>Limpieza, consejos y reporte de fallas</div>
+              </div>
+              <div style={{fontSize:18,color:"rgba(255,255,255,0.25)"}}>›</div>
+            </div>
+          </div>
+          <div onClick={()=>setShowTutorial(true)}
+            style={{display:"flex",alignItems:"center",gap:10,background:"rgba(255,255,255,0.05)",borderRadius:12,padding:"12px 16px",cursor:"pointer",border:"1px solid rgba(255,255,255,0.08)"}}>
+            <div style={{width:36,height:36,background:"linear-gradient(135deg,#f97316,#dc2626)",borderRadius:9,display:"flex",alignItems:"center",justifyContent:"center",fontSize:18,flexShrink:0}}>📖</div>
+            <div style={{flex:1}}>
+              <div style={{fontSize:12,fontWeight:700,color:"#fff",marginBottom:1}}>¿Primera vez aquí?</div>
+              <div style={{fontSize:10,color:"rgba(255,255,255,0.4)"}}>Tutorial de uso · 9 pasos con audio 🔈</div>
+            </div>
+            <div style={{fontSize:16,color:"rgba(255,255,255,0.25)"}}>›</div>
+          </div>
+          <div style={{textAlign:"center",marginTop:22,fontSize:10,color:"rgba(255,255,255,0.18)"}}>Rational · Unox · Zanolli · Turbochef · Bunn</div>
+        </div>
+      </div>
+    </>
   );
 }
 
@@ -987,52 +1105,79 @@ function WelcomeScreen({ onSelect }) {
 // INICIO TÉCNICO
 // ══════════════════════════════════════════════════════════════════════════════
 function InicioTab({ onNav }) {
+  const [showTutorial, setShowTutorial] = useState(false);
   const items = [
-    {id:"chat",icon:"🤖",color:C.accent,bg:C.al,titulo:"CEM Bot",desc:"Diagnóstico por texto, voz o imagen."},
-    {id:"planes",icon:"📋",color:C.green,bg:C.gl,titulo:"Planes PM",desc:"Tareas preventivas por equipo."},
-    {id:"instalacion",icon:"⚡",color:C.purple,bg:C.pl,titulo:"Instalación",desc:"Requisitos eléctricos e hidráulicos."},
-    {id:"limpieza",icon:"🧹",color:C.yellow,bg:C.yl,titulo:"Limpieza",desc:"Guías para operadores y técnicos."},
-    {id:"repuestos",icon:"🔩",color:"#b45309",bg:"#fffbeb",titulo:"Repuestos",desc:"Precios Unox y Rational Colombia."},
-    {id:"stats",icon:"📊",color:"#0891b2",bg:"#ecfeff",titulo:"Estadísticas",desc:"Registro de fallas con filtros."},
-    {id:"guia",icon:"📖",color:C.red,bg:C.rl,titulo:"Guía Técnica",desc:"Códigos de error por marca."},
+    {id:"chat",      icon:"🤖", color:"#2563eb", bg:"#dbeafe", titulo:"CEM Bot",        desc:"Diagnóstico por texto, voz e imagen."},
+    {id:"planes",    icon:"📋", color:"#16a34a", bg:"#dcfce7", titulo:"Planes PM",       desc:"Tareas preventivas por equipo."},
+    {id:"instalacion",icon:"⚡",color:"#7c3aed", bg:"#ede9fe", titulo:"Instalación",     desc:"Requisitos eléctricos, agua y gas."},
+    {id:"limpieza",  icon:"🧹", color:"#d97706", bg:"#fef3c7", titulo:"Limpieza",        desc:"Protocolos y cambio de burletes."},
+    {id:"repuestos", icon:"🔩", color:"#b45309", bg:"#fef9c3", titulo:"Repuestos",       desc:"Precios Unox y Rational Colombia."},
+    {id:"stats",     icon:"📊", color:"#0891b2", bg:"#cffafe", titulo:"Estadísticas",    desc:"Registro de fallas con gráficas."},
+    {id:"guia",      icon:"📖", color:"#dc2626", bg:"#fee2e2", titulo:"Guía Técnica",    desc:"Códigos de error por marca."},
   ];
   return (
-    <div style={{padding:20,overflowY:"auto",height:"calc(100vh - 110px)"}}>
-      <div style={{textAlign:"center",marginBottom:22,paddingTop:6}}>
-        <div style={{position:"relative",display:"inline-block",marginBottom:12}}>
-          <LogoCEM size={80}/>
-          <div style={{position:"absolute",top:-6,right:-10,background:"#e8432d",color:"#fff",fontSize:12,fontWeight:900,padding:"3px 8px",borderRadius:6,fontFamily:"Impact,sans-serif"}}>IA</div>
+    <>
+      {showTutorial && <TutorialScreen onClose={()=>setShowTutorial(false)}/>}
+      <div style={{overflowY:"auto",height:"calc(100vh - 110px)",background:"#f8fafc"}}>
+        <div style={{background:"linear-gradient(135deg,#1e3a5f,#2563eb)",padding:"20px 18px 16px",position:"relative",overflow:"hidden"}}>
+          <div style={{position:"absolute",right:-18,top:-18,width:110,height:110,borderRadius:"50%",background:"rgba(255,255,255,0.05)"}}/>
+          <div style={{display:"flex",alignItems:"center",gap:12,position:"relative"}}>
+            <div style={{width:50,height:50,background:"rgba(255,255,255,0.1)",borderRadius:13,display:"flex",alignItems:"center",justifyContent:"center",border:"1px solid rgba(255,255,255,0.12)",flexShrink:0}}>
+              <LogoCEM size={36}/>
+            </div>
+            <div>
+              <div style={{fontSize:17,fontWeight:900,color:"#fff"}}>CEM IA Assistant</div>
+              <div style={{fontSize:10,color:"rgba(255,255,255,0.5)",marginTop:1}}>🔧 Módulo técnico · v3.2</div>
+            </div>
+          </div>
+          <div style={{marginTop:12,display:"flex",gap:7}}>
+            <div style={{background:"rgba(255,255,255,0.12)",borderRadius:20,padding:"3px 10px",fontSize:10,color:"rgba(255,255,255,0.75)",fontWeight:600}}>✅ Bot activo</div>
+            <div style={{background:"rgba(255,255,255,0.12)",borderRadius:20,padding:"3px 10px",fontSize:10,color:"rgba(255,255,255,0.75)",fontWeight:600}}>🇨🇴 Colombia</div>
+          </div>
         </div>
-        <div style={{fontSize:21,fontWeight:900,marginBottom:5}}>CEM IA Assistant</div>
-        <div style={{fontSize:12,color:C.muted,lineHeight:1.6,maxWidth:300,margin:"0 auto"}}>Herramienta del <strong style={{color:C.text}}>Centro de Excelencia de Mantenimiento</strong></div>
-        <div style={{display:"inline-block",marginTop:10,background:C.gl,color:C.green,fontSize:11,fontWeight:700,padding:"4px 12px",borderRadius:20,border:`1px solid ${C.green}33`}}>🔧 Módulo técnico</div>
-      </div>
-      {items.map(s=>(
-        <div key={s.id} onClick={()=>onNav(s.id)} style={{...card({marginBottom:9,cursor:"pointer",display:"flex",gap:12,alignItems:"flex-start",padding:"12px 14px"})}}
-          onMouseOver={e=>e.currentTarget.style.borderColor=s.color} onMouseOut={e=>e.currentTarget.style.borderColor=C.border}>
-          <div style={{width:40,height:40,background:s.bg,borderRadius:9,display:"flex",alignItems:"center",justifyContent:"center",fontSize:20,flexShrink:0}}>{s.icon}</div>
-          <div style={{flex:1}}><div style={{fontSize:13,fontWeight:700,marginBottom:2}}>{s.titulo}</div><div style={{fontSize:11,color:C.muted,lineHeight:1.5}}>{s.desc}</div></div>
-          <div style={{color:C.light,fontSize:15,paddingTop:8}}>›</div>
+        <div style={{padding:"12px 14px 80px"}}>
+          <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:9,marginBottom:10}}>
+            <div onClick={()=>onNav("chat")}
+              style={{background:"linear-gradient(135deg,#1d4ed8,#2563eb)",borderRadius:14,padding:"15px 13px",cursor:"pointer",color:"#fff"}}>
+              <div style={{fontSize:22,marginBottom:5}}>🤖</div>
+              <div style={{fontSize:13,fontWeight:800,marginBottom:1}}>CEM Bot</div>
+              <div style={{fontSize:10,opacity:0.7}}>Diagnóstico IA</div>
+            </div>
+            <div onClick={()=>onNav("guia")}
+              style={{background:"linear-gradient(135deg,#b91c1c,#dc2626)",borderRadius:14,padding:"15px 13px",cursor:"pointer",color:"#fff"}}>
+              <div style={{fontSize:22,marginBottom:5}}>📖</div>
+              <div style={{fontSize:13,fontWeight:800,marginBottom:1}}>Guía Técnica</div>
+              <div style={{fontSize:10,opacity:0.7}}>Códigos de error</div>
+            </div>
+          </div>
+          <div style={{fontSize:10,fontWeight:800,color:"#94a3b8",letterSpacing:1,marginBottom:7,paddingLeft:1}}>HERRAMIENTAS</div>
+          {items.filter(s=>!["chat","guia"].includes(s.id)).map(s=>(
+            <div key={s.id} onClick={()=>onNav(s.id)}
+              style={{background:"#fff",borderRadius:12,marginBottom:7,padding:"11px 13px",cursor:"pointer",display:"flex",gap:11,alignItems:"center",border:"1px solid #f1f5f9"}}>
+              <div style={{width:36,height:36,background:s.bg,borderRadius:9,display:"flex",alignItems:"center",justifyContent:"center",fontSize:17,flexShrink:0}}>{s.icon}</div>
+              <div style={{flex:1}}>
+                <div style={{fontSize:13,fontWeight:700,color:"#0f172a",marginBottom:1}}>{s.titulo}</div>
+                <div style={{fontSize:10,color:"#64748b"}}>{s.desc}</div>
+              </div>
+              <div style={{fontSize:15,color:"#cbd5e1"}}>›</div>
+            </div>
+          ))}
+          <div onClick={()=>setShowTutorial(true)}
+            style={{background:"linear-gradient(135deg,#fffbeb,#fef9c3)",borderRadius:12,marginTop:3,padding:"13px 15px",cursor:"pointer",display:"flex",gap:11,alignItems:"center",border:"1px solid #fde68a"}}>
+            <div style={{width:36,height:36,background:"linear-gradient(135deg,#f97316,#dc2626)",borderRadius:9,display:"flex",alignItems:"center",justifyContent:"center",fontSize:19,flexShrink:0}}>📖</div>
+            <div style={{flex:1}}>
+              <div style={{fontSize:13,fontWeight:800,color:"#92400e",marginBottom:1}}>Tutorial de uso</div>
+              <div style={{fontSize:10,color:"#a16207"}}>9 pasos · texto + audio 🔈</div>
+            </div>
+            <div style={{fontSize:15,color:"#d97706"}}>›</div>
+          </div>
+          <div style={{textAlign:"center",paddingTop:14,borderTop:"1px solid #f1f5f9",marginTop:11,fontSize:10,color:"#d1d5db"}}>
+            Rational · Unox · Zanolli · Turbochef · Bunn<br/>
+            <span style={{fontSize:9}}>{process.env.NEXT_PUBLIC_BUILD_DATE?"v3.2 · "+new Date(process.env.NEXT_PUBLIC_BUILD_DATE).toLocaleDateString("es-CO",{day:"2-digit",month:"2-digit",year:"2-digit"}):"v3.2 · dev"}</span>
+          </div>
         </div>
-      ))}
-      {/* Tutorial video card */}
-      <div style={{...card({marginBottom:12,padding:"14px 16px",background:"#fef9c3",border:"1px solid #fde047",display:"flex",gap:12,alignItems:"center"})}}>
-        <div style={{width:48,height:48,background:"#dc2626",borderRadius:10,display:"flex",alignItems:"center",justifyContent:"center",fontSize:26,flexShrink:0}}>▶️</div>
-        <div style={{flex:1}}>
-          <div style={{fontSize:13,fontWeight:800,marginBottom:2}}>Tutorial de uso — CEM IA</div>
-          <div style={{fontSize:11,color:C.muted,marginBottom:6}}>Aprende a usar la app: diagnóstico, imágenes, limpieza, repuestos y más.</div>
-          <a href="https://www.youtube.com/results?search_query=CEM+IA+assistant+mantenimiento+hornos+tutorial"
-            target="_blank" rel="noopener noreferrer"
-            style={{display:"inline-flex",alignItems:"center",gap:5,background:"#dc2626",color:"white",fontSize:11,fontWeight:700,padding:"5px 12px",borderRadius:6,textDecoration:"none"}}>
-            ▶ Ver tutorial en YouTube
-          </a>
-        </div>
       </div>
-      <div style={{textAlign:"center",padding:"14px 0 6px",borderTop:`1px solid ${C.border}`,marginTop:6,fontSize:10,color:C.light}}>
-        Rational · Unox · Zanolli · Turbochef · Bunn<br/>
-        <span style={{fontSize:9}}>{process.env.NEXT_PUBLIC_BUILD_DATE ? "v3.2 · " + new Date(process.env.NEXT_PUBLIC_BUILD_DATE).toLocaleDateString("es-CO",{day:"2-digit",month:"2-digit",year:"2-digit"}) + " " + new Date(process.env.NEXT_PUBLIC_BUILD_DATE).toLocaleTimeString("es-CO",{hour:"2-digit",minute:"2-digit"}) : "v3.2 · dev"}</span>
-      </div>
-    </div>
+    </>
   );
 }
 
@@ -1040,43 +1185,64 @@ function InicioTab({ onNav }) {
 // INICIO OPERADOR
 // ══════════════════════════════════════════════════════════════════════════════
 function InicioOpTab({ onNav }) {
+  const [showTutorial, setShowTutorial] = useState(false);
   return (
-    <div style={{padding:20,overflowY:"auto",height:"calc(100vh - 110px)"}}>
-      <div style={{textAlign:"center",marginBottom:24}}>
-        <LogoCEM size={70}/>
-        <div style={{fontSize:20,fontWeight:900,marginTop:10,marginBottom:6}}>Hola 👋</div>
-        <div style={{fontSize:13,color:C.muted,lineHeight:1.6}}>Este es tu espacio de ayuda para el cuidado de los equipos de cocina.</div>
-      </div>
-      <div onClick={()=>onNav("chat_op")} style={{...card({marginBottom:14,cursor:"pointer",padding:"18px 16px",background:C.al,border:`1px solid ${C.accent}33`,display:"flex",gap:12,alignItems:"center"})}}>
-        <div style={{width:48,height:48,background:C.accent,borderRadius:12,display:"flex",alignItems:"center",justifyContent:"center",fontSize:24,flexShrink:0}}>💬</div>
-        <div>
-          <div style={{fontSize:15,fontWeight:800,marginBottom:3}}>¿Hay algo raro con el equipo?</div>
-          <div style={{fontSize:12,color:C.muted}}>Cuéntame qué está pasando y te ayudo o te digo a quién llamar.</div>
-        </div>
-      </div>
-      <div onClick={()=>onNav("limpieza")} style={{...card({marginBottom:14,cursor:"pointer",padding:"18px 16px",display:"flex",gap:12,alignItems:"center"})}}>
-        <div style={{width:48,height:48,background:C.yl,borderRadius:12,display:"flex",alignItems:"center",justifyContent:"center",fontSize:24,flexShrink:0}}>🧹</div>
-        <div>
-          <div style={{fontSize:15,fontWeight:800,marginBottom:3}}>Guías de limpieza</div>
-          <div style={{fontSize:12,color:C.muted}}>Paso a paso cómo limpiar hornos, cafeteras y más.</div>
-        </div>
-      </div>
-      <div onClick={()=>onNav("consejos")} style={{...card({marginBottom:14,cursor:"pointer",padding:"18px 16px",display:"flex",gap:12,alignItems:"center"})}}>
-        <div style={{width:48,height:48,background:C.gl,borderRadius:12,display:"flex",alignItems:"center",justifyContent:"center",fontSize:24,flexShrink:0}}>💡</div>
-        <div>
-          <div style={{fontSize:15,fontWeight:800,marginBottom:3}}>Consejos diarios</div>
-          <div style={{fontSize:12,color:C.muted}}>Qué hacer y qué no hacer para cuidar el equipo.</div>
-        </div>
-      </div>
-      <div style={{...card({background:"#fef2f2",border:`1px solid ${C.red}33`,padding:"14px 16px"})}}>
-        <div style={{fontSize:12,fontWeight:800,color:C.red,marginBottom:8}}>🚨 Contrata un técnico certificado si:</div>
-        {["Hay humo, llamas o chispas","Hay olor a gas o quemado","Hay agua en el piso del equipo","Aparece un número de error en pantalla"].map((item,i)=>(
-          <div key={i} style={{fontSize:12,color:C.text,padding:"3px 0",display:"flex",gap:6}}>
-            <span style={{color:C.red}}>•</span> {item}
+    <>
+      {showTutorial && <TutorialScreen onClose={()=>setShowTutorial(false)}/>}
+      <div style={{overflowY:"auto",height:"calc(100vh - 110px)",background:"#f8fafc"}}>
+        <div style={{background:"linear-gradient(135deg,#064e3b,#059669)",padding:"20px 18px 16px",position:"relative",overflow:"hidden"}}>
+          <div style={{position:"absolute",right:-18,top:-18,width:100,height:100,borderRadius:"50%",background:"rgba(255,255,255,0.05)"}}/>
+          <div style={{fontSize:20,fontWeight:900,color:"#fff",marginBottom:3,position:"relative"}}>Hola 👋</div>
+          <div style={{fontSize:11,color:"rgba(255,255,255,0.55)",position:"relative"}}>Asistente de cocina · CEM</div>
+          <div style={{marginTop:11,background:"rgba(0,0,0,0.15)",borderRadius:10,padding:"10px 13px",position:"relative"}}>
+            <div style={{fontSize:11,color:"rgba(255,255,255,0.9)",lineHeight:1.6}}>
+              🚨 Humo · olor a gas · chispas · número de error → <strong style={{color:"#fde68a"}}>contrata técnico certificado ya</strong>
+            </div>
           </div>
-        ))}
+        </div>
+        <div style={{padding:"12px 14px 80px"}}>
+          <div onClick={()=>onNav("chat_op")}
+            style={{background:"linear-gradient(135deg,#1d4ed8,#2563eb)",borderRadius:14,padding:"16px 16px",cursor:"pointer",display:"flex",gap:13,alignItems:"center",marginBottom:9,boxShadow:"0 4px 14px rgba(37,99,235,0.25)"}}>
+            <div style={{width:48,height:48,background:"rgba(255,255,255,0.15)",borderRadius:12,display:"flex",alignItems:"center",justifyContent:"center",fontSize:24,flexShrink:0}}>💬</div>
+            <div>
+              <div style={{fontSize:14,fontWeight:800,color:"#fff",marginBottom:2}}>¿Algo raro con el equipo?</div>
+              <div style={{fontSize:11,color:"rgba(255,255,255,0.7)"}}>Cuéntame y te ayudo o te digo si necesitas especialista</div>
+            </div>
+          </div>
+          <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:9,marginBottom:9}}>
+            <div onClick={()=>onNav("limpieza")}
+              style={{background:"#fff",borderRadius:13,padding:"15px 13px",cursor:"pointer",border:"1px solid #f1f5f9"}}>
+              <div style={{fontSize:24,marginBottom:5}}>🧹</div>
+              <div style={{fontSize:13,fontWeight:700,color:"#0f172a",marginBottom:1}}>Limpieza</div>
+              <div style={{fontSize:10,color:"#64748b"}}>Paso a paso</div>
+            </div>
+            <div onClick={()=>onNav("consejos")}
+              style={{background:"#fff",borderRadius:13,padding:"15px 13px",cursor:"pointer",border:"1px solid #f1f5f9"}}>
+              <div style={{fontSize:24,marginBottom:5}}>💡</div>
+              <div style={{fontSize:13,fontWeight:700,color:"#0f172a",marginBottom:1}}>Consejos</div>
+              <div style={{fontSize:10,color:"#64748b"}}>Qué sí y qué no</div>
+            </div>
+          </div>
+          <div onClick={()=>setShowTutorial(true)}
+            style={{background:"linear-gradient(135deg,#fffbeb,#fef9c3)",borderRadius:12,padding:"13px 15px",cursor:"pointer",display:"flex",gap:11,alignItems:"center",border:"1px solid #fde68a",marginBottom:9}}>
+            <div style={{width:36,height:36,background:"linear-gradient(135deg,#f97316,#dc2626)",borderRadius:9,display:"flex",alignItems:"center",justifyContent:"center",fontSize:19,flexShrink:0}}>📖</div>
+            <div style={{flex:1}}>
+              <div style={{fontSize:13,fontWeight:800,color:"#92400e",marginBottom:1}}>Tutorial de uso</div>
+              <div style={{fontSize:10,color:"#a16207"}}>9 pasos · texto + audio 🔈</div>
+            </div>
+            <div style={{fontSize:15,color:"#d97706"}}>›</div>
+          </div>
+          <div style={{background:"#fff",borderRadius:12,padding:"13px 15px",border:"1px solid #fecaca"}}>
+            <div style={{fontSize:11,fontWeight:800,color:"#dc2626",marginBottom:7}}>🚨 Contrata técnico certificado si:</div>
+            {["Hay humo, llamas o chispas dentro del equipo","Hay olor a gas o a quemado eléctrico","El equipo hace un ruido muy fuerte o inusual","Aparece un número de error en la pantalla","Hay agua en el piso alrededor del equipo"].map((item,i)=>(
+              <div key={i} style={{fontSize:11,color:"#374151",padding:"2px 0",display:"flex",gap:6}}>
+                <span style={{color:"#dc2626",flexShrink:0}}>•</span>{item}
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
