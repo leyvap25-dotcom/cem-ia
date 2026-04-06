@@ -485,47 +485,80 @@ const TutorialLinks = ({ tutoriales }) => {
 const CONTACTOS_ST = {
   Rational: {
     oficial: [
-      { nombre:"Rational Colombia", tipo:"🏢 Oficial", tel:"+57 1 743 3837", ws:"https://wa.me/573173723134", web:"https://www.rational-online.co", ciudad:"Bogotá · Calle 104 #15-31", nota:"Distribuidor y servicio técnico oficial para toda Colombia." },
+      { nombre:"Rational Colombia", tipo:"🏢 Oficial", tel:"+57 1 743 3837", ws:"https://wa.me/573173723134", web:"https://www.rational-online.co", ciudad:"Bogotá", nota:"Distribuidor y servicio técnico oficial para toda Colombia." },
     ],
     especializados: [
-      { nombre:"Euromex Equipos Industriales", tipo:"🔧 Certificado", tel:"+57 1 226 4242", ws:"https://wa.me/573142264242", web:"https://euromex.com.co", ciudad:"Bogotá · cobertura nacional", nota:"Técnicos certificados en equipos de cocina industrial. Repuestos originales." },
-      { nombre:"Cleaning Mach — TécnicosRational.com", tipo:"🔧 Certificado", tel:"", ws:"https://tecnicosrational.com", web:"https://tecnicosrational.com", ciudad:"Bogotá · cobertura nacional", nota:"Diagnóstico sin costo si se hace la reparación. Repuestos originales Rational." },
-      { nombre:"Induservis Colombia", tipo:"🔧 Certificado", tel:"+57 1 285 0300", ws:"https://wa.me/573102850300", web:"https://induservis.com.co", ciudad:"Bogotá · Medellín · Cali", nota:"Mantenimiento preventivo y correctivo de equipos de cocina industrial." },
+      // Bogotá / Cundinamarca
+      { nombre:"Influmax SAS — Bogotá", tipo:"🔧 Certificado", tel:"322 248 7631", ws:"https://wa.me/573222487631", web:"", ciudad:"Bogotá", nota:"Contacto: Guillermo Blanco · influmaxsas.bogota@gmail.com" },
+      { nombre:"Tecnobread SAS", tipo:"🔧 Certificado", tel:"302 442 2378", ws:"https://wa.me/573024422378", web:"", ciudad:"Bogotá", nota:"Contacto: Bibiana Carrillo · serviciotecnico@tecnobread.com" },
+      { nombre:"AD Soluciones & Mantenimiento", tipo:"🔧 Certificado", tel:"317 738 6263", ws:"https://wa.me/573177386263", web:"", ciudad:"Bogotá", nota:"Contacto: Alejandro Alvarado · alejandro.alvarado@adsolucionesymantenimiento.com" },
+      { nombre:"MDB Ingenieria SAS", tipo:"🔧 Certificado", tel:"314 272 4285", ws:"https://wa.me/573142724285", web:"", ciudad:"Bogotá", nota:"Contacto: Mairon Barreto · mdb.ingenieria.director@gmail.com" },
+      // Medellín / Antioquia
+      { nombre:"Industrial Kitchen SAS", tipo:"🔧 Certificado", tel:"301 471 1328", ws:"https://wa.me/573014711328", web:"", ciudad:"Medellín", nota:"Contacto: Santiago Ramírez · servicio@indukitchen.com" },
+      { nombre:"Soluciones Tesla SAS", tipo:"🔧 Certificado", tel:"310 656 2315", ws:"https://wa.me/573106562315", web:"", ciudad:"Medellín", nota:"Contacto: Juan Esteban Muñoz · juan.teslasas@gmail.com" },
+      // Cali / Valle
+      { nombre:"Tecnología en Equipos Alimenticios (TEESA)", tipo:"🔧 Certificado", tel:"316 243 2974", ws:"https://wa.me/573162432974", web:"", ciudad:"Cali", nota:"Contacto: Víctor Puertas · proyectos.teesa@gmail.com" },
+      { nombre:"Refrigerar Ingeniería SAS — Cali", tipo:"🔧 Certificado", tel:"317 525 7545", ws:"https://wa.me/573175257545", web:"", ciudad:"Cali", nota:"Contacto: Yeison Muñoz · coordinador2@refrigerar.com.co" },
+      // Barranquilla / Costa
+      { nombre:"Soluciones Integrales de Ingeniería", tipo:"🔧 Certificado", tel:"321 539 7970", ws:"https://wa.me/573215397970", web:"", ciudad:"Barranquilla", nota:"Contacto: Juan Carlos Torres · siimsas2013@gmail.com" },
+      { nombre:"Soluctem SAS — Barranquilla", tipo:"🔧 Certificado", tel:"318 683 5306", ws:"https://wa.me/573186835306", web:"", ciudad:"Barranquilla", nota:"Contacto: Lina Bahoz · coordinadorz2@soluctem.com" },
+      { nombre:"Refrigerar Ingeniería SAS — Barranquilla", tipo:"🔧 Certificado", tel:"316 706 9646", ws:"https://wa.me/573167069646", web:"", ciudad:"Barranquilla", nota:"Contacto: Luis Paternina · coordinador1@refrigerar.com.co" },
+      // Bucaramanga / Santander
+      { nombre:"Influmax SAS — Bucaramanga", tipo:"🔧 Certificado", tel:"315 452 1263", ws:"https://wa.me/573154521263", web:"", ciudad:"Bucaramanga", nota:"Contacto: Maycol Soledad · influmaxsas.bucaramanga@gmail.com" },
+      // Eje Cafetero / Dosquebradas
+      { nombre:"Soluctem SAS — Dosquebradas", tipo:"🔧 Certificado", tel:"316 656 1910", ws:"https://wa.me/573166561910", web:"", ciudad:"Dosquebradas", nota:"Contacto: Vannessa Londoño · coordinadortecnico@soluctem.com" },
+      { nombre:"Refrigerar Ingeniería SAS — Dosquebradas", tipo:"🔧 Certificado", tel:"316 875 3712", ws:"https://wa.me/573168753712", web:"", ciudad:"Dosquebradas", nota:"Contacto: Vanesa Ituyan · auxiliar1ccr@refrigerar.com.co" },
+      { nombre:"Dacara Colombia", tipo:"🔧 Certificado", tel:"318 291 1825", ws:"https://wa.me/573182911825", web:"", ciudad:"Dosquebradas", nota:"Contacto: Anggy Ramírez · servicios@dacara.co" },
+      // Costa / Montería
+      { nombre:"Refriwilliam SAS", tipo:"🔧 Certificado", tel:"316 443 0197", ws:"https://wa.me/573164430197", web:"", ciudad:"Montería", nota:"Contacto: William Barbosa · dir.operaciones@refriwilliams.com" },
     ],
   },
   Unox: {
     oficial: [
-      { nombre:"Exhibir Equipos Colombia — Servicio Unox", tipo:"🏢 Oficial", tel:"+57 1 751 1028", ws:"https://wa.me/5717511028", web:"https://exhibirequipos.com/servicio-tecnico/unox/", ciudad:"Bogotá · Cra 68H #78-95", nota:"Distribuidor directo Unox. Servicio inmediato en Bogotá, programado en el resto del país." },
+      { nombre:"Exhibir Equipos Colombia", tipo:"🏢 Oficial", tel:"+57 1 751 1028", ws:"https://wa.me/5717511028", web:"https://exhibirequipos.com/servicio-tecnico/unox/", ciudad:"Bogotá", nota:"Distribuidor directo Unox. Servicio inmediato Bogotá." },
     ],
     especializados: [
-      { nombre:"Euromex Equipos Industriales", tipo:"🔧 Certificado", tel:"+57 1 226 4242", ws:"https://wa.me/573142264242", web:"https://euromex.com.co", ciudad:"Bogotá · cobertura nacional", nota:"Técnicos certificados ChefTop, BakerTop, Arianna. Repuestos originales." },
-      { nombre:"HAGAMOS — Gestión e Ingeniería", tipo:"🔧 Certificado", tel:"+57 315 000 0000", ws:"https://hagamos.co", web:"https://hagamos.co/mantenimiento-hornos-unox-repuestos/", ciudad:"Bogotá · Cali · Valle del Cauca", nota:"Especialistas en ChefTop, BakerTop, Arianna y Camilla. Repuestos originales." },
-      { nombre:"Induservis Colombia", tipo:"🔧 Certificado", tel:"+57 1 285 0300", ws:"https://wa.me/573102850300", web:"https://induservis.com.co", ciudad:"Bogotá · Medellín · Cali", nota:"Mantenimiento preventivo y correctivo de hornos Unox." },
+      // Bogotá / Cundinamarca — PLATINUM
+      { nombre:"Crutek", tipo:"🏆 PLATINUM", tel:"310 476 2771", ws:"https://wa.me/573104762771", web:"", ciudad:"Bogotá", nota:"Contacto: Carlos Rodriguez · gerente@crutek.co / Rubén Bautista · ruben.morales@crutek.co · 315 727 2636" },
+      { nombre:"Industrial Technical Service (INTECSE)", tipo:"🏆 PLATINUM", tel:"321 494 7580", ws:"https://wa.me/573214947580", web:"", ciudad:"Bogotá", nota:"Contacto: Edison Nieto · gerencia@intecsecolombia.com / Richard Herreño · 320 809 0136" },
+      { nombre:"Tecnobread", tipo:"🥇 GOLD", tel:"317 365 6619", ws:"https://wa.me/573173656619", web:"", ciudad:"Bogotá", nota:"Contacto: Katerinne Campos · mantenimiento@tecnobread.com / Harold Gomez · 317 365 6624" },
+      { nombre:"MDB Ingenieria", tipo:"🥈 SILVER", tel:"314 272 4285", ws:"https://wa.me/573142724285", web:"", ciudad:"Bogotá", nota:"Contacto: Mairon Barreto · maironbarreto@gmail.com" },
+      // Bucaramanga / Santanderes — PLATINUM
+      { nombre:"Influmax", tipo:"🏆 PLATINUM", tel:"316 820 0182", ws:"https://wa.me/573168200182", web:"", ciudad:"Bucaramanga", nota:"Contacto: Omar Fernando Gomez · influmaxsas@gmail.com · Calle 113 22-104 Provenza, Bucaramanga" },
+      // Manizales — GOLD
+      { nombre:"Mtto Andino", tipo:"🥇 GOLD", tel:"310 383 3591", ws:"https://wa.me/573103833591", web:"", ciudad:"Manizales", nota:"Contacto: Sergio Salazar Buritica · mantenimientoandino@gmail.com / sergiosalas32@hotmail.com · 318 243 4180 · Cl. 76a #21-85, Milán" },
+      // Medellín / Antioquia — PLATINUM
+      { nombre:"Soluciones Tesla", tipo:"🏆 PLATINUM", tel:"300 444 7500", ws:"https://wa.me/573004447500", web:"", ciudad:"Medellín", nota:"Contacto: Juan Muñoz · juan.teslasas@gmail.com / Jessica Taborda · solucionesteslasas@gmail.com · Calle 45 #10a-239" },
+      // Cali / Valle — GOLD
+      { nombre:"TEESA", tipo:"🥇 GOLD", tel:"316 243 2974", ws:"https://wa.me/573162432974", web:"", ciudad:"Cali", nota:"Contacto: Víctor Manuel Puertas · servicioteesa@gmail.com · Cra 17f4 #27d-72, Cali" },
+      // Eje Cafetero / Risaralda — PLATINUM + SILVER
+      { nombre:"REFRIGERAR", tipo:"🏆 PLATINUM", tel:"315 575 0883", ws:"https://wa.me/573155750883", web:"", ciudad:"Dosquebradas", nota:"Contacto: Carlos Benjumea · director@refrigerar.com.co / Yeison Muñoz · 310 428 3542 · Zona Industrial La Badea, Dosquebradas" },
+      { nombre:"Soluctem", tipo:"🥇 GOLD", tel:"316 417 7660", ws:"https://wa.me/573164177660", web:"", ciudad:"Dosquebradas", nota:"Contacto: Carlos Guerrón · direcciontecnica@soluctem.com / Yulieth Duque · 318 531 0263 · Cl 9 #3-90, Dosquebradas" },
+      { nombre:"Dacara", tipo:"🥈 SILVER", tel:"315 579 5329", ws:"https://wa.me/573155795329", web:"", ciudad:"Dosquebradas", nota:"Contacto: Juan Peñuela · gerencia@dacara.co / Liliana Orrego · 315 884 4327 · Cl 43 #2N-69 Bodega 3" },
+      // Barranquilla / Costa — SILVER
+      { nombre:"Sercointec", tipo:"🥈 SILVER", tel:"321 463 4311", ws:"https://wa.me/573214634311", web:"", ciudad:"Barranquilla", nota:"Contacto: Juan David Jaramillo · juan.jaramillo@sercointec.com · Cra 58 #75-17 Ofic 2B, Barranquilla" },
     ],
   },
   Zanolli: {
     oficial: [
-      { nombre:"Euromex Equipos Industriales", tipo:"🏢 Distribuidor", tel:"+57 1 226 4242", ws:"https://wa.me/573142264242", web:"https://euromex.com.co", ciudad:"Bogotá · cobertura nacional", nota:"Distribuidor y servicio técnico Zanolli en Colombia." },
+      { nombre:"Euromex Equipos Industriales", tipo:"🏢 Distribuidor", tel:"+57 1 226 4242", ws:"https://wa.me/573142264242", web:"https://euromex.com.co", ciudad:"Bogotá", nota:"Distribuidor y servicio técnico Zanolli en Colombia." },
     ],
-    especializados: [
-      { nombre:"Induservis Colombia", tipo:"🔧 Certificado", tel:"+57 1 285 0300", ws:"https://wa.me/573102850300", web:"https://induservis.com.co", ciudad:"Bogotá · Medellín · Cali", nota:"Mantenimiento de hornos de pizza y túnel Zanolli." },
-    ],
+    especializados: [],
   },
   Turbochef: {
     oficial: [
-      { nombre:"Turbochef Technologies — Portal oficial", tipo:"🏢 Oficial", tel:"", ws:"", web:"https://www.turbochef.com/service", ciudad:"Contacto vía web", nota:"Localizar técnico autorizado en Colombia desde el portal oficial." },
+      { nombre:"Turbochef Technologies — Portal oficial", tipo:"🏢 Oficial", tel:"", ws:"", web:"https://www.turbochef.com/service", ciudad:"Web", nota:"Localizar técnico autorizado en Colombia desde el portal oficial." },
     ],
     especializados: [
-      { nombre:"Euromex Equipos Industriales", tipo:"🔧 Certificado", tel:"+57 1 226 4242", ws:"https://wa.me/573142264242", web:"https://euromex.com.co", ciudad:"Bogotá · cobertura nacional", nota:"Servicio técnico hornos de alta velocidad TurboChef." },
-      { nombre:"Induservis Colombia", tipo:"🔧 Certificado", tel:"+57 1 285 0300", ws:"https://wa.me/573102850300", web:"https://induservis.com.co", ciudad:"Bogotá · Medellín · Cali", nota:"Mantenimiento correctivo y preventivo TurboChef HHC." },
+      { nombre:"Euromex Equipos Industriales", tipo:"🔧 Certificado", tel:"+57 1 226 4242", ws:"https://wa.me/573142264242", web:"https://euromex.com.co", ciudad:"Bogotá", nota:"Servicio técnico hornos de alta velocidad TurboChef." },
     ],
   },
   Bunn: {
     oficial: [
-      { nombre:"Bunn Latinoamérica — Soporte", tipo:"🏢 Oficial", tel:"", ws:"", web:"https://www.bunn.com/support", ciudad:"Contacto vía web", nota:"Portal oficial de soporte y localización de técnicos Bunn." },
+      { nombre:"Bunn Latinoamérica — Soporte", tipo:"🏢 Oficial", tel:"", ws:"", web:"https://www.bunn.com/support", ciudad:"Web", nota:"Portal oficial de soporte y localización de técnicos Bunn." },
     ],
     especializados: [
-      { nombre:"Euromex Equipos Industriales", tipo:"🔧 Certificado", tel:"+57 1 226 4242", ws:"https://wa.me/573142264242", web:"https://euromex.com.co", ciudad:"Bogotá · cobertura nacional", nota:"Servicio técnico cafeteras y granizadoras Bunn." },
+      { nombre:"Euromex Equipos Industriales", tipo:"🔧 Certificado", tel:"+57 1 226 4242", ws:"https://wa.me/573142264242", web:"https://euromex.com.co", ciudad:"Bogotá", nota:"Servicio técnico cafeteras y granizadoras Bunn." },
     ],
   },
 };
@@ -538,34 +571,52 @@ function ContactCard({ marca, ciudad }) {
   const data = CONTACTOS_ST[marca];
   if (!data) return null;
   const todos = [...(data.oficial||[]), ...(data.especializados||[])];
+  // Filtrar por ciudad si se especificó — primero los de esa ciudad, luego los demás
+  const cidLow = ciudad ? ciudad.toLowerCase() : "";
+  const enCiudad = cidLow ? todos.filter(c => c.ciudad.toLowerCase().includes(cidLow) || cidLow.includes(c.ciudad.toLowerCase())) : [];
+  const otros = cidLow ? todos.filter(c => !c.ciudad.toLowerCase().includes(cidLow) && !cidLow.includes(c.ciudad.toLowerCase())) : todos;
+  const lista = enCiudad.length > 0 ? [...enCiudad, ...otros] : todos;
+
+  // Badge color by certification
+  const badgeStyle = (tipo) => {
+    if (tipo.includes("PLATINUM")) return {background:"#e9d5ff",color:"#6d28d9",border:"1px solid #c4b5fd"};
+    if (tipo.includes("GOLD"))     return {background:"#fef9c3",color:"#a16207",border:"1px solid #fde047"};
+    if (tipo.includes("SILVER"))   return {background:"#f1f5f9",color:"#475569",border:"1px solid #cbd5e1"};
+    if (tipo.includes("Oficial"))  return {background:"#dbeafe",color:"#1d4ed8",border:"1px solid #93c5fd"};
+    return {background:"#dcfce7",color:"#15803d",border:"1px solid #86efac"};
+  };
+
   return (
     <div style={{marginTop:8,background:"#f0fdf4",border:"1px solid #16a34a44",borderRadius:12,padding:"12px 13px"}}>
-      <div style={{fontSize:10,fontWeight:800,color:C.green,marginBottom:8}}>📍 SERVICIO TÉCNICO {marca.toUpperCase()} — {ciudad.toUpperCase()}</div>
-      {todos.map((c,i)=>(
-        <div key={i} style={{background:C.white,borderRadius:8,padding:"9px 11px",marginBottom:7,border:`1px solid ${C.border}`}}>
-          <div style={{display:"flex",alignItems:"center",gap:6,marginBottom:4}}>
-            <span style={{fontSize:11}}>{c.tipo}</span>
-            <span style={{fontSize:11,fontWeight:700,color:C.text,flex:1}}>{c.nombre}</span>
+      <div style={{fontSize:10,fontWeight:800,color:C.green,marginBottom:2}}>📍 SERVICIO TÉCNICO {marca.toUpperCase()}</div>
+      {enCiudad.length > 0 && <div style={{fontSize:10,color:C.green,marginBottom:8,fontWeight:600}}>Mostrando primero los más cercanos a {ciudad}</div>}
+      {lista.map((c,i)=>(
+        <div key={i} style={{background:C.white,borderRadius:8,padding:"10px 11px",marginBottom:7,border:`1px solid ${C.border}`}}>
+          <div style={{display:"flex",alignItems:"flex-start",gap:6,marginBottom:5}}>
+            <span style={{...badgeStyle(c.tipo),fontSize:9,fontWeight:700,padding:"2px 7px",borderRadius:10,flexShrink:0,marginTop:1}}>{c.tipo}</span>
+            <div>
+              <div style={{fontSize:12,fontWeight:800,color:C.text,lineHeight:1.3}}>{c.nombre}</div>
+              {c.ciudad && <div style={{fontSize:9,color:C.muted,marginTop:1}}>📌 {c.ciudad}</div>}
+            </div>
           </div>
-          {c.ciudad && <div style={{fontSize:9,color:C.muted,marginBottom:4}}>📌 {c.ciudad}</div>}
-          {c.nota && <div style={{fontSize:9,color:C.muted,marginBottom:6,lineHeight:1.4}}>{c.nota}</div>}
+          {c.nota && <div style={{fontSize:10,color:"#374151",marginBottom:7,lineHeight:1.5,background:"#f8fafc",borderRadius:6,padding:"6px 8px"}}>{c.nota}</div>}
           <div style={{display:"flex",gap:6,flexWrap:"wrap"}}>
             {c.tel && (
-              <a href={`tel:${c.tel.replace(/\s/g,"")}`}
-                style={{display:"flex",alignItems:"center",gap:4,background:C.gl,color:C.green,fontSize:10,fontWeight:700,padding:"4px 9px",borderRadius:6,textDecoration:"none"}}>
+              <a href={`tel:+57${c.tel.replace(/[\s\-]/g,"")}`}
+                style={{display:"flex",alignItems:"center",gap:4,background:C.gl,color:C.green,fontSize:10,fontWeight:700,padding:"5px 10px",borderRadius:6,textDecoration:"none"}}>
                 📞 {c.tel}
               </a>
             )}
             {c.ws && (
               <a href={c.ws} target="_blank" rel="noopener noreferrer"
-                style={{display:"flex",alignItems:"center",gap:4,background:"#dcfce7",color:"#15803d",fontSize:10,fontWeight:700,padding:"4px 9px",borderRadius:6,textDecoration:"none"}}>
-                💬 WhatsApp / Web
+                style={{display:"flex",alignItems:"center",gap:4,background:"#dcfce7",color:"#15803d",fontSize:10,fontWeight:700,padding:"5px 10px",borderRadius:6,textDecoration:"none"}}>
+                💬 WhatsApp
               </a>
             )}
-            {c.web && !c.ws && (
+            {c.web && (
               <a href={c.web} target="_blank" rel="noopener noreferrer"
-                style={{display:"flex",alignItems:"center",gap:4,background:C.al,color:C.accent,fontSize:10,fontWeight:700,padding:"4px 9px",borderRadius:6,textDecoration:"none"}}>
-                🌐 Ver web
+                style={{display:"flex",alignItems:"center",gap:4,background:C.al,color:C.accent,fontSize:10,fontWeight:700,padding:"5px 10px",borderRadius:6,textDecoration:"none"}}>
+                🌐 Web
               </a>
             )}
           </div>
