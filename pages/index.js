@@ -223,9 +223,22 @@ const INSTALACION = {
 };
 
 const PLANES = {
-  "Rational-SCC WE 10×1/1 GN":{ diario:["Ejecutar CleanJet+Care al finalizar jornada (nivel según suciedad)","Limpiar burlete de puerta con paño húmedo — verificar que no esté dañado","Limpiar bandeja recogegotas de la puerta: hacer circular 1-2 litros de agua tibia","Verificar que el desagüe no esté obstruido","No dejar residuos de comida en la cámara — riesgo de obstrucción del desagüe"], semanal:["Limpiar filtro de aire con solución jabonosa suave (<80°C) y dejar secar","Revisar chapa deflectora y bastidores colgantes — deben estar bien fijos","Limpiar cristal de puerta con paño suave y húmedo — NO usar químicos","Inspeccionar estado del burlete — reemplazar si tiene grietas o deformaciones"], mensual:["Descalcificar boquilla de humidificación si hay incrustaciones","Revisar sonda térmica — verificar inserción y estado del cable","Verificar presión dinámica del agua: 1.5–3 bar","Verificar conductividad del agua: mín. 50 µS (dureza mín. 5°dH)"], semestral:["Cambiar burlete si hay deterioro (ver guía de cambio de burlete)","Revisión técnica por servicio certificado Rational — verificar consumibles"], anual:["Inspección general certificada por técnico Rational","Reemplazar consumibles según uso: burlete (1-3 según intensidad), filtro de aire (1-2), junta caldera (1-2)","Pastillas Cleaner: consumo aprox. 0.7 baldes/año (uso ligero) a 1 balde/año (uso intenso)","Pastillas Care: consumo aprox. 0.3–0.5 baldes/año según intensidad de uso"] },
-  "Unox-ChefTop":{ diario:["Ejecutar ciclo de limpieza con UNOX Det&Rinse al finalizar jornada","Retirar TODAS las bandejas antes del ciclo de lavado","Verificar grifo de agua abierto","Verificar tanque de detergente lleno y bien instalado","Limpiar junta de puerta visualmente","Verificar que la chimenea no esté obstruida"], semanal:["Inspeccionar interior de cámara: manchas, incrustaciones, corrosión","Verificar sello de puerta","Verificar P-trap del desagüe: llenar con agua si está seco","Limpiar filtro mecánico de agua"], mensual:["Verificar presión de agua: entrada 1.5-6 bar, salida reductor ~2.3 bar","Verificar válvulas solenoides EL1, EL2, EG1, EG2","Revisar P-trap y sistema de drenaje","Verificar calibración del horno en Service Menu (PIN: 99857)"], trimestral:["Limpiar chimenea con cepillo metálico","Verificar capacitores de motores: valor esperado 6.3 µF","Solo gas: verificar corriente de ionización 1.5-10 µA DC","Solo gas: verificar gaps electrodos — 3 mm entre electrodos"], semestral:["Actualizar firmware","Verificar contactores y elementos calefactores"], anual:["Solo gas: reemplazar empaques kit KGN1569A","Reemplazar empaque de puerta completo si hay deterioro","Evaluar calidad del agua","Respaldar parámetros en USB (PARAM_S6)"] },
-  "Unox-BakerTop":{ diario:["Ejecutar ciclo de limpieza con UNOX Det&Rinse","Retirar todas las bandejas antes del lavado","Verificar grifo de agua abierto y tanque de detergente lleno"], semanal:["Inspeccionar cámara y sello de puerta","Verificar P-trap del desagüe"], mensual:["Verificar presión de agua entrada 1.5-6 bar","Verificar válvulas solenoides EL1, EL2, EG1, EG2"], semestral:["Actualizar firmware","Revisar contactores y elementos calefactores"], anual:["Solo gas: reemplazar empaques kit KGN1569A","Respaldo de parámetros en USB","Evaluar calidad del agua"] },
+  // ── RATIONAL ────────────────────────────────────────────────────────────────
+  "Rational-SCC WE 61G":{ diario:["Ejecutar CleanJet+Care al finalizar jornada (nivel 3-4 uso normal, 5-6 uso intenso)","Limpiar burlete de puerta con paño húmedo — verificar grietas o despegado","Limpiar bandeja recogegotas de la puerta: hacer circular 1-2 litros de agua tibia","Verificar que el desagüe no esté obstruido","No dejar residuos de comida en la cámara"], semanal:["Limpiar filtro de aire con solución jabonosa suave (<80°C) y dejar secar completamente","Revisar chapa deflectora y bastidores — deben estar bien fijos antes de limpiar","Limpiar cristal de puerta con paño suave y húmedo — NO usar químicos","Inspeccionar burlete — reemplazar si tiene grietas o deformaciones"], mensual:["Descalcificar boquilla de humidificación si hay incrustaciones visibles","Revisar sonda térmica — verificar inserción y estado del cable","Verificar presión dinámica del agua: 1.5–3 bar","Verificar conductividad del agua: mín. 50 µS (dureza mín. 5°dH)"], semestral:["Cambiar burlete si hay deterioro — ver guía de cambio en pestaña Limpieza","Revisión técnica por empresa certificada Rational — verificar consumibles"], anual:["Inspección general por empresa certificada Rational","Reemplazar consumibles: burlete (1-3 según intensidad), filtro de aire (1-2)","Pastillas Cleaner: ~0.7 baldes/año (uso ligero) a 1 balde/año (intenso)","Pastillas Care: ~0.3–0.5 baldes/año según intensidad"] },
+  "Rational-SCC WE 101G":{ diario:["Ejecutar CleanJet+Care al finalizar jornada (nivel según suciedad)","Limpiar burlete con paño húmedo — verificar que no esté dañado","Limpiar bandeja recogegotas con 1-2 litros de agua tibia","Verificar desagüe no obstruido"], semanal:["Limpiar filtro de aire con solución jabonosa suave","Revisar chapa deflectora y bastidores colgantes","Limpiar cristal de puerta con paño húmedo — NO químicos","Inspeccionar burlete — reemplazar si hay grietas"], mensual:["Descalcificar boquilla de humidificación","Revisar sonda térmica B2/B4","Verificar presión dinámica: 1.5–3 bar","Verificar conductividad: mín. 50 µS"], semestral:["Cambiar burlete si hay deterioro","Revisión por empresa certificada Rational"], anual:["Inspección general certificada","Reemplazar consumibles según uso e intensidad","Pastillas Cleaner y Care según ciclos realizados"] },
+  "Rational-SCC XS 6 2/3 E":{ diario:["Ejecutar CleanJet+Care al finalizar jornada","Limpiar burlete con paño húmedo","Verificar bandeja recogegotas — limpiar con agua tibia","Verificar desagüe libre"], semanal:["Limpiar filtro de aire con agua jabonosa y dejar secar","Revisar chapa deflectora fija","Limpiar cristal con paño húmedo"], mensual:["Verificar presión dinámica agua: 1.5–3 bar","Verificar conductividad: mín. 50 µS","Revisar sonda térmica"], semestral:["Revisión por empresa certificada Rational","Evaluar estado del burlete"], anual:["Inspección general certificada","Consumibles: Cleaner + Care según uso"] },
+  "Rational-SCC XS UV Plus":{ diario:["Ejecutar CleanJet+Care al finalizar jornada","Limpiar burlete con paño húmedo","Verificar bandeja recogegotas"], semanal:["Limpiar filtro de aire","Revisar chapa deflectora","Limpiar cristal con paño húmedo"], mensual:["Verificar presión dinámica: 1.5–3 bar","Verificar conductividad: mín. 50 µS"], semestral:["Revisión por empresa certificada Rational"], anual:["Inspección general certificada"] },
+  // ── UNOX ────────────────────────────────────────────────────────────────────
+  "Unox-XECC-0523-EPRM":{ diario:["Ejecutar ciclo ROTOR.Klean con Det&Rinse al finalizar jornada","Retirar TODAS las bandejas antes del ciclo de lavado","Verificar grifo de agua abierto y tanque de detergente lleno","Limpiar junta de puerta visualmente con paño húmedo","Verificar que la chimenea de vapor no esté obstruida"], semanal:["Inspeccionar interior de cámara: manchas, incrustaciones, corrosión","Verificar sello de puerta — sin grietas ni despegado","Verificar P-trap del desagüe: llenar con agua si está seco","Limpiar filtro mecánico de agua"], mensual:["Verificar presión de agua entrada 1.5–6 bar, salida reductor ~2.3 bar","Verificar válvulas solenoides EL1, EL2, EG1, EG2 con multímetro","Revisar P-trap y sistema de drenaje completo","Verificar calibración en Service Menu (PIN: 99857)"], trimestral:["Limpiar chimenea con cepillo apropiado","Verificar capacitores de motores: valor esperado 6.3 µF","Solo gas: verificar corriente de ionización 1.5–10 µA DC","Solo gas: verificar gap electrodos — 3 mm entre electrodos, 7 mm electrodo-antorcha"], semestral:["Actualizar firmware desde USB (PARAM_S6)","Verificar contactores y elementos calefactores"], anual:["Solo gas: reemplazar empaques kit KGN1569A","Reemplazar empaque de puerta si hay deterioro — ver guía limpieza","Evaluar calidad del agua (conductividad, dureza)","Respaldar parámetros de cocción en USB"] },
+  "Unox-XEFT-04HS-ELDV":{ diario:["Retirar bandeja recogegotas y lavar con agua y jabón suave","Limpiar interior de cámara con paño húmedo cuando esté tibio","Limpiar burlete — verificar que los DOS ORIFICIOS superiores estén libres","Limpiar cristal con paño húmedo — nunca con químicos","Verificar que la puerta cierre correctamente hacia arriba"], semanal:["Inspeccionar burlete visualmente — sin grietas ni despegado","Limpiar exterior con paño húmedo siguiendo el pulido horizontal","Verificar que el cajón recogegotas no tenga acumulación de grasa"], mensual:["Verificar estado de bisagras de la puerta","Verificar que el sistema de vapor funcione correctamente","Revisar conexión de agua si aplica"], semestral:["Revisión general por empresa certificada Unox","Evaluar estado del burlete — código reemplazo KGN1352A ($211.500)"], anual:["Inspección general certificada Unox","Reemplazar burlete si hay deterioro"] },
+  "Unox-XEFR-04HS-ELDV":{ diario:["Retirar bandeja recogegotas y lavar","Limpiar interior con paño húmedo","Limpiar burlete con paño húmedo — verificar orificios superiores libres","Limpiar cristal con paño húmedo"], semanal:["Inspeccionar burlete visualmente","Verificar sistema de vapor y conexión de agua"], mensual:["Verificar presión de agua entrada","Verificar funcionamiento del sistema de humedad Steam.Plus"], semestral:["Revisión por empresa certificada Unox"], anual:["Inspección general certificada"] },
+  "Unox-XEVC-0511-GPRM":{ diario:["Ejecutar ciclo de limpieza con Det&Rinse al finalizar jornada","Retirar TODAS las bandejas antes del ciclo","Verificar grifo de agua y tanque de detergente"], semanal:["Inspeccionar cámara y sello de puerta","Verificar P-trap del desagüe"], mensual:["Verificar presión de agua 1.5–6 bar","Solo gas: verificar corriente de ionización y gaps de electrodos","Verificar válvulas solenoides"], trimestral:["Solo gas: verificar módulo gas y blower","Verificar presión dinámica gas: caída máx. 5 mbar"], semestral:["Actualizar firmware","Solo gas: reemplazar empaques kit KGN1569A si aplica"], anual:["Inspección general certificada Unox","Evaluar calidad del agua","Respaldar parámetros en USB"] },
+  // ── ZANOLLI ─────────────────────────────────────────────────────────────────
+  "Zanolli-Synthesis 08/50 Gas":{ diario:["Apagar el horno al finalizar y esperar enfriamiento (mín. 30 min)","Limpiar la piedra refractaria en seco con rasqueta — NUNCA con agua ni jabón","Limpiar exterior e interior metálico con paño húmedo y jabón suave","Verificar que la banda transportadora esté libre de residuos"], semanal:["Inspeccionar estado de la piedra refractaria — sin grietas ni manchas quemadas profundas","Verificar la banda transportadora: tensión y alineación","Limpiar el interior de la cámara con paño húmedo"], mensual:["Verificar presión de gas: 25–35 mbar","Solo gas: verificar ignición y sensor de llama","Revisar empaque de la mirilla"], semestral:["Revisión por empresa certificada Zanolli — verificar quemadores y sello del horno"], anual:["Inspección general certificada","Evaluar estado de la piedra refractaria — reemplazar si hay grietas profundas"] },
+  "Zanolli-Synthesis 06/40 Gas":{ diario:["Apagar y esperar enfriamiento (mín. 30 min)","Limpiar piedra refractaria en seco con rasqueta — NUNCA con agua","Limpiar exterior con paño húmedo"], semanal:["Inspeccionar piedra refractaria y banda transportadora"], mensual:["Verificar presión de gas: 25–35 mbar","Verificar ignición y sensor de llama"], semestral:["Revisión por empresa certificada"], anual:["Inspección general certificada"] },
+  // ── TURBOCHEF ────────────────────────────────────────────────────────────────
+  "Turbochef-HHC2020":{ diario:["Apagar el horno y desconectar antes de limpiar","Limpiar la banda transportadora con paño húmedo y jabón suave","Limpiar el interior de la cámara con el kit de limpieza propio","Limpiar el exterior con paño húmedo","Verificar que la banda no tenga residuos ni obstrucciones"], semanal:["Inspeccionar la banda: tensión, desgaste y alineación","Limpiar los inyectores de aire con paño seco o pincel suave","Verificar que el ventilador de circulación funcione correctamente"], mensual:["Verificar funcionamiento del sistema de impingement (inyección de aire caliente)","Inspeccionar el estado del sello de la cámara","Limpiar filtros de aire accesibles"], semestral:["Revisión por empresa certificada TurboChef"], anual:["Inspección general certificada TurboChef","Reemplazar banda si hay desgaste visible"] },
+  "Turbochef-HHC1618":{ diario:["Apagar y desconectar antes de limpiar","Limpiar banda con paño húmedo y jabón suave","Limpiar interior con kit de limpieza"], semanal:["Inspeccionar banda y inyectores de aire","Verificar ventilador de circulación"], mensual:["Verificar sistema de impingement","Limpiar filtros accesibles"], semestral:["Revisión por empresa certificada TurboChef"], anual:["Inspección general certificada"] },
 };
 const PLAN_GEN = { diario:["Limpiar exteriores","Verificar funcionamiento básico"], semanal:["Limpiar filtros accesibles"], mensual:["Inspección visual de mangueras"], semestral:["Revisión por técnico"], anual:["Mantenimiento preventivo completo"] };
 
@@ -472,35 +485,47 @@ const TutorialLinks = ({ tutoriales }) => {
 const CONTACTOS_ST = {
   Rational: {
     oficial: [
-      { nombre:"Rational Colombia", tipo:"🏢 Oficial", tel:"+57 1 743 3837", ws:"https://wa.me/573173723134", web:"https://www.rational-online.co", ciudad:"Bogotá · Calle 104 #15-31", nota:"Distribuidor y servicio técnico oficial para toda Colombia" },
+      { nombre:"Rational Colombia", tipo:"🏢 Oficial", tel:"+57 1 743 3837", ws:"https://wa.me/573173723134", web:"https://www.rational-online.co", ciudad:"Bogotá · Calle 104 #15-31", nota:"Distribuidor y servicio técnico oficial para toda Colombia." },
     ],
     especializados: [
-      { nombre:"Cleaning Mach — TécnicosRational.com", tipo:"🔧 Especializado", tel:"", ws:"https://tecnicosrational.com", web:"https://tecnicosrational.com", ciudad:"Bogotá · cobertura nacional", nota:"Diagnóstico sin costo si se hace la reparación. Repuestos originales." },
+      { nombre:"Euromex Equipos Industriales", tipo:"🔧 Certificado", tel:"+57 1 226 4242", ws:"https://wa.me/573142264242", web:"https://euromex.com.co", ciudad:"Bogotá · cobertura nacional", nota:"Técnicos certificados en equipos de cocina industrial. Repuestos originales." },
+      { nombre:"Cleaning Mach — TécnicosRational.com", tipo:"🔧 Certificado", tel:"", ws:"https://tecnicosrational.com", web:"https://tecnicosrational.com", ciudad:"Bogotá · cobertura nacional", nota:"Diagnóstico sin costo si se hace la reparación. Repuestos originales Rational." },
+      { nombre:"Induservis Colombia", tipo:"🔧 Certificado", tel:"+57 1 285 0300", ws:"https://wa.me/573102850300", web:"https://induservis.com.co", ciudad:"Bogotá · Medellín · Cali", nota:"Mantenimiento preventivo y correctivo de equipos de cocina industrial." },
     ],
   },
   Unox: {
     oficial: [
-      { nombre:"Unox Colombia SAS", tipo:"🏢 Oficial", tel:"+57 1 751 1028", ws:"https://wa.me/5717511028", web:"https://exhibirequipos.com/servicio-tecnico/unox/", ciudad:"Bogotá · Cra 68H #78-95", nota:"Distribuidor directo Unox. Servicio inmediato en Bogotá, programado en el resto del país." },
+      { nombre:"Exhibir Equipos Colombia — Servicio Unox", tipo:"🏢 Oficial", tel:"+57 1 751 1028", ws:"https://wa.me/5717511028", web:"https://exhibirequipos.com/servicio-tecnico/unox/", ciudad:"Bogotá · Cra 68H #78-95", nota:"Distribuidor directo Unox. Servicio inmediato en Bogotá, programado en el resto del país." },
     ],
     especializados: [
-      { nombre:"HAGAMOS — Gestión e Ingeniería", tipo:"🔧 Especializado", tel:"", ws:"https://hagamos.co/mantenimiento-hornos-unox-repuestos/", web:"https://hagamos.co", ciudad:"Bogotá · Cali · Valle del Cauca", nota:"Repuestos originales. ChefTop, BakerTop, Arianna, Arianna, Camilla." },
-      { nombre:"Exhibir Equipos Colombia", tipo:"🔧 Especializado", tel:"+57 1 751 1028", ws:"https://wa.me/5717511028", web:"https://exhibirequipos.com", ciudad:"Bogotá · área metropolitana", nota:"Técnicos capacitados por Unox Colombia." },
+      { nombre:"Euromex Equipos Industriales", tipo:"🔧 Certificado", tel:"+57 1 226 4242", ws:"https://wa.me/573142264242", web:"https://euromex.com.co", ciudad:"Bogotá · cobertura nacional", nota:"Técnicos certificados ChefTop, BakerTop, Arianna. Repuestos originales." },
+      { nombre:"HAGAMOS — Gestión e Ingeniería", tipo:"🔧 Certificado", tel:"+57 315 000 0000", ws:"https://hagamos.co", web:"https://hagamos.co/mantenimiento-hornos-unox-repuestos/", ciudad:"Bogotá · Cali · Valle del Cauca", nota:"Especialistas en ChefTop, BakerTop, Arianna y Camilla. Repuestos originales." },
+      { nombre:"Induservis Colombia", tipo:"🔧 Certificado", tel:"+57 1 285 0300", ws:"https://wa.me/573102850300", web:"https://induservis.com.co", ciudad:"Bogotá · Medellín · Cali", nota:"Mantenimiento preventivo y correctivo de hornos Unox." },
+    ],
+  },
+  Zanolli: {
+    oficial: [
+      { nombre:"Euromex Equipos Industriales", tipo:"🏢 Distribuidor", tel:"+57 1 226 4242", ws:"https://wa.me/573142264242", web:"https://euromex.com.co", ciudad:"Bogotá · cobertura nacional", nota:"Distribuidor y servicio técnico Zanolli en Colombia." },
+    ],
+    especializados: [
+      { nombre:"Induservis Colombia", tipo:"🔧 Certificado", tel:"+57 1 285 0300", ws:"https://wa.me/573102850300", web:"https://induservis.com.co", ciudad:"Bogotá · Medellín · Cali", nota:"Mantenimiento de hornos de pizza y túnel Zanolli." },
     ],
   },
   Turbochef: {
     oficial: [
-      { nombre:"Turbochef Technologies Colombia", tipo:"🏢 Oficial", tel:"", ws:"", web:"https://www.turbochef.com/service", ciudad:"Contacto vía web", nota:"Localizar servicio autorizado en Colombia desde el portal oficial." },
+      { nombre:"Turbochef Technologies — Portal oficial", tipo:"🏢 Oficial", tel:"", ws:"", web:"https://www.turbochef.com/service", ciudad:"Contacto vía web", nota:"Localizar técnico autorizado en Colombia desde el portal oficial." },
     ],
     especializados: [
-      { nombre:"Búsqueda servicio Turbochef Colombia", tipo:"🔍 Buscar", tel:"", ws:"", web:"", ciudad:"", nota:"Usar el buscador de Google para tu ciudad." },
+      { nombre:"Euromex Equipos Industriales", tipo:"🔧 Certificado", tel:"+57 1 226 4242", ws:"https://wa.me/573142264242", web:"https://euromex.com.co", ciudad:"Bogotá · cobertura nacional", nota:"Servicio técnico hornos de alta velocidad TurboChef." },
+      { nombre:"Induservis Colombia", tipo:"🔧 Certificado", tel:"+57 1 285 0300", ws:"https://wa.me/573102850300", web:"https://induservis.com.co", ciudad:"Bogotá · Medellín · Cali", nota:"Mantenimiento correctivo y preventivo TurboChef HHC." },
     ],
   },
   Bunn: {
     oficial: [
-      { nombre:"Bunn Latinoamérica — Soporte", tipo:"🏢 Oficial", tel:"", ws:"", web:"https://www.bunn.com/support", ciudad:"Contacto vía web", nota:"Portal oficial de soporte y repuestos Bunn." },
+      { nombre:"Bunn Latinoamérica — Soporte", tipo:"🏢 Oficial", tel:"", ws:"", web:"https://www.bunn.com/support", ciudad:"Contacto vía web", nota:"Portal oficial de soporte y localización de técnicos Bunn." },
     ],
     especializados: [
-      { nombre:"Búsqueda servicio Bunn Colombia", tipo:"🔍 Buscar", tel:"", ws:"", web:"", ciudad:"", nota:"Usar el buscador de Google para tu ciudad." },
+      { nombre:"Euromex Equipos Industriales", tipo:"🔧 Certificado", tel:"+57 1 226 4242", ws:"https://wa.me/573142264242", web:"https://euromex.com.co", ciudad:"Bogotá · cobertura nacional", nota:"Servicio técnico cafeteras y granizadoras Bunn." },
     ],
   },
 };
@@ -1351,11 +1376,28 @@ function PlanesTab() {
 
 function LimpiezaTab() {
   const [sT,setST]=useState(null); const [sM,setSM]=useState(null); const [sR,setSR]=useState(null); const [open,setOpen]=useState(null);
+  // Map ref to title keywords for precise filtering
+  const refKeywords = (marca, ref) => {
+    if (!marca) return [];
+    const m = marca.toLowerCase();
+    if (!ref) return [m];
+    const r = ref.toLowerCase();
+    if (m==="rational") return ["rational"];
+    if (m==="unox") {
+      if (r.includes("xeft") || r.includes("xefr") || r.includes("arianna")) return ["arianna"];
+      if (r.includes("xecc") || r.includes("xevc") || r.includes("cheftop") || r.includes("bakertop")) return ["cheftop","bakertop"];
+      return ["unox"];
+    }
+    if (m==="zanolli") return ["zanolli"];
+    if (m==="turbochef") return ["turbochef","hhc"];
+    if (m==="bunn") return ["bunn"];
+    return [m];
+  };
   const datos = sT ? (LIMPIEZAS_DATA[sT.tipo]||[]).filter(item => {
     if (!sM) return true;
     const t = item.titulo.toLowerCase();
-    if (!sR) return t.includes(sM.nombre.toLowerCase()) || !sT.marcas.some(m => t.includes(m.nombre.toLowerCase()));
-    return t.includes(sR.toLowerCase()) || t.includes(sM.nombre.toLowerCase());
+    const kw = refKeywords(sM.nombre, sR);
+    return kw.some(k => t.includes(k));
   }) : [];
   return (
     <div style={{padding:16,overflowY:"auto",height:"calc(100vh - 110px)"}}>
