@@ -128,10 +128,122 @@ const EQUIPOS = [
     ]},
   ]},
   { tipo:"Nevera / Congelador", icon:"❄️", marcas:[
-    { nombre:"General", refs:[
-      { ref:"Refrigerador vertical", favorito:false, img:"", desc:"Refrigerador vertical comercial" },
-      { ref:"Congelador horizontal", favorito:false, img:"", desc:"Congelador tipo cofre" },
-      { ref:"Vitrina fría",          favorito:false, img:"", desc:"Vitrina refrigerada exhibición" },
+    { nombre:"Imbera", refs:[
+      { ref:"G326-D2",              favorito:false, img:"", desc:"Nevera vertical 1 puerta · exhibición bebidas" },
+      { ref:"G342",                 favorito:false, img:"", desc:"Nevera vertical 2 puertas · exhibición bebidas" },
+      { ref:"CV18-F1",              favorito:false, img:"", desc:"Congelador horizontal 1 puerta abatible" },
+      { ref:"VR08-E1",              favorito:false, img:"", desc:"Nevera vertical bajo mostrador" },
+      { ref:"VR20",                 favorito:false, img:"", desc:"Nevera vertical 1 puerta" },
+      { ref:"VR09 OC-E1 P2D115BG", favorito:false, img:"", desc:"Nevera vertical open cooler" },
+      { ref:"NF11-B1-P2D115BGCFN", favorito:false, img:"", desc:"Nevera de aguila light" },
+      { ref:"FV20PP",               favorito:false, img:"", desc:"Nevera vertical 2 puertas" },
+      { ref:"6326-D2 E2D115BGCIR",  favorito:false, img:"", desc:"Nevera vertical exhibidora" },
+      { ref:"G319 OC",              favorito:false, img:"", desc:"Refrigerador open cooler" },
+      { ref:"VR20-D1",              favorito:false, img:"", desc:"Refrigerador vertical 1 puerta" },
+    ]},
+    { nombre:"Parker", refs:[
+      { ref:"LRB-771PC",            favorito:false, img:"", desc:"Refrigerador vertical 1 ala" },
+      { ref:"LRB-771PC-HC",         favorito:false, img:"", desc:"Refrigerador vertical 1 ala HC" },
+      { ref:"LRB-1471 PC",          favorito:false, img:"", desc:"Refrigerador vertical 2 alas" },
+      { ref:"LFB-771PC",            favorito:false, img:"", desc:"Congelador vertical 1 ala" },
+      { ref:"LFB-1471PC",           favorito:false, img:"", desc:"Congelador vertical 2 alas" },
+      { ref:"LUCR48",               favorito:false, img:"", desc:"Nevera bajo mostrador 48 pulgadas" },
+      { ref:"LUCR27",               favorito:false, img:"", desc:"Nevera bajo mostrador 27 pulgadas" },
+      { ref:"LUCR72-HC",            favorito:false, img:"", desc:"Nevera bajo mostrador 72 pulgadas HC" },
+      { ref:"LUCF48-HC_PK126",      favorito:false, img:"", desc:"Congelador bajo mostrador 48 pulgadas" },
+      { ref:"LUCF27-HC_PK126",      favorito:false, img:"", desc:"Congelador bajo mostrador 27 pulgadas" },
+      { ref:"LST27",                favorito:false, img:"", desc:"Nevera bajo mostrador 27 pulgadas" },
+      { ref:"LST48",                favorito:false, img:"", desc:"Nevera bajo mostrador 48 pulgadas" },
+      { ref:"ASUB-28-P8",           favorito:false, img:"", desc:"Nevera topinera bajo mostrador" },
+      { ref:"AB-23F",               favorito:false, img:"", desc:"Nevera bajo mostrador 23 pulgadas" },
+      { ref:"LFR 147IDC",           favorito:false, img:"", desc:"Congelador vertical 2 alas" },
+    ]},
+    { nombre:"Turbo Air", refs:[
+      { ref:"TGM-48RB",             favorito:false, img:"", desc:"Refrigerador vertical 2 alas gaseosas" },
+      { ref:"TGM-69RB",             favorito:false, img:"", desc:"Nevera vertical 2 puertas · 69 pulgadas" },
+      { ref:"TGM-72RSB-N",          favorito:false, img:"", desc:"Nevera vertical 2 puertas · 72 pulgadas" },
+      { ref:"TGM-69RB-N",           favorito:false, img:"", desc:"Nevera vertical 2 puertas · nueva serie N" },
+      { ref:"TGM-48R-N",            favorito:false, img:"", desc:"Nevera vertical 48 pulgadas serie N" },
+      { ref:"TUR-28SD",             favorito:false, img:"", desc:"Nevera baja bajo mostrador 28 pulgadas" },
+      { ref:"TUR-48SD",             favorito:false, img:"", desc:"Nevera baja 2 puertas 48 pulgadas" },
+      { ref:"TUF-28SD",             favorito:false, img:"", desc:"Nevera bajo mostrador 28 pulgadas" },
+      { ref:"TUF-28SD-N",           favorito:false, img:"", desc:"Nevera bajo mostrador 28 pulgadas serie N" },
+      { ref:"TST-28SD",             favorito:false, img:"", desc:"Nevera bajo mostrador corredera" },
+      { ref:"TSF-28D",              favorito:false, img:"", desc:"Nevera bajo mostrador 28 pulgadas corredera" },
+      { ref:"TSF-49SD",             favorito:false, img:"", desc:"Nevera bajo mostrador 49 pulgadas" },
+      { ref:"TSF-49SD-N",           favorito:false, img:"", desc:"Refrigerador bajo mostrador 49 pulgadas N" },
+      { ref:"TSF-23SD-N",           favorito:false, img:"", desc:"Refrigerador bajo mostrador 23 pulgadas N" },
+      { ref:"TSA 49SD-N",           favorito:false, img:"", desc:"Congelador bajo mostrador 49 pulgadas N" },
+      { ref:"TSF-23SD",             favorito:false, img:"", desc:"Congelador bajo mostrador 23 pulgadas" },
+      { ref:"GDM-23",               favorito:false, img:"", desc:"Refrigerador vertical 1 ala gaseosas · TRUE" },
+    ]},
+    { nombre:"Fogel", refs:[
+      { ref:"CR-23-AC-AF-SA-HC",    favorito:false, img:"", desc:"Congelador horizontal 23 pulgadas HC" },
+      { ref:"CR-49",                favorito:false, img:"", desc:"Congelador horizontal 49 pulgadas" },
+      { ref:"MTR-27-FP",            favorito:false, img:"", desc:"Nevera vertical 27 pulgadas" },
+      { ref:"MTR-48",               favorito:false, img:"", desc:"Nevera vertical 48 pulgadas" },
+      { ref:"MTF27",                favorito:false, img:"", desc:"Congelador vertical 27 pulgadas" },
+    ]},
+    { nombre:"Coldline", refs:[
+      { ref:"FORTE SV17 R290",      favorito:false, img:"", desc:"Nevera vertical 17 pies refrigerante R290" },
+      { ref:"FORTE SV17-D",         favorito:false, img:"", desc:"Nevera vertical 17 pies" },
+      { ref:"Enfriador forte su13-D",favorito:false, img:"", desc:"Enfriador vertical 13 pies" },
+    ]},
+    { nombre:"Electrolux", refs:[
+      { ref:"EFCC15C3HQW",          favorito:false, img:"", desc:"Congelador horizontal 15 pies" },
+      { ref:"EHC08-E1 P2D115BG",    favorito:false, img:"", desc:"Nevera horizontal 8 pies" },
+    ]},
+    { nombre:"Wonder", refs:[
+      { ref:"WC-215CZ",             favorito:false, img:"", desc:"Congelador horizontal tipo pecho" },
+      { ref:"WCV-430PV",            favorito:false, img:"", desc:"Nevera vertical exhibidora" },
+      { ref:"WCH-415VCC",           favorito:false, img:"", desc:"Nevera horizontal exhibidora" },
+    ]},
+    { nombre:"Tornado", refs:[
+      { ref:"HC-VC27",              favorito:false, img:"", desc:"Congelador horizontal 27 pulgadas" },
+      { ref:"HC-VC27F",             favorito:false, img:"", desc:"Congelador horizontal 27 pulgadas frost free" },
+      { ref:"HC- UC48",             favorito:false, img:"", desc:"Nevera bajo mostrador 48 pulgadas" },
+    ]},
+    { nombre:"Dukers", refs:[
+      { ref:"DUC29F",               favorito:false, img:"", desc:"Nevera bajo mostrador 29 pulgadas" },
+      { ref:"DUC48F",               favorito:false, img:"", desc:"Nevera bajo mostrador 48 pulgadas" },
+      { ref:"DUC48R",               favorito:false, img:"", desc:"Nevera bajo mostrador 48 pulgadas · puerta ciega" },
+      { ref:"D28F",                 favorito:false, img:"", desc:"Congelador bajo mostrador 28 pulgadas" },
+      { ref:"D55F",                 favorito:false, img:"", desc:"Nevera bajo mostrador 55 pulgadas" },
+    ]},
+    { nombre:"Infrico", refs:[
+      { ref:"ERV83",                favorito:false, img:"", desc:"Nevera exhibidora 2 puertas" },
+      { ref:"UC27R",                favorito:false, img:"", desc:"Nevera bajo mostrador 27 pulgadas" },
+    ]},
+    { nombre:"Inducol", refs:[
+      { ref:"W-25DBL1PV",           favorito:false, img:"", desc:"Nevera vertical 2 puertas" },
+      { ref:"VV-25",                favorito:false, img:"", desc:"Nevera vertical 25 pulgadas" },
+      { ref:"W-13",                 favorito:false, img:"", desc:"Nevera bajo mostrador 13 pulgadas" },
+    ]},
+    { nombre:"Atosa", refs:[
+      { ref:"MGF8405GR",            favorito:false, img:"", desc:"Congelador horizontal 1 puerta" },
+      { ref:"MBF8001GR",            favorito:false, img:"", desc:"Congelador horizontal 1 puerta" },
+      { ref:"MSF8303GR",            favorito:false, img:"", desc:"Nevera bajo mostrador 3 puertas" },
+    ]},
+    { nombre:"Crutek", refs:[
+      { ref:"HROGXX03",             favorito:false, img:"", desc:"Nevera de leche cafetera" },
+      { ref:"Hr06xx",               favorito:false, img:"", desc:"Nevera de leche cafetera compacta" },
+    ]},
+    { nombre:"Nordik", refs:[
+      { ref:"K27f",                 favorito:false, img:"", desc:"Congelador vertical 1 ala" },
+      { ref:"K27R",                 favorito:false, img:"", desc:"Refrigerador vertical 1 ala" },
+    ]},
+    { nombre:"Hoshizaki", refs:[
+      { ref:"PR67A",                favorito:false, img:"", desc:"Nevera vertical bajo mostrador" },
+      { ref:"CR15-FS",              favorito:false, img:"", desc:"Congelador horizontal" },
+    ]},
+    { nombre:"Lux", refs:[
+      { ref:"MUC48",                favorito:false, img:"", desc:"Nevera bajo mostrador 48 pulgadas" },
+      { ref:"M548",                 favorito:false, img:"", desc:"Nevera bajo mostrador 48 pulgadas" },
+      { ref:"LUX-CUA23",            favorito:false, img:"", desc:"Nevera vertical 1 puerta" },
+    ]},
+    { nombre:"Indufrial", refs:[
+      { ref:"HU210-MLC",            favorito:false, img:"", desc:"Congelador horizontal 210 litros" },
+      { ref:"W450_RHC",             favorito:false, img:"", desc:"Congelador horizontal 450 litros" },
     ]},
   ]},
 ];
@@ -178,7 +290,23 @@ const ALIAS_TIPO = [
   { words:["horno","oven","combi","convector"], tipo:"Horno" },
   { words:["cafetera","cafe","coffee","espresso"], tipo:"Cafetera" },
   { words:["granizadora","granizado","slush","frozen"], tipo:"Granizadora" },
-  { words:["nevera","refri","refrigerador","congelador"], tipo:"Nevera / Congelador" },
+  { words:["nevera","refri","refrigerador","congelador","frio","vitrina fría","vitrina refrigerada"], tipo:"Nevera / Congelador" },
+  { words:["imbera","g326","g342","vr08","vr20","vr09","cv18","nf11","fv20","6326","6362"], tipo:"Nevera / Congelador", marca:"Imbera" },
+  { words:["parker","lrb","lfb","lucr","lucf","lst27","lst48","asub"], tipo:"Nevera / Congelador", marca:"Parker" },
+  { words:["turbo air","turboair","tgm","tur-","tuf-","tsf","tst","tsa","gdm-23"], tipo:"Nevera / Congelador", marca:"Turbo Air" },
+  { words:["fogel","mtr-","mtf","cr-23","cr-49"], tipo:"Nevera / Congelador", marca:"Fogel" },
+  { words:["coldline","forte sv","forteav"], tipo:"Nevera / Congelador", marca:"Coldline" },
+  { words:["electrolux","efcc15","ehc08"], tipo:"Nevera / Congelador", marca:"Electrolux" },
+  { words:["wonder","wc-215","wcv-430","wch-415"], tipo:"Nevera / Congelador", marca:"Wonder" },
+  { words:["tornado","hc-vc","hc-uc"], tipo:"Nevera / Congelador", marca:"Tornado" },
+  { words:["dukers","duc29","duc48","d28f","d55f"], tipo:"Nevera / Congelador", marca:"Dukers" },
+  { words:["infrico","erv83","uc27r"], tipo:"Nevera / Congelador", marca:"Infrico" },
+  { words:["inducol","w-25dbl","vv-25","w-13"], tipo:"Nevera / Congelador", marca:"Inducol" },
+  { words:["atosa","mgf84","mbf80","msf83"], tipo:"Nevera / Congelador", marca:"Atosa" },
+  { words:["crutek","hrogxx","hr06xx"], tipo:"Nevera / Congelador", marca:"Crutek" },
+  { words:["nordik","k27f","k27r"], tipo:"Nevera / Congelador", marca:"Nordik" },
+  { words:["hoshizaki","pr67a","cr15"], tipo:"Nevera / Congelador", marca:"Hoshizaki" },
+  { words:["indufrial","hu210","w450"], tipo:"Nevera / Congelador", marca:"Indufrial" },
 ];
 
 const extraerPorReglas = (texto) => {
@@ -697,6 +825,7 @@ const TABS_TECNICO = [
   {id:"instalacion",icon:"⚡",label:"Instalación"},
   {id:"limpieza",icon:"🧹",label:"Limpieza"},
   {id:"repuestos",icon:"🔩",label:"Repuestos"},
+  {id:"referencias",icon:"📑",label:"Refs"},
   {id:"stats",icon:"📊",label:"Stats"},
   {id:"guia",icon:"📖",label:"Guía"},
 ];
@@ -2002,6 +2131,218 @@ function StatsTab({ fallas, onBorrar }) {
   );
 }
 
+
+// ─── REFERENCIAS TAB ──────────────────────────────────────────────────────────
+function ReferenciasTab() {
+  const [filtro, setFiltro] = React.useState("Todos");
+  const [busq, setBusq] = React.useState("");
+  const [descMsg, setDescMsg] = React.useState("");
+
+  // Build flat list from EQUIPOS
+  const allRefs = React.useMemo(() => {
+    const lista = [];
+    for (const eq of EQUIPOS) {
+      for (const marca of eq.marcas) {
+        for (const r of marca.refs) {
+          const ref = typeof r === "string" ? r : r.ref;
+          const desc = typeof r === "object" ? (r.desc || "") : "";
+          lista.push({ tipo: eq.tipo, marca: marca.nombre, ref, desc });
+        }
+      }
+    }
+    return lista;
+  }, []);
+
+  const tipos = ["Todos", ...Array.from(new Set(allRefs.map(r => r.tipo)))];
+
+  const filtered = React.useMemo(() => {
+    let list = allRefs;
+    if (filtro !== "Todos") list = list.filter(r => r.tipo === filtro);
+    if (busq.trim()) {
+      const q = busq.toLowerCase();
+      list = list.filter(r =>
+        r.ref.toLowerCase().includes(q) ||
+        r.marca.toLowerCase().includes(q) ||
+        r.desc.toLowerCase().includes(q)
+      );
+    }
+    return list;
+  }, [allRefs, filtro, busq]);
+
+  // Group by Tipo → Marca
+  const grouped = React.useMemo(() => {
+    const g = {};
+    for (const r of filtered) {
+      if (!g[r.tipo]) g[r.tipo] = {};
+      if (!g[r.tipo][r.marca]) g[r.tipo][r.marca] = [];
+      g[r.tipo][r.marca].push(r);
+    }
+    return g;
+  }, [filtered]);
+
+  const buildCSV = (data) => {
+    const rows = [["Activo","Marca","Referencia","Descripción"]];
+    for (const r of data) {
+      rows.push([r.tipo, r.marca, r.ref, r.desc || ""]);
+    }
+    return rows.map(r => r.map(c => `"${String(c).replace(/"/g,"\"\"")}"`).join(",")).join("\n");
+  };
+
+  const download = (data, name) => {
+    const csv = "\uFEFF" + buildCSV(data);
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url; a.download = name; a.click();
+    URL.revokeObjectURL(url);
+    setDescMsg("✅ Descargado: " + name);
+    setTimeout(() => setDescMsg(""), 3000);
+  };
+
+  const downloadFiltrado = () => {
+    const name = filtro === "Todos"
+      ? "CEM_Referencias_Completa.csv"
+      : `CEM_Referencias_${filtro.replace(/[\s/]/g,"_")}.csv`;
+    download(filtered, name);
+  };
+
+  const TIPO_COLOR = {
+    "Horno": "#f97316",
+    "Cafetera": "#8b5cf6",
+    "Granizadora": "#06b6d4",
+    "Nevera / Congelador": "#0ea5e9",
+  };
+
+  return (
+    <div style={{padding:14, overflowY:"auto", height:"calc(100vh - 110px)"}}>
+      {/* Header */}
+      <div style={{display:"flex", alignItems:"center", justifyContent:"space-between", marginBottom:12}}>
+        <div>
+          <div style={{fontSize:17, fontWeight:800, color:C.text}}>📑 Referencias</div>
+          <div style={{fontSize:10, color:C.muted, marginTop:1}}>{filtered.length} equipos encontrados</div>
+        </div>
+        <button
+          onClick={downloadFiltrado}
+          style={{...btn("primary","sm"), gap:5, fontSize:11, padding:"7px 13px", borderRadius:20}}
+        >
+          ⬇ {filtro === "Todos" ? "Descargar todo" : `Descargar ${filtro.split(" / ")[0]}`}
+        </button>
+      </div>
+
+      {/* Mensaje descarga */}
+      {descMsg && (
+        <div style={{background:"#f0fdf4",border:"1px solid #bbf7d0",borderRadius:8,padding:"7px 12px",fontSize:11,color:"#16a34a",marginBottom:10,fontWeight:600}}>
+          {descMsg}
+        </div>
+      )}
+
+      {/* Buscador */}
+      <input
+        value={busq}
+        onChange={e => setBusq(e.target.value)}
+        placeholder="🔍 Buscar por referencia, marca o descripción..."
+        style={{width:"100%",boxSizing:"border-box",padding:"9px 12px",borderRadius:10,border:`1px solid ${C.border}`,fontSize:12,fontFamily:"inherit",marginBottom:10,outline:"none",background:C.white}}
+      />
+
+      {/* Filtros por tipo */}
+      <div style={{display:"flex",gap:6,flexWrap:"wrap",marginBottom:14}}>
+        {tipos.map(t => (
+          <button
+            key={t}
+            onClick={() => setFiltro(t)}
+            style={{
+              ...btn(filtro===t?"primary":"outline","sm"),
+              borderRadius:20,
+              fontSize:10,
+              padding:"4px 11px",
+              borderColor: filtro===t ? C.accent : C.border,
+            }}
+          >
+            {t === "Nevera / Congelador" ? "❄️ Frío" :
+             t === "Horno" ? "🔥 Horno" :
+             t === "Cafetera" ? "☕ Cafetera" :
+             t === "Granizadora" ? "🧊 Granizadora" : t}
+          </button>
+        ))}
+      </div>
+
+      {/* Botones descarga por activo (cuando está en Todos) */}
+      {filtro === "Todos" && busq === "" && (
+        <div style={{display:"flex",gap:6,flexWrap:"wrap",marginBottom:14}}>
+          {tipos.filter(t=>t!=="Todos").map(t => {
+            const count = allRefs.filter(r=>r.tipo===t).length;
+            const color = TIPO_COLOR[t] || C.accent;
+            return (
+              <button
+                key={t}
+                onClick={() => download(allRefs.filter(r=>r.tipo===t), `CEM_Refs_${t.replace(/[\s/]/g,"_")}.csv`)}
+                style={{display:"flex",alignItems:"center",gap:5,padding:"6px 11px",borderRadius:20,border:`1px solid ${color}`,background:"transparent",cursor:"pointer",fontSize:10,fontWeight:600,color,fontFamily:"inherit"}}
+              >
+                ⬇ {t === "Nevera / Congelador" ? "Frío" : t} ({count})
+              </button>
+            );
+          })}
+        </div>
+      )}
+
+      {/* Lista agrupada */}
+      {Object.keys(grouped).length === 0 ? (
+        <div style={{textAlign:"center",color:C.muted,fontSize:13,marginTop:40}}>
+          Sin resultados para "{busq}"
+        </div>
+      ) : (
+        Object.entries(grouped).map(([tipo, marcas]) => (
+          <div key={tipo} style={{marginBottom:18}}>
+            {/* Tipo header */}
+            <div style={{
+              display:"flex", alignItems:"center", gap:8,
+              marginBottom:10, paddingBottom:6,
+              borderBottom:`2px solid ${TIPO_COLOR[tipo]||C.accent}`,
+            }}>
+              <span style={{fontSize:15}}>
+                {tipo==="Horno"?"🔥":tipo==="Cafetera"?"☕":tipo==="Granizadora"?"🧊":"❄️"}
+              </span>
+              <span style={{fontSize:13,fontWeight:800,color:C.text}}>{tipo}</span>
+              <span style={{fontSize:10,color:C.muted,marginLeft:"auto"}}>
+                {Object.values(marcas).flat().length} refs
+              </span>
+            </div>
+
+            {/* Marcas dentro del tipo */}
+            {Object.entries(marcas).map(([marca, refs]) => (
+              <div key={marca} style={{marginBottom:12}}>
+                <div style={{fontSize:11,fontWeight:700,color:TIPO_COLOR[tipo]||C.accent,marginBottom:5,paddingLeft:2}}>
+                  {marca} <span style={{fontWeight:400,color:C.muted}}>({refs.length})</span>
+                </div>
+                {/* Refs */}
+                <div style={{display:"flex",flexDirection:"column",gap:4}}>
+                  {refs.map((r,i) => (
+                    <div key={i} style={{
+                      ...card({padding:"8px 11px",background:"#f8fafc"}),
+                      display:"flex", alignItems:"center", gap:8,
+                    }}>
+                      <div style={{
+                        width:6, height:6, borderRadius:"50%",
+                        background: TIPO_COLOR[tipo]||C.accent, flexShrink:0,
+                      }}/>
+                      <div style={{flex:1}}>
+                        <div style={{fontSize:12,fontWeight:700,color:C.text}}>{r.ref}</div>
+                        {r.desc && <div style={{fontSize:10,color:C.muted,marginTop:1}}>{r.desc}</div>}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        ))
+      )}
+
+      <div style={{height:20}}/>
+    </div>
+  );
+}
+
 function GuiaTab() {
   const [marca, setMarca] = useState("rational");
   const [open, setOpen] = useState(null);
@@ -2095,6 +2436,7 @@ export default function App() {
         {tab==="limpieza"    && <LimpiezaTab/>}
         {tab==="repuestos"   && <RepuestosTab/>}
         {tab==="stats"       && <StatsTab fallas={fallas} onBorrar={f=>{setFallas(f);saveF(f);}}/>}
+        {tab==="referencias" && <ReferenciasTab/>}
         {tab==="guia"        && <GuiaTab/>}
         {tab==="consejos"    && <ConsejosTab/>}
 
