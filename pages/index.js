@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useEffect, useCallback, useMemo } from "react";
 import Head from "next/head";
 
 // ─── COLORES ──────────────────────────────────────────────────────────────────
@@ -2134,12 +2134,12 @@ function StatsTab({ fallas, onBorrar }) {
 
 // ─── REFERENCIAS TAB ──────────────────────────────────────────────────────────
 function ReferenciasTab() {
-  const [filtro, setFiltro] = React.useState("Todos");
-  const [busq, setBusq] = React.useState("");
-  const [descMsg, setDescMsg] = React.useState("");
+  const [filtro, setFiltro] = useState("Todos");
+  const [busq, setBusq] = useState("");
+  const [descMsg, setDescMsg] = useState("");
 
   // Build flat list from EQUIPOS
-  const allRefs = React.useMemo(() => {
+  const allRefs = useMemo(() => {
     const lista = [];
     for (const eq of EQUIPOS) {
       for (const marca of eq.marcas) {
@@ -2153,9 +2153,11 @@ function ReferenciasTab() {
     return lista;
   }, []);
 
-  const tipos = ["Todos", ...Array.from(new Set(allRefs.map(r => r.tipo)))];
+  const tipos = useMemo(() =>
+    ["Todos", ...Array.from(new Set(allRefs.map(r => r.tipo)))]
+  , [allRefs]);
 
-  const filtered = React.useMemo(() => {
+  const filtered = useMemo(() => {
     let list = allRefs;
     if (filtro !== "Todos") list = list.filter(r => r.tipo === filtro);
     if (busq.trim()) {
@@ -2170,7 +2172,7 @@ function ReferenciasTab() {
   }, [allRefs, filtro, busq]);
 
   // Group by Tipo → Marca
-  const grouped = React.useMemo(() => {
+  const grouped = useMemo(() => {
     const g = {};
     for (const r of filtered) {
       if (!g[r.tipo]) g[r.tipo] = {};
