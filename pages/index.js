@@ -1166,7 +1166,119 @@ function ContactCard({ marca, ciudad }) {
   );
 }
 
-// ─── CIUDADES COLOMBIA (botones rápidos) ──────────────────────────────────────
+// ─── HOOK: Detección de actualización disponible ──────────────────────────────
+function useUpdateCheck() {
+  const [hayUpdate, setHayUpdate] = useState(false);
+  const [checking, setChecking]   = useState(false);
+
+  useEffect(() => {
+    const buildDate = process.env.NEXT_PUBLIC_BUILD_DATE || null;
+
+    const check = async () => {
+      try {
+        setChecking(true);
+        // Hace HEAD a la propia página con cache-bust para forzar al servidor
+        const res = await fetch(window.location.href, {
+          method: "HEAD",
+          cache: "no-store",
+          headers: { "Cache-Control": "no-cache", "Pragma": "no-cache" }
+        });
+        // Leer ETag o Last-Modified del servidor
+        const serverEtag    = res.headers.get("etag") || "";
+        const serverModified= res.headers.get("last-modified") || "";
+
+        // Guardar en sessionStorage la primera vez que se carga
+        const storedEtag    = sessionStorage.getItem("cem_etag") || "";
+        const storedModified= sessionStorage.getItem("cem_modified") || "";
+
+        if (!storedEtag && !storedModified) {
+          // Primera carga — guardar como baseline
+          if (serverEtag)     sessionStorage.setItem("cem_etag", serverEtag);
+          if (serverModified) sessionStorage.setItem("cem_modified", serverModified);
+        } else {
+          // Comparar: si el servidor devuelve algo distinto → hay update
+          const etagCambio    = serverEtag     && storedEtag     && serverEtag !== storedEtag;
+          const modifCambio   = serverModified && storedModified && serverModified !== storedModified;
+          if (etagCambio || modifCambio) setHayUpdate(true);
+        }
+      } catch (_) {
+        // Sin conexión o error → no mostrar nada
+      } finally {
+        setChecking(false);
+      }
+    };
+
+    // Verificar al montar y luego cada 5 minutos
+    check();
+    const timer = setInterval(check, 5 * 60 * 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const currentVersion = process.env.NEXT_PUBLIC_BUILD_DATE
+    ? "v3.2 · " + new Date(process.env.NEXT_PUBLIC_BUILD_DATE)
+        .toLocaleDateString("es-CO", { day:"2-digit", month:"2-digit", year:"2-digit" })
+    : "v3.2";
+
+  const recargar = () => {
+    sessionStorage.removeItem("cem_etag");
+    sessionStorage.removeItem("cem_modified");
+    window.location.reload(true);
+  };
+
+  return { hayUpdate, checking, currentVersion, recargar };
+}
+
+// ─── BANNER DE ACTUALIZACIÓN ──────────────────────────────────────────────────
+function UpdateBanner({ hayUpdate, checking, currentVersion, recargar, dark = false }) {
+  if (hayUpdate) {
+    return (
+      <div style={{
+        display:"flex", alignItems:"center", gap:8,
+        background: dark ? "rgba(37,99,235,0.25)" : "#eff6ff",
+        border: dark ? "1px solid rgba(147,197,253,0.4)" : "1px solid #93c5fd",
+        borderRadius:12, padding:"10px 13px", cursor:"pointer",
+        marginTop: dark ? 12 : 0,
+      }} onClick={recargar}>
+        <div style={{
+          width:32, height:32, background:"#2563eb", borderRadius:8,
+          display:"flex", alignItems:"center", justifyContent:"center",
+          fontSize:16, flexShrink:0, animation:"pulse 1.5s infinite"
+        }}>🔄</div>
+        <div style={{flex:1}}>
+          <div style={{fontSize:12, fontWeight:800, color: dark ? "#93c5fd" : "#1d4ed8"}}>
+            Actualización disponible
+          </div>
+          <div style={{fontSize:10, color: dark ? "rgba(147,197,253,0.8)" : "#3b82f6", marginTop:1}}>
+            Toca aquí para recargar y obtener la última versión
+          </div>
+        </div>
+        <div style={{
+          background:"#2563eb", color:"#fff", fontSize:10, fontWeight:700,
+          padding:"4px 10px", borderRadius:20, flexShrink:0
+        }}>
+          Actualizar
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div style={{
+      display:"flex", alignItems:"center", gap:6,
+      padding: dark ? "5px 2px" : "4px 0",
+    }}>
+      <div style={{
+        width:7, height:7, borderRadius:"50%",
+        background: checking ? "#f97316" : "#16a34a",
+        flexShrink:0,
+        boxShadow: checking ? "0 0 0 3px rgba(249,115,22,0.25)" : "0 0 0 3px rgba(22,163,74,0.2)",
+      }}/>
+      <span style={{fontSize:9, color: dark ? "rgba(255,255,255,0.4)" : "#94a3b8", fontWeight:600}}>
+        {checking ? "Verificando..." : `✓ Actualizado · ${currentVersion}`}
+      </span>
+    </div>
+  );
+}
 const CIUDADES_CO = ["Bogotá","Medellín","Cali","Barranquilla","Bucaramanga","Pereira","Manizales","Cartagena","Cúcuta","Ibagué","Pasto","Villavicencio","Santa Marta","Montería","Neiva"];
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -1675,6 +1787,7 @@ function TutorialScreen({ onClose }) {
 
 function WelcomeScreen({ onSelect }) {
   const [showTutorial, setShowTutorial] = useState(false);
+  const { hayUpdate, checking, currentVersion, recargar } = useUpdateCheck();
   return (
     <>
       {showTutorial && <TutorialScreen onClose={()=>setShowTutorial(false)}/>}
@@ -1690,6 +1803,10 @@ function WelcomeScreen({ onSelect }) {
             </div>
             <div style={{fontSize:22,fontWeight:900,color:"#fff",letterSpacing:-0.5,marginBottom:4}}>CEM IA Assistant</div>
             <div style={{fontSize:12,color:"rgba(255,255,255,0.4)"}}>Centro de Excelencia de Mantenimiento</div>
+            {/* Indicador de versión / update bajo el título */}
+            <div style={{display:"flex",justifyContent:"center",marginTop:6}}>
+              <UpdateBanner hayUpdate={false} checking={checking} currentVersion={currentVersion} recargar={recargar} dark={true}/>
+            </div>
           </div>
           <div style={{fontSize:10,color:"rgba(255,255,255,0.4)",fontWeight:700,letterSpacing:1,marginBottom:10,textAlign:"center"}}>SELECCIONA TU ROL</div>
           <div style={{display:"flex",flexDirection:"column",gap:10,marginBottom:14}}>
@@ -1712,6 +1829,12 @@ function WelcomeScreen({ onSelect }) {
               <div style={{fontSize:18,color:"rgba(255,255,255,0.25)"}}>›</div>
             </div>
           </div>
+          {/* Banner de update — aparece aquí si hay nueva versión */}
+          {hayUpdate && (
+            <div style={{marginBottom:12}}>
+              <UpdateBanner hayUpdate={hayUpdate} checking={checking} currentVersion={currentVersion} recargar={recargar} dark={true}/>
+            </div>
+          )}
           <div onClick={()=>setShowTutorial(true)}
             style={{display:"flex",alignItems:"center",gap:10,background:"rgba(255,255,255,0.05)",borderRadius:12,padding:"12px 16px",cursor:"pointer",border:"1px solid rgba(255,255,255,0.08)"}}>
             <div style={{width:36,height:36,background:"linear-gradient(135deg,#f97316,#dc2626)",borderRadius:9,display:"flex",alignItems:"center",justifyContent:"center",fontSize:18,flexShrink:0}}>📖</div>
@@ -1733,6 +1856,7 @@ function WelcomeScreen({ onSelect }) {
 // ══════════════════════════════════════════════════════════════════════════════
 function InicioTab({ onNav }) {
   const [showTutorial, setShowTutorial] = useState(false);
+  const { hayUpdate, checking, currentVersion, recargar } = useUpdateCheck();
   const items = [
     {id:"chat",      icon:"🤖", color:"#2563eb", bg:"#dbeafe", titulo:"CEM Bot",        desc:"Diagnóstico por texto, voz e imagen."},
     {id:"planes",    icon:"📋", color:"#16a34a", bg:"#dcfce7", titulo:"Planes PM",       desc:"Tareas preventivas por equipo."},
@@ -1754,13 +1878,23 @@ function InicioTab({ onNav }) {
             </div>
             <div>
               <div style={{fontSize:17,fontWeight:900,color:"#fff"}}>CEM IA Assistant</div>
-              <div style={{fontSize:10,color:"rgba(255,255,255,0.5)",marginTop:1}}>🔧 Módulo técnico · v3.2</div>
+              <div style={{fontSize:10,color:"rgba(255,255,255,0.5)",marginTop:1}}>🔧 Módulo técnico · {currentVersion}</div>
             </div>
           </div>
-          <div style={{marginTop:12,display:"flex",gap:7}}>
+          <div style={{marginTop:12,display:"flex",gap:7,alignItems:"center",flexWrap:"wrap"}}>
             <div style={{background:"rgba(255,255,255,0.12)",borderRadius:20,padding:"3px 10px",fontSize:10,color:"rgba(255,255,255,0.75)",fontWeight:600}}>✅ Bot activo</div>
             <div style={{background:"rgba(255,255,255,0.12)",borderRadius:20,padding:"3px 10px",fontSize:10,color:"rgba(255,255,255,0.75)",fontWeight:600}}>🇨🇴 Colombia</div>
+            {/* Indicador compacto si está actualizado */}
+            {!hayUpdate && (
+              <UpdateBanner hayUpdate={false} checking={checking} currentVersion={currentVersion} recargar={recargar} dark={true}/>
+            )}
           </div>
+          {/* Banner de actualización disponible — prominente */}
+          {hayUpdate && (
+            <div style={{marginTop:10}}>
+              <UpdateBanner hayUpdate={hayUpdate} checking={checking} currentVersion={currentVersion} recargar={recargar} dark={true}/>
+            </div>
+          )}
         </div>
         <div style={{padding:"12px 14px 80px"}}>
           <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:9,marginBottom:10}}>
@@ -1800,7 +1934,7 @@ function InicioTab({ onNav }) {
           </div>
           <div style={{textAlign:"center",paddingTop:14,borderTop:"1px solid #f1f5f9",marginTop:11,fontSize:10,color:"#d1d5db"}}>
             Rational · Unox · Zanolli · Turbochef · Bunn<br/>
-            <span style={{fontSize:9}}>{process.env.NEXT_PUBLIC_BUILD_DATE?"v3.2 · "+new Date(process.env.NEXT_PUBLIC_BUILD_DATE).toLocaleDateString("es-CO",{day:"2-digit",month:"2-digit",year:"2-digit"}):"v3.2 · dev"}</span>
+            <span style={{fontSize:9}}>{currentVersion}</span>
           </div>
         </div>
       </div>
@@ -1813,6 +1947,7 @@ function InicioTab({ onNav }) {
 // ══════════════════════════════════════════════════════════════════════════════
 function InicioOpTab({ onNav }) {
   const [showTutorial, setShowTutorial] = useState(false);
+  const { hayUpdate, checking, currentVersion, recargar } = useUpdateCheck();
   return (
     <>
       {showTutorial && <TutorialScreen onClose={()=>setShowTutorial(false)}/>}
@@ -1821,6 +1956,11 @@ function InicioOpTab({ onNav }) {
           <div style={{position:"absolute",right:-18,top:-18,width:100,height:100,borderRadius:"50%",background:"rgba(255,255,255,0.05)"}}/>
           <div style={{fontSize:20,fontWeight:900,color:"#fff",marginBottom:3,position:"relative"}}>Hola 👋</div>
           <div style={{fontSize:11,color:"rgba(255,255,255,0.55)",position:"relative"}}>Asistente de cocina · CEM</div>
+          {hayUpdate && (
+            <div style={{marginTop:10,position:"relative"}}>
+              <UpdateBanner hayUpdate={hayUpdate} checking={checking} currentVersion={currentVersion} recargar={recargar} dark={true}/>
+            </div>
+          )}
           <div style={{marginTop:11,background:"rgba(0,0,0,0.15)",borderRadius:10,padding:"10px 13px",position:"relative"}}>
             <div style={{fontSize:11,color:"rgba(255,255,255,0.9)",lineHeight:1.6}}>
               🚨 Humo · olor a gas · chispas · número de error → <strong style={{color:"#fde68a"}}>contrata técnico certificado ya</strong>
