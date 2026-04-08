@@ -951,65 +951,214 @@ const googleST = (marca, ciudad) => `https://www.google.com/search?q=servicio+te
 // Componente tarjeta de contacto
 function ContactCard({ marca, ciudad }) {
   const data = CONTACTOS_ST[marca];
-  if (!data) return null;
-  const todos = [...(data.oficial||[]), ...(data.especializados||[])];
-  // Filtrar por ciudad si se especificó — primero los de esa ciudad, luego los demás
-  const cidLow = ciudad ? ciudad.toLowerCase() : "";
-  const enCiudad = cidLow ? todos.filter(c => c.ciudad.toLowerCase().includes(cidLow) || cidLow.includes(c.ciudad.toLowerCase())) : [];
-  const otros = cidLow ? todos.filter(c => !c.ciudad.toLowerCase().includes(cidLow) && !cidLow.includes(c.ciudad.toLowerCase())) : todos;
-  const lista = enCiudad.length > 0 ? [...enCiudad, ...otros] : todos;
 
-  // Badge color by certification
+  // ── Mapa de ciudades cercanas (por región geográfica) ─────────────────────
+  const CERCANAS = {
+    "Bogotá":       ["Bogotá","Cundinamarca","Facatativá","Soacha","Zipaquirá","Tunja","Chía"],
+    "Medellín":     ["Medellín","Antioquia","Bello","Itagüí","Envigado","Rionegro","Sabaneta"],
+    "Cali":         ["Cali","Valle","Palmira","Buenaventura","Cartago","Tuluá"],
+    "Barranquilla": ["Barranquilla","Santa Marta","Cartagena","Montería","Sincelejo","Valledupar"],
+    "Bucaramanga":  ["Bucaramanga","Floridablanca","Girón","Piedecuesta","Cúcuta","Barrancabermeja","Socorro"],
+    "Pereira":      ["Pereira","Dosquebradas","Armenia","Manizales","Cartago","Santa Rosa de Cabal","Eje Cafetero"],
+    "Manizales":    ["Manizales","Pereira","Dosquebradas","Armenia","Eje Cafetero"],
+    "Dosquebradas": ["Dosquebradas","Pereira","Manizales","Armenia","Eje Cafetero"],
+    "Montería":     ["Montería","Barranquilla","Sincelejo","Cartagena","Costa"],
+    "Cartagena":    ["Cartagena","Barranquilla","Montería","Santa Marta","Costa"],
+    "Santa Marta":  ["Santa Marta","Barranquilla","Cartagena","Valledupar","Costa"],
+    "Ibagué":       ["Ibagué","Bogotá","Armenia","Neiva"],
+    "Villavicencio":["Villavicencio","Bogotá"],
+    "Neiva":        ["Neiva","Ibagué","Bogotá"],
+    "Pasto":        ["Pasto","Cali","Ipiales"],
+    "Cúcuta":       ["Cúcuta","Bucaramanga","Pamplona"],
+  };
+
+  // Orden de prioridad de certificación
+  const CERT_ORDER = { "PLATINUM":0, "GOLD":1, "SILVER":2, "Oficial":3, "Distribuidor":4, "Certificado":5 };
+  const certPrio = (tipo) => {
+    for (const [k,v] of Object.entries(CERT_ORDER)) if (tipo.includes(k)) return v;
+    return 9;
+  };
+
+  const sortByCert = (arr) => [...arr].sort((a,b) => certPrio(a.tipo) - certPrio(b.tipo));
+
+  if (!data) {
+    // Marca sin datos — fallback genérico
+    return (
+      <div style={{marginTop:8,background:"#fff7ed",border:"1px solid #fed7aa",borderRadius:12,padding:"12px 13px"}}>
+        <div style={{fontSize:11,fontWeight:800,color:"#c2410c",marginBottom:6}}>
+          📍 Servicio técnico {marca}
+        </div>
+        <div style={{fontSize:11,color:"#374151",marginBottom:10}}>
+          No tenemos técnicos certificados registrados para {marca} en Colombia. Te sugerimos contactar al distribuidor oficial o buscar en Google.
+        </div>
+        <a href={`https://www.google.com/search?q=servicio+tecnico+${encodeURIComponent(marca)}+Colombia+${encodeURIComponent(ciudad||"")}+certificado`}
+          target="_blank" rel="noopener noreferrer"
+          style={{display:"flex",alignItems:"center",gap:6,padding:"8px 11px",background:"#fff7ed",border:"1px solid #fed7aa",borderRadius:8,textDecoration:"none"}}>
+          <span style={{fontSize:15}}>🔍</span>
+          <div>
+            <div style={{fontSize:11,fontWeight:700,color:"#c2410c"}}>Buscar en Google</div>
+            <div style={{fontSize:9,color:C.muted}}>Servicio técnico {marca} certificado {ciudad ? "en "+ciudad : "en Colombia"}</div>
+          </div>
+          <span style={{marginLeft:"auto",color:C.light,fontSize:12}}>›</span>
+        </a>
+      </div>
+    );
+  }
+
+  const todos = [...(data.oficial||[]), ...(data.especializados||[])];
+  const cidKey = ciudad ? ciudad.trim() : "";
+  const cidLow = cidKey.toLowerCase();
+
+  // Detectar si la ciudad seleccionada es una de nuestras ciudades clave (o cercana)
+  const cercanasACiudad = cidKey
+    ? (CERCANAS[cidKey] || [cidKey]).map(c => c.toLowerCase())
+    : [];
+
+  const esCercana = (contactCiudad) => {
+    const cl = contactCiudad.toLowerCase();
+    return cercanasACiudad.some(c => cl.includes(c) || c.includes(cl));
+  };
+
+  // Separar: en ciudad, en ciudades cercanas, en otras
+  const enCiudad   = cidLow ? sortByCert(todos.filter(c => c.ciudad.toLowerCase().includes(cidLow) || cidLow.includes(c.ciudad.toLowerCase()))) : [];
+  const enCercanas = cidLow ? sortByCert(todos.filter(c => !enCiudad.includes(c) && esCercana(c.ciudad))) : [];
+  const enOtras    = sortByCert(todos.filter(c => !enCiudad.includes(c) && !enCercanas.includes(c)));
+
+  // Si no hay nadie en la ciudad ni cercanas — mostrar TODO ordenado por cert con aviso
+  const sinCobertura = cidLow && enCiudad.length === 0 && enCercanas.length === 0;
+
   const badgeStyle = (tipo) => {
-    if (tipo.includes("PLATINUM")) return {background:"#e9d5ff",color:"#6d28d9",border:"1px solid #c4b5fd"};
+    if (tipo.includes("PLATINUM")) return {background:"#ede9fe",color:"#5b21b6",border:"1px solid #c4b5fd"};
     if (tipo.includes("GOLD"))     return {background:"#fef9c3",color:"#a16207",border:"1px solid #fde047"};
     if (tipo.includes("SILVER"))   return {background:"#f1f5f9",color:"#475569",border:"1px solid #cbd5e1"};
     if (tipo.includes("Oficial"))  return {background:"#dbeafe",color:"#1d4ed8",border:"1px solid #93c5fd"};
     return {background:"#dcfce7",color:"#15803d",border:"1px solid #86efac"};
   };
 
+  const ContactItem = ({ c, destacado }) => (
+    <div style={{
+      background: destacado ? "#f0fdf4" : C.white,
+      borderRadius:8, padding:"10px 11px", marginBottom:6,
+      border:`1px solid ${destacado ? "#86efac" : C.border}`,
+    }}>
+      <div style={{display:"flex",alignItems:"flex-start",gap:6,marginBottom:5}}>
+        <span style={{...badgeStyle(c.tipo),fontSize:9,fontWeight:700,padding:"2px 7px",borderRadius:10,flexShrink:0,marginTop:1}}>{c.tipo}</span>
+        <div style={{flex:1}}>
+          <div style={{fontSize:12,fontWeight:800,color:C.text,lineHeight:1.3}}>{c.nombre}</div>
+          {c.ciudad && (
+            <div style={{fontSize:9,color:C.muted,marginTop:1}}>
+              📌 {c.ciudad}
+              {!destacado && cidLow && enCiudad.length > 0 && (
+                <span style={{color:"#f97316",marginLeft:4,fontWeight:600}}>· fuera de tu ciudad</span>
+              )}
+            </div>
+          )}
+        </div>
+      </div>
+      {c.nota && (
+        <div style={{fontSize:10,color:"#374151",marginBottom:7,lineHeight:1.5,background:"#f8fafc",borderRadius:6,padding:"6px 8px"}}>
+          {c.nota}
+        </div>
+      )}
+      <div style={{display:"flex",gap:6,flexWrap:"wrap"}}>
+        {c.tel && (
+          <a href={`tel:+57${c.tel.replace(/[\s\-]/g,"")}`}
+            style={{display:"flex",alignItems:"center",gap:4,background:C.gl,color:C.green,fontSize:10,fontWeight:700,padding:"5px 10px",borderRadius:6,textDecoration:"none"}}>
+            📞 {c.tel}
+          </a>
+        )}
+        {c.ws && (
+          <a href={c.ws} target="_blank" rel="noopener noreferrer"
+            style={{display:"flex",alignItems:"center",gap:4,background:"#dcfce7",color:"#15803d",fontSize:10,fontWeight:700,padding:"5px 10px",borderRadius:6,textDecoration:"none"}}>
+            💬 WhatsApp
+          </a>
+        )}
+        {c.web && (
+          <a href={c.web} target="_blank" rel="noopener noreferrer"
+            style={{display:"flex",alignItems:"center",gap:4,background:C.al,color:C.accent,fontSize:10,fontWeight:700,padding:"5px 10px",borderRadius:6,textDecoration:"none"}}>
+            🌐 Web
+          </a>
+        )}
+      </div>
+    </div>
+  );
+
+  const SectionLabel = ({ emoji, label, sub, color }) => (
+    <div style={{display:"flex",alignItems:"center",gap:6,margin:"10px 0 6px",padding:"4px 8px",background:color+"18",borderRadius:6,borderLeft:`3px solid ${color}`}}>
+      <span style={{fontSize:13}}>{emoji}</span>
+      <div>
+        <div style={{fontSize:10,fontWeight:800,color}}>{label}</div>
+        {sub && <div style={{fontSize:9,color:C.muted}}>{sub}</div>}
+      </div>
+    </div>
+  );
+
   return (
     <div style={{marginTop:8,background:"#f0fdf4",border:"1px solid #16a34a44",borderRadius:12,padding:"12px 13px"}}>
-      <div style={{fontSize:10,fontWeight:800,color:C.green,marginBottom:2}}>📍 SERVICIO TÉCNICO {marca.toUpperCase()}</div>
-      {enCiudad.length > 0 && <div style={{fontSize:10,color:C.green,marginBottom:8,fontWeight:600}}>Mostrando primero los más cercanos a {ciudad}</div>}
-      {lista.map((c,i)=>(
-        <div key={i} style={{background:C.white,borderRadius:8,padding:"10px 11px",marginBottom:7,border:`1px solid ${C.border}`}}>
-          <div style={{display:"flex",alignItems:"flex-start",gap:6,marginBottom:5}}>
-            <span style={{...badgeStyle(c.tipo),fontSize:9,fontWeight:700,padding:"2px 7px",borderRadius:10,flexShrink:0,marginTop:1}}>{c.tipo}</span>
-            <div>
-              <div style={{fontSize:12,fontWeight:800,color:C.text,lineHeight:1.3}}>{c.nombre}</div>
-              {c.ciudad && <div style={{fontSize:9,color:C.muted,marginTop:1}}>📌 {c.ciudad}</div>}
-            </div>
-          </div>
-          {c.nota && <div style={{fontSize:10,color:"#374151",marginBottom:7,lineHeight:1.5,background:"#f8fafc",borderRadius:6,padding:"6px 8px"}}>{c.nota}</div>}
-          <div style={{display:"flex",gap:6,flexWrap:"wrap"}}>
-            {c.tel && (
-              <a href={`tel:+57${c.tel.replace(/[\s\-]/g,"")}`}
-                style={{display:"flex",alignItems:"center",gap:4,background:C.gl,color:C.green,fontSize:10,fontWeight:700,padding:"5px 10px",borderRadius:6,textDecoration:"none"}}>
-                📞 {c.tel}
-              </a>
-            )}
-            {c.ws && (
-              <a href={c.ws} target="_blank" rel="noopener noreferrer"
-                style={{display:"flex",alignItems:"center",gap:4,background:"#dcfce7",color:"#15803d",fontSize:10,fontWeight:700,padding:"5px 10px",borderRadius:6,textDecoration:"none"}}>
-                💬 WhatsApp
-              </a>
-            )}
-            {c.web && (
-              <a href={c.web} target="_blank" rel="noopener noreferrer"
-                style={{display:"flex",alignItems:"center",gap:4,background:C.al,color:C.accent,fontSize:10,fontWeight:700,padding:"5px 10px",borderRadius:6,textDecoration:"none"}}>
-                🌐 Web
-              </a>
-            )}
-          </div>
+      {/* Header */}
+      <div style={{fontSize:11,fontWeight:800,color:C.green,marginBottom:2}}>
+        📍 SERVICIO TÉCNICO {marca.toUpperCase()}
+      </div>
+      {cidLow && (
+        <div style={{fontSize:10,color:C.green,marginBottom:8,fontWeight:600}}>
+          {sinCobertura
+            ? `⚠️ Sin técnicos registrados cerca de ${ciudad} — mostrando los disponibles en Colombia`
+            : enCiudad.length > 0
+              ? `✅ ${enCiudad.length} empresa${enCiudad.length>1?"s":""} en ${ciudad}${enCercanas.length>0?" · "+enCercanas.length+" en ciudades cercanas":""}`
+              : `🔄 Sin técnicos en ${ciudad} — mostrando ${enCercanas.length} empresa${enCercanas.length>1?"s":""} en ciudades cercanas`
+          }
         </div>
-      ))}
+      )}
+
+      {/* Aviso sin cobertura */}
+      {sinCobertura && (
+        <div style={{background:"#fff7ed",border:"1px solid #fed7aa",borderRadius:8,padding:"8px 10px",marginBottom:10,fontSize:10,color:"#92400e",lineHeight:1.5}}>
+          <strong>No tenemos técnicos certificados registrados en {ciudad}.</strong><br/>
+          Te mostramos las empresas disponibles en Colombia ordenadas por nivel de certificación. Contáctalas para consultar si atienden tu zona o tienen técnico visitante.
+        </div>
+      )}
+
+      {/* En la ciudad — ordenados por certificación */}
+      {enCiudad.length > 0 && (
+        <>
+          <SectionLabel emoji="📍" label={`En ${ciudad}`} sub="Ordenados por nivel de certificación" color={C.green}/>
+          {enCiudad.map((c,i) => <ContactItem key={"loc-"+i} c={c} destacado={true}/>)}
+        </>
+      )}
+
+      {/* En ciudades cercanas */}
+      {enCercanas.length > 0 && (
+        <>
+          <SectionLabel emoji="🗺️" label="Ciudades cercanas" sub="Pueden desplazarse a tu zona" color={C.accent}/>
+          {enCercanas.map((c,i) => <ContactItem key={"cer-"+i} c={c} destacado={false}/>)}
+        </>
+      )}
+
+      {/* Otras ciudades — colapsable si ya hay cobertura local */}
+      {enOtras.length > 0 && (
+        <>
+          <SectionLabel
+            emoji={sinCobertura ? "🇨🇴" : "📦"}
+            label={sinCobertura ? "Técnicos disponibles en Colombia" : "Otras ciudades"}
+            sub={sinCobertura ? "Ordenados por certificación" : "Solo si los anteriores no están disponibles"}
+            color={sinCobertura ? C.accent : C.muted}
+          />
+          {(sinCobertura ? enOtras : enOtras.slice(0,3)).map((c,i) => <ContactItem key={"oth-"+i} c={c} destacado={false}/>)}
+          {!sinCobertura && enOtras.length > 3 && (
+            <div style={{fontSize:9,color:C.muted,textAlign:"center",marginBottom:4}}>
+              +{enOtras.length-3} más en otras ciudades
+            </div>
+          )}
+        </>
+      )}
+
+      {/* Buscar en Google */}
       <a href={googleST(marca, ciudad)} target="_blank" rel="noopener noreferrer"
-        style={{display:"flex",alignItems:"center",gap:6,marginTop:4,padding:"8px 11px",background:"#fff7ed",border:"1px solid #fed7aa",borderRadius:8,textDecoration:"none"}}>
+        style={{display:"flex",alignItems:"center",gap:6,marginTop:8,padding:"8px 11px",background:"#fff7ed",border:"1px solid #fed7aa",borderRadius:8,textDecoration:"none"}}>
         <span style={{fontSize:15}}>🔍</span>
         <div>
           <div style={{fontSize:11,fontWeight:700,color:"#c2410c"}}>Buscar más en Google</div>
-          <div style={{fontSize:9,color:C.muted}}>Servicio técnico {marca} certificado en {ciudad}</div>
+          <div style={{fontSize:9,color:C.muted}}>Servicio técnico {marca} certificado{ciudad?" en "+ciudad:" en Colombia"}</div>
         </div>
         <span style={{marginLeft:"auto",color:C.light,fontSize:12}}>›</span>
       </a>
@@ -1341,18 +1490,36 @@ Contrata técnico certificado si: [condición clara]`;
         )}
         {step==="ubicacion" && (
           <div style={{alignSelf:"flex-start",width:"100%"}}>
-            <div style={{fontSize:11,color:C.muted,marginBottom:8,fontWeight:600}}>Ciudades principales — o escribe la tuya:</div>
-            <div style={{display:"flex",flexWrap:"wrap",gap:6}}>
-              {CIUDADES_CO.map(c=>(
+            <div style={{fontSize:11,color:C.muted,marginBottom:8,fontWeight:600}}>
+              Selecciona tu ciudad — o escribe la tuya en el chat:
+            </div>
+            {/* Ciudades con cobertura directa */}
+            <div style={{fontSize:9,color:C.accent,fontWeight:700,marginBottom:5,textTransform:"uppercase",letterSpacing:"0.5px"}}>
+              ✅ Con técnicos registrados
+            </div>
+            <div style={{display:"flex",flexWrap:"wrap",gap:6,marginBottom:10}}>
+              {["Bogotá","Medellín","Cali","Barranquilla","Bucaramanga","Dosquebradas","Manizales","Montería"].map(c=>(
                 <div key={c} onClick={()=>pickCiudad(c)}
-                  style={{background:C.white,border:`1px solid ${C.border}`,borderRadius:20,padding:"5px 12px",cursor:"pointer",fontSize:11,fontWeight:600,color:C.text}}>
+                  style={{background:C.gl,border:`1px solid ${C.green}`,borderRadius:20,padding:"5px 12px",cursor:"pointer",fontSize:11,fontWeight:700,color:C.green,display:"flex",alignItems:"center",gap:4}}>
                   📍 {c}
                 </div>
               ))}
-              <div onClick={()=>setStep("chat")}
-                style={{background:C.bg,border:`1px solid ${C.border}`,borderRadius:20,padding:"5px 12px",cursor:"pointer",fontSize:11,color:C.muted}}>
-                Omitir
-              </div>
+            </div>
+            {/* Otras ciudades — sin cobertura directa */}
+            <div style={{fontSize:9,color:C.muted,fontWeight:700,marginBottom:5,textTransform:"uppercase",letterSpacing:"0.5px"}}>
+              🗺️ Otras ciudades (sugeriremos los más cercanos)
+            </div>
+            <div style={{display:"flex",flexWrap:"wrap",gap:6,marginBottom:8}}>
+              {["Pereira","Cartagena","Cúcuta","Ibagué","Pasto","Villavicencio","Santa Marta","Neiva","Popayán","Tunja","Palmira","Armenia"].map(c=>(
+                <div key={c} onClick={()=>pickCiudad(c)}
+                  style={{background:C.white,border:`1px solid ${C.border}`,borderRadius:20,padding:"5px 12px",cursor:"pointer",fontSize:11,fontWeight:600,color:C.text}}>
+                  {c}
+                </div>
+              ))}
+            </div>
+            <div onClick={()=>setStep("chat")}
+              style={{background:C.bg,border:`1px solid ${C.border}`,borderRadius:20,padding:"5px 14px",cursor:"pointer",fontSize:11,color:C.muted,display:"inline-block"}}>
+              Omitir →
             </div>
           </div>
         )}
