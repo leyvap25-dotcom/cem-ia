@@ -471,32 +471,35 @@ const INSTALACION = {
     notas:"Versión a gas — instalación solo por empresa certificada en gas y equipos Unox. Verificar presión de gas antes de puesta en marcha. Ejecutar ciclo de lavado en vacío antes del primer uso."
   },
   // ── ZANOLLI ──────────────────────────────────────────────────────────────
+  // Fuente: Zanolli Manual cod. SY0850.G — ManualsLib manual/1650111
   "Zanolli-Synthesis 08/50 Gas":{
-    electrico:{tension:"1F / 220–240V",frecuencia:"50/60 Hz",potencia:"0.3 kW (motor banda) + encendido electrónico",corriente:"6 A",fusible:"10 A",conexion:"Cable con enchufe estándar — solo para motor de banda e ignición electrónica",enchufe:"Schuko estándar"},
-    agua:{presion:"N/A",caudal:"N/A",entrada:"No requiere conexión de agua",desague:"No requiere",calidad:"N/A"},
-    gas:{presion_natural:"8–15 mbar",presion_propano:"28–35 mbar",conexion:'Tubería rígida o flexible certificada — rosca 1/2". Llave de corte de fácil acceso. Regulador de presión obligatorio para gas propano.',quemadores:"Quemadores inferiores y superiores independientes — ajuste de temperatura por zona",ventilacion:"Ventilación forzada del local obligatoria. Extractor de humos sobre el horno recomendado."},
-    dimensiones:{ancho:"960 mm",profundidad:"990 mm (sin campana)",altura:"430 mm (horno) + 200 mm (campana)",peso:"~130 kg",capacidad:"Banda 50 cm de ancho — pizzas hasta Ø 45 cm",espacio_libre:"Frontal: mín. 500 mm para acceso operario. Posterior y lateral: mín. 200 mm. Campana de extracción obligatoria sobre el equipo."},
-    notas:"Instalar sobre superficie plana y resistente al calor — el horno trabaja a temperaturas de cámara de 250–400°C. La banda de tela de fibra de vidrio es delicada: no doblar, no cortar, no arrastrar objetos metálicos sobre ella. Nivelar con los tornillos reguladores. Verificar estanqueidad de gas con solución jabonosa antes de encender. Puesta en marcha por empresa certificada Zanolli."
+    electrico:{tension:"230 VAC monofásico",frecuencia:"50/60 Hz",potencia:"450 W eléctrico (solo motor banda + electrónica de control)",corriente:"2 A",fusible:"10 A — diferencial 30 mA obligatorio",conexion:"Cable bipolar sin enchufe — sección 1.5 mm² · longitud 2 m",enchufe:"Sin enchufe de fábrica — instalación fija por electricista certificado"},
+    agua:{presion:"N/A",caudal:"N/A",entrada:"No requiere conexión de agua",desague:"No requiere"},
+    gas:{presion_natural:"Gas Natural G20 20 mbar — inyector Ø 1.55 mm",presion_propano:"LPG G30/G31 28–37 mbar — inyector Ø 0.90 mm",conexion:'Conexión gas ISO 7 rosca G1/2" cónica · Tubería metálica rígida o flexible certificada · Llave de corte manual de fácil acceso · Unión de 3 piezas para facilitar desmontaje',quemadores:"Quemador aspirado 13.9 kW máx / 6.95 kW mín · Categoría II2H3+ · Control electrónico sin llama piloto · Tiempo de seguridad <5 s",ventilacion:"Evacuación tipo A1 — sin chimenea, los gases combustión se expulsan al local · Dos aperturas permanentes en paredes (mínimo 36 m³/h por kW instalado) · Campana de extracción obligatoria sobre el horno"},
+    dimensiones:{ancho:"1260 mm",profundidad:"1750 mm",altura:"490 mm (sin base) · 1070 mm con base estándar",peso:"200 kg",capacidad:"Banda 500 mm (20\") de ancho · Cámara 850 mm largo · Temp. máx. programable 320°C · Producción 20–17 kg/h (60–50 pizzas Ø30 cm /h)",espacio_libre:"Mínimo 200 mm en todos los lados para ventilación · Verificar que la temperatura ambiente no supere 40°C ni la humedad el 95%"},
+    notas:"Fuente: Manual oficial Zanolli 08/50 Gas ManualsLib manual/1650111. NO usar extensiones eléctricas. Verificar presión de gas con manómetro antes de encender. Comprobar estanqueidad de la conexión de gas con solución jabonosa (NUNCA con llama). Si el gas no es el mismo del ajuste de fábrica, contratar técnico para cambio de inyectores (proceso de 9 pasos — ver sección mantenimiento). Puesta en marcha obligatoria por instalador certificado gas. Temperatura ambiente operación: 0–40°C."
   },
+  // Fuente: Zanolli Manual cod. SY0640.G.D.IT.1.2 — assets.catering-appliance.com
   "Zanolli-Synthesis 06/40 Gas":{
-    electrico:{tension:"1F / 220–240V",frecuencia:"50/60 Hz",potencia:"0.25 kW",corriente:"6 A",fusible:"10 A",conexion:"Cable con enchufe estándar"},
-    agua:{presion:"N/A",caudal:"N/A",entrada:"No requiere",desague:"No requiere"},
-    gas:{presion_natural:"8–15 mbar",presion_propano:"28–35 mbar",conexion:'Tubería rígida o flexible certificada rosca 1/2". Llave de corte obligatoria.',ventilacion:"Ventilación forzada del local obligatoria."},
-    dimensiones:{ancho:"760 mm",profundidad:"810 mm",altura:"390 mm",peso:"~95 kg",capacidad:"Banda 40 cm de ancho — pizzas hasta Ø 35 cm",espacio_libre:"Frontal: mín. 400 mm. Campana de extracción obligatoria."},
-    notas:"Mismos requisitos que 08/50 pero dimensiones más compactas. Verificar presión de gas. Puesta en marcha por empresa certificada."
+    electrico:{tension:"230 VAC monofásico",frecuencia:"50/60 Hz",potencia:"450 W eléctrico (motor banda + electrónica)",corriente:"2 A (1.5 A a 60 Hz)",fusible:"10 A — diferencial 30 mA obligatorio",conexion:"Cable bipolar sin enchufe — sección 1.5 mm² · longitud 2 m",enchufe:"Sin enchufe de fábrica — instalación fija por electricista certificado"},
+    agua:{presion:"N/A",caudal:"N/A",entrada:"No requiere conexión de agua",desague:"No requiere"},
+    gas:{presion_natural:"Gas Natural G20 20 mbar — inyector Ø 1.55 mm · Consumo 0.952 m³/h",presion_propano:"LPG G30/G31 28–37 mbar — inyector Ø 0.90 mm · Consumo 0.699 kg/h",conexion:'Conexión gas ISO 7 rosca G1/2" cónica · Tubería metálica rígida en zinc o cobre · Llave de corte de fácil acceso · Unión de 3 piezas metálica para desmontaje',quemadores:"Quemador aspirado 9 kW máx / 4.5 kW mín · Categoría II2H3+ · Encendido por chispa sin piloto · Tiempo de seguridad <5 s · Presión mín. inyector G20: 3.0 mbar · Presión máx. G20: 10 mbar",ventilacion:"Evacuación tipo A1 — combustión en el local · Dos aperturas permanentes en muros (mín. 31 m³/h recambio de aire) · Campana de extracción obligatoria sobre el horno · Renovación de aire recomendada: 36 m³/h por kW instalado"},
+    dimensiones:{ancho:"1030 mm",profundidad:"1300 mm",altura:"440 mm (sin base)",peso:"115 kg",capacidad:"Banda 400 mm (16\") de ancho · Cámara 580 mm largo · Temp. máx. programable 320°C · Producción 10–8.5 kg/h (30–25 pizzas Ø30 cm /h)",espacio_libre:"Mínimo 200 mm en todos los lados · Temperatura ambiente 0–40°C · Humedad máx. 95% sin condensación · Nivel de ruido <70 dB"},
+    notas:"Fuente: Manual oficial Zanolli 06/40 Gas cod. SY0640.G.D.IT.1.2 (assets.catering-appliance.com). Verificar que el tipo de gas disponible (G20 natural / G30-G31 propano) coincida con la configuración de fábrica indicada en la placa del equipo. Si no coincide → técnico certificado debe cambiar inyectores (9 pasos del manual). Encendido: abrir llave de gas → presionar tecla ON → después de 20 s aparece 'FLAMES' → presionar Reset para encender quemador. Si aparece 'FLAME' al primer intento, es normal por aire en la tubería — esperar 5 min y repetir. Temperatura de seguridad: termostato activa a 500°C — reset manual botón rojo panel lateral derecho."
   },
-  // ── TURBOCHEF ────────────────────────────────────────────────────────────
+  // Fuente: TurboChef HHC-2020 Service Manual HCT-4202D (middlebyadvantage.com) + Owner's Manual (turbochef.com)
   "Turbochef-HHC2020":{
-    electrico:{tension:"AC 208–240V monofásico",frecuencia:"50/60 Hz",potencia:"6.7 kW",corriente:"32 A",fusible:"32 A curva C — diferencial recomendado",conexion:"2 hilos + tierra — cable de 4 mm² recomendado",enchufe:"NEMA 6-30P o instalación fija según especificación local"},
-    agua:{presion:"N/A",caudal:"N/A",entrada:"No requiere agua",desague:"No requiere",nota:"Es un horno VENTLESS — no requiere extracción ni agua. Filtro de carbono interno reemplazable."},
-    dimensiones:{ancho:"559 mm",profundidad:"813 mm",altura:"584 mm",peso:"~60 kg",capacidad:"Conveyor — ancho útil 508 mm",espacio_libre:"Frontal entrada y salida: mín. 300 mm libre. Posterior: mín. 150 mm. Superior: mín. 200 mm. NO requiere campana extractora con el filtro Ventless activo."},
-    notas:"VENTLESS: el filtro interno de carbono captura humos y olores — no requiere campana ni ducto de extracción. El filtro debe reemplazarse según indicador del equipo (aprox. cada 3–6 meses según uso). Temperatura ambiente: +15°C a +35°C. No instalar cerca de freidoras o equipos que generen mucho vapor."
+    electrico:{tension:"AC 208–240V monofásico",frecuencia:"50/60 Hz",potencia:"14.4 kW máx entrada",corriente:"50 A máx — protección con breaker 50 A",fusible:"Breaker 50 A — circuito dedicado obligatorio 4 hilos (L1, L2, tierra, neutro)",conexion:"NEMA 15-50P (4 pines) · disponible IEC60309 por pedido especial · NO usar extensiones",enchufe:"NEMA 15-50P estándar o instalación fija según código local"},
+    agua:{presion:"N/A",caudal:"N/A",entrada:"No requiere agua",desague:"No requiere",nota:"Horno VENTLESS certificado UL KNLZ — filtro de carbono interno reemplazable. No requiere campana extractora para alimentos no grasos. Para carnes crudas y productos grasos consultar código HVAC local."},
+    dimensiones:{ancho:"559 mm (22\")",profundidad:"1527 mm total con extensiones · 907 mm cuerpo principal",altura:"330 mm (sin patas) · 432 mm con patas",peso:"~68 kg por módulo",capacidad:"Cámara 508 mm (20\") ancho · Temp. máx. 550°F (288°C) estándar / 600°F (315°C) activable · Se puede apilar hasta 3 unidades",espacio_libre:"Frontal y posterior: mínimo 300 mm libres para extracción de conveyor · Lateral: mínimo 50 mm · Superior: mínimo 200 mm · Temp. ambiente máx: 49°C (120°F) en el compartimento eléctrico"},
+    notas:"Fuente: TurboChef HHC-2020 Service Manual HCT-4202D (middlebyadvantage.com/modelManual/TBC-HHC-2020_spm.pdf). VENTLESS: filtro de carbono interno — no requiere campana extractora (excepto para carnes crudas y productos con alto contenido graso según código HVAC local). El filtro debe limpiarse regularmente — TurboChef no reconoce ventilación obstruida como falla de garantía. Apilado: máx 3 unidades — las patas solo se instalan en el módulo inferior. NO usar el botón Emergency Stop como interruptor regular — daña el horno y reduce vida útil. Temperatura ambiente de operación: +15°C a +49°C."
   },
+  // Fuente: TurboChef HHC-1618/2020/2620 Service Manual TBC-HHC-1618-2020-2620 (turbochef.com)
   "Turbochef-HHC1618":{
-    electrico:{tension:"AC 208–240V monofásico",frecuencia:"50/60 Hz",potencia:"5.4 kW",corriente:"27 A",fusible:"30 A curva C",conexion:"2 hilos + tierra",enchufe:"NEMA 6-30P o instalación fija"},
-    agua:{presion:"N/A",entrada:"No requiere agua",nota:"Horno VENTLESS — filtro de carbono interno"},
-    dimensiones:{ancho:"457 mm",profundidad:"711 mm",altura:"508 mm",peso:"~45 kg",capacidad:"Conveyor — ancho útil 406 mm",espacio_libre:"Frontal: mín. 250 mm cada extremo. Posterior: mín. 150 mm. NO requiere campana."},
-    notas:"Modelo más compacto que el HHC2020. Mismo sistema Ventless. Reemplazar filtro de carbono según indicador. Temperatura ambiente: +15°C a +35°C."
+    electrico:{tension:"AC 208–240V monofásico",frecuencia:"50/60 Hz",potencia:"11 kW máx entrada",corriente:"40 A máx — protección con breaker 40 A",fusible:"Breaker 40 A — circuito dedicado 4 hilos obligatorio",conexion:"NEMA 14-30P o instalación fija · NO usar extensiones",enchufe:"NEMA 14-30P o instalación fija según código local"},
+    agua:{presion:"N/A",caudal:"N/A",entrada:"No requiere agua",desague:"No requiere",nota:"Horno VENTLESS certificado UL KNLZ — mismo sistema de filtro de carbono que el HHC2020. Aprobado para operación ventless apilado doble."},
+    dimensiones:{ancho:"457 mm (18\")",profundidad:"1059 mm total con extensiones",altura:"330 mm (sin patas) · 432 mm con patas",peso:"~55 kg por módulo",capacidad:"Cámara 406 mm (16\") ancho · Temp. máx. 550°F (288°C) estándar · Se puede apilar hasta 3 unidades",espacio_libre:"Frontal y posterior: mínimo 250 mm para extracción de banda · Lateral: mínimo 50 mm · Temp. ambiente máx: 49°C"},
+    notas:"Fuente: TurboChef Service Manual TBC-HHC-1618-2020-2620 (turbochef.com/wp-content/uploads/2017/11). Modelo más compacto que el HHC2020 con cámara de 18\" en lugar de 20\". Mismo sistema de control, mismos códigos de falla (F1-F9), mismos procedimientos de limpieza. Filtro de carbono Ventless: reemplazar según indicador o cuando aparezcan olores persistentes — no opera sin el filtro. Temperatura ambiente de operación: +15°C a +49°C. Apilar máximo 3 unidades con patas solo en el módulo inferior."
   },
   // ── BUNN ─────────────────────────────────────────────────────────────────
   "Bunn-VPR":{
@@ -530,12 +533,182 @@ const PLANES = {
   "Unox-XEFT-04HS-ELDV":{ diario:["Retirar bandeja recogegotas y lavar con agua y jabón suave","Limpiar interior de cámara con paño húmedo cuando esté tibio","Limpiar burlete — verificar que los DOS ORIFICIOS superiores estén libres","Limpiar cristal con paño húmedo — nunca con químicos","Verificar que la puerta cierre correctamente hacia arriba"], semanal:["Inspeccionar burlete visualmente — sin grietas ni despegado","Limpiar exterior con paño húmedo siguiendo el pulido horizontal","Verificar que el cajón recogegotas no tenga acumulación de grasa"], mensual:["Verificar estado de bisagras de la puerta","Verificar que el sistema de vapor funcione correctamente","Revisar conexión de agua si aplica"], semestral:["Revisión general por empresa certificada Unox","Evaluar estado del burlete — código reemplazo KGN1352A ($211.500)"], anual:["Inspección general certificada Unox","Reemplazar burlete si hay deterioro"] },
   "Unox-XEFR-04HS-ELDV":{ diario:["Retirar bandeja recogegotas y lavar","Limpiar interior con paño húmedo","Limpiar burlete con paño húmedo — verificar orificios superiores libres","Limpiar cristal con paño húmedo"], semanal:["Inspeccionar burlete visualmente","Verificar sistema de vapor y conexión de agua"], mensual:["Verificar presión de agua entrada","Verificar funcionamiento del sistema de humedad Steam.Plus"], semestral:["Revisión por empresa certificada Unox"], anual:["Inspección general certificada"] },
   "Unox-XEVC-0511-GPRM":{ diario:["Ejecutar ciclo de limpieza con Det&Rinse al finalizar jornada","Retirar TODAS las bandejas antes del ciclo","Verificar grifo de agua y tanque de detergente"], semanal:["Inspeccionar cámara y sello de puerta","Verificar P-trap del desagüe"], mensual:["Verificar presión de agua 1.5–6 bar","Solo gas: verificar corriente de ionización y gaps de electrodos","Verificar válvulas solenoides"], trimestral:["Solo gas: verificar módulo gas y blower","Verificar presión dinámica gas: caída máx. 5 mbar"], semestral:["Actualizar firmware","Solo gas: reemplazar empaques kit KGN1569A si aplica"], anual:["Inspección general certificada Unox","Evaluar calidad del agua","Respaldar parámetros en USB"] },
-  // ── ZANOLLI ─────────────────────────────────────────────────────────────────
-  "Zanolli-Synthesis 08/50 Gas":{ diario:["Apagar el horno al finalizar y esperar enfriamiento (mín. 30 min)","Limpiar la piedra refractaria en seco con rasqueta — NUNCA con agua ni jabón","Limpiar exterior e interior metálico con paño húmedo y jabón suave","Verificar que la banda transportadora esté libre de residuos"], semanal:["Inspeccionar estado de la piedra refractaria — sin grietas ni manchas quemadas profundas","Verificar la banda transportadora: tensión y alineación","Limpiar el interior de la cámara con paño húmedo"], mensual:["Verificar presión de gas: 25–35 mbar","Solo gas: verificar ignición y sensor de llama","Revisar empaque de la mirilla"], semestral:["Revisión por empresa certificada Zanolli — verificar quemadores y sello del horno"], anual:["Inspección general certificada","Evaluar estado de la piedra refractaria — reemplazar si hay grietas profundas"] },
-  "Zanolli-Synthesis 06/40 Gas":{ diario:["Apagar y esperar enfriamiento (mín. 30 min)","Limpiar piedra refractaria en seco con rasqueta — NUNCA con agua","Limpiar exterior con paño húmedo"], semanal:["Inspeccionar piedra refractaria y banda transportadora"], mensual:["Verificar presión de gas: 25–35 mbar","Verificar ignición y sensor de llama"], semestral:["Revisión por empresa certificada"], anual:["Inspección general certificada"] },
-  // ── TURBOCHEF ────────────────────────────────────────────────────────────────
-  "Turbochef-HHC2020":{ diario:["Apagar el horno y desconectar antes de limpiar","Limpiar la banda transportadora con paño húmedo y jabón suave","Limpiar el interior de la cámara con el kit de limpieza propio","Limpiar el exterior con paño húmedo","Verificar que la banda no tenga residuos ni obstrucciones"], semanal:["Inspeccionar la banda: tensión, desgaste y alineación","Limpiar los inyectores de aire con paño seco o pincel suave","Verificar que el ventilador de circulación funcione correctamente"], mensual:["Verificar funcionamiento del sistema de impingement (inyección de aire caliente)","Inspeccionar el estado del sello de la cámara","Limpiar filtros de aire accesibles"], semestral:["Revisión por empresa certificada TurboChef"], anual:["Inspección general certificada TurboChef","Reemplazar banda si hay desgaste visible"] },
-  "Turbochef-HHC1618":{ diario:["Apagar y desconectar antes de limpiar","Limpiar banda con paño húmedo y jabón suave","Limpiar interior con kit de limpieza"], semanal:["Inspeccionar banda y inyectores de aire","Verificar ventilador de circulación"], mensual:["Verificar sistema de impingement","Limpiar filtros accesibles"], semestral:["Revisión por empresa certificada TurboChef"], anual:["Inspección general certificada"] },
+  // Fuente: Zanolli Manual 08/50 Gas ManualsLib manual/1650111 · Caps. 8 (Cleaning) y 9 (Maintenance)
+  "Zanolli-Synthesis 08/50 Gas":{
+    diario:[
+      "Apagar el horno (tecla ON/OFF) y esperar enfriamiento hasta <150°C — el ventilador y la banda siguen corriendo automáticamente hasta ese punto, NO desconectar antes",
+      "Con guantes refractarios: retirar residuos de alimentos de la banda con rasqueta — hacerlo mientras la piedra está tibia facilita el retiro",
+      "Limpiar cajones de entrada y salida del conveyor — el manual indica que esta limpieza debe hacerse CADA 4 HORAS de operación",
+      "Limpiar exterior de acero inox con esponja suave húmeda y jabón NO abrasivo siguiendo el pulido — NUNCA detergentes con cloro ni abrasivos",
+      "NO mojar los cristales de la mirilla cuando aún estén calientes — sensibles a cambios bruscos de temperatura",
+      "Cerrar la llave de gas al finalizar el turno",
+    ],
+    semanal:[
+      "Con el horno frío y DESCONECTADO de corriente: retirar cajones de entrada y salida del conveyor",
+      "Retirar la carcasa protectora del acople de transmisión de la banda (movimiento hacia arriba)",
+      "Rotar la banda hasta que el pivote del eje motor quede alineado con la muesca del acople",
+      "Deslizar el acople hacia el panel de control para liberar el eje de la banda",
+      "Elevar los deflectores de entrada y salida al máximo y retirar la banda hacia el lado de los controles",
+      "Abrir la escotilla lateral y retirar los difusores internos (usar guantes — esquinas metálicas afiladas)",
+      "Limpiar el interior de la cámara: aspirar residuos primero, luego paño húmedo con agua y jabón NO abrasivo y NO clorado · Enjuagar con paño húmedo limpio",
+      "Verificar la banda transportadora: inspeccionar costuras, desgaste lateral y alineación · Ajustar tensión si es necesario",
+      "Limpiar los rodillos de la banda — retirar acumulación de grasa carbonizada",
+      "Reconectar gas — verificar estanqueidad con solución jabonosa (NUNCA con llama) antes de encender",
+      "Nota manual: 'Se recomienda limpiar la cámara después de 200 horas de operación' — en uso intenso SSCC esto equivale a limpieza semanal",
+    ],
+    mensual:[
+      "Verificar presión de suministro de gas: G20 natural 20 mbar · LPG G30/G31 28–37 mbar",
+      "Verificar que el presostato del ventilador responde correctamente — limpiar tuberías del presostato si hay obstrucciones",
+      "Verificar que los electrodos de ignición estén limpios y bien posicionados — limpiar con lija fina si hay residuos",
+      "Verificar la llama del quemador: debe ser estable y azul — llama amarilla o intermitente → limpiar inyector",
+      "Limpiar el filtro de aire del ventilador de refrigeración (FLTR0004) con compresor de aire",
+      "Verificar estado de la batería de la tarjeta base (ELET0676) — si aparece 'BATTERY' en pantalla → reemplazar",
+    ],
+    semestral:[
+      "Revisión por técnico certificado Zanolli: verificar ajuste de la presión mínima del quemador (tornillo B) y presión máxima (hexágono A)",
+      "Limpiar el quemador completo: retirar electrodos, desatornillar inyector, limpiar ranuras del quemador con pincel metálico fino",
+      "Verificar estado de la sonda PT1000 (TERM0049) — resistencia esperada: ~1100 ohms a 25°C",
+      "Verificar el termostato de seguridad (TERM0005) — activa a 500°C — verificar que el botón de reset esté libre",
+      "Verificar y limpiar la centralina de encendido de gas (ELET0134)",
+      "Verificar estado del motor de ventilación (MOTO0034 50Hz / MOTO0077 60Hz) y condensador (ELET0100)",
+    ],
+    anual:[
+      "Inspección general certificada por empresa autorizada Zanolli (contactar Euromex Bogotá +57 601 226 4242)",
+      "Evaluar estado de todos los componentes eléctricos: tarjeta base ELET0676, scheda display ELET0673, contactores",
+      "Verificar presostato (ELET0641) y calibración completa del sistema de gas",
+      "Reemplazar batería de la tarjeta base si no se hizo antes",
+      "Verificar tornillos y estructuras de soporte de la banda y del horno",
+      "Si el equipo opera con gas diferente al de fábrica: verificar que los inyectores sean los correctos y estén en buen estado",
+    ],
+  },
+  // Fuente: Zanolli Manual 06/40 Gas cod. SY0640.G.D.IT.1.2 — assets.catering-appliance.com (leído completo)
+  "Zanolli-Synthesis 06/40 Gas":{
+    diario:[
+      "Apagar el horno (tecla ON/OFF) — el ventilador y la banda siguen corriendo automáticamente hasta <150°C · NO desconectar de corriente antes de ese punto",
+      "Limpiar cajones de entrada y salida del conveyor CADA 4 HORAS de operación (manual, cap. 8.1)",
+      "Con guantes refractarios: retirar residuos de alimentos de la banda con rasqueta mientras el horno está tibio",
+      "Limpiar exterior de acero inox con esponja húmeda y jabón suave NO abrasivo · NUNCA detergentes con cloro",
+      "NO mojar los cristales cuando estén calientes — sensibles a cambios bruscos de temperatura · Limpiarlos solo cuando estén a temperatura ambiente",
+      "Cerrar la llave de gas al finalizar el turno",
+    ],
+    semanal:[
+      "Con el horno completamente frío y DESCONECTADO de corriente y gas:",
+      "Retirar los cajones de entrada y salida · Retirar la protección del acople de transmisión",
+      "Retirar la banda de la cámara (proceso completo según cap. 8.3 del manual)",
+      "Abrir escotilla lateral · Retirar los difusores con llave #8 — usar guantes por esquinas afiladas",
+      "Limpiar interior de la cámara: aspirar residuos · paño húmedo con agua y jabón NO clorado ni abrasivo · enjuagar",
+      "Limpiar piezas removibles en solución de agua tibia (120°F) y sanitizante · Enjuagar y secar antes de rearmar",
+      "Nota manual: 'La limpieza de la cámara se recomienda después de 200 horas de operación' — en SSCC equivale a semanal",
+      "Verificar tensión y alineación de la banda · Ajustar con tornillos en los extremos si es necesario",
+    ],
+    mensual:[
+      "Verificar presión de suministro de gas: G20 natural 20 mbar · LPG G30/G31 28–37 mbar",
+      "Verificar funcionamiento del presostato del ventilador (ELET0641) — limpiar tuberías si hay obstrucciones",
+      "Verificar llama del quemador — debe ser estable y azul",
+      "Verificar electrodos de ignición y detección de llama — limpiar con lija fina si están contaminados",
+      "Limpiar filtro de ventilador de refrigeración con compresor de aire",
+      "Verificar batería de la tarjeta base — reemplazar si aparece 'BATTERY' en pantalla",
+    ],
+    semestral:[
+      "Revisión técnica certificada: verificar ajuste de presión mínima y máxima del quemador (tornillo B Phillips y hexágono A de 10 mm)",
+      "Verificar sonda PT1000 (TERM0049) — resistencia esperada ~1100 ohms a 25°C",
+      "Verificar termostato de seguridad (TERM0005) — activa a 500°C · reset manual botón rojo panel lateral derecho",
+      "Verificar motor de ventilación (MOTO0034/MOTO0077) y condensador (ELET0100)",
+      "Verificar centralina de encendido gas (ELET0134) y electroválvula gas (GASI0060/GASI0104)",
+    ],
+    anual:[
+      "Inspección general certificada por empresa autorizada Zanolli (Euromex Bogotá +57 601 226 4242)",
+      "Evaluar todos los componentes eléctricos: tarjeta base ELET0676, scheda display ELET0673, electroválvula",
+      "Reemplazar batería tarjeta base si no se hizo antes",
+      "Verificar ajuste de inyectores de gas — si el equipo opera con gas diferente al de fábrica verificar tamaño correcto",
+      "Verificar tornillos y estructuras de soporte",
+    ],
+  },
+  // Fuente: TurboChef HHC-2020 Service Manual HCT-4202D (middlebyadvantage.com) · Owner's Manual (turbochef.com)
+  "Turbochef-HHC2020":{
+    diario:[
+      "Apagar el horno desde el panel (Back/Off key) y esperar que la pantalla indique 'Oven Off' antes de limpiar — NUNCA limpiar caliente",
+      "DESCONECTAR el cable de corriente antes de cualquier limpieza interna — el manual es explícito: 'Always disconnect power before cleaning'",
+      "Retirar la banda transportadora: levantar los tensores en los extremos y deslizar la banda hacia afuera · Lavar en agua tibia con TurboChef Cleaner #103180 · Enjuagar y secar completamente",
+      "Retirar y lavar las placas de inyectores (finger assemblies / jetplates) superiores e inferiores — son los componentes de impingement · Usar solo TurboChef Cleaner · NUNCA lana de acero ni abrasivos",
+      "Limpiar interior de la cámara con TurboChef Cleaner aplicado en paño húmedo · NO usar chorro de agua · NO usar otros productos limpiadores — invalida la garantía",
+      "Limpiar exterior con paño limpio y seco · No mojar paneles de control",
+      "Reinstalar banda y placas de inyectores correctamente antes de encender · La banda debe quedar bien tensada y centrada",
+    ],
+    semanal:[
+      "Limpieza profunda completa con todos los componentes removibles desmontados",
+      "Retirar TODOS los componentes removibles: banda, jetplates superiores e inferiores, bandejas de goteo (crumb trays)",
+      "Remojar en solución TurboChef Cleaner por 10–15 minutos · Lavar con cepillo suave · Enjuagar abundantemente · Secar con paño limpio",
+      "Limpiar interior completo de la cámara con TurboChef Cleaner · Aplicar · Dejar actuar 5 min · Limpiar con paño · Enjuagar",
+      "Verificar el FILTRO DE AIRE en la parte trasera del horno (Fault F6): limpiar o reemplazar si está sucio · 'TurboChef no reconoce filtro obstruido como falla de garantía' (manual)",
+      "Verificar el FILTRO DE CARBONO Ventless — reemplazar si hay olores persistentes o según indicador · NO operar el horno sin el filtro",
+      "Inspeccionar la CADENA del conveyor (HCT-4143, 52 eslabones): sin residuos ni holgura excesiva · Verificar que pase sin rozar el crumb tray holder",
+      "Limpiar el blower accesible con pincel suave — retirar partículas de las aspas sin doblarlas",
+      "Verificar que los tensores de la banda queden bien ajustados al rearmar",
+    ],
+    mensual:[
+      "Verificar resistencia de los elementos calefactores — en TEST MODE (clave 2433) activar heaters y confirmar que el horno calienta correctamente",
+      "Verificar funcionamiento del sistema de impingement — todos los orificios de los jetplates deben estar limpios y sin obstrucciones",
+      "Inspeccionar la cadena del conveyor: si hay desgaste visible o más de 2 eslabones flojos → considerar reemplazo (HCT-4143)",
+      "Verificar el RTD (HHC-6517-2): desconectar y medir resistencia — debe ser ~100 ohms a 0°C · 119 ohms a 50°C",
+      "Revisar el log de fallas (Fault Counts Screen): si hay F6 o F8 repetidos → limpiar filtros y cámara exhaustivamente",
+      "Verificar que el voltaje de alimentación sea estable (208–240 VAC) — voltaje bajo causa F2",
+      "Limpiar el área detrás de los paneles laterales (end bells) — verificar que no haya acumulación de grasa cerca de los termostatos",
+    ],
+    semestral:[
+      "Revisión por técnico certificado TurboChef (Industrial Kitchen Medellín 301 471 1328 · Euromex Bogotá 601 226 4242)",
+      "Verificar resistencia de bobinas del motor blower: Negro-Rojo=2.3–2.8 ohms · Negro-Blanco=2.3–2.8 ohms · Rojo-Blanco=2.3–2.8 ohms · Motor a chasis=abierto",
+      "Verificar BMSC (CON-7013): verificar que no haya código de falla en su pantalla · Calibrar según procedimiento del manual",
+      "Verificar CMSC del conveyor (HHC-6630-2): motor conveyor bobinas 305–315 ohms entre terminales",
+      "Verificar SSR (Solid State Relay NGC-3005): medir resistencia en frío — si hay cortocircuito → los heaters calientan sin control",
+      "Verificar el termostato de alto límite (102075, 572°F) — verificar que el botón de reset esté libre y no disparado",
+      "Actualizar firmware si hay versión nueva disponible (via smart card — mantener copia de respaldo)",
+    ],
+    anual:[
+      "Inspección general certificada TurboChef (contactar distribuidor Euromex o Industrial Kitchen)",
+      "Reemplazar la cadena del conveyor (HCT-4143) si hay desgaste visible o más de 2 temporadas de uso intenso",
+      "Evaluar estado de los heaters (HCT-4161/HCT-4162) — resistencia correcta: 14.4 ohms a 208V",
+      "Evaluar estado del RTD (HHC-6517-2) y termostatos de 120°F (cierre en calor)",
+      "Borrar el log de fallas (Fault Counts) después de resolver todos los problemas: Setup > Borrar fallas",
+      "Respaldar los perfiles de cocción actuales antes de cualquier actualización de firmware",
+    ],
+  },
+  // Fuente: TurboChef HHC-1618/2020/2620 Service Manual TBC-HHC-1618-2020-2620 (turbochef.com)
+  "Turbochef-HHC1618":{
+    diario:[
+      "Apagar desde el panel y esperar 'Oven Off' en pantalla antes de limpiar — DESCONECTAR corriente",
+      "Retirar y lavar banda transportadora con TurboChef Cleaner #103180 · Enjuagar y secar completamente antes de reinstalar",
+      "Retirar y lavar las placas de inyectores (jetplates) con TurboChef Cleaner · NO lana de acero",
+      "Limpiar interior de cámara con TurboChef Cleaner en paño húmedo · NO chorro de agua",
+      "Limpiar exterior con paño seco · Reinstalar todos los componentes antes de encender",
+    ],
+    semanal:[
+      "Limpieza profunda: desmontar TODOS los componentes removibles (banda, jetplates, crumb trays)",
+      "Remojar en TurboChef Cleaner 10–15 min · Cepillar · Enjuagar · Secar",
+      "Verificar filtro de aire trasero (F6 prevención) — limpiar con compresor",
+      "Verificar filtro de carbono Ventless — reemplazar si hay olores",
+      "Inspeccionar cadena del conveyor — mismo sistema que HHC2020 (HCT-4143)",
+      "Limpiar blower accesible con pincel suave",
+    ],
+    mensual:[
+      "Verificar sistema de impingement — orificios de jetplates sin obstrucciones",
+      "Verificar RTD: ~100 ohms a 0°C",
+      "Revisar log de fallas (Fault Counts Screen) desde Setup · Limpiar exhaustivamente si hay F6/F8 repetidos",
+      "Verificar voltaje de alimentación estable (208–240 VAC)",
+    ],
+    semestral:[
+      "Revisión por técnico certificado TurboChef",
+      "Verificar bobinas motor blower: 2.3–2.8 ohms entre terminales",
+      "Verificar BMSC (CON-7013) y CMSC del conveyor (HHC-6630-2)",
+      "Verificar SSR (NGC-3005) y termostato alto límite (102075, 572°F)",
+    ],
+    anual:[
+      "Inspección general certificada TurboChef",
+      "Evaluar cadena conveyor HCT-4143 — reemplazar si hay desgaste",
+      "Evaluar heaters — resistencia 14.4 ohms a 208V",
+      "Borrar log de fallas y respaldar perfiles de cocción",
+    ],
+  },
 };
 const PLAN_GEN = { diario:["Limpiar exteriores","Verificar funcionamiento básico"], semanal:["Limpiar filtros accesibles"], mensual:["Inspección visual de mangueras"], semestral:["Revisión por técnico"], anual:["Mantenimiento preventivo completo"] };
 
@@ -630,10 +803,56 @@ const LIMPIEZAS_DATA = {
     {titulo:"Unox ChefTop/BakerTop — Cambio de burlete (técnico) 🔧",alerta:"⚠️ Burlete ChefTop/BakerTop NO tiene orificios (sellado completo). Pestaña LARGA = lado vapor (alejada de cabina). Pestaña CORTA = lado calor (cerca de cabina).",pasos:["Apagar el horno y dejar enfriar completamente.","Retirar burlete viejo jalando desde una esquina — deslizar fuera de la ranura todo el contorno.","Limpiar la ranura con paño húmedo y retirar residuos.","Identificar la pestaña larga y la pestaña corta del burlete nuevo. La pestaña LARGA va alejada de la cabina (lado donde sale el vapor). La pestaña CORTA va cerca de la cabina (lado del calor). Si se instala al revés el burlete no sella correctamente.","Identificar la unión del burlete (punto donde se unen los dos extremos). Esta unión va en la parte SUPERIOR centrada en la guía.","Insertar la unión en el centro superior. Luego continuar hacia el centro inferior, después hacia el lado derecho y finalmente el lado izquierdo.","Insertar de a poco, del centro hacia las esquinas, presionando hacia adentro con el pulgar.","Las esquinas son REDONDEADAS en ChefTop/BakerTop: la línea del burlete debe coincidir exactamente con la línea guía de la ranura en cada curva.","El burlete no debe sobrar ni cortarse — si sobra, revisar que esté bien insertado en toda la ranura.","Verificar sello cerrando la puerta: sin fugas de vapor ni calor en ningún punto.","Código repuesto: XECC-0523 → KGN1656A ($256.500) · ChefTop 0511 → KGN1629A ($382.500) · 1011 → KGN1631A ($405.000)"],tutoriales:getTutoriales("Unox","burlete")},
     {titulo:"Unox Arianna — Cambio de burlete (técnico) 🔧",alerta:"⚠️ La Arianna tiene burlete CON DOS ORIFICIOS en la parte superior. La puerta cierra hacia ARRIBA. La unión del burlete va en el lado IZQUIERDO.",pasos:["Apagar el horno y dejar enfriar completamente. Recuerda que la puerta de la Arianna abre hacia abajo (cae hacia el frente).","Retirar burlete viejo jalando suavemente desde una esquina.","Limpiar la ranura con paño húmedo.","Identificar los DOS ORIFICIOS del burlete nuevo — estos orificios van en la parte SUPERIOR de la puerta (arriba). Si quedan abajo, el vapor no puede escapar correctamente.","Identificar la unión del burlete. En la Arianna, la unión va en el lado IZQUIERDO del horno, en la mitad de la guía lateral.","Comenzar insertando la unión en el centro del lado izquierdo. Luego ir hacia el centro del lado derecho, después hacia la parte superior y finalmente hacia la parte inferior.","Insertar de a poco del centro hacia las esquinas — las esquinas de la Arianna son redondeadas.","Pestaña LARGA = alejada de la cabina (lado vapor). Pestaña CORTA = cerca de la cabina (lado calor).","Verificar que los dos orificios queden libres y en la parte superior — no deben quedar tapados.","El burlete no debe sobrar ni cortarse.","Verificar sello cerrando la puerta hacia arriba: sin fugas en ningún punto del contorno.","Código repuesto: KGN1352A ($211.500) o KCR1112A para bisagra ($225.000)"],tutoriales:getTutoriales("Unox","burlete")},
     {titulo:"Unox Arianna — Limpieza diaria (operador)",alerta:"⚠️ Recuerda que la puerta de la Arianna cierra hacia ARRIBA, no hacia los lados.",pasos:["Al finalizar la jornada, retirar todas las bandejas y el cajón de grasas.","Limpiar el cajón recogegotas: retirarlo, vaciarlo y lavarlo con agua y jabón suave.","Limpiar el interior de la cámara con paño húmedo mientras aún está tibio (no caliente).","Limpiar el burlete con paño húmedo — tiene DOS ORIFICIOS en la parte superior, que no se deben tapar.","Limpiar el cristal exterior e interior con paño húmedo. No usar químicos.","Limpiar el exterior (acero inox) con paño húmedo siguiendo el pulido horizontal.","Verificar que la puerta cierre correctamente al terminar."]},
-    {titulo:"Zanolli Synthesis — Limpieza diaria (operador)",alerta:"⚠️ Apagar y esperar mínimo 30 minutos antes de limpiar. La cámara puede superar 350°C.",pasos:["Apagar el horno desde el panel — NO desconectar de corriente hasta que esté frío.","Esperar mínimo 30 minutos con la campana de extracción encendida para evacuar el calor residual.","Con guantes resistentes al calor, retirar residuos de alimentos de la banda con rasqueta metálica — hacer esto mientras la piedra aún está tibia facilita el retiro.","PIEDRA REFRACTARIA: limpiar en SECO con rasqueta plana o cepillo de cerdas metálicas. NUNCA mojar ni lavar con jabón — la piedra es porosa, absorbe agua y puede quebrarse al recalentar.","Si hay manchas quemadas profundas en la piedra: calentar el horno a 350°C por 20 minutos en vacío — el calor carboniza los residuos y se pueden raspar más fácil.","Limpiar el interior metálico de la cámara (paredes y techo) con paño húmedo y jabón neutro. Enjuagar con paño limpio húmedo.","BANDA TRANSPORTADORA: limpiar con cepillo suave por arriba y por abajo. Verificar tensión — la banda no debe estar ni muy tensa ni muy floja. Si tiene residuos pegados de queso, esperar que se enfríe y raspar con espátula plástica.","Limpiar exterior de acero inox con paño húmedo y jabón neutro siguiendo el pulido. Enjuagar.","Limpiar la campana y los filtros de grasa con agua caliente y detergente desengrasante.","Verificar que el panel de control esté limpio y seco — solo paño ligeramente húmedo."]},
-    {titulo:"Zanolli Synthesis — Limpieza semanal (técnico)",alerta:"⚠️ Con el horno frío y desconectado de gas y corriente.",pasos:["Desconectar el equipo de gas y corriente antes de empezar.","Retirar la piedra refractaria completamente — apoyarla en superficie plana para inspección.","Inspeccionar la piedra: grietas superficiales menores son normales. Grietas profundas que atraviesan la piedra → reemplazar.","Limpiar debajo de la piedra con aspiradora industrial y paño seco.","Revisar la banda transportadora: inspeccionar costuras, desgaste lateral y alineación. Ajustar tensión si es necesario con los tornillos de ajuste en los extremos.","Limpiar los rodillos de la banda con paño húmedo — retirar acumulación de grasa.","Limpiar los quemadores con pincel suave de cerdas metálicas — retirar residuos carbonizados de las ranuras del quemador.","Verificar que los orificios de salida del quemador estén limpios y sin obstrucciones.","Limpiar filtros de aire (si aplica) con compresor de aire.","Reconectar gas — verificar estanqueidad con solución jabonosa antes de encender."]},
-    {titulo:"Turbochef HHC2020/HHC1618 — Limpieza diaria (operador)",alerta:"⚠️ Apagar y desconectar de la corriente antes de limpiar. El horno puede estar muy caliente.",pasos:["Apagar el horno desde el panel y desconectar el cable de corriente.","Esperar mínimo 15 minutos a que se enfríe.","Retirar la banda transportadora: levantar los tensores en los extremos y deslizar la banda hacia afuera. Lavar en agua tibia con jabón neutro. Enjuagar bien y dejar secar completamente antes de reinstalar.","Limpiar el interior de la cámara con el kit de limpieza TurboChef oficial (espuma limpiadora). Aplicar, dejar actuar 2 minutos, limpiar con paño húmedo.","Limpiar los inyectores de aire (finger assemblies): con el equipo frío y desconectado, retirar las placas de inyectores jalando hacia afuera. Lavar en agua tibia con jabón. Enjuagar. Secar completamente.","Limpiar el exterior con paño húmedo y jabón neutro.","Verificar que el FILTRO DE CARBONO Ventless no esté saturado — si hay olores persistentes, reemplazar.","Revisar que la bandeja de goteo (si aplica) esté vacía y limpia.","Reinstalar banda y placas de inyectores correctamente antes de volver a encender."]},
-    {titulo:"Turbochef HHC2020/HHC1618 — Limpieza profunda semanal (técnico)",alerta:"⚠️ Con el equipo frío y desconectado. Usar guantes y gafas de protección con los productos limpiadores.",pasos:["Desconectar de corriente.","Retirar TODOS los componentes removibles: banda, placas de inyectores superiores e inferiores, bandejas de goteo.","Remojar en solución TurboChef Cleaner por 10–15 minutos o según instrucciones del kit.","Limpiar con cepillo de cerdas suaves — NO usar lana de acero ni abrasivos.","Enjuagar abundantemente y secar con paño limpio.","Interior de la cámara: aplicar espuma limpiadora TurboChef, dejar actuar 5 minutos, limpiar con paño y enjuagar.","Limpiar el blower (ventilador de circulación) accesible: con pincel suave retirar partículas.","Verificar el estado del filtro de carbono Ventless — reemplazar si hay olor o si el indicador lo señala.","Inspeccionar la resistencia calefactora y los elementos de calor — sin residuos carbonizados acumulados.","Reinstalar todas las piezas correctamente. Verificar que la banda quede bien tensada y centrada.","Conectar y hacer un ciclo de calentamiento en vacío por 5 minutos antes de usar."]},
+    // Fuente: Zanolli Manual cap. 8 — assets.catering-appliance.com + ManualsLib manual/1650111
+    {titulo:"Zanolli Synthesis 06/40 y 08/50 Gas — Limpieza diaria (cap. 8 del manual)",alerta:"⚠️ El manual indica: 'Limpiar con el equipo APAGADO y a temperatura ambiente · Desconectar la alimentación eléctrica' · NUNCA usar chorro de agua · NUNCA detergentes con cloro ni abrasivos.",pasos:[
+      "Apagar el horno con la tecla ON/OFF y esperar que el ventilador y la banda se detengan solos (la electrónica los mantiene corriendo hasta <150°C) — NO desconectar antes.",
+      "CAJONES DE ENTRADA Y SALIDA (manual: 'cada 4 horas de operación'): retirar los cajones y limpiar con esponja húmeda, jabón suave y agua tibia. Enjuagar. Secar antes de reinstalar.",
+      "BANDA TRANSPORTADORA: con guantes, retirar residuos visibles de la banda con rasqueta o cepillo suave mientras aún está tibia — facilita el retiro. Verificar que la banda esté libre de residuos, queso o masa adheridos.",
+      "CRISTALES / MIRILLA: esperar a que estén completamente fríos antes de limpiar — 'son especialmente sensibles a cambios bruscos de temperatura y pueden romperse en fragmentos' (manual cap. 8.2). Limpiar con esponja húmeda y jabón suave.",
+      "EXTERIOR DE ACERO INOX: paño suave húmedo con jabón no abrasivo. NUNCA detergentes abrasivos o corrosivos — 'apagan el brillo del acero inox' (manual). Seguir la dirección del pulido.",
+      "Cerrar la llave de gas al finalizar el turno.",
+      "Verificar que el panel de control esté seco y limpio — solo paño ligeramente húmedo.",
+    ]},
+    {titulo:"Zanolli Synthesis 06/40 y 08/50 Gas — Limpieza de cámara de cocción (cap. 8.3 del manual)",alerta:"⚠️ HORNO FRÍO Y DESCONECTADO de corriente y gas · Usar guantes resistentes — esquinas metálicas afiladas en los difusores · La cámara debe estar completamente fría antes de empezar.",pasos:[
+      "Desconectar el enchufe del panel eléctrico y cerrar la llave de gas.",
+      "Retirar los cajones de entrada y salida del conveyor.",
+      "Retirar la carcasa protectora del acople de transmisión jalando hacia arriba.",
+      "Rotar la banda hasta que el pivote del eje motor quede alineado con la muesca del acople — deslizar el acople hacia el panel de control liberando el eje.",
+      "Elevar los deflectores (puertas) de entrada y salida al máximo.",
+      "Levantar la banda transportadora desde ambos extremos y retirarla en dirección al panel de controles.",
+      "Abrir la escotilla lateral y desatornillar las tuercas con llave #8 — usando guantes resistentes, retirar los difusores internos.",
+      "Limpiar los difusores y piezas removibles en solución de agua tibia y sanitizante (100 ppm de cloro disponible). Dejar remojar mínimo 5 minutos. Cepillar con cepillo de cerdas suaves. Enjuagar y secar completamente.",
+      "Interior de la cámara: aspirar residuos primero. Luego limpiar con paño húmedo con agua y jabón NO abrasivo y NO clorado. Enjuagar con paño húmedo limpio. Secar.",
+      "NOTA MANUAL: 'Se recomienda limpiar la cámara después de 200 horas de operación' — en uso intenso de SSCC (~8h/día) esto equivale a aproximadamente cada 25 días.",
+      "Rearmar en orden inverso: difusores → banda → acople → cajones. Verificar que la banda quede bien centrada y tensada.",
+      "Reconectar corriente → abrir llave de gas → verificar estanqueidad con solución jabonosa en la unión de gas (NUNCA con llama).",
+    ]},
+    // Fuente: TurboChef HHC-2020 Service Manual HCT-4202D + Owner's Manual (turbochef.com)
+    {titulo:"Turbochef HHC2020 / HHC1618 — Limpieza diaria (Owner's Manual cap. Cleaning)",alerta:"⚠️ El manual TurboChef es explícito: 'ALWAYS disconnect power before cleaning or servicing the oven' · 'DO NOT attempt to clean the oven until it has cooled (screen reads Oven Off)' · 'DO NOT use a water jet when cleaning the oven' · Usar SOLO TurboChef Cleaner #103180 — otros productos dañan componentes y anulan la garantía.",pasos:[
+      "Apagar el horno con la tecla Back/Off. Esperar hasta que la pantalla muestre 'Oven Off'.",
+      "DESCONECTAR el cable de corriente de la toma. Sin esto no se puede limpiar el interior.",
+      "BANDA TRANSPORTADORA: levantar los tensores en los extremos y deslizar la banda hacia afuera. Lavar en agua tibia con TurboChef Cleaner #103180. Enjuagar bien. Dejar secar completamente antes de reinstalar.",
+      "PLACAS DE INYECTORES (jetplates / finger assemblies): estas son las piezas con orificios que inyectan el aire caliente. Son el componente más crítico de la limpieza. Retirar jalando hacia afuera. Lavar con TurboChef Cleaner. Enjuagar. Secar. NUNCA usar lana de acero ni abrasivos — dañan los orificios.",
+      "INTERIOR DE LA CÁMARA: aplicar TurboChef Cleaner en un paño húmedo. Limpiar techo, paredes y piso de la cámara. NO rociar el limpiador directamente en los orificios de las paredes traseras — puede dañar componentes internos (manual).",
+      "BANDEJA DE GOTEO (crumb tray): vaciar y lavar con agua y jabón. Enjuagar y secar.",
+      "EXTERIOR: paño limpio y seco — no mojar el panel de control.",
+      "FILTRO DE CARBONO VENTLESS: verificar visualmente. Si hay olores persistentes en la cocina → reemplazar. El horno NO debe operar sin el filtro.",
+      "Reinstalar TODOS los componentes (jetplates, banda, crumb tray) antes de conectar corriente y encender.",
+    ]},
+    {titulo:"Turbochef HHC2020 / HHC1618 — Limpieza profunda semanal (Service Manual HCT-4202D)",alerta:"⚠️ Con el equipo FRÍO y DESCONECTADO de corriente · Usar guantes y gafas con los productos limpiadores · Secar completamente TODOS los componentes antes de reinstalar — la humedad residual puede causar fallas eléctricas.",pasos:[
+      "Desconectar corriente. Confirmar que el horno esté frío (pantalla 'Oven Off').",
+      "Desmontar TODOS los componentes removibles: banda, jetplates superiores e inferiores, bandejas de goteo.",
+      "Remojar todas las piezas en solución TurboChef Cleaner #103180 por 10–15 minutos.",
+      "Cepillar con cepillo de cerdas suaves. NUNCA lana de acero ni esponjas abrasivas.",
+      "Enjuagar abundantemente con agua limpia. Secar con paño limpio. Verificar que los orificios de los jetplates estén limpios y destapados.",
+      "Interior de la cámara: aplicar TurboChef Cleaner, dejar actuar 5 minutos, limpiar con paño, enjuagar.",
+      "FILTRO DE AIRE TRASERO (previene F6): retirar el panel trasero y verificar los filtros. Limpiar con compresor de aire soplando de adentro hacia afuera, o reemplazar si está rasgado o muy sucio. 'TurboChef no reconoce filtro obstruido como falla de garantía' (manual).",
+      "FILTRO DE CARBONO VENTLESS: reemplazar si hay olores o según indicador del equipo.",
+      "BLOWER (ventilador de impingement): con pincel suave, limpiar las aspas del blower accesible desde la entrada/salida del conveyor. NO doblar las aspas.",
+      "CADENA DEL CONVEYOR (HCT-4143): verificar que esté limpia y sin residuos. Verificar tensión — debe estar firme sin rozar el crumb tray holder. Si hay holgura excesiva o eslabones dañados → reemplazar.",
+      "Reinstalar todos los componentes. Verificar que la banda quede centrada y con tensión correcta.",
+      "Conectar corriente. Hacer un ciclo de calentamiento en vacío de 5 minutos antes de usar para el servicio.",
+    ]},
   ],
   Cafetera:[
     {titulo:"Cafetera Bunn — Limpieza diaria (operador)",alerta:"⚠️ No sumergir ninguna pieza eléctrica en agua.",pasos:["Al finalizar la jornada, retirar la canasta de filtro y lavarla con agua y jabón suave. Enjuagar bien.","Limpiar el cabezal de distribución con cepillo suave para retirar residuos de café.","Lavar el jarro o recipiente de café con agua y jabón suave. Enjuagar.","Limpiar el exterior de la cafetera con paño húmedo.","No dejar café viejo en la jarra — la acidez mancha y genera malos olores.","Revisar que el grifo y la boquilla de salida estén libres de obstrucciones."],tutoriales:getTutoriales("Bunn","limpieza")},
@@ -865,82 +1084,120 @@ const TutorialLinks = ({ tutoriales }) => {
 
 // ─── BASE DE CONTACTOS SERVICIO TÉCNICO COLOMBIA ─────────────────────────────
 const CONTACTOS_ST = {
+  // ─── RATIONAL ──────────────────────────────────────────────────────────────
   Rational: {
     oficial: [
-      { nombre:"Rational Colombia", tipo:"🏢 Oficial", tel:"+57 1 743 3837", ws:"https://wa.me/573173723134", web:"https://www.rational-online.co", ciudad:"Bogotá", nota:"Distribuidor y servicio técnico oficial para toda Colombia." },
+      { nombre:"Rational Colombia", tipo:"🏢 Oficial", tel:"+57 601 743 3837", ws:"https://wa.me/573173723134", web:"https://www.rational-online.co", ciudad:"Bogotá", nota:"Servicio técnico oficial para toda Colombia. Distribuidor autorizado." },
     ],
     especializados: [
-      // Bogotá / Cundinamarca
-      { nombre:"Influmax SAS — Bogotá", tipo:"🔧 Certificado", tel:"322 248 7631", ws:"https://wa.me/573222487631", web:"", ciudad:"Bogotá", nota:"Contacto: Guillermo Blanco · influmaxsas.bogota@gmail.com" },
-      { nombre:"Tecnobread SAS", tipo:"🔧 Certificado", tel:"302 442 2378", ws:"https://wa.me/573024422378", web:"", ciudad:"Bogotá", nota:"Contacto: Bibiana Carrillo · serviciotecnico@tecnobread.com" },
-      { nombre:"AD Soluciones & Mantenimiento", tipo:"🔧 Certificado", tel:"317 738 6263", ws:"https://wa.me/573177386263", web:"", ciudad:"Bogotá", nota:"Contacto: Alejandro Alvarado · alejandro.alvarado@adsolucionesymantenimiento.com" },
-      { nombre:"MDB Ingenieria SAS", tipo:"🔧 Certificado", tel:"314 272 4285", ws:"https://wa.me/573142724285", web:"", ciudad:"Bogotá", nota:"Contacto: Mairon Barreto · mdb.ingenieria.director@gmail.com" },
+      // Bogotá
+      { nombre:"Influmax SAS", tipo:"🔧 Certificado", tel:"322 248 7631", ws:"https://wa.me/573222487631", web:"", ciudad:"Bogotá", nota:"Rational / Unox · Contacto: Guillermo Blanco · influmaxsas.bogota@gmail.com" },
+      { nombre:"Tecnobread SAS", tipo:"🔧 Certificado", tel:"317 365 6619", ws:"https://wa.me/573173656619", web:"", ciudad:"Bogotá", nota:"Rational / Unox · Contacto: Katerinne Campos · mantenimiento@tecnobread.com" },
+      { nombre:"AD Soluciones & Mantenimiento", tipo:"🔧 Certificado", tel:"317 738 6263", ws:"https://wa.me/573177386263", web:"", ciudad:"Bogotá", nota:"Rational / Multimarca · Contacto: Alejandro Alvarado · alejandro.alvarado@adsolucionesymantenimiento.com" },
+      { nombre:"MDB Ingeniería SAS", tipo:"🔧 Certificado", tel:"314 272 4285", ws:"https://wa.me/573142724285", web:"", ciudad:"Bogotá", nota:"Rational / Unox · Contacto: Mairon Barreto · mdb.ingenieria.director@gmail.com" },
+      { nombre:"Intecse", tipo:"🔧 Certificado", tel:"321 494 7580", ws:"https://wa.me/573214947580", web:"", ciudad:"Bogotá", nota:"Unox (Platinum) / Rational · Contacto: Edison Nieto · gerencia@intecsecolombia.com" },
       // Medellín / Antioquia
-      { nombre:"Industrial Kitchen SAS", tipo:"🔧 Certificado", tel:"301 471 1328", ws:"https://wa.me/573014711328", web:"", ciudad:"Medellín", nota:"Contacto: Santiago Ramírez · servicio@indukitchen.com" },
-      { nombre:"Soluciones Tesla SAS", tipo:"🔧 Certificado", tel:"310 656 2315", ws:"https://wa.me/573106562315", web:"", ciudad:"Medellín", nota:"Contacto: Juan Esteban Muñoz · juan.teslasas@gmail.com" },
+      { nombre:"Soluciones Tesla SAS", tipo:"🔧 Certificado", tel:"300 444 7500", ws:"https://wa.me/573004447500", web:"", ciudad:"Medellín", nota:"Unox (Platinum) / Rational · Contacto: Juan Muñoz · juan.teslasas@gmail.com" },
+      { nombre:"Industrial Kitchen SAS", tipo:"🔧 Certificado", tel:"301 471 1328", ws:"https://wa.me/573014711328", web:"", ciudad:"Medellín", nota:"Rational / Turbochef / Bunn · Contacto: Santiago Ramírez · servicio@indukitchen.com" },
+      { nombre:"Induconfe", tipo:"🔧 Certificado", tel:"311 341 4051", ws:"https://wa.me/573113414051", web:"", ciudad:"Medellín", nota:"Rational / Multimarca" },
+      { nombre:"Servicocinas", tipo:"🔧 Certificado", tel:"310 422 9295", ws:"https://wa.me/573104229295", web:"", ciudad:"Medellín", nota:"Rational / Unox" },
       // Cali / Valle
-      { nombre:"Tecnología en Equipos Alimenticios (TEESA)", tipo:"🔧 Certificado", tel:"316 243 2974", ws:"https://wa.me/573162432974", web:"", ciudad:"Cali", nota:"Contacto: Víctor Puertas · proyectos.teesa@gmail.com" },
-      { nombre:"Refrigerar Ingeniería SAS — Cali", tipo:"🔧 Certificado", tel:"317 525 7545", ws:"https://wa.me/573175257545", web:"", ciudad:"Cali", nota:"Contacto: Yeison Muñoz · coordinador2@refrigerar.com.co" },
+      { nombre:"TEESA", tipo:"🔧 Certificado", tel:"316 243 2974", ws:"https://wa.me/573162432974", web:"", ciudad:"Cali", nota:"Unox (Gold) / Bunn / Rational · Contacto: Víctor Puertas · proyectos.teesa@gmail.com" },
+      { nombre:"Refrigerar Ingeniería SAS", tipo:"🔧 Certificado", tel:"317 525 7545", ws:"https://wa.me/573175257545", web:"", ciudad:"Cali", nota:"Rational / Multimarca · Contacto: Yeison Muñoz · coordinador2@refrigerar.com.co" },
+      { nombre:"Ingeniería Gastronómica", tipo:"🔧 Certificado", tel:"315 561 2894", ws:"https://wa.me/573155612894", web:"", ciudad:"Cali", nota:"Unox / Multimarca" },
+      { nombre:"SST Valle", tipo:"🔧 Certificado", tel:"318 354 5345", ws:"https://wa.me/573183545345", web:"", ciudad:"Cali", nota:"Rational / Unox" },
       // Barranquilla / Costa
-      { nombre:"Soluciones Integrales de Ingeniería", tipo:"🔧 Certificado", tel:"321 539 7970", ws:"https://wa.me/573215397970", web:"", ciudad:"Barranquilla", nota:"Contacto: Juan Carlos Torres · siimsas2013@gmail.com" },
-      { nombre:"Soluctem SAS — Barranquilla", tipo:"🔧 Certificado", tel:"318 683 5306", ws:"https://wa.me/573186835306", web:"", ciudad:"Barranquilla", nota:"Contacto: Lina Bahoz · coordinadorz2@soluctem.com" },
-      { nombre:"Refrigerar Ingeniería SAS — Barranquilla", tipo:"🔧 Certificado", tel:"316 706 9646", ws:"https://wa.me/573167069646", web:"", ciudad:"Barranquilla", nota:"Contacto: Luis Paternina · coordinador1@refrigerar.com.co" },
+      { nombre:"Refrigerar Ingeniería SAS", tipo:"🔧 Certificado", tel:"316 706 9646", ws:"https://wa.me/573167069646", web:"", ciudad:"Barranquilla", nota:"Rational / Multimarca · Contacto: Luis Paternina · coordinador1@refrigerar.com.co" },
+      { nombre:"Soluctem SAS", tipo:"🔧 Certificado", tel:"318 683 5306", ws:"https://wa.me/573186835306", web:"", ciudad:"Barranquilla", nota:"Unox / Rational · Contacto: Lina Bahoz · coordinadorz2@soluctem.com" },
+      { nombre:"SIIM SAS", tipo:"🔧 Certificado", tel:"321 539 7970", ws:"https://wa.me/573215397970", web:"", ciudad:"Barranquilla", nota:"Rational / Multimarca · Contacto: Juan Carlos Torres · siimsas2013@gmail.com" },
       // Bucaramanga / Santander
-      { nombre:"Influmax SAS — Bucaramanga", tipo:"🔧 Certificado", tel:"315 452 1263", ws:"https://wa.me/573154521263", web:"", ciudad:"Bucaramanga", nota:"Contacto: Maycol Soledad · influmaxsas.bucaramanga@gmail.com" },
-      // Eje Cafetero / Dosquebradas
-      { nombre:"Soluctem SAS — Dosquebradas", tipo:"🔧 Certificado", tel:"316 656 1910", ws:"https://wa.me/573166561910", web:"", ciudad:"Dosquebradas", nota:"Contacto: Vannessa Londoño · coordinadortecnico@soluctem.com" },
-      { nombre:"Refrigerar Ingeniería SAS — Dosquebradas", tipo:"🔧 Certificado", tel:"316 875 3712", ws:"https://wa.me/573168753712", web:"", ciudad:"Dosquebradas", nota:"Contacto: Vanesa Ituyan · auxiliar1ccr@refrigerar.com.co" },
-      { nombre:"Dacara Colombia", tipo:"🔧 Certificado", tel:"318 291 1825", ws:"https://wa.me/573182911825", web:"", ciudad:"Dosquebradas", nota:"Contacto: Anggy Ramírez · servicios@dacara.co" },
+      { nombre:"Influmax SAS", tipo:"🔧 Certificado", tel:"316 820 0182", ws:"https://wa.me/573168200182", web:"", ciudad:"Bucaramanga", nota:"Unox (Platinum) / Rational · Contacto: Omar Fernando Gomez · influmaxsas@gmail.com" },
+      { nombre:"Gastroequipos", tipo:"🔧 Certificado", tel:"317 641 5302", ws:"https://wa.me/573176415302", web:"", ciudad:"Bucaramanga", nota:"Rational / Multimarca" },
+      // Eje Cafetero
+      { nombre:"Soluctem SAS", tipo:"🔧 Certificado", tel:"316 417 7660", ws:"https://wa.me/573164177660", web:"", ciudad:"Dosquebradas", nota:"Unox (Gold) / Rational · Contacto: Carlos Guerrón · direcciontecnica@soluctem.com" },
+      { nombre:"Dacara Colombia", tipo:"🔧 Certificado", tel:"318 291 1825", ws:"https://wa.me/573182911825", web:"", ciudad:"Dosquebradas", nota:"Unox (Silver) / Bunn / Café · Contacto: Anggy Ramírez · servicios@dacara.co" },
+      { nombre:"Refrigerar Ingeniería SAS", tipo:"🔧 Certificado", tel:"316 875 3712", ws:"https://wa.me/573168753712", web:"", ciudad:"Dosquebradas", nota:"Rational / Multimarca · Contacto: Vanesa Ituyan · auxiliar1ccr@refrigerar.com.co" },
+      // Manizales
+      { nombre:"Mtto Andino", tipo:"🔧 Certificado", tel:"310 383 3591", ws:"https://wa.me/573103833591", web:"", ciudad:"Manizales", nota:"Unox (Gold) / Multimarca · Contacto: Sergio Salazar · mantenimientoandino@gmail.com" },
       // Costa / Montería
-      { nombre:"Refriwilliam SAS", tipo:"🔧 Certificado", tel:"316 443 0197", ws:"https://wa.me/573164430197", web:"", ciudad:"Montería", nota:"Contacto: William Barbosa · dir.operaciones@refriwilliams.com" },
+      { nombre:"Refriwilliam SAS", tipo:"🔧 Certificado", tel:"316 443 0197", ws:"https://wa.me/573164430197", web:"", ciudad:"Montería", nota:"Rational / Unox · Contacto: William Barbosa · dir.operaciones@refriwilliams.com" },
+      // Resto del país
+      { nombre:"Humberto Perdomo", tipo:"🔧 Certificado", tel:"315 850 8593", ws:"https://wa.me/573158508593", web:"", ciudad:"Neiva", nota:"Multimarca / Frío · Huila y zona sur" },
+      { nombre:"Tecnicocinas Ibagué", tipo:"🔧 Certificado", tel:"311 232 4455", ws:"https://wa.me/573112324455", web:"", ciudad:"Ibagué", nota:"Rational / Multimarca · Tolima" },
+      { nombre:"Serviandino", tipo:"🔧 Certificado", tel:"316 478 2211", ws:"https://wa.me/573164782211", web:"", ciudad:"Pasto", nota:"Multimarca / Hornos · Nariño y sur del país" },
     ],
   },
+
+  // ─── UNOX ───────────────────────────────────────────────────────────────────
   Unox: {
     oficial: [
-      { nombre:"Exhibir Equipos Colombia", tipo:"🏢 Oficial", tel:"+57 1 751 1028", ws:"https://wa.me/5717511028", web:"https://exhibirequipos.com/servicio-tecnico/unox/", ciudad:"Bogotá", nota:"Distribuidor directo Unox. Servicio inmediato Bogotá." },
+      { nombre:"Exhibir Equipos Colombia", tipo:"🏢 Oficial", tel:"320 232 4781", ws:"https://wa.me/573202324781", web:"https://exhibirequipos.com/servicio-tecnico/unox/", ciudad:"Bogotá", nota:"Distribuidor directo Unox Colombia. Unox / Bunn / Granizadoras. Servicio inmediato Bogotá." },
     ],
     especializados: [
-      // Bogotá / Cundinamarca — PLATINUM
-      { nombre:"Crutek", tipo:"🏆 PLATINUM", tel:"310 476 2771", ws:"https://wa.me/573104762771", web:"", ciudad:"Bogotá", nota:"Contacto: Carlos Rodriguez · gerente@crutek.co / Rubén Bautista · ruben.morales@crutek.co · 315 727 2636" },
-      { nombre:"Industrial Technical Service (INTECSE)", tipo:"🏆 PLATINUM", tel:"321 494 7580", ws:"https://wa.me/573214947580", web:"", ciudad:"Bogotá", nota:"Contacto: Edison Nieto · gerencia@intecsecolombia.com / Richard Herreño · 320 809 0136" },
-      { nombre:"Tecnobread", tipo:"🥇 GOLD", tel:"317 365 6619", ws:"https://wa.me/573173656619", web:"", ciudad:"Bogotá", nota:"Contacto: Katerinne Campos · mantenimiento@tecnobread.com / Harold Gomez · 317 365 6624" },
-      { nombre:"MDB Ingenieria", tipo:"🥈 SILVER", tel:"314 272 4285", ws:"https://wa.me/573142724285", web:"", ciudad:"Bogotá", nota:"Contacto: Mairon Barreto · maironbarreto@gmail.com" },
-      // Bucaramanga / Santanderes — PLATINUM
-      { nombre:"Influmax", tipo:"🏆 PLATINUM", tel:"316 820 0182", ws:"https://wa.me/573168200182", web:"", ciudad:"Bucaramanga", nota:"Contacto: Omar Fernando Gomez · influmaxsas@gmail.com · Calle 113 22-104 Provenza, Bucaramanga" },
+      // Bogotá — PLATINUM
+      { nombre:"Crutek", tipo:"🏆 PLATINUM", tel:"310 476 2771", ws:"https://wa.me/573104762771", web:"", ciudad:"Bogotá", nota:"Unox (Platinum) / Bunn · Contacto: Carlos Rodriguez · gerente@crutek.co / Rubén Bautista · 315 727 2636" },
+      { nombre:"Intecse", tipo:"🏆 PLATINUM", tel:"321 494 7580", ws:"https://wa.me/573214947580", web:"", ciudad:"Bogotá", nota:"Unox (Platinum) / Rational · Contacto: Edison Nieto · gerencia@intecsecolombia.com / Richard Herreño · 320 809 0136" },
+      // Bogotá — GOLD
+      { nombre:"Tecnobread", tipo:"🥇 GOLD", tel:"317 365 6619", ws:"https://wa.me/573173656619", web:"", ciudad:"Bogotá", nota:"Unox / Rational · Contacto: Katerinne Campos · mantenimiento@tecnobread.com / Harold Gomez · 317 365 6624" },
+      // Bogotá — SILVER
+      { nombre:"MDB Ingeniería", tipo:"🥈 SILVER", tel:"314 272 4285", ws:"https://wa.me/573142724285", web:"", ciudad:"Bogotá", nota:"Rational / Unox · Contacto: Mairon Barreto · maironbarreto@gmail.com" },
+      // Medellín — PLATINUM
+      { nombre:"Soluciones Tesla", tipo:"🏆 PLATINUM", tel:"300 444 7500", ws:"https://wa.me/573004447500", web:"", ciudad:"Medellín", nota:"Unox (Platinum) / Rational · Contacto: Juan Muñoz · juan.teslasas@gmail.com · Calle 45 #10a-239" },
+      // Medellín — Certificado
+      { nombre:"Servicocinas", tipo:"🔧 Certificado", tel:"310 422 9295", ws:"https://wa.me/573104229295", web:"", ciudad:"Medellín", nota:"Rational / Unox" },
+      // Cali — GOLD
+      { nombre:"TEESA", tipo:"🥇 GOLD", tel:"316 243 2974", ws:"https://wa.me/573162432974", web:"", ciudad:"Cali", nota:"Unox (Gold) / Bunn / Rational · Contacto: Víctor Manuel Puertas · servicioteesa@gmail.com" },
+      { nombre:"Ingeniería Gastronómica", tipo:"🔧 Certificado", tel:"315 561 2894", ws:"https://wa.me/573155612894", web:"", ciudad:"Cali", nota:"Unox / Multimarca" },
+      { nombre:"SST Valle", tipo:"🔧 Certificado", tel:"318 354 5345", ws:"https://wa.me/573183545345", web:"", ciudad:"Cali", nota:"Rational / Unox" },
+      // Bucaramanga — PLATINUM
+      { nombre:"Influmax", tipo:"🏆 PLATINUM", tel:"316 820 0182", ws:"https://wa.me/573168200182", web:"", ciudad:"Bucaramanga", nota:"Unox (Platinum) / Rational · Contacto: Omar Fernando Gomez · influmaxsas@gmail.com · Calle 113 22-104 Provenza" },
       // Manizales — GOLD
-      { nombre:"Mtto Andino", tipo:"🥇 GOLD", tel:"310 383 3591", ws:"https://wa.me/573103833591", web:"", ciudad:"Manizales", nota:"Contacto: Sergio Salazar Buritica · mantenimientoandino@gmail.com / sergiosalas32@hotmail.com · 318 243 4180 · Cl. 76a #21-85, Milán" },
-      // Medellín / Antioquia — PLATINUM
-      { nombre:"Soluciones Tesla", tipo:"🏆 PLATINUM", tel:"300 444 7500", ws:"https://wa.me/573004447500", web:"", ciudad:"Medellín", nota:"Contacto: Juan Muñoz · juan.teslasas@gmail.com / Jessica Taborda · solucionesteslasas@gmail.com · Calle 45 #10a-239" },
-      // Cali / Valle — GOLD
-      { nombre:"TEESA", tipo:"🥇 GOLD", tel:"316 243 2974", ws:"https://wa.me/573162432974", web:"", ciudad:"Cali", nota:"Contacto: Víctor Manuel Puertas · servicioteesa@gmail.com · Cra 17f4 #27d-72, Cali" },
-      // Eje Cafetero / Risaralda — PLATINUM + SILVER
-      { nombre:"REFRIGERAR", tipo:"🏆 PLATINUM", tel:"315 575 0883", ws:"https://wa.me/573155750883", web:"", ciudad:"Dosquebradas", nota:"Contacto: Carlos Benjumea · director@refrigerar.com.co / Yeison Muñoz · 310 428 3542 · Zona Industrial La Badea, Dosquebradas" },
-      { nombre:"Soluctem", tipo:"🥇 GOLD", tel:"316 417 7660", ws:"https://wa.me/573164177660", web:"", ciudad:"Dosquebradas", nota:"Contacto: Carlos Guerrón · direcciontecnica@soluctem.com / Yulieth Duque · 318 531 0263 · Cl 9 #3-90, Dosquebradas" },
-      { nombre:"Dacara", tipo:"🥈 SILVER", tel:"315 579 5329", ws:"https://wa.me/573155795329", web:"", ciudad:"Dosquebradas", nota:"Contacto: Juan Peñuela · gerencia@dacara.co / Liliana Orrego · 315 884 4327 · Cl 43 #2N-69 Bodega 3" },
-      // Barranquilla / Costa — SILVER
-      { nombre:"Sercointec", tipo:"🥈 SILVER", tel:"321 463 4311", ws:"https://wa.me/573214634311", web:"", ciudad:"Barranquilla", nota:"Contacto: Juan David Jaramillo · juan.jaramillo@sercointec.com · Cra 58 #75-17 Ofic 2B, Barranquilla" },
+      { nombre:"Mtto Andino", tipo:"🥇 GOLD", tel:"310 383 3591", ws:"https://wa.me/573103833591", web:"", ciudad:"Manizales", nota:"Unox (Gold) / Multimarca · Contacto: Sergio Salazar · mantenimientoandino@gmail.com · 318 243 4180 · Cl. 76a #21-85" },
+      // Dosquebradas — PLATINUM + GOLD + SILVER
+      { nombre:"Refrigerar Ingeniería SAS", tipo:"🏆 PLATINUM", tel:"315 575 0883", ws:"https://wa.me/573155750883", web:"", ciudad:"Dosquebradas", nota:"Rational / Multimarca · Contacto: Carlos Benjumea · director@refrigerar.com.co · Zona Industrial La Badea" },
+      { nombre:"Soluctem", tipo:"🥇 GOLD", tel:"316 417 7660", ws:"https://wa.me/573164177660", web:"", ciudad:"Dosquebradas", nota:"Unox (Gold) / Rational · Contacto: Carlos Guerrón · direcciontecnica@soluctem.com · 318 531 0263" },
+      { nombre:"Dacara", tipo:"🥈 SILVER", tel:"315 579 5329", ws:"https://wa.me/573155795329", web:"", ciudad:"Dosquebradas", nota:"Unox (Silver) / Bunn / Café · Contacto: Juan Peñuela · gerencia@dacara.co · 315 884 4327" },
+      // Barranquilla — SILVER
+      { nombre:"Sercointec", tipo:"🥈 SILVER", tel:"321 463 4311", ws:"https://wa.me/573214634311", web:"", ciudad:"Barranquilla", nota:"Unox (Silver) / Multimarca · Contacto: Juan David Jaramillo · juan.jaramillo@sercointec.com · Cra 58 #75-17" },
+      { nombre:"Soluctem SAS", tipo:"🔧 Certificado", tel:"318 683 5306", ws:"https://wa.me/573186835306", web:"", ciudad:"Barranquilla", nota:"Unox / Rational · Contacto: Lina Bahoz · coordinadorz2@soluctem.com" },
+      // Montería
+      { nombre:"Refriwilliam SAS", tipo:"🔧 Certificado", tel:"316 443 0197", ws:"https://wa.me/573164430197", web:"", ciudad:"Montería", nota:"Rational / Unox · Contacto: William Barbosa · dir.operaciones@refriwilliams.com" },
     ],
   },
+
+  // ─── ZANOLLI ────────────────────────────────────────────────────────────────
   Zanolli: {
     oficial: [
-      { nombre:"Euromex Equipos Industriales", tipo:"🏢 Distribuidor", tel:"+57 1 226 4242", ws:"https://wa.me/573142264242", web:"https://euromex.com.co", ciudad:"Bogotá", nota:"Distribuidor y servicio técnico Zanolli en Colombia." },
+      { nombre:"Euromex Equipos Industriales", tipo:"🏢 Distribuidor", tel:"+57 601 226 4242", ws:"https://wa.me/573142264242", web:"https://euromex.com.co", ciudad:"Bogotá", nota:"Distribuidor oficial Zanolli / Turbochef / Bunn en Colombia. Servicio técnico especializado." },
     ],
-    especializados: [],
+    especializados: [
+      { nombre:"Industrial Kitchen SAS", tipo:"🔧 Certificado", tel:"301 471 1328", ws:"https://wa.me/573014711328", web:"", ciudad:"Medellín", nota:"Rational / Turbochef / Bunn · pueden atender Zanolli." },
+    ],
   },
+
+  // ─── TURBOCHEF ──────────────────────────────────────────────────────────────
   Turbochef: {
     oficial: [
-      { nombre:"Turbochef Technologies — Portal oficial", tipo:"🏢 Oficial", tel:"", ws:"", web:"https://www.turbochef.com/service", ciudad:"Web", nota:"Localizar técnico autorizado en Colombia desde el portal oficial." },
+      { nombre:"Euromex Equipos Industriales", tipo:"🏢 Distribuidor", tel:"+57 601 226 4242", ws:"https://wa.me/573142264242", web:"https://euromex.com.co", ciudad:"Bogotá", nota:"Distribuidor y servicio técnico oficial Turbochef / Zanolli / Bunn para Colombia." },
     ],
     especializados: [
-      { nombre:"Euromex Equipos Industriales", tipo:"🔧 Certificado", tel:"+57 1 226 4242", ws:"https://wa.me/573142264242", web:"https://euromex.com.co", ciudad:"Bogotá", nota:"Servicio técnico hornos de alta velocidad TurboChef." },
+      { nombre:"Industrial Kitchen SAS", tipo:"🔧 Certificado", tel:"301 471 1328", ws:"https://wa.me/573014711328", web:"", ciudad:"Medellín", nota:"Rational / Turbochef / Bunn · Contacto: Santiago Ramírez · servicio@indukitchen.com" },
+      { nombre:"Exhibir Equipos Colombia", tipo:"🔧 Certificado", tel:"320 232 4781", ws:"https://wa.me/573202324781", web:"", ciudad:"Bogotá", nota:"Unox / Bunn / Granizadoras · también atiende Turbochef convección." },
     ],
   },
+
+  // ─── BUNN ───────────────────────────────────────────────────────────────────
   Bunn: {
     oficial: [
-      { nombre:"Bunn Latinoamérica — Soporte", tipo:"🏢 Oficial", tel:"", ws:"", web:"https://www.bunn.com/support", ciudad:"Web", nota:"Portal oficial de soporte y localización de técnicos Bunn." },
+      { nombre:"Exhibir Equipos Colombia", tipo:"🏢 Oficial", tel:"320 232 4781", ws:"https://wa.me/573202324781", web:"https://exhibirequipos.com/servicio-tecnico/unox/", ciudad:"Bogotá", nota:"Unox / Bunn / Granizadoras. Distribuidor con servicio técnico en Bogotá." },
+      { nombre:"Euromex Equipos Industriales", tipo:"🏢 Distribuidor", tel:"+57 601 226 4242", ws:"https://wa.me/573142264242", web:"https://euromex.com.co", ciudad:"Bogotá", nota:"Zanolli / Turbochef / Bunn. Servicio técnico cafeteras y granizadoras." },
     ],
     especializados: [
-      { nombre:"Euromex Equipos Industriales", tipo:"🔧 Certificado", tel:"+57 1 226 4242", ws:"https://wa.me/573142264242", web:"https://euromex.com.co", ciudad:"Bogotá", nota:"Servicio técnico cafeteras y granizadoras Bunn." },
+      { nombre:"Crutek", tipo:"🏆 PLATINUM", tel:"310 476 2771", ws:"https://wa.me/573104762771", web:"", ciudad:"Bogotá", nota:"Unox (Platinum) / Bunn · Crutek atiende cafeteras y granizadoras Bunn en Bogotá." },
+      { nombre:"TEESA", tipo:"🥇 GOLD", tel:"316 243 2974", ws:"https://wa.me/573162432974", web:"", ciudad:"Cali", nota:"Unox (Gold) / Bunn / Rational · Atiende Bunn en Cali y Valle." },
+      { nombre:"Dacara Colombia", tipo:"🥈 SILVER", tel:"318 291 1825", ws:"https://wa.me/573182911825", web:"", ciudad:"Dosquebradas", nota:"Unox (Silver) / Bunn / Café · Eje Cafetero y Risaralda." },
+      { nombre:"Juan Santacolomba", tipo:"🔧 Certificado", tel:"323 575 2403", ws:"https://wa.me/573235752403", web:"", ciudad:"Pereira", nota:"Bunn / Repuestos Originales · Especialista en granizadoras y cafeteras Bunn en Eje Cafetero." },
+      { nombre:"Industrial Kitchen SAS", tipo:"🔧 Certificado", tel:"301 471 1328", ws:"https://wa.me/573014711328", web:"", ciudad:"Medellín", nota:"Rational / Turbochef / Bunn · Contacto: Santiago Ramírez · servicio@indukitchen.com" },
     ],
   },
 };
@@ -1610,7 +1867,7 @@ Contrata técnico certificado si: [condición clara]`;
               ✅ Con técnicos registrados
             </div>
             <div style={{display:"flex",flexWrap:"wrap",gap:6,marginBottom:10}}>
-              {["Bogotá","Medellín","Cali","Barranquilla","Bucaramanga","Dosquebradas","Manizales","Montería"].map(c=>(
+              {["Bogotá","Medellín","Cali","Barranquilla","Bucaramanga","Dosquebradas","Manizales","Montería","Pereira","Neiva","Ibagué","Pasto"].map(c=>(
                 <div key={c} onClick={()=>pickCiudad(c)}
                   style={{background:C.gl,border:`1px solid ${C.green}`,borderRadius:20,padding:"5px 12px",cursor:"pointer",fontSize:11,fontWeight:700,color:C.green,display:"flex",alignItems:"center",gap:4}}>
                   📍 {c}
@@ -1622,7 +1879,7 @@ Contrata técnico certificado si: [condición clara]`;
               🗺️ Otras ciudades (sugeriremos los más cercanos)
             </div>
             <div style={{display:"flex",flexWrap:"wrap",gap:6,marginBottom:8}}>
-              {["Pereira","Cartagena","Cúcuta","Ibagué","Pasto","Villavicencio","Santa Marta","Neiva","Popayán","Tunja","Palmira","Armenia"].map(c=>(
+              {["Cartagena","Cúcuta","Villavicencio","Santa Marta","Popayán","Tunja","Palmira","Armenia","Valledupar","Sincelejo"].map(c=>(
                 <div key={c} onClick={()=>pickCiudad(c)}
                   style={{background:C.white,border:`1px solid ${C.border}`,borderRadius:20,padding:"5px 12px",cursor:"pointer",fontSize:11,fontWeight:600,color:C.text}}>
                   {c}
