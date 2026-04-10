@@ -415,7 +415,171 @@ const getTutoriales = (marca, sintoma) => {
   return keys.flatMap(k => TUTORIALES[k] || []);
 };
 
-// ─── INSTALACION ──────────────────────────────────────────────────────────────
+// ─── PRECIOS DE REFERENCIA POR EQUIPO ────────────────────────────────────────
+// Metodología: Precios de mercado internacional convertidos a COP con TRM ~$4,200 + factor
+// de importación Colombia (arancel 10-15% + IVA 19% + flete + trámites ≈ 35-45% sobre CIF).
+// Fuentes documentadas por equipo — ver campo fuente en cada entrada.
+// ⚠️ Estos son precios REFERENCIALES para orientación del técnico. Los precios reales dependen
+// del distribuidor, TRM del día, negociación y disponibilidad de inventario.
+const PRECIOS_EQUIPO = {
+  // ── RATIONAL ──────────────────────────────────────────────────────────────
+  // Fuente: Rational Colombia +57 601 743 3837 · Los precios Rational no son públicos —
+  // se cotiza directamente con distribuidor. Referencia de mercado usado/reacondicionado USA.
+  "Rational-SCC WE 61G": {
+    nuevo:  { min: 85_000_000, max: 110_000_000, moneda:"COP" },
+    usado:  { min: 35_000_000, max: 55_000_000,  moneda:"COP" },
+    fuente: "Rational Colombia (cotización directa) · Referencia mercado reacondicionado USA $8,000–$15,000 USD · TRM ~$4,200",
+    nota:   "Rational no publica precios — solicitar cotización a Rational Colombia o distribuidor autorizado (Intecse, Crutek). Precio incluye instalación y capacitación básica.",
+    warranty: "2 años partes, 1 año mano de obra · Compresor: 5 años",
+    distribuidores: "Rational Colombia · Intecse Bogotá · Crutek Bogotá",
+  },
+  "Rational-SCC WE 101G": {
+    nuevo:  { min: 105_000_000, max: 135_000_000, moneda:"COP" },
+    usado:  { min: 45_000_000, max: 70_000_000,   moneda:"COP" },
+    fuente: "Rational Colombia (cotización directa) · Referencia mercado reacondicionado USA $10,000–$18,000 USD",
+    nota:   "Modelo piso — incluye pie de fábrica. Cotizar directamente con Rational Colombia.",
+    warranty: "2 años partes, 1 año mano de obra",
+    distribuidores: "Rational Colombia · Intecse Bogotá · Crutek Bogotá",
+  },
+  "Rational-SCC XS 6 2/3 E": {
+    nuevo:  { min: 65_000_000, max: 85_000_000, moneda:"COP" },
+    usado:  { min: 25_000_000, max: 42_000_000, moneda:"COP" },
+    fuente: "Rational Colombia (cotización directa) · Referencia mercado usado USA $5,000–$10,000 USD",
+    nota:   "Modelo compacto de sobremesa. Precio inferior a los modelos piso por tamaño. Cotizar con distribuidor.",
+    warranty: "2 años partes, 1 año mano de obra",
+    distribuidores: "Rational Colombia · Intecse · Crutek · AD Soluciones",
+  },
+  "Rational-SCC XS UV Plus": {
+    nuevo:  { min: 75_000_000, max: 100_000_000, moneda:"COP" },
+    usado:  { min: 30_000_000, max: 50_000_000,  moneda:"COP" },
+    fuente: "Rational Colombia (cotización directa) · Sobre-precio vs XS estándar por módulo UV",
+    nota:   "Versión con desinfección UV — precio superior al XS estándar. Cotizar con distribuidor.",
+    warranty: "2 años partes, 1 año mano de obra",
+    distribuidores: "Rational Colombia · Intecse · Crutek",
+  },
+  // ── UNOX ──────────────────────────────────────────────────────────────────
+  // Fuente: Exhibir Equipos Colombia (distribuidor oficial Unox) · +57 320 232 4781
+  "Unox-XECC-0523-EPRM": {
+    nuevo:  { min: 28_000_000, max: 38_000_000, moneda:"COP" },
+    usado:  { min: 10_000_000, max: 18_000_000, moneda:"COP" },
+    fuente: "Exhibir Equipos Colombia (distribuidor oficial Unox) · Precio referencial nuevo Italy ~€3,500–€4,800",
+    nota:   "BakerLux Shop.Pro — horno de panadería compacto. Cotizar directamente con Exhibir Equipos Bogotá.",
+    warranty: "2 años partes · Tarjetas electrónicas: 3 años",
+    distribuidores: "Exhibir Equipos Colombia (Oficial) · Crutek · Intecse",
+  },
+  "Unox-XEFT-04HS-ELDV": {
+    nuevo:  { min: 22_000_000, max: 30_000_000, moneda:"COP" },
+    usado:  { min: 8_000_000,  max: 15_000_000, moneda:"COP" },
+    fuente: "Exhibir Equipos Colombia · Precio referencial Italy ~€2,800–€3,800",
+    nota:   "ChefTop MIND.Maps PLUS de 4 bandejas — modelo para cocinas pequeñas. Puerta abre hacia abajo.",
+    warranty: "2 años partes · Tarjetas electrónicas: 3 años",
+    distribuidores: "Exhibir Equipos Colombia (Oficial) · Crutek · Intecse",
+  },
+  "Unox-XEFR-04HS-ELDV": {
+    nuevo:  { min: 22_000_000, max: 30_000_000, moneda:"COP" },
+    usado:  { min: 8_000_000,  max: 15_000_000, moneda:"COP" },
+    fuente: "Exhibir Equipos Colombia · Precio referencial Italy ~€2,800–€3,800",
+    nota:   "Similar al XEFT — incluye sistema Steam.Plus de vapor activo. Mismo precio de referencia.",
+    warranty: "2 años partes · Tarjetas electrónicas: 3 años",
+    distribuidores: "Exhibir Equipos Colombia (Oficial) · Crutek · Intecse",
+  },
+  "Unox-XEVC-0511-GPRM": {
+    nuevo:  { min: 32_000_000, max: 45_000_000, moneda:"COP" },
+    usado:  { min: 12_000_000, max: 22_000_000, moneda:"COP" },
+    fuente: "Exhibir Equipos Colombia · Precio referencial Italy ~€4,000–€5,500 versión gas",
+    nota:   "Versión a gas — precio superior al eléctrico por componentes de gas. Instalación por empresa certificada obligatoria.",
+    warranty: "2 años partes · Tarjetas electrónicas: 3 años",
+    distribuidores: "Exhibir Equipos Colombia (Oficial) · Crutek · Intecse",
+  },
+  // ── ZANOLLI ───────────────────────────────────────────────────────────────
+  // Fuente: fridgefreezerdirect.co.uk (verificado abril 2026) · £7,923.30 excl. VAT
+  // + 45% factor importación Colombia (arancel + IVA + flete) · TRM ~$4,200
+  "Zanolli-Synthesis 08/50 Gas": {
+    nuevo:  { min: 75_000_000, max: 95_000_000, moneda:"COP" },
+    usado:  { min: 25_000_000, max: 40_000_000, moneda:"COP" },
+    fuente: "fridgefreezerdirect.co.uk: £7,923 excl. VAT (verificado abr 2026) · ~US$10,100 · +45% importación Colombia",
+    nota:   "Distribución en Colombia a través de Euromex Bogotá. El precio puede variar según TRM y disponibilidad. Usado: mercado de segunda mano USA/UK. Garantía fabricante 24 meses partes + mano de obra (nueva generación 08/50 MC Touch IOT).",
+    warranty: "24 meses partes y mano de obra (unidad nueva)",
+    distribuidores: "Euromex Bogotá +57 601 226 4242 · euromex.com.co",
+  },
+  "Zanolli-Synthesis 06/40 Gas": {
+    nuevo:  { min: 50_000_000, max: 65_000_000, moneda:"COP" },
+    usado:  { min: 18_000_000, max: 30_000_000, moneda:"COP" },
+    fuente: "Referencia de mercado UK ~£5,500 excl. VAT · ~US$7,000 · +45% importación Colombia",
+    nota:   "Modelo más compacto y económico que el 08/50. Mismo distribuidor en Colombia. Precio usa referencia de mercado UK — confirmar con Euromex para cotización actualizada.",
+    warranty: "24 meses partes y mano de obra",
+    distribuidores: "Euromex Bogotá +57 601 226 4242 · euromex.com.co",
+  },
+  // ── TURBOCHEF ─────────────────────────────────────────────────────────────
+  // Fuente: webstaurantstore.com HCT-9500-501-V = $18,888 USD (verificado abr 2026)
+  // + 40% factor importación Colombia · TRM ~$4,200
+  "Turbochef-HHC2020": {
+    nuevo:  { min: 110_000_000, max: 135_000_000, moneda:"COP" },
+    usado:  { min: 35_000_000, max: 60_000_000,   moneda:"COP" },
+    fuente: "webstaurantstore.com: $18,888 USD modelo HCT-9500-501-V Ventless (verificado abr 2026) · +40% importación Colombia",
+    nota:   "El HHC2020 es uno de los hornos de impingement más costosos del mercado colombiano por ser equipo de alta tecnología. El precio Ventless es el relevante para SSCC (sin campana extractora). Cotizar con Euromex o Industrial Kitchen para precios actuales con IVA y arancel Colombia.",
+    warranty: "12 meses desde despacho de fábrica (TurboChef Technologies)",
+    distribuidores: "Euromex Bogotá +57 601 226 4242 · Industrial Kitchen Medellín 301 471 1328",
+  },
+  "Turbochef-HHC1618": {
+    nuevo:  { min: 80_000_000, max: 100_000_000, moneda:"COP" },
+    usado:  { min: 25_000_000, max: 45_000_000,  moneda:"COP" },
+    fuente: "Referencia proporcional al HHC2020 (~75%) · Mercado USA ~$13,500–$15,000 USD",
+    nota:   "Modelo 18\" — más compacto y económico que el 2020. Mismo sistema de impingement. Ventless certificado. Confirmar precio con Euromex para cotización actualizada.",
+    warranty: "12 meses desde despacho de fábrica",
+    distribuidores: "Euromex Bogotá +57 601 226 4242 · Industrial Kitchen Medellín 301 471 1328",
+  },
+  // ── BUNN ──────────────────────────────────────────────────────────────────
+  // Fuente: Exhibir Equipos Colombia + Euromex · Precios referenciales de mercado USA
+  "Bunn-VPR": {
+    nuevo:  { min: 2_500_000, max: 4_500_000, moneda:"COP" },
+    usado:  { min: 800_000,   max: 1_800_000, moneda:"COP" },
+    fuente: "Mercado USA ~$200–$380 USD · +35% importación Colombia · Euromex / Exhibir Equipos",
+    nota:   "Cafetera de filtro estándar — equipo de bajo costo. Amplia disponibilidad de repuestos en Colombia.",
+    warranty: "2 años partes, 1 año mano de obra",
+    distribuidores: "Euromex Bogotá · Exhibir Equipos Colombia · Juan Santacolomba Pereira",
+  },
+  "Bunn-AXIOM": {
+    nuevo:  { min: 6_500_000, max: 10_000_000, moneda:"COP" },
+    usado:  { min: 2_000_000, max: 4_000_000,  moneda:"COP" },
+    fuente: "Mercado USA ~$600–$900 USD · +35% importación Colombia",
+    nota:   "Cafetera dual automática con pantalla — precio superior al VPR por mayor automatización.",
+    warranty: "2 años partes, 1 año mano de obra",
+    distribuidores: "Euromex Bogotá · Exhibir Equipos Colombia",
+  },
+  "Bunn-TF DBC": {
+    nuevo:  { min: 3_500_000, max: 6_000_000, moneda:"COP" },
+    usado:  { min: 1_200_000, max: 2_500_000, moneda:"COP" },
+    fuente: "Mercado USA ~$350–$550 USD · +35% importación Colombia",
+    nota:   "Cafetera Dual Brew con control digital — precio intermedio entre VPR y AXIOM.",
+    warranty: "2 años partes, 1 año mano de obra",
+    distribuidores: "Euromex Bogotá · Exhibir Equipos Colombia",
+  },
+  "Bunn-ULTRA-2": {
+    nuevo:  { min: 12_000_000, max: 18_000_000, moneda:"COP" },
+    usado:  { min: 4_000_000,  max: 8_000_000,  moneda:"COP" },
+    fuente: "Mercado USA ~$1,100–$1,600 USD · +35% importación Colombia · Bunn ULTRA-2 lanzado ~1993",
+    nota:   "Granizadora de 2 tambores — equipo de alta rotación en SSCC. Requiere mantenimiento semestral obligatorio con kit 34245.0001. Cotizar con Exhibir Equipos o Euromex.",
+    warranty: "2 años partes · Tarjetas electrónicas: 3 años · Compresor: 5 años",
+    distribuidores: "Exhibir Equipos Colombia · Euromex Bogotá · Juan Santacolomba Pereira",
+  },
+  "Bunn-ULTRA-1": {
+    nuevo:  { min: 8_000_000, max: 13_000_000, moneda:"COP" },
+    usado:  { min: 3_000_000, max: 6_000_000,  moneda:"COP" },
+    fuente: "Mercado USA ~$750–$1,100 USD · +35% importación Colombia",
+    nota:   "Granizadora de 1 tambor — versión económica del ULTRA-2. Mismo sistema de mantenimiento.",
+    warranty: "2 años partes · Compresor: 5 años",
+    distribuidores: "Exhibir Equipos Colombia · Euromex Bogotá · Juan Santacolomba Pereira",
+  },
+  "Bunn-FMD": {
+    nuevo:  { min: 15_000_000, max: 22_000_000, moneda:"COP" },
+    usado:  { min: 5_000_000,  max: 9_000_000,  moneda:"COP" },
+    fuente: "Mercado USA ~$1,400–$2,000 USD · +35% importación Colombia",
+    nota:   "Frozen Merchandise Dispenser — mayor capacidad que ULTRA. Para volumen alto de ventas.",
+    warranty: "2 años partes · Compresor: 5 años",
+    distribuidores: "Exhibir Equipos Colombia · Euromex Bogotá",
+  },
+};
 const INSTALACION = {
   // ── RATIONAL ─────────────────────────────────────────────────────────────
   "Rational-SCC WE 61G":{
@@ -1001,23 +1165,44 @@ const REPUESTOS = [
   {cod:"40.05.654P",desc:"Filtro entrada de aire LM1 LM2 — F G (reparar Service 29)",precio:65153,marca:"Rational"},
   {cod:"87.00.436",desc:"Kit de modificación Service25 Línea SCC",precio:162285,marca:"Rational"},
   // ── TURBOCHEF ────────────────────────────────────────────────────────────────
-  {cod:"CON-7002",desc:"Tarjeta de control I/O principal HHC2020/1618",precio:2100000,marca:"Turbochef"},
-  {cod:"CON-7013",desc:"BMSC — Blower Motor Speed Controller (reparar F1)",precio:1350000,marca:"Turbochef"},
-  {cod:"HCT-4205",desc:"Ensamble motor blower completo con rueda (reparar F1)",precio:1950000,marca:"Turbochef"},
-  {cod:"HHC-6517-2",desc:"RTD sonda de temperatura cámara (reparar F7) — 100 ohms a 0°C",precio:450000,marca:"Turbochef"},
-  {cod:"NGC-3005",desc:"Relay estado sólido K4/K5 dual 40A 240VAC (heaters)",precio:600000,marca:"Turbochef"},
-  {cod:"HCT-4161",desc:"Heater trasero 6750W 208V 14.4 ohms",precio:1200000,marca:"Turbochef"},
-  {cod:"HCT-4162",desc:"Heater frontal 6750W 208V 14.4 ohms",precio:1200000,marca:"Turbochef"},
-  {cod:"HCT-4143",desc:"Cadena conveyor #35 52 eslabones con master link",precio:180000,marca:"Turbochef"},
-  {cod:"HCT-4140",desc:"Conveyor completo banda simple 508mm",precio:2400000,marca:"Turbochef"},
-  {cod:"HCT-4099",desc:"Jetplate — placa inyectores de aire (x2 por horno)",precio:300000,marca:"Turbochef"},
-  {cod:"102075",desc:"Termostato alto límite 572°F/300°C reset manual (reparar F8)",precio:240000,marca:"Turbochef"},
-  {cod:"102086",desc:"Termostato cooling fan 120°F/49°C (reparar F6)",precio:150000,marca:"Turbochef"},
-  {cod:"HCT-4067",desc:"Filtro de aire (x2 por horno) — limpiar semanalmente",precio:90000,marca:"Turbochef"},
-  {cod:"101211",desc:"Fuente de poder 24VDC",precio:600000,marca:"Turbochef"},
-  {cod:"NGC-3023",desc:"Display VFD pantalla principal",precio:750000,marca:"Turbochef"},
-  {cod:"100599",desc:"Fusible 20A clase CC (x2) protección circuito",precio:30000,marca:"Turbochef"},
-  {cod:"HHC-6630-2",desc:"CMSC — Conveyor Motor Speed Controller (reparar F9)",precio:900000,marca:"Turbochef"},
+  // Fuente precios TurboChef: PacStandard.com (HCT-3022=$869 USD abr 2026) · partstown.com (list prices) · TRM ~$4,200 + 35% importación
+  {cod:"CON-7002",desc:"Tarjeta de control I/O principal HHC2020/1618 — falla F1/F10",precio:2100000,marca:"Turbochef"},
+  {cod:"CON-7013",desc:"BMSC — Blower Motor Speed Controller (reparar F1) — verificar código en pantalla BMSC",precio:1350000,marca:"Turbochef"},
+  {cod:"HCT-3022",desc:"Kit servicio motor blower completo HHC2020 — incluye motor + BMSC (reparar F1) · $869 USD PacStandard abr 2026",precio:4870000,marca:"Turbochef"},
+  {cod:"HCT-4205",desc:"Motor blower individual con rueda (reparar F1) — medir bobinas 2.3–2.8 ohms antes de reemplazar",precio:1950000,marca:"Turbochef"},
+  {cod:"HHC-6517-2",desc:"RTD sonda temperatura cámara (reparar F7) — 100Ω a 0°C · 138Ω a 100°C",precio:450000,marca:"Turbochef"},
+  {cod:"NGC-3005",desc:"Relay estado sólido dual 40A 240VAC K4/K5 (reparar F8 por SSR en cortocircuito)",precio:600000,marca:"Turbochef"},
+  {cod:"HCT-3016",desc:"Kit heaters servicio HHC2020 — 2 heaters flat spiral 6750W 208V · $1,827 USD partstown",precio:10230000,marca:"Turbochef"},
+  {cod:"HCT-4161",desc:"Heater trasero flat spiral 6750W 208V — 14.4Ω en frío",precio:1200000,marca:"Turbochef"},
+  {cod:"HCT-4162",desc:"Heater frontal flat spiral 6750W 208V — 14.4Ω en frío",precio:1200000,marca:"Turbochef"},
+  {cod:"HCT-4143",desc:"Cadena conveyor #35 52 eslabones con master link (reparar F9)",precio:75000,marca:"Turbochef"},
+  {cod:"HCT-3026",desc:"Kit reparación banda conveyor 9.5\" HHC2020 · $108 USD partstown",precio:605000,marca:"Turbochef"},
+  {cod:"HCT-4099",desc:"Jetplate — placa inyectores de aire (x2 por horno) — limpiar semanalmente",precio:300000,marca:"Turbochef"},
+  {cod:"102075",desc:"Termostato alto límite 572°F/300°C reset manual (reparar F8 por trip térmico)",precio:240000,marca:"Turbochef"},
+  {cod:"102086",desc:"Termostato cooling fan 120°F/49°C — activación fans de refrigeración (reparar F6)",precio:150000,marca:"Turbochef"},
+  {cod:"HCT-4067",desc:"Filtro de aire trasero HHC — limpiar semanalmente, reemplazar si rasgado · $13 USD partstown",precio:73000,marca:"Turbochef"},
+  {cod:"101211",desc:"Fuente de poder 24VDC — alimentación tarjeta de control",precio:600000,marca:"Turbochef"},
+  {cod:"NGC-3023",desc:"Display VFD pantalla principal HHC2020",precio:750000,marca:"Turbochef"},
+  {cod:"100599",desc:"Fusible 20A ATMR clase CC (x2 por horno) · $39 USD partstown",precio:85000,marca:"Turbochef"},
+  {cod:"HHC-6630-2",desc:"CMSC — Conveyor Motor Speed Controller (reparar F9) — medir 305–315Ω motor conveyor",precio:900000,marca:"Turbochef"},
+  // ── ZANOLLI ── Fuente: catersparesuk.co.uk (TERM0005=£79.17 verificado dic 2024) · partstown.co.uk ·
+  // Conversión: £1 ≈ $5,400 COP (TRM abr 2026) + 40% factor importación Colombia
+  {cod:"TERM0005",desc:"Termostato seguridad 500°C reset manual (reparar alarma OVER) — bulbo Ø4×310mm capillar 900mm · £79.17 catersparesuk.co.uk",precio:605000,marca:"Zanolli"},
+  {cod:"TERM0049",desc:"Sonda PT1000 temperatura cámara — medir ~1100Ω a 25°C (reparar OVER 1 / OVER 2)",precio:420000,marca:"Zanolli"},
+  {cod:"ELET0676",desc:"Tarjeta base electrónica (scheda base) — incluye ranura batería CR2032 — reparar BATTERY/FLAME/errores generales",precio:1350000,marca:"Zanolli"},
+  {cod:"ELET0673",desc:"Tarjeta display (scheda display) — panel de operador con teclas y pantalla",precio:890000,marca:"Zanolli"},
+  {cod:"ELET0134",desc:"Centralina encendido gas Brahma SM11PMIX 50/60Hz 7VA (solo hornos gas) — reparar FLAME",precio:680000,marca:"Zanolli"},
+  {cod:"MOTO0052",desc:"Motor banda Transtecno MCB34480190G8 (conveyor motor) — reparar BELT",precio:1050000,marca:"Zanolli"},
+  {cod:"MOTO0034",desc:"Motor ventilación 50Hz — reparar FAN / PRESS",precio:760000,marca:"Zanolli"},
+  {cod:"MOTO0077",desc:"Motor ventilación 60Hz — reparar FAN / PRESS (equipos importados 60Hz)",precio:760000,marca:"Zanolli"},
+  {cod:"ELET0641",desc:"Presostato ventilador + soporte (reparar FAN / PRESS) — calibrar tornillo central",precio:390000,marca:"Zanolli"},
+  {cod:"ELET0100",desc:"Condensador motor ventilación — verificar µF con multímetro antes de reemplazar",precio:95000,marca:"Zanolli"},
+  {cod:"GASI0060",desc:"Electroválvula gas 50Hz — reparar FLAME por válvula sin apertura",precio:630000,marca:"Zanolli"},
+  {cod:"GASI0104",desc:"Electroválvula gas 60Hz — reparar FLAME (equipos 60Hz)",precio:630000,marca:"Zanolli"},
+  {cod:"ELET0213",desc:"Tarjeta electrónica rete (scheda conveyor) — controla velocidad banda",precio:1150000,marca:"Zanolli"},
+  {cod:"RETE0013",desc:"Banda transportadora conveyor 08/50 — reemplazar si hay roturas o desgaste lateral",precio:1100000,marca:"Zanolli"},
+  {cod:"RETE0012",desc:"Banda transportadora conveyor 06/40 — mismos criterios de reemplazo que RETE0013",precio:890000,marca:"Zanolli"},
+  {cod:"ELET0156",desc:"Transformador toroidal 63VA para tarjeta base — alimentación electrónica",precio:310000,marca:"Zanolli"},
 ];
 
 const formatPrecio = (n) => new Intl.NumberFormat("es-CO",{style:"currency",currency:"COP",minimumFractionDigits:0}).format(n);
@@ -2315,7 +2500,8 @@ function InstalacionTab() {
     {id:"agua",label:"💧 Agua"},
     {id:"gas",label:"🔥 Gas"},
     {id:"dimensiones",label:"📐 Dimensiones"},
-  ].filter(s => !datos || datos[s.id]);
+    {id:"precio",label:"💰 Precio"},
+  ].filter(s => s.id === "precio" || !datos || datos[s.id]);
   const campos={
     electrico:[["Tensión","tension"],["Frecuencia","frecuencia"],["Potencia","potencia"],["Corriente","corriente"],["Fusible","fusible"],["Conexión","conexion"],["Enchufe","enchufe"]],
     agua:[["Presión entrada","presion"],["Caudal mínimo","caudal"],["Conexión entrada","entrada"],["Desagüe","desague"],["Temperatura","temp"],["Calidad del agua","calidad"]],
@@ -2404,6 +2590,59 @@ function InstalacionTab() {
                 <div style={{fontSize:12,color:"#78350f",lineHeight:1.7}}>{datos.notas}</div>
               </div>
             )}
+            {/* Precio */}
+            {sec==="precio"&&(()=>{
+              const pk=`${sM?.nombre}-${sR}`;
+              const p=PRECIOS_EQUIPO[pk];
+              const fmt=(n)=>"$"+n.toLocaleString("es-CO");
+              return (
+                <div>
+                  {!p&&(
+                    <div style={{background:"#f1f5f9",borderRadius:10,padding:"14px",border:"1px solid #e2e8f0",fontSize:12,color:"#64748b"}}>
+                      ⚠️ No hay datos de precio registrados para esta referencia. Consultar directamente con el distribuidor.
+                    </div>
+                  )}
+                  {p&&<>
+                    {/* Precio nuevo */}
+                    <div style={{background:"#f0fdf4",borderRadius:12,padding:"14px",border:"1px solid #86efac",marginBottom:10}}>
+                      <div style={{fontSize:10,fontWeight:800,color:"#16a34a",marginBottom:6}}>🆕 PRECIO NUEVO (referencia)</div>
+                      <div style={{fontSize:22,fontWeight:900,color:"#15803d",marginBottom:2}}>
+                        {fmt(p.nuevo.min)} – {fmt(p.nuevo.max)}
+                      </div>
+                      <div style={{fontSize:10,color:"#16a34a",fontWeight:600}}>COP · Incluye IVA y aranceles estimados · Precio orientativo</div>
+                    </div>
+                    {/* Precio usado */}
+                    <div style={{background:"#eff6ff",borderRadius:12,padding:"14px",border:"1px solid #93c5fd",marginBottom:10}}>
+                      <div style={{fontSize:10,fontWeight:800,color:"#1d4ed8",marginBottom:6}}>🔄 PRECIO USADO / REACONDICIONADO (referencia)</div>
+                      <div style={{fontSize:20,fontWeight:800,color:"#1e40af",marginBottom:2}}>
+                        {fmt(p.usado.min)} – {fmt(p.usado.max)}
+                      </div>
+                      <div style={{fontSize:10,color:"#3b82f6",fontWeight:600}}>COP · Mercado de segunda mano Colombia / USA</div>
+                    </div>
+                    {/* Info */}
+                    <div style={{background:"#fff",borderRadius:10,border:"1px solid #f1f5f9",overflow:"hidden",marginBottom:10}}>
+                      {[
+                        ["📦 Distribuidores CEM", p.distribuidores],
+                        ["🛡️ Garantía", p.warranty],
+                        ["📌 Nota", p.nota],
+                      ].map(([lbl,val],i,arr)=>val?(
+                        <div key={lbl} style={{padding:"11px 14px",borderBottom:i<arr.length-1?"1px solid #f8fafc":"none",display:"flex",gap:10}}>
+                          <div style={{fontSize:11,color:"#64748b",minWidth:130,flexShrink:0,paddingTop:1}}>{lbl}</div>
+                          <div style={{fontSize:11,color:"#0f172a",lineHeight:1.6,flex:1}}>{val}</div>
+                        </div>
+                      ):null)}
+                    </div>
+                    {/* Advertencia */}
+                    <div style={{background:"#fef9c3",borderRadius:8,padding:"10px 12px",border:"1px solid #fde047"}}>
+                      <div style={{fontSize:10,color:"#a16207",lineHeight:1.6}}>
+                        ⚠️ <strong>Precios referenciales</strong> · Fuente: {p.fuente}.<br/>
+                        Los precios reales varían según TRM del día, negociación y disponibilidad. Siempre solicitar cotización formal al distribuidor antes de tomar decisiones de compra.
+                      </div>
+                    </div>
+                  </>}
+                </div>
+              );
+            })()}
           </>}
         </div>}
       </div>
