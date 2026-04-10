@@ -1165,25 +1165,26 @@ const REPUESTOS = [
   {cod:"40.05.654P",desc:"Filtro entrada de aire LM1 LM2 — F G (reparar Service 29)",precio:65153,marca:"Rational"},
   {cod:"87.00.436",desc:"Kit de modificación Service25 Línea SCC",precio:162285,marca:"Rational"},
   // ── TURBOCHEF ────────────────────────────────────────────────────────────────
-  // Fuente precios TurboChef: PacStandard.com (HCT-3022=$869 USD abr 2026) · partstown.com (list prices) · TRM ~$4,200 + 35% importación
-  {cod:"CON-7002",desc:"Tarjeta de control I/O principal HHC2020/1618 — falla F1/F10",precio:2100000,marca:"Turbochef"},
-  {cod:"CON-7013",desc:"BMSC — Blower Motor Speed Controller (reparar F1) — verificar código en pantalla BMSC",precio:1350000,marca:"Turbochef"},
-  {cod:"HCT-3022",desc:"Kit servicio motor blower completo HHC2020 — incluye motor + BMSC (reparar F1) · $869 USD PacStandard abr 2026",precio:4870000,marca:"Turbochef"},
+  // Fuente precios TurboChef: schedule73parts.us (verificado abr 2026): HCT-3022=$950, HCT-3026=$74.31, 102075=$139.50, 100599=$30.38
+  // partstown.com: HCT-3016=$1,827, HCT-4067=$13 · PacStandard.com: HCT-3022=$869 (descuento) · TRM $4,200 + 35% importación
+  {cod:"CON-7002",desc:"Tarjeta de control I/O principal HHC2020/1618 — falla F1/F10 · precio referencial: precio oculto en distribuidores (requiere cuenta)",precio:2100000,marca:"Turbochef"},
+  {cod:"CON-7013",desc:"BMSC — Blower Motor Speed Controller (reparar F1) — verificar código en pantalla BMSC · precio referencial mercado",precio:1350000,marca:"Turbochef"},
+  {cod:"HCT-3022",desc:"Kit servicio motor blower completo HHC2020 (motor + BMSC) — reparar F1 · $950 USD schedule73parts abr 2026",precio:5390000,marca:"Turbochef"},
   {cod:"HCT-4205",desc:"Motor blower individual con rueda (reparar F1) — medir bobinas 2.3–2.8 ohms antes de reemplazar",precio:1950000,marca:"Turbochef"},
   {cod:"HHC-6517-2",desc:"RTD sonda temperatura cámara (reparar F7) — 100Ω a 0°C · 138Ω a 100°C",precio:450000,marca:"Turbochef"},
   {cod:"NGC-3005",desc:"Relay estado sólido dual 40A 240VAC K4/K5 (reparar F8 por SSR en cortocircuito)",precio:600000,marca:"Turbochef"},
-  {cod:"HCT-3016",desc:"Kit heaters servicio HHC2020 — 2 heaters flat spiral 6750W 208V · $1,827 USD partstown",precio:10230000,marca:"Turbochef"},
+  {cod:"HCT-3016",desc:"Kit heaters servicio HHC2020 — 2 heaters flat spiral 6750W 208V · $1,827 USD partstown list",precio:10230000,marca:"Turbochef"},
   {cod:"HCT-4161",desc:"Heater trasero flat spiral 6750W 208V — 14.4Ω en frío",precio:1200000,marca:"Turbochef"},
   {cod:"HCT-4162",desc:"Heater frontal flat spiral 6750W 208V — 14.4Ω en frío",precio:1200000,marca:"Turbochef"},
-  {cod:"HCT-4143",desc:"Cadena conveyor #35 52 eslabones con master link (reparar F9)",precio:75000,marca:"Turbochef"},
-  {cod:"HCT-3026",desc:"Kit reparación banda conveyor 9.5\" HHC2020 · $108 USD partstown",precio:605000,marca:"Turbochef"},
-  {cod:"HCT-4099",desc:"Jetplate — placa inyectores de aire (x2 por horno) — limpiar semanalmente",precio:300000,marca:"Turbochef"},
-  {cod:"102075",desc:"Termostato alto límite 572°F/300°C reset manual (reparar F8 por trip térmico)",precio:240000,marca:"Turbochef"},
-  {cod:"102086",desc:"Termostato cooling fan 120°F/49°C — activación fans de refrigeración (reparar F6)",precio:150000,marca:"Turbochef"},
-  {cod:"HCT-4067",desc:"Filtro de aire trasero HHC — limpiar semanalmente, reemplazar si rasgado · $13 USD partstown",precio:73000,marca:"Turbochef"},
+  {cod:"HCT-4143",desc:"Cadena conveyor #35 52 eslabones con master link (reparar F9) · $13.16 USD webstaurantstore",precio:75000,marca:"Turbochef"},
+  {cod:"HCT-3026",desc:"Kit reparación banda conveyor 9.5\" HHC2020 · $74.31 USD schedule73parts abr 2026",precio:420000,marca:"Turbochef"},
+  {cod:"HCT-4099",desc:"Jetplate — placa inyectores de aire superior o inferior (x2 por horno) — limpiar semanalmente",precio:300000,marca:"Turbochef"},
+  {cod:"102075",desc:"Termostato alto límite 572°F/300°C reset manual (reparar F8) · $139.50 USD schedule73parts abr 2026",precio:790000,marca:"Turbochef"},
+  {cod:"102086",desc:"Termostato cooling fan 120°F/49°C — cierra al calentarse, activa fans de refrigeración (reparar F6)",precio:150000,marca:"Turbochef"},
+  {cod:"HCT-4067",desc:"Filtro de aire trasero HHC (x2 por horno) — limpiar semanalmente, reemplazar si rasgado · $13 USD partstown",precio:73000,marca:"Turbochef"},
   {cod:"101211",desc:"Fuente de poder 24VDC — alimentación tarjeta de control",precio:600000,marca:"Turbochef"},
   {cod:"NGC-3023",desc:"Display VFD pantalla principal HHC2020",precio:750000,marca:"Turbochef"},
-  {cod:"100599",desc:"Fusible 20A ATMR clase CC (x2 por horno) · $39 USD partstown",precio:85000,marca:"Turbochef"},
+  {cod:"100599",desc:"Fusible 20A ATMR clase CC (x2 por horno) · $30.38 USD schedule73parts abr 2026",precio:170000,marca:"Turbochef"},
   {cod:"HHC-6630-2",desc:"CMSC — Conveyor Motor Speed Controller (reparar F9) — medir 305–315Ω motor conveyor",precio:900000,marca:"Turbochef"},
   // ── ZANOLLI ── Fuente: catersparesuk.co.uk (TERM0005=£79.17 verificado dic 2024) · partstown.co.uk ·
   // Conversión: £1 ≈ $5,400 COP (TRM abr 2026) + 40% factor importación Colombia
