@@ -115,9 +115,19 @@ const EQUIPOS = [
   ]},
   { tipo:"Cafetera", icon:"☕", marcas:[
     { nombre:"Bunn", refs:[
-      { ref:"VPR",   favorito:false, img:EQUIPO_SVG.IMG_07, desc:"Pour-over Brewer · 1.9 L · 120V" },
-      { ref:"AXIOM", favorito:false, img:EQUIPO_SVG.IMG_07, desc:"Doble decanter · digital" },
-      { ref:"TF DBC",favorito:false, img:EQUIPO_SVG.IMG_07, desc:"ThermoFresh DBC · acero inox" },
+      { ref:"VPR",        favorito:false, img:EQUIPO_SVG.IMG_07, desc:"Pour-over · 2 warmers · 120V · 1575W" },
+      { ref:"AXIOM",      favorito:false, img:EQUIPO_SVG.IMG_07, desc:"Doble decanter · pantalla digital" },
+      { ref:"TF DBC",     favorito:false, img:EQUIPO_SVG.IMG_07, desc:"ThermoFresh DBC · acero inox" },
+      { ref:"TF SERVER",  favorito:false, img:EQUIPO_SVG.IMG_07, desc:"ThermoFresh Server · dispensador térmico" },
+      { ref:"CW15-APS",   favorito:false, img:EQUIPO_SVG.IMG_07, desc:"Cafetera goteo automática · 1 tanque · 120V · 1700W" },
+      { ref:"CW15-ADS",   favorito:false, img:EQUIPO_SVG.IMG_07, desc:"Cafetera goteo automática · 1 tanque · variante ADS" },
+      { ref:"ICB-DV",     favorito:false, img:EQUIPO_SVG.IMG_07, desc:"Cafetera goteo automática · dual voltage · 120V" },
+      { ref:"ICB DU",     favorito:false, img:EQUIPO_SVG.IMG_07, desc:"Cafetera goteo automática · modelo DU" },
+    ]},
+    { nombre:"Rancilio", refs:[
+      { ref:"Lasse",           favorito:false, img:EQUIPO_SVG.IMG_07, desc:"Cafetera capuchino automática · 1 grupo" },
+      { ref:"CLASSE 5 USB 2/C",favorito:false, img:EQUIPO_SVG.IMG_07, desc:"Cafetera espresso 2 grupos · digital · USB" },
+      { ref:"S2",              favorito:false, img:EQUIPO_SVG.IMG_07, desc:"Cafetera espresso 2 grupos · manual" },
     ]},
   ]},
   { tipo:"Granizadora", icon:"🧊", marcas:[
@@ -285,6 +295,13 @@ const ALIAS_MARCA = [
   { words:["bunn","bun"], marca:"Bunn", ref:null },
   { words:["ultra-2","ultra2","ultra 2"], marca:"Bunn", ref:"ULTRA-2" },
   { words:["ultra-1","ultra1","ultra 1"], marca:"Bunn", ref:"ULTRA-1" },
+  { words:["cw15-aps","cw15 aps","cw15aps","cw00"], marca:"Bunn", ref:"CW15-APS" },
+  { words:["cw15-ads","cw15 ads","cw15ads"], marca:"Bunn", ref:"CW15-ADS" },
+  { words:["icb-dv","icbdv","icb dv","icb0","icb du"], marca:"Bunn", ref:"ICB-DV" },
+  { words:["tf server","tfserver","tf dbc"], marca:"Bunn", ref:"TF SERVER" },
+  { words:["rancilio","rancilo"], marca:"Rancilio", ref:null },
+  { words:["lasse"], marca:"Rancilio", ref:"Lasse" },
+  { words:["classe 5","clase 5","classe5","clase5"], marca:"Rancilio", ref:"CLASSE 5 USB 2/C" },
 ];
 const ALIAS_TIPO = [
   { words:["horno","oven","combi","convector"], tipo:"Horno" },
