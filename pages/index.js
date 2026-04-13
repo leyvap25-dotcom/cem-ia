@@ -1343,8 +1343,7 @@ const CONTACTOS_ST = {
       { nombre:"Refrigerar Ingeniería SAS", tipo:"🏆 PLATINUM", tel:"315 575 0883", ws:"https://wa.me/573155750883", web:"", ciudad:"Dosquebradas", nota:"Rational / Multimarca · Contacto: Carlos Benjumea · director@refrigerar.com.co · Zona Industrial La Badea" },
       { nombre:"Soluctem", tipo:"🥇 GOLD", tel:"316 417 7660", ws:"https://wa.me/573164177660", web:"", ciudad:"Dosquebradas", nota:"Unox (Gold) / Rational · Contacto: Carlos Guerrón · direcciontecnica@soluctem.com · 318 531 0263" },
       { nombre:"Dacara", tipo:"🥈 SILVER", tel:"315 579 5329", ws:"https://wa.me/573155795329", web:"", ciudad:"Dosquebradas", nota:"Unox (Silver) / Bunn / Café · Contacto: Juan Peñuela · gerencia@dacara.co · 315 884 4327" },
-      // Barranquilla — SILVER
-      { nombre:"Sercointec", tipo:"🥈 SILVER", tel:"321 463 4311", ws:"https://wa.me/573214634311", web:"", ciudad:"Barranquilla", nota:"Unox (Silver) / Multimarca · Contacto: Juan David Jaramillo · juan.jaramillo@sercointec.com · Cra 58 #75-17" },
+      // Barranquilla
       { nombre:"Soluctem SAS", tipo:"🔧 Certificado", tel:"318 683 5306", ws:"https://wa.me/573186835306", web:"", ciudad:"Barranquilla", nota:"Unox / Rational · Contacto: Lina Bahoz · coordinadorz2@soluctem.com" },
       // Montería
       { nombre:"Refriwilliam SAS", tipo:"🔧 Certificado", tel:"316 443 0197", ws:"https://wa.me/573164430197", web:"", ciudad:"Montería", nota:"Rational / Unox · Contacto: William Barbosa · dir.operaciones@refriwilliams.com" },
@@ -1671,7 +1670,63 @@ function useUpdateCheck() {
   return { hayUpdate, checking, currentVersion, recargar };
 }
 
-// ─── BANNER DE ACTUALIZACIÓN ──────────────────────────────────────────────────
+// ─── PWA: HOOK DE INSTALACIÓN ─────────────────────────────────────────────────
+function usePWAInstall() {
+  const [deferredPrompt, setDeferredPrompt] = useState(null);
+  const [instalable, setInstalable] = useState(false);
+  const [instalado, setInstalado] = useState(false);
+  const [offline, setOffline] = useState(typeof navigator !== "undefined" ? !navigator.onLine : false);
+
+  useEffect(() => {
+    // Detectar si ya está instalada como PWA
+    if (window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone) {
+      setInstalado(true);
+      return;
+    }
+    const handler = (e) => { e.preventDefault(); setDeferredPrompt(e); setInstalable(true); };
+    window.addEventListener("beforeinstallprompt", handler);
+    window.addEventListener("appinstalled", () => { setInstalado(true); setInstalable(false); });
+    const onOffline = () => setOffline(true);
+    const onOnline  = () => setOffline(false);
+    window.addEventListener("offline", onOffline);
+    window.addEventListener("online",  onOnline);
+    return () => {
+      window.removeEventListener("beforeinstallprompt", handler);
+      window.removeEventListener("offline", onOffline);
+      window.removeEventListener("online",  onOnline);
+    };
+  }, []);
+
+  const instalar = async () => {
+    if (!deferredPrompt) return;
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    if (outcome === "accepted") setInstalado(true);
+    setDeferredPrompt(null); setInstalable(false);
+  };
+
+  return { instalable, instalado, instalar, offline };
+}
+
+// ─── BANNER OFFLINE ───────────────────────────────────────────────────────────
+function OfflineBanner({ offline }) {
+  if (!offline) return null;
+  return (
+    <div style={{
+      display:"flex", alignItems:"center", gap:8,
+      background:"rgba(234,88,12,0.2)", border:"1px solid rgba(251,146,60,0.5)",
+      borderRadius:8, padding:"7px 12px", marginBottom:8,
+    }}>
+      <span style={{fontSize:14}}>📡</span>
+      <div style={{flex:1}}>
+        <div style={{fontSize:11,fontWeight:700,color:"#fb923c"}}>Sin conexión</div>
+        <div style={{fontSize:10,color:"rgba(251,146,60,0.8)"}}>CEM Bot no disponible · Tablas de errores, PM y repuestos funcionan offline</div>
+      </div>
+    </div>
+  );
+}
+
+
 function UpdateBanner({ hayUpdate, checking, currentVersion, recargar, dark = false }) {
   if (hayUpdate) {
     return (
@@ -2300,6 +2355,7 @@ function WelcomeScreen({ onSelect }) {
 function InicioTab({ onNav }) {
   const [showTutorial, setShowTutorial] = useState(false);
   const { hayUpdate, checking, currentVersion, recargar } = useUpdateCheck();
+  const { instalable, instalado, instalar, offline } = usePWAInstall();
   const items = [
     {id:"chat",      icon:"🤖", color:"#2563eb", bg:"#dbeafe", titulo:"CEM Bot",        desc:"Diagnóstico por texto, voz e imagen."},
     {id:"planes",    icon:"📋", color:"#16a34a", bg:"#dcfce7", titulo:"Planes PM",       desc:"Tareas preventivas por equipo."},
@@ -2340,6 +2396,26 @@ function InicioTab({ onNav }) {
           )}
         </div>
         <div style={{padding:"12px 14px 80px"}}>
+          {/* Banner offline */}
+          <OfflineBanner offline={offline}/>
+          {/* Botón instalar PWA */}
+          {instalable && !instalado && (
+            <div onClick={instalar}
+              style={{background:"linear-gradient(135deg,#064e3b,#065f46)",borderRadius:12,padding:"11px 14px",cursor:"pointer",display:"flex",gap:11,alignItems:"center",border:"1px solid rgba(52,211,153,0.3)",marginBottom:9}}>
+              <div style={{width:36,height:36,background:"rgba(52,211,153,0.15)",borderRadius:9,display:"flex",alignItems:"center",justifyContent:"center",fontSize:19,flexShrink:0}}>📲</div>
+              <div style={{flex:1}}>
+                <div style={{fontSize:13,fontWeight:800,color:"#6ee7b7",marginBottom:1}}>Instalar app offline</div>
+                <div style={{fontSize:10,color:"rgba(110,231,183,0.7)"}}>Agrega a pantalla de inicio · funciona sin internet</div>
+              </div>
+              <div style={{fontSize:15,color:"rgba(110,231,183,0.5)"}}>›</div>
+            </div>
+          )}
+          {instalado && (
+            <div style={{background:"rgba(5,150,105,0.1)",borderRadius:10,padding:"8px 12px",marginBottom:9,display:"flex",gap:8,alignItems:"center",border:"1px solid rgba(52,211,153,0.2)"}}>
+              <span style={{fontSize:14}}>✅</span>
+              <div style={{fontSize:11,color:"#6ee7b7",fontWeight:600}}>App instalada · modo offline activo</div>
+            </div>
+          )}
           <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:9,marginBottom:10}}>
             <div onClick={()=>onNav("chat")}
               style={{background:"linear-gradient(135deg,#1d4ed8,#2563eb)",borderRadius:14,padding:"15px 13px",cursor:"pointer",color:"#fff"}}>
