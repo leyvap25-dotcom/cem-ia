@@ -1204,6 +1204,24 @@ const REPUESTOS = [
   {cod:"RETE0013",desc:"Banda transportadora conveyor 08/50 — reemplazar si hay roturas o desgaste lateral",precio:1100000,marca:"Zanolli"},
   {cod:"RETE0012",desc:"Banda transportadora conveyor 06/40 — mismos criterios de reemplazo que RETE0013",precio:890000,marca:"Zanolli"},
   {cod:"ELET0156",desc:"Transformador toroidal 63VA para tarjeta base — alimentación electrónica",precio:310000,marca:"Zanolli"},
+  // ── BUNN ── Fuente precios: webstaurantstore.com (verificado abr 2026) · schedule73parts.us
+  // TRM $4,200 + 35% importación Colombia
+  // ── VPR (cafetera de filtro) ──────────────────────────────────────────────
+  {cod:"01082.0000",desc:"Sprayhead 6 hoyos — reparar distribución desigual de agua · $3.80 USD webstaurantstore abr 2026",precio:22000,marca:"Bunn"},
+  {cod:"04236.1000",desc:"Kit calentador tanque 1320W 120V VPR — reparar agua fría, no brewa · $30.99 USD webstaurantstore abr 2026",precio:176000,marca:"Bunn"},
+  {cod:"29329.1000",desc:"Termostato hi-limit (corte seguridad) VPR/AXIOM/CWTF — reparar corte térmico sin recobrar · $7.50 USD schedule73parts abr 2026",precio:43000,marca:"Bunn"},
+  {cod:"01227.0000",desc:"Elemento calefactor warmer 40W 120V — reparar platillo calentador sin calor · $11.90 USD webstaurantstore abr 2026",precio:68000,marca:"Bunn"},
+  {cod:"01121.0000",desc:"Kit elemento warmer 100W 120V (incluye placa + tensor + tuerca) — reparar warmer sin calor · $19.20 USD webstaurantstore abr 2026",precio:109000,marca:"Bunn"},
+  {cod:"04225.0002",desc:"Switch on/off toggle VPR/urnas — reparar equipo sin encender · $7.80 USD webstaurantstore",precio:44000,marca:"Bunn"},
+  {cod:"02232.0000",desc:"Canasta embudo (funnel basket) VPR — reemplazar si tiene grietas o retiene agua · $18.80 USD webstaurantstore",precio:107000,marca:"Bunn"},
+  {cod:"05555.0002",desc:"Kit tubo sprayhead completo (incluye hub, empaque y 3 tuercas) — reparar goteo por sello defectuoso",precio:85000,marca:"Bunn"},
+  // ── ULTRA-2 (granizadora) ─────────────────────────────────────────────────
+  {cod:"32190.1000",desc:"Ensamble hopper (tambor) Ultra-1 y Ultra-2 — incluye bushing y nariz de auger · $99.04 USD webstaurantstore abr 2026",precio:562000,marca:"Bunn"},
+  {cod:"44039.1000",desc:"Tarjeta de control principal CBA Ultra-2 (con RTC) — reparar pantalla muerta / errores electrónicos · $179.24 USD schedule73parts abr 2026",precio:1016000,marca:"Bunn"},
+  {cod:"28122.0002",desc:"Filtro de aire magnético 34.4×28.1cm Ultra NX Series — limpiar mensualmente, reemplazar si rasgado · $13.95 USD webstaurantstore",precio:79000,marca:"Bunn"},
+  {cod:"34245.0000",desc:"Kit mantenimiento preventivo Ultra-2 (sellos, empaques, paleta) — PM semestral obligatorio",precio:280000,marca:"Bunn"},
+  {cod:"32133.0000",desc:"Ensamble válvula solenoide 120V Ultra-2 — reparar flujo detenido o dosificación incorrecta",precio:310000,marca:"Bunn"},
+  {cod:"29084.1002",desc:"Termostato de control temperatura (regulación de congelación) VPR/AXIOM — reparar temperatura inestable",precio:95000,marca:"Bunn"},
 ];
 
 const formatPrecio = (n) => new Intl.NumberFormat("es-CO",{style:"currency",currency:"COP",minimumFractionDigits:0}).format(n);
