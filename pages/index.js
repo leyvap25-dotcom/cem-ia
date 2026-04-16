@@ -801,6 +801,14 @@ function usePWAInstall() {
     window.addEventListener("appinstalled", () => { setInstalado(true); setInstalable(false); });
     window.addEventListener("offline", () => setOffline(true));
     window.addEventListener("online",  () => setOffline(false));
+    // Auto-recarga cuando el SW activa una nueva versión
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.addEventListener("message", (e) => {
+        if (e.data?.type === "SW_UPDATED") {
+          window.location.reload();
+        }
+      });
+    }
     return () => window.removeEventListener("beforeinstallprompt", h);
   }, []);
   const instalar = async () => {
