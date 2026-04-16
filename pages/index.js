@@ -774,9 +774,17 @@ function useUpdateCheck() {
     const t = setInterval(check, 5*60*1000);
     return () => clearInterval(t);
   }, []);
-  const currentVersion = process.env.NEXT_PUBLIC_BUILD_DATE
-    ? "v3.2 · " + new Date(process.env.NEXT_PUBLIC_BUILD_DATE).toLocaleDateString("es-CO",{day:"2-digit",month:"2-digit",year:"2-digit"})
-    : "v3.2";
+  // La versión se calcula desde NEXT_PUBLIC_BUILD_DATE (si existe) o desde NEXT_PUBLIC_VERCEL_GIT_COMMIT_AUTHOR_LOGIN
+  // En cada deploy de Vercel, NEXT_PUBLIC_BUILD_DATE debe estar seteada en Settings > Env Variables
+  // con valor: automático via _buildDate trick, o manualmente.
+  // Solución robusta: usar BUILD_TIMESTAMP generado en next.config.js
+  // NEXT_PUBLIC_BUILD_TIMESTAMP se genera automáticamente en next.config.js con new Date().toISOString()
+  // Así la fecha siempre refleja cuándo Vercel hizo el último deploy — sin setear nada manualmente.
+  const currentVersion = "v3.3 · " + (
+    process.env.NEXT_PUBLIC_BUILD_TIMESTAMP
+      ? new Date(process.env.NEXT_PUBLIC_BUILD_TIMESTAMP).toLocaleDateString("es-CO",{day:"2-digit",month:"2-digit",year:"2-digit"})
+      : new Date().toLocaleDateString("es-CO",{day:"2-digit",month:"2-digit",year:"2-digit"})
+  );
   const recargar = () => { sessionStorage.removeItem("cem_etag"); window.location.reload(true); };
   return { hayUpdate, checking, currentVersion, recargar };
 }
