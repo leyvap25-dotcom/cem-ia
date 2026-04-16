@@ -1,42 +1,48 @@
-// ─── CEM IA — Service Worker v1 ──────────────────────────────────────────────
+// ─── CEM IA — Service Worker v3 ──────────────────────────────────────────────
 // Estrategia: Cache-First para assets estáticos, Network-First para /api/chat
-// Al actualizar el SW (cambiar CACHE_NAME) se purgan las cachés viejas.
+// v3: detección automática de actualizaciones + notificación al usuario
 
-const CACHE_NAME = "cem-ia-v1";
+const CACHE_NAME = "cem-ia-v3";
 
-// Assets que se precargan al instalar el SW (app shell)
-const PRECACHE = [
-  "/",
-  "/_next/static/css/app.css",   // Next.js los genera dinámicos — se agregan en runtime
-];
-
-// Rutas que NUNCA se cachean (siempre van a la red)
 const NETWORK_ONLY = [
   "/api/chat",
   "/api/stats",
 ];
 
-// ── Install: precaché del app shell ──────────────────────────────────────────
+// ── Install: skipWaiting inmediato para activar la nueva versión YA ──────────
 self.addEventListener("install", (e) => {
+  // skipWaiting fuerza que el nuevo SW tome control sin esperar que se cierren tabs
   self.skipWaiting();
   e.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      // Solo cacheamos "/" en install; el resto se agrega en fetch
       return cache.add("/").catch(() => {});
     })
   );
 });
 
-// ── Activate: limpia cachés viejas ───────────────────────────────────────────
+// ── Activate: limpia cachés viejas y toma control de todos los clientes ───────
 self.addEventListener("activate", (e) => {
   e.waitUntil(
     caches.keys().then((keys) =>
       Promise.all(
         keys
           .filter((k) => k !== CACHE_NAME)
-          .map((k) => caches.delete(k))
+          .map((k) => {
+            console.log("[SW] Eliminando caché vieja:", k);
+            return caches.delete(k);
+          })
       )
-    ).then(() => self.clients.claim())
+    ).then(() => {
+      // clients.claim() hace que el SW tome control de todas las tabs abiertas
+      return self.clients.claim();
+    }).then(() => {
+      // Notificar a todos los clientes que hay una nueva versión activa
+      return self.clients.matchAll({ type: "window" }).then((clients) => {
+        clients.forEach((client) => {
+          client.postMessage({ type: "SW_UPDATED", version: CACHE_NAME });
+        });
+      });
+    })
   );
 });
 
@@ -45,17 +51,34 @@ self.addEventListener("fetch", (e) => {
   const { request } = e;
   const url = new URL(request.url);
 
-  // Solo interceptamos mismo origen
   if (url.origin !== self.location.origin) return;
 
-  // Rutas Network-Only (API calls con clave Anthropic, stats, etc.)
   if (NETWORK_ONLY.some((p) => url.pathname.startsWith(p))) {
-    return; // deja pasar sin cachear
+    return;
   }
 
-  // Para peticiones GET → Cache-First con fallback a red y almacenamiento
   if (request.method !== "GET") return;
 
+  // Para la página principal ("/") usar Network-First para detectar updates
+  if (url.pathname === "/") {
+    e.respondWith(
+      fetch(request)
+        .then((response) => {
+          if (response.ok) {
+            const clone = response.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(request, clone));
+          }
+          return response;
+        })
+        .catch(async () => {
+          const cached = await caches.match(request);
+          return cached || offlinePage();
+        })
+    );
+    return;
+  }
+
+  // Para assets estáticos → Cache-First
   e.respondWith(
     caches.open(CACHE_NAME).then(async (cache) => {
       const cached = await cache.match(request);
@@ -63,11 +86,9 @@ self.addEventListener("fetch", (e) => {
 
       try {
         const response = await fetch(request);
-        // Solo cachear respuestas exitosas de assets estáticos
         if (
           response.ok &&
           (url.pathname.startsWith("/_next/") ||
-            url.pathname === "/" ||
             url.pathname.endsWith(".html") ||
             url.pathname.endsWith(".json") ||
             url.pathname.endsWith(".png") ||
@@ -79,10 +100,19 @@ self.addEventListener("fetch", (e) => {
         }
         return response;
       } catch {
-        // Sin red y sin caché → página offline integrada
         if (request.headers.get("accept")?.includes("text/html")) {
-          return new Response(
-            `<!DOCTYPE html>
+          return offlinePage();
+        }
+        return new Response("Sin conexión", { status: 503 });
+      }
+    })
+  );
+});
+
+// ── Página offline ────────────────────────────────────────────────────────────
+function offlinePage() {
+  return new Response(
+    `<!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
@@ -117,14 +147,9 @@ self.addEventListener("fetch", (e) => {
 </div>
 </body>
 </html>`,
-            {
-              status: 200,
-              headers: { "Content-Type": "text/html; charset=utf-8" },
-            }
-          );
-        }
-        return new Response("Sin conexión", { status: 503 });
-      }
-    })
+    {
+      status: 200,
+      headers: { "Content-Type": "text/html; charset=utf-8" },
+    }
   );
-});
+}
