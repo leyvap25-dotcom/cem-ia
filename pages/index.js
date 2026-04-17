@@ -201,14 +201,14 @@ const isRefFav   = (r) => typeof r === "object" && r.favorito === true;
 const SINTOMAS = {
   Horno:["Código de error en pantalla","No genera vapor","No enciende","Gotea por la puerta","Ruidos extraños","Error durante la limpieza","Autolavado no funciona","Autolavado se interrumpe","No cierra el ciclo de lavado","Sobrecalentamiento","Sonda térmica","No alcanza temperatura","Quema los alimentos","Puerta no cierra bien","Burlete dañado o despegado","Ventilador no gira","Pantalla en blanco","Olor a quemado","Temperatura irregular","No enciende quemador (gas)","Falla eléctrica","CareControl en rojo","Pequeñas explosiones o detonaciones","Goteras en la parte inferior","Fuga de agua por la base","Humo dentro de la cámara","Cristal de puerta sucio o roto","Filtro de aire sucio","Luz de la cabina no funciona","Precalentamiento muy lento","Equipo se apaga solo"],
   Cafetera:["No calienta el agua","No extrae café","Gotea","No enciende","Error en pantalla","Poca presión"],
-  Granizadora:["No enfría","No mezcla","Gotea","No enciende","Ruido extraño","Producto muy líquido","Producto muy sólido"],
+  Granizadora:["No enfría","No mezcla","Gotea","No enciende","Ruido extraño","Producto muy líquido","Producto muy sólido","Producto no congela bien","Compresor no arranca","Motor del tambor no gira","Fuga de producto por el dispensador","Tambor trabado o atascado","Panel de control no responde","Temperatura del producto inestable","Vibración excesiva","Olor extraño en el producto","Dispensador no sale producto"],
   "Nevera / Congelador":["No enfría","Ruido extraño","Gotea agua","Escarcha excesiva","No enciende","Temperatura inestable"],
 };
 
 const SINTOMAS_OP = {
   Horno:["El horno no enciende","Hay un código de error en la pantalla","El horno gotea agua","El lavado automático no funciona","El burlete está despegado o roto","El horno quema los alimentos","La puerta no cierra bien","Hay humo o llamas dentro del horno","Ruidos fuertes o extraños","El horno tarda mucho en calentar"],
   Cafetera:["No calienta el agua","No sale café","Gotea por debajo","No enciende"],
-  Granizadora:["No enfría","No mezcla","Gotea","No enciende"],
+  Granizadora:["No enfría","No mezcla","Gotea","No enciende","El producto está muy líquido","El producto está muy duro o helado","El dispensador no sale nada","Hace mucho ruido","Hay producto en el piso"],
   "Nevera / Congelador":["No enfría","Hace ruido","Tiene mucho hielo","No enciende"],
 };
 
@@ -801,12 +801,9 @@ function usePWAInstall() {
     window.addEventListener("appinstalled", () => { setInstalado(true); setInstalable(false); });
     window.addEventListener("offline", () => setOffline(true));
     window.addEventListener("online",  () => setOffline(false));
-    // Auto-recarga cuando el SW activa una nueva versión
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker.addEventListener("message", (e) => {
-        if (e.data?.type === "SW_UPDATED") {
-          window.location.reload();
-        }
+        if (e.data?.type === "SW_UPDATED") { window.location.reload(); }
       });
     }
     return () => window.removeEventListener("beforeinstallprompt", h);
@@ -1102,11 +1099,44 @@ Contrata técnico si: [condición clara]`;
             <RefCatalog marca={sel.marca} onSelect={pickRef}/>
           </div>
         )}
-        {step==="sintoma"&&(
-          <div style={{alignSelf:"flex-start",display:"flex",flexWrap:"wrap",gap:7}}>
-            {sintomasActivos.map(s=><div key={s} onClick={()=>pickSintoma(s)} style={{...card({padding:"7px 13px",cursor:"pointer"}),fontSize:12}}>{s}</div>)}
-          </div>
-        )}
+        {step==="sintoma"&&(()=>{
+          // Top 5 fallas más recurrentes para este equipo+marca
+          const topFallas = (() => {
+            try {
+              const hist = loadF();
+              const eq = sel?.tipo?.tipo; const mrc = sel?.marca?.nombre;
+              const conteo = {};
+              hist.filter(f=>f.equipo===eq&&f.marca===mrc&&f.sintoma&&f.sintoma!=="[imagen]")
+                .forEach(f=>{ conteo[f.sintoma]=(conteo[f.sintoma]||0)+1; });
+              return Object.entries(conteo).sort((a,b)=>b[1]-a[1]).slice(0,5).map(([s,n])=>({s,n}));
+            } catch { return []; }
+          })();
+          return (
+            <div style={{alignSelf:"flex-start",width:"100%"}}>
+              {topFallas.length>0&&(
+                <div style={{marginBottom:12}}>
+                  <div style={{fontSize:10,fontWeight:800,color:"#dc2626",letterSpacing:0.5,marginBottom:7,display:"flex",alignItems:"center",gap:5}}>
+                    🔥 TOP FALLAS RECURRENTES
+                  </div>
+                  <div style={{display:"flex",flexWrap:"wrap",gap:7}}>
+                    {topFallas.map(({s,n})=>(
+                      <div key={s} onClick={()=>pickSintoma(s)}
+                        style={{...card({padding:"7px 13px",cursor:"pointer",background:"#fef2f2",border:"1.5px solid #fca5a5"}),fontSize:12,display:"flex",alignItems:"center",gap:6}}>
+                        <span style={{fontSize:10,fontWeight:800,color:"#dc2626",background:"#fee2e2",borderRadius:10,padding:"1px 6px"}}>{n}x</span>
+                        {s}
+                      </div>
+                    ))}
+                  </div>
+                  <div style={{height:1,background:C.border,margin:"10px 0"}}/>
+                </div>
+              )}
+              <div style={{fontSize:10,fontWeight:600,color:C.muted,marginBottom:7}}>TODOS LOS SÍNTOMAS</div>
+              <div style={{display:"flex",flexWrap:"wrap",gap:7}}>
+                {sintomasActivos.map(s=><div key={s} onClick={()=>pickSintoma(s)} style={{...card({padding:"7px 13px",cursor:"pointer"}),fontSize:12}}>{s}</div>)}
+              </div>
+            </div>
+          );
+        })()}
         {step==="ubicacion"&&(
           <div style={{alignSelf:"flex-start",width:"100%"}}>
             <div style={{fontSize:11,color:C.muted,marginBottom:8,fontWeight:600}}>Selecciona tu ciudad o escríbela:</div>
