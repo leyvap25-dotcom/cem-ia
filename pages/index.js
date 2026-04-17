@@ -740,7 +740,7 @@ function ContactCard({ marca, ciudad }) {
       <div style={{background:"#fffbeb",border:"1px solid #fde68a",borderRadius:8,padding:"9px 11px",marginBottom:10,display:"flex",gap:8,alignItems:"flex-start"}}>
         <span style={{fontSize:14,flexShrink:0}}>⚠️</span>
         <div style={{fontSize:10,color:"#92400e",lineHeight:1.6}}>
-          <strong>Solo puedes contratar proveedores activos en Coupa.</strong> La lista de proveedores habilitados se publicará en la próxima actualización. En junio CEM tendrá contrato con uno o más proveedores de servicio técnico. Por ahora, verifica en Coupa antes de generar la orden.
+          <strong>Solo puedes contratar proveedores activos en Coupa.</strong> La lista de proveedores habilitados se publicará en la próxima actualización. En junio se espera tener un contrato con uno o más proveedores de servicio técnico. Por ahora, verifica en Coupa antes de generar la orden.
         </div>
       </div>
       {enCiudad.length>0 && <>{enCiudad.map((c,i)=><Item key={"l"+i} c={c}/>)}</>}
@@ -1608,7 +1608,7 @@ function InstalacionTab() {
                   <div style={{background:"#eff6ff",border:"1px solid #93c5fd",borderRadius:10,padding:"10px 13px",marginBottom:12,display:"flex",gap:9,alignItems:"flex-start"}}>
                     <span style={{fontSize:16,flexShrink:0}}>ℹ️</span>
                     <div style={{fontSize:11,color:"#1e40af",lineHeight:1.6}}>
-                      <strong>Precios sugeridos por las marcas.</strong> En próximas actualizaciones publicaremos cuál de nuestros proveedores homologados en Coupa ofrece el precio más competitivo para cada equipo.
+                      <strong>Precios de referencia calculados con base en los precios sugeridos por las marcas.</strong> En algunos casos no es posible comprar directamente con el fabricante, pero en el mercado los precios deberían ser similares. En próximas actualizaciones publicaremos una lista de cotizaciones con los precios más competitivos que ofrecen nuestros proveedores homologados en Coupa.
                     </div>
                   </div>
                   <div style={{background:"#f0fdf4",borderRadius:12,padding:"14px",border:"1px solid #86efac",marginBottom:10}}>
