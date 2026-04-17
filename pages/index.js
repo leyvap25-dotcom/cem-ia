@@ -1271,7 +1271,88 @@ function TutorialScreen({ onClose }) {
 
 function WelcomeScreen({ onSelect }) {
   const [showTutorial, setShowTutorial] = useState(false);
+  const [pinOk, setPinOk] = useState(() => {
+    try { return sessionStorage.getItem("cem_pin_ok") === "1"; } catch { return false; }
+  });
+  const [pinInput, setPinInput] = useState("");
+  const [pinError, setPinError] = useState(false);
   const { hayUpdate, checking, currentVersion, recargar } = useUpdateCheck();
+
+  const verificarPin = () => {
+    if (pinInput === "2468") {
+      try { sessionStorage.setItem("cem_pin_ok", "1"); } catch {}
+      setPinOk(true); setPinError(false);
+    } else {
+      setPinError(true); setPinInput("");
+    }
+  };
+
+  if (!pinOk) {
+    return (
+      <div style={{minHeight:"100vh",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:"28px 22px",background:"#0f172a"}}>
+        <div style={{position:"fixed",inset:0,backgroundImage:"radial-gradient(circle at 25% 25%,#1e3a5f 0%,transparent 55%),radial-gradient(circle at 78% 75%,#1e40af 0%,transparent 55%)",opacity:0.7,pointerEvents:"none"}}/>
+        <div style={{position:"relative",width:"100%",maxWidth:340,textAlign:"center"}}>
+          <div style={{position:"relative",display:"inline-block",marginBottom:20}}>
+            <div style={{width:80,height:80,background:"rgba(255,255,255,0.07)",borderRadius:20,display:"flex",alignItems:"center",justifyContent:"center",border:"1px solid rgba(255,255,255,0.1)"}}>
+              <LogoCEM size={58}/>
+            </div>
+            <div style={{position:"absolute",top:-6,right:-8,background:"#e8432d",color:"#fff",fontSize:10,fontWeight:900,padding:"3px 8px",borderRadius:6,fontFamily:"Impact,sans-serif"}}>IA</div>
+          </div>
+          <div style={{fontSize:20,fontWeight:900,color:"#fff",marginBottom:4}}>CEM IA Assistant</div>
+          <div style={{fontSize:12,color:"rgba(255,255,255,0.4)",marginBottom:32}}>Centro de Excelencia de Mantenimiento</div>
+          <div style={{background:"rgba(255,255,255,0.05)",borderRadius:16,padding:"24px 20px",border:"1px solid rgba(255,255,255,0.1)"}}>
+            <div style={{fontSize:14,fontWeight:700,color:"#fff",marginBottom:6}}>🔐 Acceso restringido</div>
+            <div style={{fontSize:11,color:"rgba(255,255,255,0.5)",marginBottom:20,lineHeight:1.5}}>Ingresa el código de acceso para continuar</div>
+            <input
+              type="password"
+              inputMode="numeric"
+              maxLength={6}
+              value={pinInput}
+              onChange={e=>{ setPinInput(e.target.value); setPinError(false); }}
+              onKeyDown={e=>e.key==="Enter"&&verificarPin()}
+              placeholder="● ● ● ●"
+              style={{
+                width:"100%", boxSizing:"border-box",
+                padding:"13px 16px", borderRadius:10, fontSize:22,
+                textAlign:"center", letterSpacing:8,
+                fontFamily:"inherit", outline:"none",
+                background:"rgba(255,255,255,0.08)",
+                border:`1.5px solid ${pinError?"#dc2626":"rgba(255,255,255,0.15)"}`,
+                color:"#fff", marginBottom:8,
+              }}
+              autoFocus
+            />
+            {pinError && <div style={{fontSize:11,color:"#f87171",marginBottom:10,fontWeight:600}}>Código incorrecto. Inténtalo de nuevo.</div>}
+            <button
+              onClick={verificarPin}
+              style={{width:"100%",padding:"12px",borderRadius:10,border:"none",background:"#2563eb",color:"#fff",fontSize:14,fontWeight:700,cursor:"pointer",fontFamily:"inherit",marginBottom:16}}
+            >
+              Ingresar →
+            </button>
+            <div style={{height:"1px",background:"rgba(255,255,255,0.08)",marginBottom:16}}/>
+            <div style={{fontSize:11,color:"rgba(255,255,255,0.35)",lineHeight:1.6}}>
+              ¿No tienes el código?{" "}
+              <a
+                href="https://teams.microsoft.com/l/chat/0/0?users=pablo.leyva@terpel.com&message=Hola%20Pablo%2C%20necesito%20el%20c%C3%B3digo%20de%20acceso%20del%20CEM%20IA%20Assistant"
+                target="_blank" rel="noopener noreferrer"
+                style={{color:"#60a5fa",textDecoration:"underline",fontWeight:600}}
+              >
+                Escríbeme por Teams
+              </a>
+              {" "}o al{" "}
+              <a
+                href="mailto:pablo.leyva@terpel.com?subject=Código CEM IA Assistant&body=Hola Pablo, necesito el código de acceso del CEM IA Assistant."
+                style={{color:"#60a5fa",textDecoration:"underline",fontWeight:600}}
+              >
+                correo
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <>
       {showTutorial && <TutorialScreen onClose={()=>setShowTutorial(false)}/>}
