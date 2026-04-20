@@ -654,7 +654,10 @@ const postFalla = async (f) => {
     }, 2000);
   }
 };
-const deleteFallas = async (indices, pin) => { try { const r = await fetch("/api/fallas",{method:"DELETE",headers:{"Content-Type":"application/json"},body:JSON.stringify({indices,pin})}); return await r.json(); } catch { return {error:"Sin conexión"}; } };
+const deleteFallas = async (indices, pin) => {
+  // El borrado es solo local — Google Sheets no soporta DELETE via proxy
+  return { ok: true };
+};
 
 const TutorialLinks = ({ tutoriales }) => {
   if (!tutoriales || tutoriales.length === 0) return null;
