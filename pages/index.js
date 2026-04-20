@@ -1885,7 +1885,7 @@ function BarChart({datos, colorFn}) {
 }
 
 const ADMIN_PIN = "1234";
-function StatsTab({ fallas, onBorrar }) {
+function StatsTab({ fallas, onBorrar, onRecargar }) {
   const [filtro,setFiltro]=useState("todo"); const [vista,setVista]=useState("graficas");
   const [adminMode,setAdminMode]=useState(false); const [pinInput,setPinInput]=useState(""); const [pinError,setPinError]=useState(false); const [showPin,setShowPin]=useState(false);
   const [seleccionados,setSeleccionados]=useState(new Set());
@@ -1928,7 +1928,7 @@ function StatsTab({ fallas, onBorrar }) {
     <div style={{padding:14,overflowY:"auto",height:"calc(100vh - 110px)"}}>
       <div style={{display:"flex",alignItems:"center",marginBottom:12,gap:8}}>
         <div style={{fontSize:17,fontWeight:800,flex:1}}>📊 Stats globales</div>
-        <button onClick={async()=>{const d=await fetchFallas();onBorrar(Array.isArray(d)?d:[]);}} style={{...btn("outline","sm"),fontSize:10}}>🔄</button>
+        <button onClick={async()=>{const d=await fetchFallas();if(Array.isArray(d))onRecargar(d);}} style={{...btn("outline","sm"),fontSize:10}}>🔄</button>
         <button onClick={()=>adminMode?setAdminMode(false):setShowPin(!showPin)} style={{...btn(adminMode?"primary":"outline","sm"),fontSize:10}}>{adminMode?"🔓 Admin ON":"🔐 Admin"}</button>
       </div>
       <div style={{background:"#eff6ff",border:"1px solid #93c5fd",borderRadius:8,padding:"7px 12px",marginBottom:10,fontSize:10,color:"#1e40af",display:"flex",alignItems:"center",gap:6}}>
@@ -2186,7 +2186,7 @@ export default function App() {
         {tab==="planes"       && <PlanesTab/>}
         {tab==="limpieza"     && <LimpiezaTab/>}
         {tab==="repuestos"    && <RepuestosTab/>}
-        {tab==="stats"        && <StatsTab fallas={fallas} onBorrar={f=>{setFallas(f);saveF(f);}}/>}
+        {tab==="stats"        && <StatsTab fallas={fallas} onBorrar={f=>{setFallas(f);saveF(f);}} onRecargar={f=>{setFallas(f);saveF(f);}}/>}
         {tab==="referencias"  && <ReferenciasTab/>}
         {tab==="guia"         && <GuiaTab/>}
         {tab==="consejos"     && <ConsejosTab/>}
