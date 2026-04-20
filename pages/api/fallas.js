@@ -1,6 +1,4 @@
 // pages/api/fallas.js
-// Proxy hacia Google Sheets Apps Script — sin dependencias externas
-
 const SHEETS_URL = "https://script.google.com/macros/s/AKfycbyPlzg3V5sTcbXoFQHnsH5iY56v0T76hk93gJ8T4rvd9dl7xftRNZ6Cm1iUS0sAVOlY/exec";
 
 export default async function handler(req, res) {
@@ -27,11 +25,12 @@ export default async function handler(req, res) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          equipo: falla.equipo || "Sin especificar",
-          marca: falla.marca || "Sin especificar",
-          ref: falla.ref || "Sin especificar",
+          equipo:  falla.equipo  || "Sin especificar",
+          marca:   falla.marca   || "Sin especificar",
+          ref:     falla.ref     || "Sin especificar",
           sintoma: falla.sintoma || "Sin especificar",
-          fecha: falla.fecha || new Date().toISOString(),
+          ciudad:  falla.ciudad  || "",
+          fecha:   falla.fecha   || new Date().toISOString(),
         }),
       });
       const data = await r.json();
