@@ -886,7 +886,7 @@ function UpdateBanner({ hayUpdate, checking, currentVersion, recargar, dark=fals
 const SALUDO_TECNICO = "¡Hola! Soy el asistente técnico del **CEM**.\n\nPuedes escribirme, usar los botones o hablarme con el micrófono 🎙️. También puedes **adjuntar una imagen** 📷.\n\nSelecciona el **equipo** para comenzar el diagnóstico:";
 const SALUDO_OPERADOR = "¡Hola! Soy tu asistente de cocina del **CEM** 👋\n\nEscríbeme o usa los botones para contarme qué está pasando con el equipo.\n\n¿Con qué equipo tienes una inquietud?";
 
-function ChatTab({ onFalla, modo="tecnico" }) {
+function ChatTab({ onFalla, onCiudad, modo="tecnico" }) {
   const [msgs, setMsgs] = useState([{ role:"bot", text:modo==="tecnico"?SALUDO_TECNICO:SALUDO_OPERADOR }]);
   const [step, setStep] = useState("tipo");
   const [sel, setSel] = useState({ tipo:null, marca:null, ref:null });
@@ -1039,7 +1039,7 @@ Contrata técnico si: [condición clara]`;
     const ctx = sel;
     if (!registrado.current) {
       registrado.current=true;
-      const falla = {equipo:ctx.tipo?.tipo||"Sin especificar",marca:ctx.marca?.nombre||"Sin especificar",ref:ctx.ref||"Sin especificar",sintoma:s};
+      const falla = {equipo:ctx.tipo?.tipo||"Sin especificar",marca:ctx.marca?.nombre||"Sin especificar",ref:ctx.ref||"Sin especificar",sintoma:s,ciudad:""};
       onFalla(falla);
     }
     callIA(s, ctx);
@@ -1050,6 +1050,8 @@ Contrata técnico si: [condición clara]`;
     setStep("chat");
     addMsg("bot",`Contactos de servicio técnico **${marca}** en tu zona:`,{isUbicacion:true});
     addMsg("bot",`__CONTACTCARD__${marca}__${ciudad}__`,{isContactCard:true,marca,ciudad});
+    // Guardar ciudad en el registro
+    if (onCiudad) onCiudad(ciudad);
   };
 
   const sendMsg = async () => {
@@ -2190,6 +2192,17 @@ export default function App() {
     saveF(a); // backup local
     postFalla(n); // enviar al servidor global
   };
+  const registrarConCiudad = (ciudad) => {
+    // Actualizar la última falla con la ciudad
+    const local = loadF();
+    if (local.length === 0) return;
+    const ultima = local[local.length - 1];
+    if (!ultima.ciudad) {
+      ultima.ciudad = ciudad;
+      saveF(local);
+      postFalla({...ultima, ciudad});
+    }
+  };
 
   if (!rol) return <WelcomeScreen onSelect={seleccionarRol}/>;
 
@@ -2228,8 +2241,8 @@ export default function App() {
 
         {tab==="inicio"       && <InicioTab onNav={setTab}/>}
         {tab==="inicio_op"    && <InicioOpTab onNav={setTab}/>}
-        {tab==="chat"         && <ChatTab onFalla={registrar} modo="tecnico"/>}
-        {tab==="chat_op"      && <ChatTab onFalla={registrar} modo="operador"/>}
+        {tab==="chat"         && <ChatTab onFalla={registrar} onCiudad={registrarConCiudad} modo="tecnico"/>}
+        {tab==="chat_op"      && <ChatTab onFalla={registrar} onCiudad={registrarConCiudad} modo="operador"/>}
         {tab==="instalacion"  && <InstalacionTab/>}
         {tab==="planes"       && <PlanesTab/>}
         {tab==="limpieza"     && <LimpiezaTab/>}
