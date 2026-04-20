@@ -630,8 +630,13 @@ const TABS_OPERADOR = [
 ];
 
 const SK = "cem_fallas_v4";
+// Carga local (fallback offline)
 const loadF = () => { try { const d = localStorage.getItem(SK); return d ? JSON.parse(d) : []; } catch { return []; } };
 const saveF = (d) => { try { localStorage.setItem(SK, JSON.stringify(d)); } catch {} };
+// API global
+const fetchFallas = async () => { try { const r = await fetch("/api/fallas"); if(!r.ok) return loadF(); return await r.json(); } catch { return loadF(); } };
+const postFalla = async (f) => { try { await fetch("/api/fallas",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(f)}); } catch {} };
+const deleteFallas = async (indices, pin) => { try { const r = await fetch("/api/fallas",{method:"DELETE",headers:{"Content-Type":"application/json"},body:JSON.stringify({indices,pin})}); return await r.json(); } catch { return {error:"Sin conexión"}; } };
 
 const TutorialLinks = ({ tutoriales }) => {
   if (!tutoriales || tutoriales.length === 0) return null;
@@ -1897,11 +1902,19 @@ function StatsTab({ fallas, onBorrar }) {
   const colores=["#2563eb","#16a34a","#d97706","#dc2626","#7c3aed","#0891b2"];
   const colorFn=i=>colores[i%colores.length];
   const toggleSel=idx=>{const s=new Set(seleccionados);s.has(idx)?s.delete(idx):s.add(idx);setSeleccionados(s);};
-  const borrarSeleccionados=()=>{
+  const borrarSeleccionados=async()=>{
     if(seleccionados.size===0)return;
     if(!window.confirm(`¿Borrar ${seleccionados.size} registro(s)?`))return;
-    const reg=new Set([...seleccionados].map(i=>[...datos].reverse()[i]));
-    onBorrar(fallas.filter(f=>!reg.has(f))); setSeleccionados(new Set());
+    // Calcular índices globales en fallas (no en datos filtrados)
+    const datosRev=[...datos].reverse();
+    const fallasObj = new Set(datosRev.filter((_,i)=>seleccionados.has(i)));
+    const indicesGlobales = fallas.map((f,i)=>fallasObj.has(f)?i:-1).filter(i=>i>=0);
+    const result = await deleteFallas(indicesGlobales, "1234");
+    if(result.error){ alert("Error: "+result.error); return; }
+    // Recargar desde servidor
+    const nuevas = await fetchFallas();
+    onBorrar(Array.isArray(nuevas)?nuevas:[]);
+    setSeleccionados(new Set());
   };
   const entrarAdmin=()=>{if(pinInput===ADMIN_PIN){setAdminMode(true);setShowPin(false);setPinInput("");setPinError(false);}else{setPinError(true);}};
   if(fallas.length===0)return(
@@ -1913,9 +1926,13 @@ function StatsTab({ fallas, onBorrar }) {
   );
   return (
     <div style={{padding:14,overflowY:"auto",height:"calc(100vh - 110px)"}}>
-      <div style={{display:"flex",alignItems:"center",marginBottom:12}}>
-        <div style={{fontSize:17,fontWeight:800,flex:1}}>Estadísticas</div>
+      <div style={{display:"flex",alignItems:"center",marginBottom:12,gap:8}}>
+        <div style={{fontSize:17,fontWeight:800,flex:1}}>📊 Stats globales</div>
+        <button onClick={async()=>{const d=await fetchFallas();onBorrar(Array.isArray(d)?d:[]);}} style={{...btn("outline","sm"),fontSize:10}}>🔄</button>
         <button onClick={()=>adminMode?setAdminMode(false):setShowPin(!showPin)} style={{...btn(adminMode?"primary":"outline","sm"),fontSize:10}}>{adminMode?"🔓 Admin ON":"🔐 Admin"}</button>
+      </div>
+      <div style={{background:"#eff6ff",border:"1px solid #93c5fd",borderRadius:8,padding:"7px 12px",marginBottom:10,fontSize:10,color:"#1e40af",display:"flex",alignItems:"center",gap:6}}>
+        <span>🌐</span> Consultas de <strong>todos los usuarios</strong> — se actualizan en tiempo real
       </div>
       {showPin&&!adminMode&&(
         <div style={{...card({marginBottom:12,padding:"12px 14px",background:C.yl,border:`1px solid ${C.yellow}44`})}}>
@@ -2103,10 +2120,28 @@ export default function App() {
   const [tab, setTab] = useState("inicio");
   const [fallas, setFallas] = useState([]);
 
-  useEffect(() => { setFallas(loadF()); }, []);
+  const [loadingFallas, setLoadingFallas] = useState(false);
+
+  useEffect(() => {
+    // Cargar fallas globales desde Blob
+    setLoadingFallas(true);
+    fetchFallas().then(data => {
+      setFallas(Array.isArray(data) ? data : []);
+      setLoadingFallas(false);
+    }).catch(() => {
+      setFallas(loadF());
+      setLoadingFallas(false);
+    });
+  }, []);
 
   const seleccionarRol = (r) => { setRol(r); setTab(r==="tecnico"?"inicio":"inicio_op"); };
-  const registrar = (f) => { const n={...f,fecha:new Date().toISOString()}; const a=[...fallas,n]; setFallas(a); saveF(a); };
+  const registrar = (f) => {
+    const n={...f,fecha:new Date().toISOString()};
+    const a=[...fallas,n];
+    setFallas(a);
+    saveF(a); // backup local
+    postFalla(n); // enviar al servidor global
+  };
 
   if (!rol) return <WelcomeScreen onSelect={seleccionarRol}/>;
 
