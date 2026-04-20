@@ -1,33 +1,57 @@
 // pages/api/fallas.js
-const { put, list } = require("@vercel/blob");
+// Sin dependencias externas - usa fetch nativo para leer/escribir en Vercel Blob
+// BLOB_READ_WRITE_TOKEN se inyecta automáticamente por Vercel
 
+const BLOB_URL = "https://blob.vercel-storage.com";
 const BLOB_PATH = "fallas.json";
+
+function getToken() {
+  return process.env.BLOB_READ_WRITE_TOKEN;
+}
 
 async function leerFallas() {
   try {
-    const result = await list({ prefix: "fallas" });
-    const blobs = result.blobs || [];
-    if (blobs.length === 0) return [];
-    blobs.sort((a, b) => new Date(b.uploadedAt) - new Date(a.uploadedAt));
-    const res = await fetch(blobs[0].downloadUrl);
+    // Listar blobs con prefijo
+    const token = getToken();
+    const res = await fetch(`${BLOB_URL}?prefix=${BLOB_PATH}&limit=1`, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
     if (!res.ok) return [];
     const data = await res.json();
-    return Array.isArray(data) ? data : [];
+    const blobs = data.blobs || [];
+    if (blobs.length === 0) return [];
+    // Descargar el archivo
+    const dl = await fetch(blobs[0].downloadUrl);
+    if (!dl.ok) return [];
+    const json = await dl.json();
+    return Array.isArray(json) ? json : [];
   } catch (e) {
-    console.error("leerFallas error:", e.message);
+    console.error("leerFallas:", e.message);
     return [];
   }
 }
 
 async function guardarFallas(fallas) {
-  await put(BLOB_PATH, JSON.stringify(fallas), {
-    access: "public",
-    contentType: "application/json",
-    addRandomSuffix: false,
+  const token = getToken();
+  const body = JSON.stringify(fallas);
+  const res = await fetch(`${BLOB_URL}/${BLOB_PATH}`, {
+    method: "PUT",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+      "x-add-random-suffix": "0",
+      "x-cache-control-max-age": "0",
+    },
+    body,
   });
+  if (!res.ok) {
+    const txt = await res.text();
+    throw new Error("Blob PUT failed: " + txt);
+  }
+  return res.json();
 }
 
-module.exports = async function handler(req, res) {
+export default async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, DELETE, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
@@ -38,7 +62,7 @@ module.exports = async function handler(req, res) {
       const fallas = await leerFallas();
       return res.status(200).json(fallas);
     } catch (e) {
-      console.error("GET error:", e.message);
+      console.error("GET:", e.message);
       return res.status(500).json({ error: e.message });
     }
   }
@@ -55,11 +79,10 @@ module.exports = async function handler(req, res) {
         sintoma: falla.sintoma || "Sin especificar",
         fecha: falla.fecha || new Date().toISOString(),
       });
-      const guardadas = fallas.slice(-2000);
-      await guardarFallas(guardadas);
-      return res.status(200).json({ ok: true, total: guardadas.length });
+      await guardarFallas(fallas.slice(-2000));
+      return res.status(200).json({ ok: true, total: fallas.length });
     } catch (e) {
-      console.error("POST error:", e.message);
+      console.error("POST:", e.message);
       return res.status(500).json({ error: e.message });
     }
   }
@@ -74,10 +97,10 @@ module.exports = async function handler(req, res) {
       await guardarFallas(nuevas);
       return res.status(200).json({ ok: true, total: nuevas.length });
     } catch (e) {
-      console.error("DELETE error:", e.message);
+      console.error("DELETE:", e.message);
       return res.status(500).json({ error: e.message });
     }
   }
 
   return res.status(405).json({ error: "Método no permitido" });
-};
+}
