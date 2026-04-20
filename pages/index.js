@@ -635,7 +635,25 @@ const loadF = () => { try { const d = localStorage.getItem(SK); return d ? JSON.
 const saveF = (d) => { try { localStorage.setItem(SK, JSON.stringify(d)); } catch {} };
 // API global
 const fetchFallas = async () => { try { const r = await fetch("/api/fallas"); if(!r.ok) return loadF(); return await r.json(); } catch { return loadF(); } };
-const postFalla = async (f) => { try { await fetch("/api/fallas",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(f)}); } catch {} };
+const postFalla = async (f) => {
+  const intentar = async () => {
+    const r = await fetch("/api/fallas", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(f)
+    });
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    return r.json();
+  };
+  try {
+    await intentar();
+  } catch {
+    // retry una vez después de 2 segundos
+    setTimeout(async () => {
+      try { await intentar(); } catch {}
+    }, 2000);
+  }
+};
 const deleteFallas = async (indices, pin) => { try { const r = await fetch("/api/fallas",{method:"DELETE",headers:{"Content-Type":"application/json"},body:JSON.stringify({indices,pin})}); return await r.json(); } catch { return {error:"Sin conexión"}; } };
 
 const TutorialLinks = ({ tutoriales }) => {
@@ -1016,7 +1034,11 @@ Contrata técnico si: [condición clara]`;
   const pickSintoma = (s) => {
     setStep("chat"); addMsg("user",s);
     const ctx = sel;
-    if (!registrado.current) { registrado.current=true; onFalla({equipo:ctx.tipo?.tipo||"Sin especificar",marca:ctx.marca?.nombre||"Sin especificar",ref:ctx.ref||"Sin especificar",sintoma:s}); }
+    if (!registrado.current) {
+      registrado.current=true;
+      const falla = {equipo:ctx.tipo?.tipo||"Sin especificar",marca:ctx.marca?.nombre||"Sin especificar",ref:ctx.ref||"Sin especificar",sintoma:s};
+      onFalla(falla);
+    }
     callIA(s, ctx);
   };
   const pickCiudad = (ciudad) => {
