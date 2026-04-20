@@ -1,19 +1,20 @@
 // pages/api/fallas.js
-import { put, list } from "@vercel/blob";
+const { put, list } = require("@vercel/blob");
 
 const BLOB_PATH = "fallas.json";
 
 async function leerFallas() {
   try {
-    const { blobs } = await list({ prefix: BLOB_PATH });
-    if (!blobs || blobs.length === 0) return [];
+    const result = await list({ prefix: "fallas" });
+    const blobs = result.blobs || [];
+    if (blobs.length === 0) return [];
     blobs.sort((a, b) => new Date(b.uploadedAt) - new Date(a.uploadedAt));
     const res = await fetch(blobs[0].downloadUrl);
     if (!res.ok) return [];
     const data = await res.json();
     return Array.isArray(data) ? data : [];
   } catch (e) {
-    console.error("leerFallas error:", e);
+    console.error("leerFallas error:", e.message);
     return [];
   }
 }
@@ -26,7 +27,7 @@ async function guardarFallas(fallas) {
   });
 }
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, DELETE, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
@@ -37,6 +38,7 @@ export default async function handler(req, res) {
       const fallas = await leerFallas();
       return res.status(200).json(fallas);
     } catch (e) {
+      console.error("GET error:", e.message);
       return res.status(500).json({ error: e.message });
     }
   }
@@ -57,6 +59,7 @@ export default async function handler(req, res) {
       await guardarFallas(guardadas);
       return res.status(200).json({ ok: true, total: guardadas.length });
     } catch (e) {
+      console.error("POST error:", e.message);
       return res.status(500).json({ error: e.message });
     }
   }
@@ -71,9 +74,10 @@ export default async function handler(req, res) {
       await guardarFallas(nuevas);
       return res.status(200).json({ ok: true, total: nuevas.length });
     } catch (e) {
+      console.error("DELETE error:", e.message);
       return res.status(500).json({ error: e.message });
     }
   }
 
   return res.status(405).json({ error: "Método no permitido" });
-}
+};
