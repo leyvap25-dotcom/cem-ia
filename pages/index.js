@@ -1917,11 +1917,29 @@ function StatsTab({ fallas, onBorrar, onRecargar }) {
     setSeleccionados(new Set());
   };
   const entrarAdmin=()=>{if(pinInput===ADMIN_PIN){setAdminMode(true);setShowPin(false);setPinInput("");setPinError(false);}else{setPinError(true);}};
+  const migrarLocal = async () => {
+    const local = loadF();
+    if (local.length === 0) { alert("No hay datos locales para migrar."); return; }
+    if (!window.confirm(`¿Subir ${local.length} consultas locales al servidor global?`)) return;
+    for (const f of local) { await postFalla(f); }
+    const data = await fetchFallas();
+    if (Array.isArray(data)) { onRecargar(data); }
+    alert(`✅ ${local.length} consultas migradas al servidor.`);
+  };
+
   if(fallas.length===0)return(
     <div style={{display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",height:"calc(100vh - 110px)",padding:16,textAlign:"center"}}>
       <div style={{fontSize:44,marginBottom:10}}>📊</div>
       <div style={{fontSize:15,fontWeight:700,marginBottom:5}}>Sin datos aún</div>
-      <div style={{fontSize:12,color:C.muted}}>Usa el CEM Bot para registrar consultas.</div>
+      <div style={{fontSize:12,color:C.muted,marginBottom:20}}>Usa el CEM Bot para registrar consultas.</div>
+      <button onClick={async()=>{const d=await fetchFallas();if(Array.isArray(d))onRecargar(d);}}
+        style={{...btn("primary","sm"),marginBottom:10,borderRadius:20,padding:"8px 20px"}}>
+        🔄 Recargar del servidor
+      </button>
+      <button onClick={migrarLocal}
+        style={{...btn("outline","sm"),borderRadius:20,padding:"8px 20px",fontSize:11}}>
+        ⬆️ Migrar mis datos locales
+      </button>
     </div>
   );
   return (
@@ -2123,13 +2141,18 @@ export default function App() {
   const [loadingFallas, setLoadingFallas] = useState(false);
 
   useEffect(() => {
-    // Cargar fallas globales desde Blob
+    // Mostrar datos locales inmediatamente
+    const local = loadF();
+    if (local.length > 0) setFallas(local);
+    // Luego cargar globales del servidor
     setLoadingFallas(true);
     fetchFallas().then(data => {
-      setFallas(Array.isArray(data) ? data : []);
+      if (Array.isArray(data) && data.length > 0) {
+        setFallas(data);
+        saveF(data);
+      }
       setLoadingFallas(false);
     }).catch(() => {
-      setFallas(loadF());
       setLoadingFallas(false);
     });
   }, []);
