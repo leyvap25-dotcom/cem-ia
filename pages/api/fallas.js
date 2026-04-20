@@ -1,5 +1,5 @@
 // pages/api/fallas.js
-const SHEETS_URL = "https://script.google.com/macros/s/AKfycbyPlzg3V5sTcbXoFQHnsH5iY56v0T76hk93gJ8T4rvd9dl7xftRNZ6Cm1iUS0sAVOlY/exec";
+const SHEETS_URL = "https://script.google.com/macros/s/AKfycbywApiKTNBjbWcrHXjgHpAhJSiHoPc-V6jXCjeefe7rmJ-w2cwIMOEZEvUQR_vEamLd/exec";
 
 export default async function handler(req, res) {
   res.setHeader("Cache-Control", "no-store");
