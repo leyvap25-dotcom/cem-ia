@@ -1,8 +1,4 @@
 // pages/api/fallas.js
-// Sin dependencias externas - usa fetch nativo para leer/escribir en Vercel Blob
-// BLOB_READ_WRITE_TOKEN se inyecta automáticamente por Vercel
-
-const BLOB_URL = "https://blob.vercel-storage.com";
 const BLOB_PATH = "fallas.json";
 
 function getToken() {
@@ -11,19 +7,21 @@ function getToken() {
 
 async function leerFallas() {
   try {
-    // Listar blobs con prefijo
     const token = getToken();
-    const res = await fetch(`${BLOB_URL}?prefix=${BLOB_PATH}&limit=1`, {
-      headers: { Authorization: `Bearer ${token}` }
-    });
-    if (!res.ok) return [];
-    const data = await res.json();
-    const blobs = data.blobs || [];
+    // Listar para obtener la URL más reciente
+    const listRes = await fetch(
+      `https://blob.vercel-storage.com?prefix=fallas.json&limit=1`,
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    if (!listRes.ok) return [];
+    const listData = await listRes.json();
+    const blobs = listData.blobs || [];
     if (blobs.length === 0) return [];
-    // Descargar el archivo
-    const dl = await fetch(blobs[0].downloadUrl);
-    if (!dl.ok) return [];
-    const json = await dl.json();
+    // Forzar no-cache con timestamp
+    const url = blobs[0].downloadUrl + "?t=" + Date.now();
+    const dlRes = await fetch(url, { cache: "no-store" });
+    if (!dlRes.ok) return [];
+    const json = await dlRes.json();
     return Array.isArray(json) ? json : [];
   } catch (e) {
     console.error("leerFallas:", e.message);
@@ -33,8 +31,7 @@ async function leerFallas() {
 
 async function guardarFallas(fallas) {
   const token = getToken();
-  const body = JSON.stringify(fallas);
-  const res = await fetch(`${BLOB_URL}/${BLOB_PATH}`, {
+  const res = await fetch(`https://blob.vercel-storage.com/${BLOB_PATH}`, {
     method: "PUT",
     headers: {
       Authorization: `Bearer ${token}`,
@@ -42,7 +39,7 @@ async function guardarFallas(fallas) {
       "x-add-random-suffix": "0",
       "x-cache-control-max-age": "0",
     },
-    body,
+    body: JSON.stringify(fallas),
   });
   if (!res.ok) {
     const txt = await res.text();
@@ -52,6 +49,8 @@ async function guardarFallas(fallas) {
 }
 
 export default async function handler(req, res) {
+  // No cachear esta respuesta
+  res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate");
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, DELETE, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
