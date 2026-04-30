@@ -418,35 +418,37 @@ const INSTALACION = {
       peso:"~47 kg",
       capacidad:"5×GN 2/3 — distancia entre guías: 67 mm — temperatura máx cámara: 260°C"
     },
-    notas:"Espacio mínimo lateral: 50 mm cada lado. Espacio mínimo posterior: 50 mm. Temperatura ambiente: +10°C a +40°C. Humedad relativa máx: 90%. Nivelar con pies regulables (nivel de burbuja). Requiere campana extractora de humos. No instalar cerca de fuentes de calor externas. Verificar que el circuito eléctrico sea exclusivo para el horno."
+    notas:"Espacio mínimo lateral: 50 mm cada lado. Espacio mínimo posterior: 50 mm. Temperatura ambiente: +10°C a +40°C. Humedad relativa máx: 90%. Nivelar con pies regulables (nivel de burbuja). Requiere campana extractora de humos. No instalar cerca de fuentes de calor externas. Verificar que el circuito eléctrico sea exclusivo para el horno.",
+    docs:[{nombre:"Lista de repuestos XECC-0523-EPRM", archivo:"XECC-0523-EPRM_ES-CO_SPARE_PARTS.pdf"}]
   },
 
-  // ─── UNOX XEFT-04HS-ELDV — BakerLux Shop.Pro Arianna LED 4×460×330 Eléctrico ───
+  // ─── UNOX XEFT-04HS-ELDV — BakerLux Shop.Pro LED 4×460×330 Eléctrico ──────
   "Unox-XEFT-04HS-ELDV":{
     electrico:{
-      tension:"230V monofásico",
+      tension:"220–240V monofásico 1PH+PE",
       frecuencia:"50/60 Hz",
       potencia:"3.5 kW",
-      corriente:"16 A",
+      corriente:"I1=15 A (I2=I3=In=0)",
       fusible:"16 A curva C — diferencial 30 mA obligatorio",
-      conexion:"Cable 3 hilos (F+N+T) — tierra obligatoria",
-      enchufe:"Clavija Schuko 16A o instalación fija"
+      conexion:"Cable tipo H07RN-F 3G×1.5 mm² — Sección exterior cable: Ø 10 mm — Tierra obligatoria",
+      enchufe:"Sin enchufe de serie — instalación fija o clavija industrial 16A"
     },
     agua:{
-      presion:"100–600 kPa (1–6 bar) dinámica",
-      caudal:"mín. 3 l/min",
-      entrada:'Racor JG 1/4" — conexión posterior',
+      presion:"150–600 kPa (1.5–6 bar) dinámica",
+      caudal:"5 l/h @ 200 kPa",
+      entrada:'Conexión 3/4"-JG8 con filtro y válvula de no retorno (kit KVL1145A)',
       desague:'Tubería Ø 25 mm mín. — resistente a 85°C — con sifón P-trap obligatorio',
       calidad:"Conductividad 125–1250 µS/cm — dureza 5–30°f — pH 6.5–8"
     },
     dimensiones:{
       ancho:"765 mm",
       profundidad:"700 mm",
-      altura:"555 mm (sin patas) / 620 mm (con patas)",
+      altura:"555 mm",
       peso:"~46 kg",
-      capacidad:"4 bandejas 460×330 mm — distancia entre guías: 80 mm"
+      capacidad:"4 bandejas 460×330 mm — cámara interior 496×349×335 mm — carga máx. 18 kg — potencia nominal: 3.2 kW — IP: X4"
     },
-    notas:"Horno de panadería sobremesa. Requiere campana extractora. Espacio mínimo lateral: 50 mm. Temperatura ambiente: +10°C a +40°C. Sistema LED para iluminación de la cámara. Nivelar con pies regulables."
+    notas:"Horno de panadería sobremesa BakerLux Shop.Pro LED. Requiere campana extractora. Espacio mínimo lateral: 50 mm. Temperatura ambiente: +10°C a +40°C. Sistema LED iluminación cámara. Nivelar con pies regulables. Circuito eléctrico exclusivo recomendado.",
+    docs:[{nombre:"Lista de repuestos XEFT-04HS-ELDV", archivo:"XEFT-04HS-ELDV_ES-CO_SPARE_PARTS.pdf"}]
   },
 
   // ─── UNOX XEFR-04HS-ELDV — BakerLux Shop.Pro Arianna LED con vapor ───────────
@@ -634,6 +636,30 @@ const REPUESTOS = [
   {cod:"KVN1165A", desc:"Kit turbina refrigeración 230V MM/S.5E ADV — Tornillos + soporte turbina CT BT + turbina refrigeración 230V",                     precio:450000,  marca:"Unox", ref:"XECC-0523-EPRM", criticidad:"B", vidaUtil:"60 meses", tiempoCambio:0.5},
   {cod:"KVN1171A", desc:"Kit turbina D195 H60 8 paletas tuerca M8 — Tornillo M6×12 + arandela + ventilador D195 H60 8 paletas",                            precio:765000,  marca:"Unox", ref:"XECC-0523-EPRM", criticidad:"A", vidaUtil:"72 meses", tiempoCambio:1.5},
   {cod:"KVN1179A", desc:"Kit turbina refrigeración 40×40×20mm 12Vcc — Ventilador axial 40×40×20mm 12Vcc",                                                  precio:180000,  marca:"Unox", ref:"XECC-0523-EPRM"},
+  // ════════════════════════════════════════════════════════════════════════
+  // UNOX XEFT-04HS-ELDV — BakerLux Shop.Pro LED — Lista completa PDF
+  // ════════════════════════════════════════════════════════════════════════
+  {cod:"KCE1095A", desc:"Kit cable bus 4 polos 2M potencia-control — Cable bus microfit 4 polos 2 metros. Repara AF04",                                    precio:180000,  marca:"Unox", ref:"XEFT-04HS-ELDV", criticidad:"B"},
+  {cod:"KCN1003A", desc:"Kit condensador motor 6.3 µF — Condensador 6.3uF + tuerca M8 + arandela dentada D8. Repara AF01",                                precio:135000,  marca:"Unox", ref:"XEFT-04HS-ELDV", criticidad:"B"},
+  {cod:"KCR1112A", desc:"Kit bisagra plegable SP Arianna-Elena — Bisagra puerta giratoria SP + tornillos M5×10",                                          precio:225000,  marca:"Unox", ref:"XEFT-04HS-ELDV", criticidad:"B", vidaUtil:"60 meses"},
+  {cod:"KEL1251A", desc:"Kit electroválvula 1 vía JG D8-D10 — Electroválvula H2O 1 vía RID marrón",                                                      precio:292500,  marca:"Unox", ref:"XEFT-04HS-ELDV", criticidad:"B", vidaUtil:"48 meses"},
+  {cod:"KGN1352A", desc:"Kit goma puerta 04HS / XF-XFT13 — Premontaje KGN1352A. Consumible.",                                                            precio:211500,  marca:"Unox", ref:"XEFT-04HS-ELDV", criticidad:"B", vidaUtil:"CONSUMIBLE"},
+  {cod:"KLP1050A", desc:"Kit barra luces LED L180 — Barra ilum LED L180 SP completa + arandela + tornillo + bolsa ESD",                                  precio:382500,  marca:"Unox", ref:"XEFT-04HS-ELDV"},
+  {cod:"KMR1025A", desc:"Kit conector 3 polos — Bornera 3 fases 450V 41A + tierra",                                                                      precio:72000,   marca:"Unox", ref:"XEFT-04HS-ELDV"},
+  {cod:"KMT1012A", desc:"Kit motor 330W eje cónico D12 — Motor 330W 230V + máscara centrado + disco sellado + goma portamotor + tornillos + imán",       precio:1350000, marca:"Unox", ref:"XEFT-04HS-ELDV", criticidad:"A", vidaUtil:"60 meses", tiempoCambio:2.5},
+  {cod:"KPE2260A", desc:"Kit tarjeta potencia BLSP/Speed.Pro/Zero — Power board 230V + tornillos + chasis tarjeta + bolsa ESD + clips fijación",         precio:990000,  marca:"Unox", ref:"XEFT-04HS-ELDV", criticidad:"A", vidaUtil:"DAÑO/72", tiempoCambio:1},
+  {cod:"KRS1283B", desc:"Kit resistencia 3000W 230V + 260W 135V 4 espiras — Goma resistencia + res circ 3200W + silicona + tornillos",                   precio:765000,  marca:"Unox", ref:"XEFT-04HS-ELDV", criticidad:"A", vidaUtil:"48 meses", tiempoCambio:2},
+  {cod:"KTR1105A", desc:"Kit sonda temperatura PT100 L1000 — Plaquita silicona + burlete + goma sonda + silicona + sonda PT100 L1000 + tornillos + tapas. Repara AF03", precio:540000, marca:"Unox", ref:"XEFT-04HS-ELDV", criticidad:"A", vidaUtil:"CONSUMIBLE"},
+  {cod:"KTR1136A", desc:"Kit termostato seguridad 318°C -0/+24 — Tapa bulbo + goma sonda + silicona + termostato + tornillos. Repara AF02",              precio:405000,  marca:"Unox", ref:"XEFT-04HS-ELDV", criticidad:"A", vidaUtil:"72 meses", tiempoCambio:2},
+  {cod:"KVE1115A", desc:"Kit minicontactor cuadripolar 20A 230V — Minicontactor 20A 230V + clips sujeción",                                              precio:247500,  marca:"Unox", ref:"XEFT-04HS-ELDV"},
+  {cod:"KVE1295A", desc:"Kit microinterruptor puerta/filtro 16A 230V",                                                                                   precio:180000,  marca:"Unox", ref:"XEFT-04HS-ELDV"},
+  {cod:"KVL1145A", desc:"Kit conexión 3/4-JG8 con filtro y VNR — VL1145A1. Recomendado para entrada de agua",                                           precio:225000,  marca:"Unox", ref:"XEFT-04HS-ELDV"},
+  {cod:"KVM1630A", desc:"Kit tapón aprieta cristal interior 10 uds — Tapón empuja-vidrio interior",                                                      precio:103500,  marca:"Unox", ref:"XEFT-04HS-ELDV"},
+  {cod:"KVM1631A", desc:"Kit tapón aprieta cristal interior PLUS 10 uds — Tapón empuja cristal interno PLUS",                                            precio:103500,  marca:"Unox", ref:"XEFT-04HS-ELDV"},
+  {cod:"KVM2456A", desc:"Kit 2 uds terminal maneta BL Shop.Pro — Tornillos inox 5×25 + terminal maneta BL Shop.Pro",                                    precio:139500,  marca:"Unox", ref:"XEFT-04HS-ELDV"},
+  {cod:"KVN1130A", desc:"Kit motor LUX ≤08.2017/L.MISS/S.5/5E — Disco sellado + goma portamotor + arandela + tuerca inox + anillo ajuste + motor 330W", precio:1440000, marca:"Unox", ref:"XEFT-04HS-ELDV"},
+  {cod:"KVN1172A", desc:"Kit turbina D195 H40 8 aspas tuerca M8 — Tornillo M6×12 + arandela + ventilador D195 H40 8 paletas",                           precio:553500,  marca:"Unox", ref:"XEFT-04HS-ELDV", criticidad:"A", vidaUtil:"72 meses", tiempoCambio:1.5},
+  {cod:"KVN1175A", desc:"Kit ventilador refrigeración 120×120 230V — Ventilador enfriamiento 120×120 230V 50/60Hz",                                     precio:247500,  marca:"Unox", ref:"XEFT-04HS-ELDV"},
   // ─── UNOX — Repuestos comunes otros modelos ───────────────────────────────
   {cod:"KPE1463A", desc:"Kit tarjeta de poder BLSP/Speed.Pro",                                                                                               precio:null,    marca:"Unox", ref:"XEFR-04HS-ELDV", criticidad:"A"},
   {cod:"KPE2107A", desc:"Kit panel de control LED",                                                                                                          precio:null,    marca:"Unox", ref:"XEFR-04HS-ELDV", criticidad:"A"},
@@ -1880,6 +1906,22 @@ function InstalacionTab() {
               {!(campos[sec]||[]).some(([,k])=>datos[sec]?.[k])&&<div style={{padding:"16px",textAlign:"center",color:"#94a3b8",fontSize:12}}>No aplica para este equipo</div>}
             </div>
             {datos.notas&&<div style={{background:"#fffbeb",borderRadius:10,padding:"12px 14px",border:"1px solid #fde68a"}}><div style={{fontSize:10,fontWeight:800,color:"#d97706",marginBottom:5}}>📝 NOTAS DE INSTALACIÓN</div><div style={{fontSize:12,color:"#78350f",lineHeight:1.7}}>{datos.notas}</div></div>}
+            {datos.docs&&datos.docs.length>0&&(
+              <div style={{background:"#eff6ff",borderRadius:10,padding:"12px 14px",border:"1px solid #93c5fd",marginTop:10}}>
+                <div style={{fontSize:10,fontWeight:800,color:"#1d4ed8",marginBottom:8}}>📄 DOCUMENTOS TÉCNICOS</div>
+                {datos.docs.map((doc,i)=>(
+                  <a key={i} href={`/docs/${doc.archivo}`} target="_blank" rel="noopener noreferrer" download
+                    style={{display:"flex",alignItems:"center",gap:10,padding:"9px 12px",background:"#fff",borderRadius:8,border:"1px solid #bfdbfe",textDecoration:"none",marginBottom:i<datos.docs.length-1?6:0}}>
+                    <div style={{width:32,height:32,background:"#dbeafe",borderRadius:7,display:"flex",alignItems:"center",justifyContent:"center",fontSize:18,flexShrink:0}}>📑</div>
+                    <div style={{flex:1}}>
+                      <div style={{fontSize:12,fontWeight:700,color:"#1d4ed8"}}>{doc.nombre}</div>
+                      <div style={{fontSize:10,color:"#3b82f6"}}>Lista de piezas sugeridas · PDF</div>
+                    </div>
+                    <div style={{fontSize:11,color:"#93c5fd"}}>⬇</div>
+                  </a>
+                ))}
+              </div>
+            )}
             {sec==="precio"&&(()=>{
               const pk=`${sM?.nombre}-${sR}`;
               const p=PRECIOS_EQUIPO[pk];
