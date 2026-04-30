@@ -392,6 +392,125 @@ const INSTALACION = {
     dimensiones:{ancho:"559 mm",profundidad:"1527 mm total",altura:"432 mm con patas",peso:"~68 kg",capacidad:"Cámara 508 mm (20\") ancho · Temp. máx. 288°C"},
     notas:"VENTLESS — no requiere campana extractora para alimentos no grasos. Temperatura ambiente máx: 49°C."
   },
+
+  // ─── UNOX XECC-0523-EPRM — ChefTop MIND.Maps PLUS Compact 5×GN2/3 Eléctrico ───
+  "Unox-XECC-0523-EPRM":{
+    electrico:{
+      tension:"230V monofásico / 400V trifásico",
+      frecuencia:"50/60 Hz",
+      potencia:"3.3 kW (230V) / 3.3 kW (400V)",
+      corriente:"16 A (230V) / 10 A (400V)",
+      fusible:"16 A curva C — diferencial 30 mA obligatorio",
+      conexion:"Cable 3 hilos (F+N+T) para monofásico — tierra obligatoria",
+      enchufe:"Sin enchufe de serie — instalación fija o clavija industrial"
+    },
+    agua:{
+      presion:"100–600 kPa (1–6 bar) dinámica",
+      caudal:"mín. 5 l/min",
+      entrada:'Racor JG 1/4" o manguera 3/8" — conexión posterior izquierda',
+      desague:'Tubería Ø 30 mm mín. — resistente a 85°C — con sifón tipo P-trap obligatorio',
+      calidad:"Conductividad 125–1250 µS/cm — dureza 5–30°f (9–54 mg/l CaCO₃) — pH 6.5–8"
+    },
+    dimensiones:{
+      ancho:"595 mm",
+      profundidad:"555 mm",
+      altura:"595 mm (sin patas) / 660 mm (con patas regulables)",
+      peso:"~47 kg",
+      capacidad:"5×GN 2/3 — distancia entre guías: 67 mm"
+    },
+    notas:"Requiere espacio mínimo lateral: 50 mm cada lado para ventilación. Temperatura ambiente: +10°C a +40°C. No instalar en ambientes con humedad relativa > 90%. Nivelar con pies regulables. Requiere campana extractora de humos."
+  },
+
+  // ─── UNOX XEFT-04HS-ELDV — BakerLux Shop.Pro Arianna LED 4×460×330 Eléctrico ───
+  "Unox-XEFT-04HS-ELDV":{
+    electrico:{
+      tension:"230V monofásico",
+      frecuencia:"50/60 Hz",
+      potencia:"3.5 kW",
+      corriente:"16 A",
+      fusible:"16 A curva C — diferencial 30 mA obligatorio",
+      conexion:"Cable 3 hilos (F+N+T) — tierra obligatoria",
+      enchufe:"Clavija Schuko 16A o instalación fija"
+    },
+    agua:{
+      presion:"100–600 kPa (1–6 bar) dinámica",
+      caudal:"mín. 3 l/min",
+      entrada:'Racor JG 1/4" — conexión posterior',
+      desague:'Tubería Ø 25 mm mín. — resistente a 85°C — con sifón P-trap obligatorio',
+      calidad:"Conductividad 125–1250 µS/cm — dureza 5–30°f — pH 6.5–8"
+    },
+    dimensiones:{
+      ancho:"765 mm",
+      profundidad:"700 mm",
+      altura:"555 mm (sin patas) / 620 mm (con patas)",
+      peso:"~46 kg",
+      capacidad:"4 bandejas 460×330 mm — distancia entre guías: 80 mm"
+    },
+    notas:"Horno de panadería sobremesa. Requiere campana extractora. Espacio mínimo lateral: 50 mm. Temperatura ambiente: +10°C a +40°C. Sistema LED para iluminación de la cámara. Nivelar con pies regulables."
+  },
+
+  // ─── UNOX XEFR-04HS-ELDV — BakerLux Shop.Pro Arianna LED con vapor ───────────
+  "Unox-XEFR-04HS-ELDV":{
+    electrico:{
+      tension:"230V monofásico",
+      frecuencia:"50/60 Hz",
+      potencia:"3.5 kW",
+      corriente:"16 A",
+      fusible:"16 A curva C — diferencial 30 mA obligatorio",
+      conexion:"Cable 3 hilos (F+N+T) — tierra obligatoria",
+      enchufe:"Clavija Schuko 16A o instalación fija"
+    },
+    agua:{
+      presion:"100–600 kPa (1–6 bar) dinámica",
+      caudal:"mín. 3 l/min",
+      entrada:'Racor JG 1/4" — conexión posterior',
+      desague:'Tubería Ø 25 mm mín. — resistente a 85°C — con sifón P-trap obligatorio',
+      calidad:"Conductividad 125–1250 µS/cm — dureza 5–30°f — pH 6.5–8"
+    },
+    dimensiones:{
+      ancho:"765 mm",
+      profundidad:"700 mm",
+      altura:"555 mm (sin patas) / 620 mm (con patas)",
+      peso:"~48 kg",
+      capacidad:"4 bandejas 460×330 mm — distancia entre guías: 80 mm"
+    },
+    notas:"Igual al XEFT con sistema de vapor adicional MATIC. Requiere conexión de agua obligatoria para generación de vapor. Requiere campana extractora. Espacio mínimo lateral: 50 mm. Temperatura ambiente: +10°C a +40°C."
+  },
+
+  // ─── UNOX XEVC-0511-GPRM — ChefTop MIND.Maps ONE 5×GN1/1 Gas ───────────────
+  "Unox-XEVC-0511-GPRM":{
+    electrico:{
+      tension:"230V monofásico",
+      frecuencia:"50/60 Hz",
+      potencia:"0.5 kW eléctrico (motor + control) + quemador gas",
+      corriente:"6 A",
+      fusible:"10 A curva C — diferencial 30 mA obligatorio",
+      conexion:"Cable 3 hilos (F+N+T) — tierra obligatoria",
+      enchufe:"Clavija Schuko 10A o instalación fija"
+    },
+    agua:{
+      presion:"100–600 kPa (1–6 bar) dinámica",
+      caudal:"mín. 5 l/min",
+      entrada:'Racor JG 1/4" o manguera 3/8" — conexión posterior izquierda',
+      desague:'Tubería Ø 30 mm mín. — resistente a 85°C — con sifón P-trap obligatorio',
+      calidad:"Conductividad 125–1250 µS/cm — dureza 5–30°f — pH 6.5–8"
+    },
+    gas:{
+      presion_natural:"17–25 mbar (gas natural G20)",
+      presion_propano:"25–37 mbar (GLP G30/G31)",
+      potencia_termica:"9.3 kW (gas natural) / 9.3 kW (GLP)",
+      conexion:'Tubería rígida o flexible certificada — rosca 1/2" — llave de corte obligatoria accesible',
+      nota:"Verificar presión de red antes de instalar. Ajustar inyectores según tipo de gas de la instalación. Prueba de estanqueidad obligatoria."
+    },
+    dimensiones:{
+      ancho:"847 mm",
+      profundidad:"771 mm",
+      altura:"600 mm (sobremesa) / con pie de horno: consultar",
+      peso:"~80 kg",
+      capacidad:"5×GN 1/1 — distancia entre guías: 67 mm"
+    },
+    notas:"Horno a gas — requiere instalador certificado en gas. Requiere campana extractora con extracción mínima de 500 m³/h. Espacio mínimo lateral: 50 mm. Temperatura ambiente: +10°C a +40°C. No instalar en sótanos o espacios sin ventilación natural."
+  },
 };
 
 const PLANES = {
