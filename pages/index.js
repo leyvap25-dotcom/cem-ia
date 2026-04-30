@@ -470,38 +470,63 @@ const ERRORES_ZANOLLI = [
 const NIVEL_C = {CRÍTICO:"red",PELIGRO:"red",LIMITADO:"blue",FRECUENTE:"yellow",SIMPLE:"green",COMÚN:"blue",MODERADO:"blue"};
 
 const REPUESTOS = [
-  {cod:"KMT1012A",desc:"Motor 330W eje cónico D12 (LUX/MIND.Maps)",precio:1350000,marca:"Unox"},
-  {cod:"KPE2260A",desc:"Tarjeta de potencia BLSP/Speed.Pro/Zero",precio:990000,marca:"Unox"},
-  {cod:"KTR1136A",desc:"Termostato de seguridad 318°C (dispara AF02)",precio:405000,marca:"Unox"},
-  {cod:"KVN1172A",desc:"Turbina D195 H40 8 aspas tuerca M8",precio:553500,marca:"Unox"},
-  {cod:"KRS1283B",desc:"Resistencia 3000W 230V + 260W 135V 4 espiras",precio:765000,marca:"Unox"},
-  {cod:"KTR1105A",desc:"Sonda temperatura PT100 L1000 (dispara AF03)",precio:540000,marca:"Unox"},
-  {cod:"KGN1352A",desc:"Goma puerta LM Arianna / Armarios BT",precio:211500,marca:"Unox"},
-  {cod:"KGN1656A",desc:"Goma puerta XECC-0523 Compact",precio:256500,marca:"Unox"},
-  {cod:"KCN1003A",desc:"Condensador motor 6.3 µF — reparar AF01",precio:135000,marca:"Unox"},
-  {cod:"KGN1629A",desc:"Goma puerta ChefTop 0511",precio:382500,marca:"Unox"},
-  {cod:"KGN1631A",desc:"Goma puerta ChefTop 1011",precio:405000,marca:"Unox"},
-  {cod:"KCE1095A",desc:"Cable bus 4 polos 2M potencia-control (dispara AF04)",precio:180000,marca:"Unox"},
-  {cod:"KEL1251A",desc:"Electroválvula 1 vía JG D8-D10",precio:292500,marca:"Unox"},
-  {cod:"20.02.550P",desc:"Burlete puerta SCC CMP 61 (SCC WE 61G)",precio:290771,marca:"Rational"},
-  {cod:"20.02.552P",desc:"Burlete puerta SCC CMP 101",precio:333391,marca:"Rational"},
-  {cod:"20.00.399P",desc:"Burlete puerta SCC CMP 202",precio:432629,marca:"Rational"},
-  {cod:"40.05.654P",desc:"Filtro entrada de aire LM1 LM2",precio:65153,marca:"Rational"},
-  {cod:"87.00.279",desc:"Kit termostato seguridad Bilímite 360°C",precio:265905,marca:"Rational"},
-  {cod:"CON-7013",desc:"BMSC — Blower Motor Speed Controller (reparar F1)",precio:1350000,marca:"Turbochef"},
-  {cod:"HHC-6517-2",desc:"RTD sonda temperatura cámara (reparar F7)",precio:450000,marca:"Turbochef"},
-  {cod:"NGC-3005",desc:"Relay estado sólido dual 40A 240VAC (reparar F8)",precio:600000,marca:"Turbochef"},
-  {cod:"HCT-4143",desc:"Cadena conveyor #35 52 eslabones (reparar F9)",precio:75000,marca:"Turbochef"},
-  {cod:"102075",desc:"Termostato alto límite 572°F reset manual (reparar F8)",precio:790000,marca:"Turbochef"},
-  {cod:"HCT-4067",desc:"Filtro de aire trasero HHC (previene F6)",precio:73000,marca:"Turbochef"},
-  {cod:"TERM0005",desc:"Termostato seguridad 500°C reset manual (reparar OVER)",precio:605000,marca:"Zanolli"},
-  {cod:"TERM0049",desc:"Sonda PT1000 temperatura cámara — medir ~1100Ω a 25°C",precio:420000,marca:"Zanolli"},
-  {cod:"ELET0676",desc:"Tarjeta base electrónica (scheda base)",precio:1350000,marca:"Zanolli"},
-  {cod:"MOTO0052",desc:"Motor banda conveyor (reparar BELT)",precio:1050000,marca:"Zanolli"},
-  {cod:"01082.0000",desc:"Sprayhead 6 hoyos Bunn VPR",precio:22000,marca:"Bunn"},
-  {cod:"04236.1000",desc:"Kit calentador tanque 1320W 120V VPR",precio:176000,marca:"Bunn"},
-  {cod:"34245.0000",desc:"Kit mantenimiento preventivo Ultra-2 (sellos, empaques)",precio:280000,marca:"Bunn"},
-  {cod:"44039.1000",desc:"Tarjeta de control principal CBA Ultra-2",precio:1016000,marca:"Bunn"},
+  // ─── UNOX — XEFR-04HS-ELDV / Shop PRO MindMAPS ───────────────────────────
+  {cod:"KPE1463A", desc:"Kit tarjeta de poder BLSP/Speed.Pro",                          precio:null,    marca:"Unox", linea:"Shop PRO - MindMAPS", ref:"XEFR-04HS-ELDV", criticidad:"A", vidaUtil:"DAÑO/72",  tiempoCambio:1},
+  {cod:"KPE2107A", desc:"Kit panel de control LED",                                     precio:null,    marca:"Unox", linea:"Shop PRO - MindMAPS", ref:"XEFR-04HS-ELDV", criticidad:"A", vidaUtil:"DAÑO/72",  tiempoCambio:1},
+  {cod:"KMT1012A", desc:"Kit motor 330W eje cónico D12 MIND.Maps/LUX — Motor 330W 230V + máscara centrado + disco sellado + goma portamotor", precio:1350000, marca:"Unox", linea:"Shop PRO - MindMAPS", ref:"XEFR-04HS-ELDV", criticidad:"A", vidaUtil:"60 meses", tiempoCambio:2.5},
+  {cod:"KTR1136A", desc:"Kit termostato de seguridad 318°C — Dispara AF02. Incluye tapa entrada bulbo + goma sonda + silicona",               precio:405000,  marca:"Unox", linea:"Shop PRO - MindMAPS", ref:"XEFR-04HS-ELDV", criticidad:"A", vidaUtil:"72 meses", tiempoCambio:2},
+  {cod:"KMN1172A", desc:"Kit ventilador D195 H60 8 aspas",                              precio:null,    marca:"Unox", linea:"Shop PRO - MindMAPS", ref:"XEFR-04HS-ELDV", criticidad:"A", vidaUtil:"72 meses", tiempoCambio:1.5},
+  {cod:"KRS1283B", desc:"Kit resistencia 3000W 230V + 260W 135V 4 espiras — Incluye goma resistencia + silicona",                            precio:765000,  marca:"Unox", linea:"Shop PRO - MindMAPS", ref:"XEFR-04HS-ELDV", criticidad:"A", vidaUtil:"48 meses", tiempoCambio:2},
+  {cod:"KTR1105A", desc:"Kit sonda temperatura PT100 L1000 — Dispara AF03. Incluye plaquita silicona + burlete + goma sonda + tapa sonda",   precio:540000,  marca:"Unox", linea:"Shop PRO - MindMAPS", ref:"XEFR-04HS-ELDV", criticidad:"A", vidaUtil:"CONSUMIBLE", tiempoCambio:null},
+  {cod:"KVT1330A", desc:"Kit cristal interno Arianna",                                  precio:null,    marca:"Unox", linea:"Shop PRO - MindMAPS", ref:"XEFR-04HS-ELDV", criticidad:"A", vidaUtil:"DAÑO",     tiempoCambio:1},
+  {cod:"KCR1112A", desc:"Kit bisagra puerta plegable SP Arianna-Elena",                 precio:225000,  marca:"Unox", linea:"Shop PRO - MindMAPS", ref:"XEFR-04HS-ELDV", criticidad:"B", vidaUtil:"60 meses", tiempoCambio:2},
+  {cod:"KCE1095A", desc:"Kit cable bus 4 polos 2M potencia-control — Dispara AF04",     precio:180000,  marca:"Unox", linea:"Shop PRO - MindMAPS", ref:"XEFR-04HS-ELDV", criticidad:"B", vidaUtil:"60 meses", tiempoCambio:0.5},
+  {cod:"KEL1251A", desc:"Kit electroválvula 1 vía JG D8-D10 — Humedad",                precio:292500,  marca:"Unox", linea:"Shop PRO - MindMAPS", ref:"XEFR-04HS-ELDV", criticidad:"B", vidaUtil:"48 meses", tiempoCambio:1.5},
+  {cod:"DB1044A",  desc:"Detergente Spray & Rinse",                                     precio:null,    marca:"Unox", linea:"Shop PRO - MindMAPS", ref:"XEFR-04HS-ELDV", criticidad:"B", vidaUtil:"CONSUMIBLE", tiempoCambio:null},
+  {cod:"KGN1352A", desc:"Kit goma puerta LM Arianna / Armarios BT",                    precio:211500,  marca:"Unox", linea:"Shop PRO - MindMAPS", ref:"XEFR-04HS-ELDV", criticidad:"B", vidaUtil:"CONSUMIBLE", tiempoCambio:null},
+  {cod:"KCN1003A", desc:"Kit capacitor motor 6.3 µF — Repara AF01",                    precio:135000,  marca:"Unox", linea:"Shop PRO - MindMAPS", ref:"XEFR-04HS-ELDV", criticidad:"B", vidaUtil:"60 meses", tiempoCambio:1},
+  // ─── UNOX — XECC-0523-EPRM / Shop PRO Arianna ───────────────────────────
+  {cod:"KPE1057B", desc:"Kit panel capacitivo MM PLUS — Cable microfit + panel control + tornillos + separador retrofit + bisagras retrofit", precio:4275000, marca:"Unox", linea:"Shop PRO - Arianna", ref:"XECC-0523-EPRM", criticidad:"A", vidaUtil:"DAÑO/72", tiempoCambio:1},
+  {cod:"KMT1012A", desc:"Kit motor 330W eje cónico D12 MIND.Maps/LUX >08.2017",        precio:1350000, marca:"Unox", linea:"Shop PRO - Arianna", ref:"XECC-0523-EPRM", criticidad:"A", vidaUtil:"60 meses", tiempoCambio:2.5},
+  {cod:"KVE1015A", desc:"Kit contactor 4P 20A 230V 50/60Hz",                           precio:null,    marca:"Unox", linea:"Shop PRO - Arianna", ref:"XECC-0523-EPRM", criticidad:"A", vidaUtil:"60 meses", tiempoCambio:1},
+  {cod:"KVN1171A", desc:"Kit turbina D195 H60 8 paletas tuerca M8",                    precio:765000,  marca:"Unox", linea:"Shop PRO - Arianna", ref:"XECC-0523-EPRM", criticidad:"A", vidaUtil:"72 meses", tiempoCambio:1.5},
+  {cod:"KPE2037A", desc:"Kit tarjeta potencia MIND.Maps ONE — Tarjeta potencia + tornillos + bolsa ESD + soporte tarjeta",                   precio:2160000, marca:"Unox", linea:"Shop PRO - Arianna", ref:"XECC-0523-EPRM", criticidad:"A", vidaUtil:"DAÑO",     tiempoCambio:1.5},
+  {cod:"KVT1303C", desc:"Kit cristal interno XECC-0513/0523 2V",                       precio:null,    marca:"Unox", linea:"Shop PRO - Arianna", ref:"XECC-0523-EPRM", criticidad:"A", vidaUtil:"DAÑO",     tiempoCambio:1},
+  {cod:"KMG1099A", desc:"Kit manija completa MIND.Maps — Ensamble manija MMc + tornillos + cubre tornillos",                                precio:301500,  marca:"Unox", linea:"Shop PRO - Arianna", ref:"XECC-0523-EPRM", criticidad:"B", vidaUtil:"DAÑO/72",  tiempoCambio:1},
+  {cod:"KSB1016A", desc:"Kit tanque detergente 3L + rompe gofre",                      precio:675000,  marca:"Unox", linea:"Shop PRO - Arianna", ref:"XECC-0523-EPRM", criticidad:"B", vidaUtil:"DAÑO",     tiempoCambio:1},
+  {cod:"KVN1165A", desc:"Kit turbina refrigeración 230V MM — Soporte + turbina refrigeración 230V + tornillos",                             precio:450000,  marca:"Unox", linea:"Shop PRO - Arianna", ref:"XECC-0523-EPRM", criticidad:"B", vidaUtil:"60 meses", tiempoCambio:0.5},
+  {cod:"KEL1140A", desc:"Kit electroválvula 1 vía lavado",                             precio:null,    marca:"Unox", linea:"Shop PRO - Arianna", ref:"XECC-0523-EPRM", criticidad:"B", vidaUtil:"48 meses", tiempoCambio:1.5},
+  {cod:"KVL1211A", desc:"Kit sistema lavado Compact ONE y 0523-EP — Abrazaderas + soporte tubo + conjunto lavado ONE EU Compact",           precio:1260000, marca:"Unox", linea:"Shop PRO - Arianna", ref:"XECC-0523-EPRM", criticidad:"B", vidaUtil:"48 meses", tiempoCambio:2},
+  {cod:"KPE1059A", desc:"Kit soporte USB-Reset MIND.Maps",                             precio:382500,  marca:"Unox", linea:"Shop PRO - Arianna", ref:"XECC-0523-EPRM", criticidad:"B", vidaUtil:"DAÑO/72",  tiempoCambio:1},
+  {cod:"KRS1150A", desc:"Kit resistencia 4.9kW RS1090A — Goma resistencia + resistencia circular 4.9kW + silicona",                        precio:990000,  marca:"Unox", linea:"Shop PRO - Arianna", ref:"XECC-0523-EPRM", criticidad:"B", vidaUtil:"DAÑO/60",  tiempoCambio:6},
+  {cod:"KCN1003A", desc:"Kit capacitor motor 6.3 µF — Condensa 6.3uF + tuerca + arandela",                                                precio:135000,  marca:"Unox", linea:"Shop PRO - Arianna", ref:"XECC-0523-EPRM", criticidad:"B", vidaUtil:"60 meses", tiempoCambio:1},
+  {cod:"KVL0022A", desc:"Kit filtro cheque detergente",                                precio:null,    marca:"Unox", linea:"Shop PRO - Arianna", ref:"XECC-0523-EPRM", criticidad:"B", vidaUtil:"48 meses", tiempoCambio:1},
+  {cod:"DB1050",   desc:"Detergente UNOX (consumible)",                                precio:null,    marca:"Unox", linea:"Shop PRO - Arianna", ref:"XECC-0523-EPRM", criticidad:null, vidaUtil:"CONSUMIBLE", tiempoCambio:null},
+  {cod:"KGN1656A", desc:"Kit goma puerta XECC-0513/0523",                             precio:256500,  marca:"Unox", linea:"Shop PRO - Arianna", ref:"XECC-0523-EPRM", criticidad:null, vidaUtil:"CONSUMIBLE", tiempoCambio:null},
+  {cod:"KSN1031A", desc:"Kit sonda al corazón monopunto L2000 — Tapa + burlete sellado + silicona + sonda corazón monopunto L2000",        precio:1080000, marca:"Unox", linea:"Shop PRO - Arianna", ref:"XECC-0523-EPRM", criticidad:null, vidaUtil:"CONSUMIBLE", tiempoCambio:null},
+  // ─── RATIONAL ─────────────────────────────────────────────────────────────
+  {cod:"20.02.550P", desc:"Burlete puerta SCC WE 61G",                                 precio:290771,  marca:"Rational"},
+  {cod:"20.02.552P", desc:"Burlete puerta SCC WE 101G",                                precio:333391,  marca:"Rational"},
+  {cod:"20.00.399P", desc:"Burlete puerta SCC WE 202",                                 precio:432629,  marca:"Rational"},
+  {cod:"40.05.654P", desc:"Filtro entrada de aire LM1 LM2",                            precio:65153,   marca:"Rational"},
+  {cod:"87.00.279",  desc:"Kit termostato seguridad bilímite 360°C",                   precio:265905,  marca:"Rational"},
+  // ─── TURBOCHEF ────────────────────────────────────────────────────────────
+  {cod:"CON-7013",   desc:"BMSC — Blower Motor Speed Controller (repara F1)",          precio:1350000, marca:"Turbochef"},
+  {cod:"HHC-6517-2", desc:"RTD sonda temperatura cámara (repara F7)",                  precio:450000,  marca:"Turbochef"},
+  {cod:"NGC-3005",   desc:"Relay estado sólido dual 40A 240VAC (repara F8)",           precio:600000,  marca:"Turbochef"},
+  {cod:"HCT-4143",   desc:"Cadena conveyor #35 52 eslabones (repara F9)",              precio:75000,   marca:"Turbochef"},
+  {cod:"102075",     desc:"Termostato alto límite 572°F reset manual (repara F8)",     precio:790000,  marca:"Turbochef"},
+  {cod:"HCT-4067",   desc:"Filtro de aire trasero HHC (previene F6)",                 precio:73000,   marca:"Turbochef"},
+  // ─── ZANOLLI ──────────────────────────────────────────────────────────────
+  {cod:"TERM0005",   desc:"Termostato seguridad 500°C reset manual (repara OVER)",     precio:605000,  marca:"Zanolli"},
+  {cod:"TERM0049",   desc:"Sonda PT1000 temperatura cámara — ~1100Ω a 25°C",          precio:420000,  marca:"Zanolli"},
+  {cod:"ELET0676",   desc:"Tarjeta base electrónica (scheda base)",                    precio:1350000, marca:"Zanolli"},
+  {cod:"MOTO0052",   desc:"Motor banda conveyor (repara BELT)",                        precio:1050000, marca:"Zanolli"},
+  // ─── BUNN ─────────────────────────────────────────────────────────────────
+  {cod:"01082.0000", desc:"Sprayhead 6 hoyos Bunn VPR",                               precio:22000,   marca:"Bunn"},
+  {cod:"04236.1000", desc:"Kit calentador tanque 1320W 120V VPR",                     precio:176000,  marca:"Bunn"},
+  {cod:"34245.0000", desc:"Kit mantenimiento preventivo Ultra-2 (sellos, empaques)",  precio:280000,  marca:"Bunn"},
+  {cod:"44039.1000", desc:"Tarjeta de control principal CBA Ultra-2",                 precio:1016000, marca:"Bunn"},
 ];
 
 const formatPrecio = (n) => new Intl.NumberFormat("es-CO",{style:"currency",currency:"COP",minimumFractionDigits:0}).format(n);
@@ -1183,7 +1208,7 @@ Contrata técnico si: [condición clara]`;
                 </div>
               ))}
             </div>
-            <div onClick={()=>setStep("chat")} style={{background:C.bg,border:`1px solid ${C.border}`,borderRadius:20,padding:"5px 14px",cursor:"pointer",fontSize:11,color:C.muted,display:"inline-block"}}>Omitir →</div>
+            <div onClick={()=>{setStep("chat"); if(onCiudad) onCiudad("");}} style={{background:C.bg,border:`1px solid ${C.border}`,borderRadius:20,padding:"5px 14px",cursor:"pointer",fontSize:11,color:C.muted,display:"inline-block"}}>Omitir →</div>
           </div>
         )}
         {loading&&<div style={{alignSelf:"flex-start",...card({padding:"10px 14px"}),fontSize:13,color:C.accent}}>Analizando…</div>}
@@ -1858,15 +1883,21 @@ function RepuestosTab() {
     <div style={{...card({marginBottom:7,padding:"10px 13px"})}}>
       <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",gap:8}}>
         <div style={{flex:1,minWidth:0}}>
-          <div style={{display:"flex",gap:5,marginBottom:3,flexWrap:"wrap"}}>
+          <div style={{display:"flex",gap:5,marginBottom:3,flexWrap:"wrap",alignItems:"center"}}>
             <span style={{fontSize:10,fontWeight:700,color:C.accent,background:C.al,padding:"2px 6px",borderRadius:4}}>{r.cod}</span>
             <span style={{fontSize:9,color:C.muted,background:"#f3f4f6",padding:"2px 6px",borderRadius:4}}>{r.marca}</span>
+            {r.criticidad&&<span style={{fontSize:9,fontWeight:700,padding:"2px 6px",borderRadius:4,background:r.criticidad==="A"?C.rl:C.yl,color:r.criticidad==="A"?C.red:C.yellow}}>Crit. {r.criticidad}</span>}
           </div>
           <div style={{fontSize:12,lineHeight:1.5,color:C.text}}>{r.desc}</div>
+          <div style={{display:"flex",gap:8,marginTop:4,flexWrap:"wrap"}}>
+            {r.vidaUtil&&<span style={{fontSize:9,color:C.muted}}>⏱ Vida útil: {r.vidaUtil}</span>}
+            {r.tiempoCambio&&<span style={{fontSize:9,color:C.muted}}>🔧 Cambio: {r.tiempoCambio}h</span>}
+            {r.ref&&<span style={{fontSize:9,color:C.accent,fontWeight:600}}>📦 {r.ref}</span>}
+          </div>
         </div>
-        <div style={{fontSize:14,fontWeight:800,color:C.green,flexShrink:0,textAlign:"right"}}>
-          {formatPrecio(r.precio)}
-          <div style={{fontSize:9,color:C.muted,fontWeight:400}}>sin IVA</div>
+        <div style={{fontSize:14,fontWeight:800,color:r.precio?C.green:C.muted,flexShrink:0,textAlign:"right"}}>
+          {r.precio?formatPrecio(r.precio):"Cotizar"}
+          {r.precio&&<div style={{fontSize:9,color:C.muted,fontWeight:400}}>sin IVA</div>}
         </div>
       </div>
     </div>
@@ -2189,19 +2220,15 @@ export default function App() {
     const n={...f,fecha:new Date().toISOString()};
     const a=[...fallas,n];
     setFallas(a);
-    saveF(a); // backup local
-    postFalla(n); // enviar al servidor global
+    saveF(a); // solo local — se envía al servidor cuando el usuario ponga ciudad o la omita
   };
   const registrarConCiudad = (ciudad) => {
-    // Actualizar la última falla con la ciudad
     const local = loadF();
     if (local.length === 0) return;
     const ultima = local[local.length - 1];
-    if (!ultima.ciudad) {
-      ultima.ciudad = ciudad;
-      saveF(local);
-      postFalla({...ultima, ciudad});
-    }
+    ultima.ciudad = ciudad || "";
+    saveF(local);
+    postFalla(ultima); // enviar al servidor con ciudad incluida
   };
 
   if (!rol) return <WelcomeScreen onSelect={seleccionarRol}/>;
